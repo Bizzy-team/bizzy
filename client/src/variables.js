@@ -1,4 +1,4 @@
 export default {
-  color: "blue"
+  color: "#5FBF73"
 }
 
