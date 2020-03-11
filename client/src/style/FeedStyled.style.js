@@ -61,7 +61,9 @@ margin-bottom: 28%;
 `
 
 export const FooterStyle = styled.footer`
-  background-color: ${props => props.theme.color};
+  // background-color: ${props => props.theme.color};
+  background-color: white;
+  border-top: solid 1px ${props => props.theme.color};
   position: fixed;
   left: 0;
   bottom: 0;
@@ -74,6 +76,7 @@ export const FooterStyle = styled.footer`
       justify-content: space-between;
       margin-top: 4px;
       i {
+        color: black;
         margin-right: 24px;
         margin-left: 8%;
         font-size: 1.2em;
