@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 const HeaderFeedStyled = styled.header`
   display: flex;
-  background-color: ${props => props.theme.color};
+  // background-color: ${props => props.theme.color};
+  background-color: white;
+  border-bottom: solid 1px ${props => props.theme.color};
   margin-bottom: 20px;
   height: 8vh;
   label {
