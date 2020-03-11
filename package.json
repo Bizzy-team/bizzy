@@ -1,0 +1,20 @@
+{
+		"scripts": {
+				"lint": "npx eslint --cache './client/**/*'",
+				"lint:watch": "esw -w --clear --color --cache './client/**/*'",
+				"lint:fix": "npx eslint --fix './client/**/*'",
+				"style": "prettier -c './client/**/*'",
+				"style:fix": "prettier --c --write './client/**/*'"
+		},
+		"devDependencies": {
+				"ava": "^3.0.0",
+				"eslint": "^6.8.0",
+				"eslint-config-airbnb-base": "^14.0.0",
+				"eslint-config-prettier": "^6.9.0",
+				"eslint-plugin-import": "^2.20.0",
+				"eslint-plugin-prettier": "^3.1.2",
+				"eslint-watch": "^6.0.1",
+				"nodemon": "^2.0.2",
+				"prettier": "^1.19.1"
+		}
+}
