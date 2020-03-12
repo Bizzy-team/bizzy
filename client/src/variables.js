@@ -1,4 +1,6 @@
 export default {
-  color: "#5FBF73"
+  color: "blue",
+  backgroundColor: "#F9FAFA",
+  fontFamilyTitle: 'Roboto',
+  fontFamilyText: 'Nunito'
 }
-
