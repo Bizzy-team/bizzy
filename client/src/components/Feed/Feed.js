@@ -2,6 +2,7 @@ import React from "react";
 import FeedCard from "./FeedCard";
 import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
 import { FeedStyle, FooterStyle } from "../../style/FeedStyled.style";
+import {Link} from "react-router-dom";
 
 function Feed() {
   return (
@@ -11,7 +12,9 @@ function Feed() {
           <input type="checkbox" name="switch"></input>
           <span className="el-switch-style"></span>
         </label>
-        <img className="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+        <Link to="/user_profile">
+          <img className="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+        </Link>
       </HeaderFeedStyled>
       <FeedStyle>
         <FeedCard />
