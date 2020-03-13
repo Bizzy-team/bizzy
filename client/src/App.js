@@ -1,12 +1,11 @@
 // import logo from './logo.svg';
 import React from "react";
-import "./App.css";
 import { Route, BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 import LogginSpace from "./components/LogginSpace/LogginSpace";
 import SigninSpace from "./components/SigninSpace/SigninSpace";
 import Feed from "./components/Feed/Feed";
 import UserProfile from "./components/UserProfile/UserProfile";
-import { ThemeProvider } from "styled-components";
 import variables from "./variables";
 
 function App() {
