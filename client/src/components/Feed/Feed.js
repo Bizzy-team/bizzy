@@ -3,14 +3,7 @@ import { Link } from "react-router-dom";
 import FeedCard from "./FeedCard";
 import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
 import { FeedStyle, FooterStyle } from "../../style/FeedStyled.style";
-<<<<<<< HEAD
-<<<<<<< HEAD
 import IconsMoodStyled from "../../style/IconsMoodStyled.style";
-=======
-import { Link } from "react-router-dom";
->>>>>>> Applicated lint on files
-=======
->>>>>>> Added import
 
 function Feed() {
   const [data, setData] = useState({

@@ -2,10 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 import Header from "../Header/Header";
-<<<<<<< HEAD
-=======
-import { Link } from "react-router-dom";
->>>>>>> Applicated lint on files
 
 function LogginSpace() {
   return (
