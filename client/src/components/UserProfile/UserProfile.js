@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 function UserProfile() {
   function addInput(e) {
-
     if (e.keyCode === 13) {
       document.activeElement.blur();
     }
