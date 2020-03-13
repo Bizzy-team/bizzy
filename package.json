@@ -1,8 +1,8 @@
 {
     "scripts": {
-        "lint": "npx eslint --cache './client/src/**/*'",
-        "lint:watch": "esw -w --clear --color --cache './client/src/**/*'",
-        "lint:fix": "npx eslint --fix './client/src/**/*'",
+        "lint": "npx eslint --cache --resolve-plugins-relative-to='./client/node_modules' './client/src/**/*'",
+        "lint:watch": "esw -w --clear --color --cache --resolve-plugins-relative-to='./client/node_modules' './client/src/**/*'",
+        "lint:fix": "npx eslint --fix --resolve-plugins-relative-to='./client/node_modules' './client/src/**/*'",
         "style": "prettier -c './client/**/*'",
         "style:fix": "prettier --c --write './client/**/*'"
     },
@@ -22,7 +22,6 @@
         "eslint-plugin-react": "^7.19.0",
         "eslint-plugin-react-hooks": "^1.7.0",
         "eslint-watch": "^6.0.1",
-        "nodemon": "^2.0.2",
         "prettier": "^1.19.1"
     }
 }
