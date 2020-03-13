@@ -5,7 +5,11 @@ function FeedCard() {
     <div className="card">
       <div className="card--header">
         <div className="card--avatar">
-          <img className="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+          <img
+            className="avatar"
+            alt="avatar"
+            src="https://kitt.lewagon.com/placeholder/users/cveneziani"
+          />
         </div>
         <div className="card--name">
           <h4>Claudia Boudié</h4>
@@ -15,7 +19,10 @@ function FeedCard() {
         </div>
       </div>
       <div className="card--desc">
-        <p>Je suis op pour aller boire des bières pour décompresser de ma journée de réunion à l'ECV Digital.</p>
+        <p>
+          Je suis op pour aller boire des bières pour décompresser de ma journée de
+          réunion à l'ECV Digital.
+        </p>
       </div>
       <div className="user--infos">
         <div className="user--mood">
@@ -26,7 +33,7 @@ function FeedCard() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default FeedCard
+export default FeedCard;

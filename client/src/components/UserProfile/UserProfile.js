@@ -15,7 +15,11 @@ function UserProfile() {
       <UserProfileStyled as="section">
         <div className="user">
           <div className="user--avatar">
-            <img className="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+            <img
+              className="avatar"
+              alt="avatar"
+              src="https://kitt.lewagon.com/placeholder/users/cveneziani"
+            />
           </div>
           <div className="user--name">
             <h2>Username:</h2>
@@ -23,17 +27,21 @@ function UserProfile() {
           </div>
           <div className="user--mail">
             <h2>Mail:</h2>
-            <h3 contentEditable="true" onKeyDown={(e) => addInput(e)}>cc@hello.com</h3>
+            <h3 contentEditable="true" onKeyDown={e => addInput(e)}>
+              cc@hello.com
+            </h3>
           </div>
           <div className="user--job">
             <h2>Job:</h2>
-            <h3 contentEditable="true" onKeyDown={(e) => addInput(e)}>Kebabier</h3>
+            <h3 contentEditable="true" onKeyDown={e => addInput(e)}>
+              Kebabier
+            </h3>
           </div>
         </div>
       </UserProfileStyled>
       <FooterStyle as="footer">
         <div className="footer--elements">
-          <Link to="/feed" style={{marginLeft: "8%"}}>
+          <Link to="/feed" style={{ marginLeft: "8%" }}>
             <i className="fas fa-home"></i>
           </Link>
           <i className="fas fa-bell"></i>
@@ -41,7 +49,7 @@ function UserProfile() {
         </div>
       </FooterStyle>
     </>
-  )
+  );
 }
 
-export default UserProfile
+export default UserProfile;

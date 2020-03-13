@@ -22,6 +22,6 @@ const HeaderFeedStyled = styled.header`
     margin-left: 10px;
     font-size: 2em;
   }
-`
+`;
 
-export default HeaderFeedStyled
+export default HeaderFeedStyled;
