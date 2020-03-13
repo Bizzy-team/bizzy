@@ -1,19 +1,28 @@
 {
-  "scripts": {
-      "lint": "npx eslint --cache './client/**/*'",
-      "lint:watch": "esw -w --clear --color --cache './client/**/*'",
-      "lint:fix": "npx eslint --fix './client/**/*'",
-      "style": "prettier -c './client/**/*'",
-      "style:fix": "prettier --c --write './client/**/*'"
-  },
-  "devDependencies": {
-      "ava": "^3.0.0",
-      "eslint": "^6.8.0",
-      "eslint-config-airbnb-base": "^14.0.0",
-      "eslint-config-prettier": "^6.9.0",
-      "eslint-plugin-import": "^2.20.0",
-      "eslint-plugin-prettier": "^3.1.2",
-      "eslint-watch": "^6.0.1",
-      "prettier": "^1.19.1"
-  }
+    "scripts": {
+        "lint": "npx eslint --cache './client/**/*'",
+        "lint:watch": "esw -w --clear --color --cache './client/**/*'",
+        "lint:fix": "npx eslint --fix './client/**/*'",
+        "style": "prettier -c './client/**/*'",
+        "style:fix": "prettier --c --write './client/**/*'"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.23.0",
+        "@typescript-eslint/parser": "^2.23.0",
+        "ava": "^3.0.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-config-prettier": "^6.9.0",
+        "eslint-config-react-app": "^5.2.0",
+        "eslint-plugin-flowtype": "^3.13.0",
+        "eslint-plugin-import": "^2.20.1",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-prettier": "^3.1.2",
+        "eslint-plugin-react": "^7.19.0",
+        "eslint-plugin-react-hooks": "^1.7.0",
+        "eslint-watch": "^6.0.1",
+        "nodemon": "^2.0.2",
+        "prettier": "^1.19.1"
+    }
 }
