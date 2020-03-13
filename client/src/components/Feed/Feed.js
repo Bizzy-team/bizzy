@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
-import {FilterStyled, FeedStyle} from "../../style/FeedStyled.style";
+import { FilterStyled, FeedStyle } from "../../style/FeedStyled.style";
 
 function Feed() {
   return(
