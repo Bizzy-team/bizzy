@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import UserProfileStyled from "../../style/UserProfileStyled.style";
 import { FooterStyle } from "../../style/FeedStyled.style";
-import { Link } from "react-router-dom";
 
 function UserProfile() {
   function addInput(e) {
