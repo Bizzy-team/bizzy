@@ -2,7 +2,7 @@ import React from "react";
 import FeedCard from "./FeedCard";
 import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
 import { FeedStyle, FooterStyle } from "../../style/FeedStyled.style";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Feed() {
   return (
@@ -13,7 +13,11 @@ function Feed() {
           <span className="el-switch-style"></span>
         </label>
         <Link to="/user_profile">
-          <img className="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+          <img
+            className="avatar"
+            alt="avatar"
+            src="https://kitt.lewagon.com/placeholder/users/cveneziani"
+          />
         </Link>
       </HeaderFeedStyled>
       <FeedStyle>
@@ -29,7 +33,7 @@ function Feed() {
         </div>
       </FooterStyle>
     </React.Fragment>
-  )
+  );
 }
 
-export default Feed
+export default Feed;
