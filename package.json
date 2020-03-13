@@ -1,8 +1,8 @@
 {
     "scripts": {
-        "lint": "npx eslint --cache './client/**/*'",
-        "lint:watch": "esw -w --clear --color --cache './client/**/*'",
-        "lint:fix": "npx eslint --fix './client/**/*'",
+        "lint": "npx eslint --cache './client/src/**/*'",
+        "lint:watch": "esw -w --clear --color --cache './client/src/**/*'",
+        "lint:fix": "npx eslint --fix './client/src/**/*'",
         "style": "prettier -c './client/**/*'",
         "style:fix": "prettier --c --write './client/**/*'"
     },
