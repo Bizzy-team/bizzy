@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
 export const FeedStyle = styled.section`
-margin-bottom: 28%;
-.card {
-  display: flex;
-  margin-left: 20px;
-  margin-bottom: 20px;
-  color: black;
-  width: 90%;
-  background: white;
-  border-radius: 7%;
-  height: 33vh;
+  margin-bottom: 28%;
+  .card {
+    display: flex;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    color: black;
+    width: 90%;
+    background: white;
+    border-radius: 7%;
+    height: 33vh;
     .card--header {
-      font-family: 'Roboto';
+      font-family: "Roboto";
       display: flex;
       margin-top: 15px;
       margin-bottom: 15px;
@@ -29,7 +29,7 @@ margin-bottom: 28%;
     }
     .card--desc {
       margin-left: 19px;
-      font-family: 'Nunito';
+      font-family: "Nunito";
       line-height: 30px;
     }
     .user--infos {
@@ -58,7 +58,7 @@ margin-bottom: 28%;
       }
     }
   }
-`
+`;
 
 export const FooterStyle = styled.footer`
   // background-color: ${props => props.theme.color};
@@ -83,4 +83,4 @@ export const FooterStyle = styled.footer`
         margin-top: 15px;
       }
     }
-`
+`;

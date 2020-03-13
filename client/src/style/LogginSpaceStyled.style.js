@@ -7,10 +7,10 @@ const LogginSpaceStyled = styled.div`
   margin-top: 5vh;
   width: 100vw;
   font-size: 1.7em;
-  font-famikly: 'Roboto';
+  font-famikly: "Roboto";
   div {
     margin-bottom: 10%;
   }
-`
+`;
 
-export default LogginSpaceStyled
+export default LogginSpaceStyled;
