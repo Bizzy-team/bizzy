@@ -1,10 +1,10 @@
 import React from "react";
 import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 import Header from "../Header/Header";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SigninSpace() {
-  return(
+  return (
     <React.Fragment>
       <Header />
       <LogginSpaceStyled className="loggin--space">
@@ -14,16 +14,26 @@ function SigninSpace() {
         </div>
         <div className="loggin--space--password">
           <label htmlFor="input--password">Password</label>
-          <input type="password" id="input--password" className="form-control" minLength="6" required></input>
-          <small class="text-muted" style={{fontSize: "0.5em"}}>6 characters minimum.</small>
+          <input
+            type="password"
+            id="input--password"
+            className="form-control"
+            minLength="6"
+            required
+          ></input>
+          <small class="text-muted" style={{ fontSize: "0.5em" }}>
+            6 characters minimum.
+          </small>
         </div>
         <div className="loggin--space--btn">
           <button className="btn btn-light">Sign in</button>
         </div>
-        <p style={{fontSize: "0.6em"}}>Already have an account ? <Link to="/"> Let's go</Link></p>
+        <p style={{ fontSize: "0.6em" }}>
+          Already have an account ? <Link to="/"> Let's go</Link>
+        </p>
       </LogginSpaceStyled>
     </React.Fragment>
-  )
+  );
 }
 
-export default SigninSpace
+export default SigninSpace;

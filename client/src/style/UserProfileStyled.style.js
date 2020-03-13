@@ -32,6 +32,6 @@ background-color: ${props => props.theme.backgroundColor};
         margin-top: 10%;
         margin-bottom: 10%;
       }
-}`
+}`;
 
-export default UserProfileStyled
+export default UserProfileStyled;
