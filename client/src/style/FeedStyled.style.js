@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FeedStyle = styled.section`
+  background-color: ${props => props.theme.backgroundColor};
   margin-bottom: 28%;
   .card {
     display: flex;
