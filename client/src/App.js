@@ -18,7 +18,7 @@ function App() {
           <Route exact path="/subscription" component={SigninSpace}></Route>
           <Route exact path="/feed" component={Feed}></Route>
           <Route exact path="/user_profile" component={UserProfile}></Route>
-          <Route exact path="/createYourCard/:icon"  component={ShareYourMood}></Route>
+          <Route exact path="/createYourCard/:icon" component={ShareYourMood}></Route>
         </ThemeProvider>
       </BrowserRouter>
     </React.Fragment>
