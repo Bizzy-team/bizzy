@@ -17,8 +17,8 @@ before_install:
   - npm i -g npm@latest
 
 install:
-- if [["$TRAVIS_BRANCH" === /^front/]]; then -e "npm install && cd client && npm install && cd .."
-- if ["$TRAVIS_BRANCH" === /^back/]; then npm install && cd back && npm install && cd ..
+- if [["$TRAVIS_BRANCH" === /^front/]]; then node -e "npm install && cd client && npm install && cd .."
+# - if ["$TRAVIS_BRANCH" === /^back/]; then npm install && cd back && npm install && cd ..
 
 script:
 - npm run lint
