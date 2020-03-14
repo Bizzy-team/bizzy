@@ -7,15 +7,18 @@ os:
 - linux
 - osx
 
-cache:
-  directories:
-    - node_modules
+cache: npm
+
+branches:
+  only:
+  - master
 
 before_install:
   - npm i -g npm@latest
 
 install:
-- npm install
+- npm install && cd client && npm install && cd ..
+- npm install && cd server && npm install && cd ..
 
 script:
 - npm run lint

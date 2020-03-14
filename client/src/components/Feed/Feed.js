@@ -1,3 +1,9 @@
+import React, {useState} from "react";
+import FeedCard from "./FeedCard";
+import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
+import { FeedStyle, FooterStyle } from "../../style/FeedStyled.style";
+import { Link } from "react-router-dom";
+import IconsMoodStyled from "../../style/IconsMoodStyled.style";
 import React from "react";
 import { Link } from "react-router-dom";
 import FeedCard from "./FeedCard";
@@ -5,11 +11,30 @@ import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
 import { FeedStyle, FooterStyle } from "../../style/FeedStyled.style";
 
 function Feed() {
+
+  const [data, setData] = useState({
+    iconsMood: false,
+    moodLink: ["utensils", "running", "film", "beer"]
+  })
+
+  function displayIcons() {
+    const newState = {...data};
+
+    if (newState.iconsMood === false) {
+      newState.iconsMood = true;
+      return setData(newState);
+    }
+    if (newState.iconsMood === true) {
+      newState.iconsMood = false;
+      return setData(newState);
+    }
+  }
+
   return (
     <React.Fragment>
       <HeaderFeedStyled as="header">
         <label className="el-switch">
-          <input type="checkbox" name="switch"></input>
+          <input type="checkbox" name="switch" onClick={displayIcons}></input>
           <span className="el-switch-style"></span>
         </label>
         <Link to="/user_profile">
@@ -20,6 +45,22 @@ function Feed() {
           />
         </Link>
       </HeaderFeedStyled>
+      {
+        function () {
+          if (data.iconsMood === true) {
+            return(
+              <IconsMoodStyled as="section">
+                <h2>What's your mood ?</h2>
+                <div style={{display: "flex", marginTop: "30px"}}>
+                  {
+                    data.moodLink.map((icon, index) => <p><Link to={`createYourCard/${icon}`} key={index}><i className={`fas fa-${icon}`}></i></Link></p>)
+                  }
+                </div>
+              </IconsMoodStyled>
+            )
+          }
+        }()
+      }
       <FeedStyle>
         <FeedCard />
         <FeedCard />
