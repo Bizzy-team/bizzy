@@ -9,11 +9,15 @@ os:
 
 cache: npm
 
+branches:
+  only:
+  - master
+
 before_install:
   - npm i -g npm@latest
 
 install:
-- npm install
+- npm install && cd client && npm install
 
 script:
 - npm run lint
