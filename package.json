@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "lint": "npx eslint --cache --resolve-plugins-relative-to='./client/node_modules' './src/**/*'",
+        "lint": "npx eslint --cache --resolve-plugins-relative-to='./client/node_modules' './client/src/**/*'",
         "lint:watch": "esw -w --clear --color --cache --resolve-plugins-relative-to='./client/node_modules' './client/src/**/*'",
         "lint:fix": "npx eslint --fix --resolve-plugins-relative-to='./client/node_modules' './client/src/**/*'",
         "style": "prettier -c './client/**/*'",
