@@ -8,12 +8,13 @@ import IconsMoodStyled from "../../style/IconsMoodStyled.style";
 function Feed() {
 
   const [data, setData] = useState({
-    iconsMood: false
+    iconsMood: false,
+    moodLink: ["utensils", "running", "film", "beer"]
   })
 
   function displayIcons() {
     const newState = {...data};
-    // debugger;
+
     if (newState.iconsMood === false) {
       newState.iconsMood = true;
       return setData(newState);
@@ -23,8 +24,6 @@ function Feed() {
       return setData(newState);
     }
   }
-
-  console.log(data.iconsMood);
 
   return (
     <React.Fragment>
@@ -45,13 +44,12 @@ function Feed() {
         function () {
           if (data.iconsMood === true) {
             return(
-              <IconsMoodStyled>
+              <IconsMoodStyled as="section">
                 <h2>What's your mood ?</h2>
-                <div>
-                  <i className="fas fa-utensils"></i>
-                  <i className="fas fa-running"></i>
-                  <i className="fas fa-film"></i>
-                  <i className="fas fa-beer"></i>
+                <div style={{display: "flex", marginTop: "30px"}}>
+                  {
+                    data.moodLink.map((icon, index) => <p><Link to={`createYourCard/${icon}`} key={index}><i className={`fas fa-${icon}`}></i></Link></p>)
+                  }
                 </div>
               </IconsMoodStyled>
             )
