@@ -4,6 +4,11 @@ import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
 import { FeedStyle, FooterStyle } from "../../style/FeedStyled.style";
 import { Link } from "react-router-dom";
 import IconsMoodStyled from "../../style/IconsMoodStyled.style";
+import React from "react";
+import { Link } from "react-router-dom";
+import FeedCard from "./FeedCard";
+import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
+import { FeedStyle, FooterStyle } from "../../style/FeedStyled.style";
 
 function Feed() {
 

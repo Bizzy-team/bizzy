@@ -1,5 +1,6 @@
 {
 	"extends": [
+		"react-app",
 		"airbnb-base",
 		"prettier"
 	],
@@ -10,6 +11,7 @@
 	"plugins": [
 		"prettier"
 	],
+	"ignorePatterns": ["*.png"],
 	"rules": {
 		"prettier/prettier": 1,
 		"no-unused-expressions": [
@@ -37,6 +39,7 @@
 		"complexity": ["warn", 5],
 		"max-nested-callbacks": ["warn", 2],
 		"max-depth": ["warn", 3],
-		"no-underscore-dangle": 0
+		"no-underscore-dangle": 0,
+		"no-console": 2
 	}
 }
