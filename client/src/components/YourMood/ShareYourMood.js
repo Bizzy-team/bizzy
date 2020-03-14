@@ -3,8 +3,6 @@ import React from "react";
 function ShareYourMood(props) {
 
   console.log(props.match.params.icon);
-  
-
   return(
     <>
     <h1>Your Mood</h1>
