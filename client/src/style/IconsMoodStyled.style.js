@@ -9,6 +9,6 @@ const IconsMoodStyled = styled.section`
     font-size: 1.4em;
     padding-right: 10px;
   }
-`
+`;
 
-export default IconsMoodStyled
+export default IconsMoodStyled;
