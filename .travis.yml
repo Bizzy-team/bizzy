@@ -18,6 +18,7 @@ before_install:
 
 install:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - npm install && cd client && npm install && cd ..
 - npm install && cd server && npm install && cd ..
 =======
@@ -27,6 +28,9 @@ install:
     cd client;
     npm install;
     cd ..
+=======
+- if [["$TRAVIS_BRANCH" === /^front/]]; then -e "npm install && cd client && npm install && cd .."
+>>>>>>> Update
 - if ["$TRAVIS_BRANCH" === /^back/]; then npm install && cd back && npm install && cd ..
 >>>>>>> Test
 
