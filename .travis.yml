@@ -17,12 +17,7 @@ before_install:
   - npm i -g npm@latest
 
 install:
-- > 
-  if [["$TRAVIS_BRANCH" === /^front/]]; then 
-    npm install;
-    cd client;
-    npm install;
-    cd ..
+- if [["$TRAVIS_BRANCH" === /^front/]]; then npm install; cd client;npm install; cd ..
 - if ["$TRAVIS_BRANCH" === /^back/]; then npm install && cd back && npm install && cd ..
 
 script:
