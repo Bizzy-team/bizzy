@@ -1,15 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
 import FeedCard from "./FeedCard";
 import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
 import { FeedStyle, FooterStyle } from "../../style/FeedStyled.style";
 
 function Feed() {
+
+  const [data, setData] = useState({
+    iconsMood: false
+  })
+
+  function displayIcons() {
+    const newState = {...data};
+    // debugger;
+    if (newState.iconsMood === false) {
+      newState.iconsMood = true;
+      return setData(newState);
+    }
+    if (newState.iconsMood === true) {
+      newState.iconsMood = false;
+      return setData(newState);
+    }
+  }
+
+  console.log(data.iconsMood);
+
   return (
     <React.Fragment>
       <HeaderFeedStyled as="header">
         <label className="el-switch">
-          <input type="checkbox" name="switch"></input>
+          <input type="checkbox" name="switch" onClick={displayIcons}></input>
           <span className="el-switch-style"></span>
         </label>
         <Link to="/user_profile">
@@ -20,6 +39,13 @@ function Feed() {
           />
         </Link>
       </HeaderFeedStyled>
+      {/* {
+        function () {
+          if (data.iconsMood === true) {
+            
+          }
+        }
+      } */}
       <FeedStyle>
         <FeedCard />
         <FeedCard />
