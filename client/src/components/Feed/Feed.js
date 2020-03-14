@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import FeedCard from "./FeedCard";
 import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
 import { FeedStyle, FooterStyle } from "../../style/FeedStyled.style";
+import { Link } from "react-router-dom";
+import IconsMoodStyled from "../../style/IconsMoodStyled.style";
 
 function Feed() {
 
@@ -39,13 +41,23 @@ function Feed() {
           />
         </Link>
       </HeaderFeedStyled>
-      {/* {
+      {
         function () {
           if (data.iconsMood === true) {
-            
+            return(
+              <IconsMoodStyled>
+                <h2>What's your mood ?</h2>
+                <div>
+                  <i className="fas fa-utensils"></i>
+                  <i className="fas fa-running"></i>
+                  <i className="fas fa-film"></i>
+                  <i className="fas fa-beer"></i>
+                </div>
+              </IconsMoodStyled>
+            )
           }
-        }
-      } */}
+        }()
+      }
       <FeedStyle>
         <FeedCard />
         <FeedCard />
