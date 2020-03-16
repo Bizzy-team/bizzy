@@ -21,7 +21,7 @@ function FeedCard() {
       <div className="card--desc">
         <p>
           Je suis op pour aller boire des bières pour décompresser de ma journée de
-          réunion à l'ECV Digital...
+          réunion à l'ECV Digital
         </p>
       </div>
       <div className="user--infos">
