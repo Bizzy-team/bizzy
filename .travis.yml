@@ -1,0 +1,30 @@
+language: node_js
+
+node_js:
+- "lts/*"
+
+os:
+- linux
+- osx
+
+cache: npm
+
+branches:
+  only:
+  - master
+
+before_install:
+  - npm i -g npm@latest
+
+install:
+- npm install && cd client && npm install && cd ..
+- npm install && cd server && npm install && cd ..
+
+script:
+- npm run lint
+- npm run style
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
