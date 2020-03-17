@@ -42,7 +42,7 @@ function Feed() {
       </HeaderFeedStyled>
       {data.iconsMood && (
         <IconsMoodStyled as="section">
-          <h2>What's your mood ?</h2>
+          <h2>It's time to: </h2>
           <div className="icons--mood">
             {data.moodLink.map((icon, index) => (
               <p>
