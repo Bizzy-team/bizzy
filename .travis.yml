@@ -23,6 +23,7 @@ script:
 - npm run build
 - npm run lint
 - npm run style
+- npm run now-build
 
 notifications:
   email:
