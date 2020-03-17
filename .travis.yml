@@ -20,6 +20,7 @@ install:
 - npm install
 
 script:
+- npm run build
 - npm run lint
 - npm run style
 
