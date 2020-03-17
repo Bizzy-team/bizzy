@@ -17,8 +17,7 @@ before_install:
   - npm i -g npm@latest
 
 install:
-- npm install && cd client && npm install && cd ..
-- npm install && cd server && npm install && cd ..
+- npm install
 
 script:
 - npm run lint
