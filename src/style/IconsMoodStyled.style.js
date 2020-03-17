@@ -3,7 +3,8 @@ import styled from "styled-components";
 const IconsMoodStyled = styled.section`
   background-color: white;
   padding-left: 22px;
-  height: 22vh;
+  margin-bottom: 20px;
+  height: 18vh;
   div {
     display: flex;
     margin-top: 30px;
