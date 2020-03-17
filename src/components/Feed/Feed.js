@@ -40,10 +40,10 @@ function Feed() {
           />
         </Link>
       </HeaderFeedStyled>
-      {!data.iconsMood && (
+      {data.iconsMood && (
         <IconsMoodStyled as="section">
           <h2>What's your mood ?</h2>
-          <div style={{ display: "flex", marginTop: "30px" }}>
+          <div className="icons--mood">
             {data.moodLink.map((icon, index) => (
               <p>
                 <Link to={`createYourCard/${icon}`} key={index}>
