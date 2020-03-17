@@ -1,12 +1,39 @@
 {
+    "name": "bizzy",
+    "version": "0.1.0",
+    "private": true,
     "scripts": {
-        "lint": "npx eslint --cache --resolve-plugins-relative-to='./client/node_modules' './client/src/**/*'",
-        "lint:watch": "esw -w --clear --color --cache --resolve-plugins-relative-to='./client/node_modules' './client/src/**/*'",
-        "lint:fix": "npx eslint --fix --resolve-plugins-relative-to='./client/node_modules' './client/src/**/*'",
-        "style": "prettier -c './client/**/*'",
-        "style:fix": "prettier --c --write './client/**/*'"
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "lint": "npx eslint --cache './src/**/*'",
+        "lint:watch": "esw -w --clear --color --cache './src/**/*'",
+        "lint:fix": "npx eslint --fix './src/**/*'",
+        "style": "prettier -c './src/**/*'",
+        "style:fix": "prettier --c --write './src/**/*'"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
     },
     "devDependencies": {
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^9.3.2",
+        "@testing-library/user-event": "^7.1.2",
+        "react": "^16.13.0",
+        "react-dom": "^16.13.0",
+        "react-router-dom": "^5.1.2",
+        "react-scripts": "3.4.0",
+        "styled-components": "^5.0.1",
         "@typescript-eslint/eslint-plugin": "^2.23.0",
         "@typescript-eslint/parser": "^2.23.0",
         "ava": "^3.0.0",
