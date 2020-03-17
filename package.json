@@ -6,7 +6,6 @@
         "start:back": "now dev",
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "now-build": "now --prod --token cZUGGMkT76fXoTdcXnBYQoWv",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "lint": "npx eslint --cache './api/**/*'",
