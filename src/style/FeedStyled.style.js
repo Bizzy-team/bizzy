@@ -70,16 +70,16 @@ export const FooterStyle = styled.footer`
   height: 8%;
   color: white;
   text-align: center;
-    div {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 4px;
-      i {
-        color: black;
-        margin-right: 24px;
-        margin-left: 8%;
-        font-size: 1.2em;
-        margin-top: 15px;
-      }
+  div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    i {
+      color: black;
+      margin-right: 24px;
+      margin-left: 8%;
+      font-size: 1.2em;
+      margin-top: 15px;
     }
+  }
 `;
