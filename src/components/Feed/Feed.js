@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import FeedCard from "./FeedCard";
 import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
-import { FeedStyle, FooterStyle } from "../../style/FeedStyled.style";
+import { FeedStyle } from "../../style/FeedStyled.style";
 import IconsMoodStyled from "../../style/IconsMoodStyled.style";
+import Footer from "../Footer/Footer";
 
 function Feed() {
   const [data, setData] = useState({
@@ -45,7 +46,7 @@ function Feed() {
           <h2>It's time to: </h2>
           <div className="icons--mood">
             {data.moodLink.map((icon, index) => (
-              <p>
+              <p key={index}>
                 <Link to={`createYourCard/${icon}`} key={index}>
                   <i className={`fas fa-${icon}`}></i>
                 </Link>
@@ -59,13 +60,7 @@ function Feed() {
         <FeedCard />
         <FeedCard />
       </FeedStyle>
-      <FooterStyle as="footer">
-        <div className="footer--elements">
-          <i className="fas fa-home"></i>
-          <i className="fas fa-bell"></i>
-          <i className="far fa-comments"></i>
-        </div>
-      </FooterStyle>
+      <Footer />
     </React.Fragment>
   );
 }
