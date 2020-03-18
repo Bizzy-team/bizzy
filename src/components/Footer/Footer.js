@@ -13,7 +13,7 @@ function Footer() {
         <i className="far fa-comments"></i>
       </div>
     </FooterStyle>
-  )
-};
+  );
+}
 
 export default Footer;

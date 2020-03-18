@@ -1,6 +1,9 @@
 import React from "react";
 import Footer from "../Footer/Footer";
-import { ShareYourMoodStyledHeader, ShareYourMoodSection } from "../../style/ShareYourMoodStyled.style";
+import {
+  ShareYourMoodStyledHeader,
+  ShareYourMoodSection
+} from "../../style/ShareYourMoodStyled.style";
 
 function ShareYourMood(props) {
   return (
@@ -25,7 +28,12 @@ function ShareYourMood(props) {
               <input placeholder="from to"></input>
             </div>
             <div className="mood--card--description">
-              <textarea id="description" rows="5" cols="33" placeholder="give a short description"></textarea>
+              <textarea
+                id="description"
+                rows="5"
+                cols="33"
+                placeholder="give a short description"
+              ></textarea>
             </div>
             <div className="mood--card--icon">
               <h6 className="mr-3">Your mood:</h6>
