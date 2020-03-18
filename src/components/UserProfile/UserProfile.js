@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import UserProfileStyled from "../../style/UserProfileStyled.style";
-import { FooterStyle } from "../../style/FeedStyled.style";
+import Footer from "../Footer/Footer";
 
 function UserProfile() {
   function addInput(e) {
@@ -39,15 +38,7 @@ function UserProfile() {
           </div>
         </div>
       </UserProfileStyled>
-      <FooterStyle as="footer">
-        <div className="footer--elements">
-          <Link to="/feed" style={{ marginLeft: "8%" }}>
-            <i className="fas fa-home"></i>
-          </Link>
-          <i className="fas fa-bell"></i>
-          <i className="far fa-comments"></i>
-        </div>
-      </FooterStyle>
+      <Footer />
     </>
   );
 }
