@@ -22,6 +22,10 @@
               {
                   "key": "X-XSS-Protection",
                   "value": "1; mode=block"
+              },
+              {
+                  "key": "Content-Type",
+                  "value": "Application/json; charset=utf-8"
               }
           ]
       }
