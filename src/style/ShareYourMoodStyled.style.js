@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ShareYourMoodStyledHeader = styled.header`
   background-image: url("https://images.unsplash.com/photo-1515092744438-961dffe687bb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1633&q=80");
   background-size: cover;
-  width: 131vw;
+  width: 141%;
   height: 30vh;
   h2 {
     color: white;
@@ -15,14 +15,18 @@ export const ShareYourMoodStyledHeader = styled.header`
 
 export const ShareYourMoodSection = styled.section`
   background-color: white;
-  border-radius: 10px;
+  border-radius: 34px;
   margin-top: 20%;
   margin-left: 54px;
   width: 90vw;
-  height: 56vh;
+  height: 64vh;
+  font-size: 1.3em;
   .mood--card {
     display: flex;
     flex-direction: column;
+    padding-top: 12px;
+    padding-left: 20px;
+    font-family: "Nunito";
     div {
       margin-top: 10px;
       margin-left: 5%;
@@ -41,6 +45,9 @@ export const ShareYourMoodSection = styled.section`
     .mood--card--description {
       margin-bottom: 5px;
       margin-top: 30px;
+      textarea {
+        width: 95%;
+      }
     }
     .mood--card--icon {
       display: flex;
