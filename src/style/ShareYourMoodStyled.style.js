@@ -18,10 +18,15 @@ export const ShareYourMoodSection = styled.section`
   width: 90vw;
   height: 64vh;
   font-size: 1.3em;
+  margin-top: 10%;
+  margin-bottom: 28%;
+  margin-left: 3px;
   .mood--card {
     display: flex;
     flex-direction: column;
     font-family: "Nunito";
+    padding-top: 17px;
+    padding-left: 36px;
     div {
       opacity: 0.5;
       i {
