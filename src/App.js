@@ -11,17 +11,18 @@ import ShareYourMood from "./components/YourMood/ShareYourMood";
 import variables from "./variables";
 
 function App() {
-  const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: ${props => props.theme.backgroundColor};
-  };
-  `;
+  // const GlobalStyle = createGlobalStyle`
+  // body {
+  //   background-color: ${props => props.theme.backgroundColor};
+  //   overflow-x: hidden;
+  // };
+  // `;
 
   return (
     <React.Fragment>
       <BrowserRouter>
         <ThemeProvider theme={{ ...variables }}>
-          <GlobalStyle></GlobalStyle>
+          {/* <GlobalStyle></GlobalStyle> */}
           <Route exact path="/" component={LogginSpace}></Route>
           <Route exact path="/subscription" component={SigninSpace}></Route>
           <Route exact path="/feed" component={Feed}></Route>
