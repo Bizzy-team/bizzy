@@ -1,11 +1,11 @@
-module.exports = (req, res) => {
-  res.writeHead(200, {
-    "content-type": "application/json; charset=utf-8"
-  })
+const responseHeader = require("./_utils/responseHeader");
+const apiDoc = require("./_utils/apidoc.json")
 
-  res.end(JSON.stringify({
-    oauth: {
-      description: "Routes to handle user connexion"
-    }
-  }))
+module.exports = (req, res) => {
+  if (req.method !== "GET") {
+    
+  }  
+
+  responseHeader(res, {code: 200});
+  res.end(JSON.stringify(apiDoc))
 };
