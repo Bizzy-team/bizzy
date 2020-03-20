@@ -1,0 +1,33 @@
+{
+    "endpoint": "https://bizzy.now.api.sh/api/",
+    "information": "All data must be passed in JSON",
+    "oauth": [
+        {
+            "path": "/login",
+            "description": "Routes to handle user connexion",
+            "method": "POST",
+            "data": {
+                "mail": "exemple.email@gmail.com",
+                "pswd": "slkjsdljsdlkgjflkjdflfj"
+            }
+        },
+        {
+            "path": "/logout",
+            "description": "Route to disconnect an user",
+            "method": "POST",
+            "data": {
+                "token": "13445645123543.234244512354.1423"
+            }
+        }
+    ],
+    "password": [
+        {
+            "path": "/forgot",
+            "description": "Reset user password",
+            "method": "POST",
+            "data": {
+                "email": "exemple.email@gmail.com"
+            }
+        }
+    ]
+}
