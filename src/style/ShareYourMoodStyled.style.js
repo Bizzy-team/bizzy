@@ -41,7 +41,8 @@ export const ShareYourMoodSection = styled.section`
         visibility: hidden;
       }
     }
-    .mood--card--name, .mood--card--location {
+    .mood--card--name,
+    .mood--card--location {
       input {
         border: none;
       }
