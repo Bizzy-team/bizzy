@@ -16,7 +16,7 @@ export const ShareYourMoodSection = styled.section`
   background-color: white;
   border-radius: 34px;
   width: 90vw;
-  height: 64vh;
+  height: 56vh;
   font-size: 1.3em;
   margin-top: 10%;
   margin-bottom: 28%;
@@ -29,6 +29,7 @@ export const ShareYourMoodSection = styled.section`
     padding-left: 36px;
     div {
       opacity: 0.5;
+      margin-bottom: 10px;
       i {
         padding-right: 5%;
       }
@@ -38,6 +39,11 @@ export const ShareYourMoodSection = styled.section`
       flex-direction: row;
       input[type="file"] {
         visibility: hidden;
+      }
+    }
+    .mood--card--name, .mood--card--location {
+      input {
+        border: none;
       }
     }
     .mood--card--description {
