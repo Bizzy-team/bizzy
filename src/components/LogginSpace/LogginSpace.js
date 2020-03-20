@@ -1,32 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
-import Header from "../Header/Header";
+import {IntroductionLogginSpace, LogginSpaceStyled} from "../../style/LogginSpaceStyled.style";
 
 function LogginSpace() {
-
-  // function signInPage() {
-  //   console.log("sign in page");
-  // }
-
-  // function signUpPage() {
-  //   console.log("sign up page");
-  // }
-
   return (
     <React.Fragment>
-      {/* <Header /> */}
-      {/* <Header signIn={() => signInPage()}  signUp={() => signUpPage()}/> */}
+      <IntroductionLogginSpace className="introduction">
+        <h1>Welcome back</h1>
+        <p>Enter yours informations to see who is around you.</p>
+      </IntroductionLogginSpace>
       <LogginSpaceStyled className="loggin--space">
         <div className="loggin--space--mail">
-          {/* <input type="mail" id="input--mail" className="form-control"  placeholder="email" required></input> */}
           <input type="mail" id="input--mail" placeholder="Email" required></input>
         </div>
         <div className="loggin--space--password">
           <input
             type="password"
             id="input--password"
-            // className="form-control"
             minLength="6"
             placeholder="Password"
             required
@@ -36,9 +26,11 @@ function LogginSpace() {
         <div className="loggin--space--btn">
           <button className="btn btn-secondary">Log in</button>
         </div>
-        <p style={{ fontSize: "0.6em" }}>
-          Not an account ? Time's to create <Link to="/subscription">one</Link>
-        </p>
+        <div className="forgot--password">
+          <p>
+            <Link to="/subscription"> <strong>Forgot password ?</strong></Link>
+          </p>
+        </div>
       </LogginSpaceStyled>
     </React.Fragment>
   );
