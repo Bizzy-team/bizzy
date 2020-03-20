@@ -6,9 +6,6 @@ import {
 } from "../../style/ShareYourMoodStyled.style";
 
 function ShareYourMood(props) {
-
-  document.querySelector("body").style = "overflow: hidden";
-
   return (
     <React.Fragment>
       <ShareYourMoodStyledHeader>
