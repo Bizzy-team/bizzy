@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
-import Header from "../Header/Header";
 
 function SigninSpace() {
   return (
     <React.Fragment>
-      <Header />
       <LogginSpaceStyled className="loggin--space">
+        <div className="loggin--space--username">
+          <label htmlFor="input--username">Username</label>
+          <input type="text" id="input--username" className="form-control" required></input>
+        </div>
         <div className="loggin--space--mail">
           <label htmlFor="input--mail">Email</label>
           <input type="mail" id="input--mail" className="form-control" required></input>
@@ -21,12 +23,12 @@ function SigninSpace() {
             minLength="6"
             required
           ></input>
-          <small class="text-muted" style={{ fontSize: "0.5em" }}>
+          <small className="text-muted" style={{ fontSize: "0.5em" }}>
             6 characters minimum.
           </small>
         </div>
         <div className="loggin--space--btn">
-          <button className="btn btn-light">Sign in</button>
+          <button className="btn btn-secondary">Sign in</button>
         </div>
         <p style={{ fontSize: "0.6em" }}>
           Already have an account ? <Link to="/"> Let's go</Link>
