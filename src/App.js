@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import React from "react";
-import { createGlobalStyle } from "styled-components";
+// import { createGlobalStyle } from "styled-components";
 import { Route, BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import LogginSpace from "./components/LogginSpace/LogginSpace";
