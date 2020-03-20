@@ -15,15 +15,13 @@ function Feed() {
   function displayIcons() {
     const newState = { ...data };
 
-    if (newState.iconsMood === false) {
-      newState.iconsMood = true;
-      return setData(newState);
-    }
-    if (newState.iconsMood === true) {
+    if (newState.iconsMood) {
       newState.iconsMood = false;
       return setData(newState);
     }
-    return null;
+
+    newState.iconsMood = true;
+    return setData(newState);
   }
 
   return (
