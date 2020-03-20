@@ -7,9 +7,18 @@ const LogginSpaceStyled = styled.div`
   margin-top: 5vh;
   width: 100vw;
   font-size: 1.7em;
-  font-famikly: "Roboto";
+  font-family: "Roboto";
   div {
     margin-bottom: 10%;
+    input {
+      border: none;
+      background: none;
+      border-bottom: solid 1px ${props => props.theme.color};
+    }
+    button {
+      border: none;
+      background-color: ${props => props.theme.color};
+    }
   }
 `;
 
