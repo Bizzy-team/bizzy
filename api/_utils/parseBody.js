@@ -7,8 +7,10 @@ module.exports = request => {
 
   request.setEncoding("utf-8");
   request
-    .on("data", dataBody => (body = dataBody))
-    .on("end", () => {
+    .on("data", function dataEvent(dataBody) {
+      body = dataBody;
+    })
+    .on("end", function endEvent() {
       if (body) {
         try {
           const bodyParsed = JSON.parse(body);
