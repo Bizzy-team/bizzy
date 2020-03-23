@@ -22,7 +22,7 @@ module.exports = async data => {
     return Promise.resolve({
       code: 200,
       serverHeader: {
-        "Set-Cookie": `sessionId=${user._id}; HttpOnly; ${
+        "Set-Cookie": `sessionId=${user._id}; HttpOnly; Expires=${new Date(Date.now() + 6.04e+8)}; ${
           process.env.NODE_ENV === "development" ? "" : "Domain=bizzy.now.sh; Secure"
         };`
       },
