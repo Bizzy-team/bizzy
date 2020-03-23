@@ -1,5 +1,6 @@
 const responseHeader = require("../_utils/responseHeader");
 const loginDB = require("../_db/login");
+const parseBody = require("../_utils/parseBody");
 
 module.exports = (req, res) => {
     if (req.method !== "POST") {
@@ -16,35 +17,71 @@ module.exports = (req, res) => {
         }));
     }
 
-    let body;
-    req.setEncoding("utf-8");
-    req
-    .on('data', chunk => body = chunk)
-    .on("end", () => {
-        if (body !== undefined) {
-            try {
-                const bodyParsed = JSON.parse(dataToCheck.body);
-                body = bodyParsed;
-                loginDB(body)
-                return res.end("gg");
-            } catch (e) {
-                responseHeader(res, {
-                    code: 406
-                });
+    parseBody(req);
+    req.on("bodyParsed", httpBody => {
+        if (httpBody.error) {
+            responseHeader(res, {
+                code: httpBody.code,
+                serverHeader: {...httpBody.serverHeader}
+            });
 
-                return res.end(JSON.stringify({
-                    error: true,
-                    message: "The routes can only receives JSON data."
-                }))
-            }
+            return res.end(JSON.stringify({
+                error: true, 
+                message: httpBody.message
+            }))
         }
 
-        responseHeader(res, {
-            code: 422
+        const q = Object.keys(httpBody);
+
+        if (q.length >= 3) {
+            responseHeader(res, {
+                code: 400
+            })
+
+            return res.end(JSON.stringify({
+                error: true,
+                message: "You can only have two parameters."
+            }));
+        };
+
+        if (!q.includes("mail")) {
+            responseHeader(res, {
+                code: 422
+            });
+
+            return res.end(JSON.stringify({
+                error: true,
+                message: "Missing mail parameter."
+            }));
+        };
+
+        if (!q.includes("pswd")) {
+            responseHeader(res, {
+                code: 422
+            });
+
+            return res.end(JSON.stringify({
+                error: true,
+                message: "Missing pswd parameter."
+            }));
+        };
+
+        return loginDB(httpBody).then(userData => {
+            if (userData.data.error) {
+                responseHeader(res, {
+                    code: userData.code,
+                    serverHeader: {...userData.serverHeader}
+                });
+                
+                return res.end(JSON.stringify({...userData.data}));
+            }
+
+            responseHeader(res, {
+                code: userData.code,
+                serverHeader: {...userData.serverHeader}
+            });
+
+            return res.end(JSON.stringify({...userData.data}));
         });
-        return res.end(JSON.stringify({
-            error: true,
-            message: "Data incorrect or missing"
-        }))
-    });
+    })
 }
