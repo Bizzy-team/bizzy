@@ -2,11 +2,9 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "build": {
-      "env": {
-          "NODEJS_HELPERS": "0",
-          "DB_URL": "@mongo"
-      }
+  "env": {
+      "NODEJS_HELPERS": "0",
+      "DB_URL": "@mongo"
   },
   "headers": [
       {
