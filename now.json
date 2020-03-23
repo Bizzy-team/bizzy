@@ -4,7 +4,8 @@
   "trailingSlash": false,
   "build": {
       "env": {
-          "NODEJS_HELPERS": "0"
+          "NODEJS_HELPERS": "0",
+          "DB_URL": "@mongo"
       }
   },
   "headers": [
