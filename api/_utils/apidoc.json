@@ -3,13 +3,11 @@
     "READ THIS !!": "All data must be passed in JSON, If fetch failed server will respond with a 400x code all responses will be in this form {error: true, message: 'message error'}, otherwise if fetch is good server will respond with a 200x code check a specific route on this document to get more information's on the data returned. PS: Data in the request-body are not good do not send this data to the server they are just here as examples",
     "feed/cards": {
         "description": "Get all events card for a specific user.",
-        "method": "POST",
+        "method": "GET",
         "headers": [
-            "Authorization: Bearer <your-token>"
-        ],
-        "request-body": {
-            "id": "<user-id>"
-        }
+            "Authorization: Bearer <your-token>",
+            "Cookie: sessionId=<cookie-id>"
+        ]
     },
     "oauth/login": {
         "description": "Routes to handle user connexion",
