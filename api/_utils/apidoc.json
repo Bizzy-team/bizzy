@@ -29,6 +29,7 @@
     },
     "oauth/register": {
         "description": "Create an user in the bizzy bdd.",
+        "method": "POST",
         "request-body": {
             "mail": "exemple.email@gmail.com",
             "pswd": "slkjsdljsdlkgjflkjdflfj",
