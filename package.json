@@ -11,8 +11,8 @@
         "lint": "npx eslint --cache './api/**/*'",
         "lint:watch": "esw -w --clear --color --cache './api/**/*'",
         "lint:fix": "npx eslint --fix './api/**/*'",
-        "style": "prettier -c './src/**/*'",
-        "style:fix": "prettier --c --write './src/**/*'"
+        "style": "prettier -c './src/**/*' && prettier -c './api/**/*'",
+        "style:fix": "prettier --c --write './src/**/*' && prettier -c './api/**/*'"
     },
     "browserslist": {
         "production": [
@@ -42,6 +42,7 @@
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
         "bcrypt": "^4.0.1",
+        "dotenv": "^8.2.0",
         "jsonwebtoken": "^8.5.1",
         "mongodb": "^3.5.5",
         "react": "^16.13.0",
