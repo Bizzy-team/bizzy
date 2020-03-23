@@ -1,33 +1,50 @@
 {
     "endpoint": "https://bizzy.now.api.sh/api/",
-    "information": "All data must be passed in JSON",
-    "oauth": [
-        {
-            "path": "/login",
-            "description": "Routes to handle user connexion",
-            "method": "POST",
-            "data": {
-                "mail": "exemple.email@gmail.com",
-                "pswd": "slkjsdljsdlkgjflkjdflfj"
-            }
+    "READ THIS !!": "All data must be passed in JSON, If fetch failed server will respond with a 400x code all responses will be in this form {error: true, message: 'message error'}, otherwise if fetch is good server will respond with a 200x code check a specific route on this document to get more information's on the data returned. PS: Data in the request-body are not good do not send this data to the server they are just here as examples",
+    "feed/cards": {
+        "description": "Get all events card for a specific user.",
+        "method": "POST",
+        "headers": [
+            "Authorization: Bearer <your-token>"
+        ],
+        "request-body": {
+            "id": "<user-id>"
+        }
+    },
+    "oauth/login": {
+        "description": "Routes to handle user connexion",
+        "method": "POST",
+        "request-body": {
+            "mail": "exemple.email@gmail.com",
+            "pswd": "slkjsdljsdlkgjflkjdflfj"
         },
-        {
-            "path": "/logout",
-            "description": "Route to disconnect an user",
-            "method": "POST",
-            "data": {
-                "token": "13445645123543.234244512354.1423"
-            }
+        "response": {
+            "token": "12234234.3534534.34534"
         }
-    ],
-    "password": [
-        {
-            "path": "/forgot",
-            "description": "Reset user password",
-            "method": "POST",
-            "data": {
-                "email": "exemple.email@gmail.com"
-            }
+    },
+    "oauth/logout": {
+        "description": "Route to disconnect an user",
+        "method": "POST",
+        "headers": [
+            "Authorization: Bearer <your-token>"
+        ]
+    },
+    "oauth/register": {
+        "description": "Create an user in the bizzy bdd.",
+        "request-body": {
+            "mail": "exemple.email@gmail.com",
+            "pswd": "slkjsdljsdlkgjflkjdflfj",
+            "username": "kvin3324"
+        },
+        "response": {
+            "token": "12234234.3534534.34534"
         }
-    ]
+    },
+    "password/forgot": {
+        "description": "Reset user password",
+        "method": "POST",
+        "request-body": {
+            "email": "exemple.email@gmail.com"
+        }
+    }
 }
