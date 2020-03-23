@@ -2,7 +2,7 @@ const responseHeader = require("../_utils/responseHeader");
 const loginDB = require("../_db/login");
 const parseBody = require("../_utils/parseBody");
 
-module.exports = (req, res) => {
+module.exports = function Login(req, res) {
   if (req.method !== "POST") {
     responseHeader(res, {
       code: 401,
@@ -20,7 +20,7 @@ module.exports = (req, res) => {
   }
 
   parseBody(req);
-  req.on("bodyParsed", httpBody => {
+  return req.on("bodyParsed", httpBody => {
     if (httpBody.error) {
       responseHeader(res, {
         code: httpBody.code,
