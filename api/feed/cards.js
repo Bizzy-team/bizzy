@@ -1,3 +1,3 @@
 module.exports = (req, res) => {
-    res.end(req.url);
-}
+  res.end(req.url);
+};
