@@ -7,16 +7,17 @@ const HeaderStyled = styled.header`
   div {
     display: flex;
     flex-direction: row;
-      img {
-        width: 20%;
-        height: 20%;
-      }
+    img {
+      width: 20%;
+      height: 20%;
+    }
     .buttons--sign {
-      margin-left: 35%;
+      margin-left: 45%;
+      margin-top: 5%;
       div {
+        font-family: "Roboto";
         padding-left: 10px;
         padding-top: 10px;
-        font-size: 1.2em;
       }
     }
   }
