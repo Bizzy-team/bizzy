@@ -24,7 +24,7 @@ function LogginSpace() {
           <p><small className="text-muted" style={{ fontSize: "0.4em" }}>6 characters minimum.</small></p>
         </div>
         <div className="loggin--space--btn">
-          <button className="btn btn-secondary">Log in</button>
+          <button>Log in</button>
         </div>
         <div className="forgot--password">
           <p>
