@@ -32,7 +32,16 @@ export const LogginSpaceStyled = styled.div`
     button {
       border: none;
       background-color: ${props => props.theme.color};
+      color: white;
+      border-radius: 5px;
+      padding: 3px 8px;
+        &:active {
+          background-color: ${props => props.theme.color};
+        }
     }
+  }
+  .loggin--space--confirm--password {
+    margin-bottom: 0;
   }
   .forgot--password {
     margin-top: 10%;
@@ -43,6 +52,9 @@ export const LogginSpaceStyled = styled.div`
         color: black;
       }
     }
+  }
+  .loggin--space--sign--btn {
+    margin-top 22%;
   }
 `;
 
