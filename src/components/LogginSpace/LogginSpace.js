@@ -51,6 +51,12 @@ function LogginSpace() {
             if (response.ok) {
               sessionStorage.setItem("UserCookie", response.headers.get("Set-Cookie"));
             }
+            if (response.status >= 500 && response.status <= 600) {
+              return setData({
+                error: true,
+                errorMessage: "Something went wrong with the server."
+              })
+            }
             return response.json();
           })
           .then(dataParsed => {
