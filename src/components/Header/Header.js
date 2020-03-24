@@ -9,10 +9,10 @@ function Header(props) {
         <img src={logo} alt="logo"></img>
         <div className="buttons--sign">
           <div className="buttons--sign--in">
-            <p onClick={props.switchPage}>Sign in</p>
+            <button onClick={props.switchPage}>Sign in</button>
           </div>
           <div className="buttons--sign--up">
-            <p id="sign--up--btn" onClick={props.switchPage}>Sign up</p>
+            <button id="sign--up--btn" onClick={props.switchPage}>Sign up</button>
           </div>
         </div>
       </div>
