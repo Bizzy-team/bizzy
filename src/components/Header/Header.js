@@ -12,7 +12,9 @@ function Header(props) {
             <button onClick={props.switchPage}>Sign in</button>
           </div>
           <div className="buttons--sign--up">
-            <button id="sign--up--btn" onClick={props.switchPage}>Sign up</button>
+            <button id="sign--up--btn" onClick={props.switchPage}>
+              Sign up
+            </button>
           </div>
         </div>
       </div>
