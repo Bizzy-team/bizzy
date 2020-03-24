@@ -13,6 +13,7 @@ function SigninSpace() {
     error: false,
     errorMessage: ""
   })
+  const [redirect, setRedirect] = React.useState(false);
 
   function checkUserSub() {
     if ((inputMail.current.value === '') || (pswd.current.value === '' && checkPswd.current.value === '')) {
@@ -89,11 +90,13 @@ function SigninSpace() {
               errorMessage: dataParsed.message,
             })
           }
-          return <Redirect to="/feed" />
+          return setRedirect(true);
         }
       )
     }
   }
+
+  if (redirect) return <Redirect to="/feed"></Redirect>
 
   return (
     <React.Fragment>
