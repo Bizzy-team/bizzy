@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const IntroductionLogginSpace = styled.div`
-margin-left: 24px;
-margin-bottom: 22%;
-h1 {
-  font-family: "Roboto";
-  font-weight: bold;
-  font-size: 3em;
+  margin-left: 24px;
+  margin-bottom: 22%;
+  h1 {
+    font-family: "Roboto";
+    font-weight: bold;
+    font-size: 3em;
     p {
       font-family: "Nunito";
     }
