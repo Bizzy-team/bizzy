@@ -12,6 +12,7 @@ function LogginSpace() {
     error: false,
     errorMessage: ""
   })
+  const [redirect, setRedirect] = React.useState(false);
 
   function userAuth() {
     if ((inputMail.current.value === '') || (inputPswd.current.value === '')) {
@@ -66,11 +67,13 @@ function LogginSpace() {
               errorMessage: dataParsed.message,
             })
           }
-          return <Redirect to="/feed" />
+          return setRedirect(true);
         }
       )
     }
   }
+
+  if (redirect) return <Redirect to="/feed"></Redirect>
 
   return (
     <React.Fragment>
@@ -83,7 +86,7 @@ function LogginSpace() {
       }
       {
         data.error && (
-          <div className="form-group bg-danger rounded p-2 ml-2">
+          <div className="form-group bg-danger rounded p-2 ml-1" style={{width: "90%"}}>
 						<p className="text-light">{data.errorMessage}</p>
 					</div>
         )
