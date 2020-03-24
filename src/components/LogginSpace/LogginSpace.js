@@ -56,9 +56,6 @@ function LogginSpace() {
         })
       })
         .then(response => {
-          if (response.ok) {
-            sessionStorage.setItem("UserCookie", response.headers.get("Set-Cookie"));
-          }
           if (response.status >= 500 && response.status <= 600) {
             return setData({
               error: true,
