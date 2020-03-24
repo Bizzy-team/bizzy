@@ -108,7 +108,7 @@ function LogginSpace() {
         </div>
         <div className="forgot--password">
           <p>
-            <Link to="/subscription"> <strong>Forgot password ?</strong></Link>
+            <Link to="/forgotPasswordForm"> <strong>Forgot password ?</strong></Link>
           </p>
         </div>
       </LogginSpaceStyled>
