@@ -6,7 +6,7 @@ margin-bottom: 22%;
 h1 {
   font-family: "Roboto";
   font-weight: bold;
-  font-size: 3.3em;
+  font-size: 3em;
     p {
       font-family: "Nunito";
     }
