@@ -76,7 +76,7 @@ function LogginSpace() {
     <React.Fragment>
       <IntroductionLogginSpace className="introduction">
         <h1>Welcome back</h1>
-        <p>Enter yours informations to see who is around you.</p>
+        <p>It's time to log in and see who is around you.</p>
       </IntroductionLogginSpace>
       {
         data.loader && <ReactSVG src={LoaderSvg}  style={{backgroundColor: "#F9FAFA"}}   />
