@@ -40,35 +40,35 @@ function LogginSpace() {
       setData({
         loader: true
       });
-       return fetch("https://bizzy.now.sh/api/oauth/login", {
-          method: 'POST',
-          body: JSON.stringify({
-            mail: inputMail.current.value,
-            pswd: inputPswd.current.value
-          })
+      return fetch("https://bizzy.now.sh/api/oauth/login", {
+        method: 'POST',
+        body: JSON.stringify({
+          mail: inputMail.current.value,
+          pswd: inputPswd.current.value
         })
-          .then(response => {
-            if (response.ok) {
-              sessionStorage.setItem("UserCookie", response.headers.get("Set-Cookie"));
-            }
-            if (response.status >= 500 && response.status <= 600) {
-              return setData({
-                error: true,
-                errorMessage: "Something went wrong with the server."
-              })
-            }
-            return response.json();
+      })
+      .then(response => {
+        if (response.ok) {
+          sessionStorage.setItem("UserCookie", response.headers.get("Set-Cookie"));
+        }
+        if (response.status >= 500 && response.status <= 600) {
+          return setData({
+            error: true,
+            errorMessage: "Something went wrong with the server."
           })
-          .then(dataParsed => {
-              if (dataParsed.error) {
-                return setData({
-                  error: dataParsed.error,
-                  errorMessage: dataParsed.message,
-                })
-              }
-              return <Redirect to="/feed" />
-            }
-          )
+        }
+        return response.json();
+      })
+      .then(dataParsed => {
+          if (dataParsed.error) {
+            return setData({
+              error: dataParsed.error,
+              errorMessage: dataParsed.message,
+            })
+          }
+          return <Redirect to="/feed" />
+        }
+      )
     }
   }
 
@@ -83,7 +83,7 @@ function LogginSpace() {
       }
       {
         data.error && (
-          <div className="form-group bg-danger rounded p-2">
+          <div className="form-group bg-danger rounded p-2 ml-2">
 						<p className="text-light">{data.errorMessage}</p>
 					</div>
         )
