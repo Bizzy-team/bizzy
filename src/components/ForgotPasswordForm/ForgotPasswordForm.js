@@ -18,7 +18,7 @@ function ForgotPasswordForm() {
         <Link to="/">I remember the password</Link>
       </div>
     </ForgotPasswordFormStyled>
-  )
-};
+  );
+}
 
 export default ForgotPasswordForm;
