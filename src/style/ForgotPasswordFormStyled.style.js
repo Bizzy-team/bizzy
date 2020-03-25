@@ -24,6 +24,9 @@ const ForgotPasswordFormStyled = styled.section`
     padding-left: 20px;
     width: 90%;
     border-radius: 30px;
+      input {
+        width: 90%;
+      }
   }
 
   p {
