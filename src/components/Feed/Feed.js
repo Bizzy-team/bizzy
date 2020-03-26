@@ -13,7 +13,9 @@ function Feed() {
   });
   const [position, setPosition] = React.useState({
     userLat: "",
-    userLong: ""
+    userLong: "",
+    filtersKm: ["2", "4", "6", "+8"],
+    filterByUser: "2"
   });
 
   function userLocation(pos) {
@@ -21,6 +23,14 @@ function Feed() {
       ...position,
       userLat: pos.coords.latitude,
       userLong: pos.coords.longitude,
+    })
+  }
+
+  function filterChoose(e) {
+    console.log(e.target.value);
+    return setPosition({
+      ...position,
+      filterByUser: e.target.value
     })
   }
 
@@ -63,6 +73,16 @@ function Feed() {
                 </Link>
               </p>
             ))}
+          </div>
+          <div className="filter--km">
+            <h2>In which perimeter ?</h2>
+              <select name="km" onChange={(e) => filterChoose(e)}>
+                {
+                  position.filtersKm.map((filter, index) => {
+                    return <option value={filter} key={index}>{filter}</option>
+                  })
+                }
+              </select>
           </div>
         </IconsMoodStyled>
       )}
