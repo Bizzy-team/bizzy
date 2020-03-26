@@ -6,7 +6,7 @@ import { FeedStyle } from "../../style/FeedStyled.style";
 import IconsMoodStyled from "../../style/IconsMoodStyled.style";
 import Footer from "../Footer/Footer";
 
-function Feed(props) {
+function Feed() {
   const [data, setData] = useState({
     iconsMood: false,
     moodLink: ["utensils", "running", "film", "beer"],
@@ -16,31 +16,15 @@ function Feed(props) {
     userLong: ""
   });
 
-
-
-  // console.log(props.coords.latitude);
-  
-
-  // function userPosition(pos) {
-  //   console.log(pos.coords.latitude);
-  //   console.log(pos.coords.longitude);
-  // }
-
-  
   function userLocation(pos) {
-    return {
+    return setPosition({
+      ...position,
       userLat: pos.coords.latitude,
-      userLong: pos.coords.longitude
-    };
+      userLong: pos.coords.longitude,
+    })
   }
 
-  // function error(err) {
-  //   console.warn(`ERREUR (${err.code}): ${err.message}`);
-  // }
-
-
-
-  function displayIcons(pos) {
+  function userAvailable() {
     const newState = { ...data };
 
     if (newState.iconsMood) {
@@ -48,10 +32,8 @@ function Feed(props) {
       return setData(newState);
     }
 
-
-    const newPosition = {...navigator.geolocation.getCurrentPosition(userLocation)};
+    navigator.geolocation.getCurrentPosition(userLocation);
     newState.iconsMood = true;
-    setPosition(newPosition);
     return setData(newState);
   }
 
@@ -59,7 +41,7 @@ function Feed(props) {
     <React.Fragment>
       <HeaderFeedStyled as="header">
         <label className="el-switch">
-          <input type="checkbox" name="switch" onClick={displayIcons}></input>
+          <input type="checkbox" name="switch" onClick={userAvailable}></input>
           <span className="el-switch-style"></span>
         </label>
         <Link to="/user_profile">
