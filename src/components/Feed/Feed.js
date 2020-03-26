@@ -28,17 +28,10 @@ function Feed(props) {
 
   
   function userLocation(pos) {
-    const newState = {...position}
-    const crd = pos.coords;
-
-    console.log('Votre position actuelle est :');
-    newState.userLat = crd.latitude;
-    console.log(`Latitude : ${newState.userLat}`);
-    newState.userLong = crd.longitude;
-    console.log(`Longitude : ${newState.userLong}`);
-    // console.log(`La précision est de ${crd.accuracy} mètres.`);
-
-    setData(newState);
+    return {
+      userLat: pos.coords.latitude,
+      userLong: pos.coords.longitude
+    };
   }
 
   // function error(err) {
@@ -49,23 +42,17 @@ function Feed(props) {
 
   function displayIcons(pos) {
     const newState = { ...data };
-    // const crd = pos.coords;
 
-
-    if (newState.iconsMood === false) {
-      // newState.userLat = crd.latitude;
-      // newState.userLong = crd.longitude;
-      navigator.geolocation.getCurrentPosition(userLocation);
-      // navigator.geolocation.getCurrentPosition(userPosition);
-      newState.iconsMood = true;
-      // userLocation(pos);
-      return setData(newState);
-    }
-    if (newState.iconsMood === true) {
+    if (newState.iconsMood) {
       newState.iconsMood = false;
       return setData(newState);
     }
-    return null;
+
+
+    const newPosition = {...navigator.geolocation.getCurrentPosition(userLocation)};
+    newState.iconsMood = true;
+    setPosition(newPosition);
+    return setData(newState);
   }
 
   return (
