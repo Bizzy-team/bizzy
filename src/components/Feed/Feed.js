@@ -27,7 +27,6 @@ function Feed() {
   }
 
   function filterChoose(e) {
-    console.log(e.target.value);
     return setPosition({
       ...position,
       filterByUser: e.target.value
