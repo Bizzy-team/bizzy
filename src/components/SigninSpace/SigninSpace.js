@@ -6,6 +6,7 @@ import {
   LogginSpaceStyled
 } from "../../style/LogginSpaceStyled.style";
 import LoaderSvg from "../../img/loader.svg";
+import InputsForm from "../InputsForm/InputsForm";
 
 function SigninSpace() {
   const inputUsername = React.createRef(null);
@@ -117,43 +118,10 @@ function SigninSpace() {
         </div>
       )}
       <LogginSpaceStyled className="loggin--space">
-        <div className="loggin--space--username">
-          <input
-            type="text"
-            id="input--username"
-            ref={inputUsername}
-            placeholder="Username"
-            required
-          ></input>
-        </div>
-        <div className="loggin--space--mail">
-          <input
-            type="mail"
-            id="input--mail"
-            placeholder="Email"
-            ref={inputMail}
-            required
-          ></input>
-        </div>
-        <div className="loggin--space--password">
-          <input
-            type="password"
-            id="input--password"
-            minLength="6"
-            placeholder="Password"
-            ref={pswd}
-            required
-          ></input>
-        </div>
-        <div className="loggin--space--confirm--password">
-          <input
-            type="password"
-            minLength="6"
-            placeholder="Confirm Password"
-            ref={checkPswd}
-            required
-          ></input>
-        </div>
+        <InputsForm spaceName="loggin" fieldName="username" placeholderInput="Username" inputRef={inputUsername} />
+        <InputsForm spaceName="loggin" fieldName="mail" placeholderInput="Email" inputRef={inputMail} />
+        <InputsForm spaceName="loggin" fieldName="password" placeholderInput="Password" inputRef={pswd} minLength="6" />
+        <InputsForm spaceName="loggin" fieldName="confirm--password" placeholderInput="Confirm Password" inputRef={checkPswd} minLength="6" />
         <p>
           <small className="text-muted" style={{ fontSize: "0.5em" }}>
             6 characters minimum.
