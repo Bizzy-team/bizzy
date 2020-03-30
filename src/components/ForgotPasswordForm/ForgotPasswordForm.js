@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ForgotPasswordFormStyled from "../../style/ForgotPasswordFormStyled.style";
 import { ReactSVG } from "react-svg";
 import LoaderSvg from "../../img/loader.svg";
+import InputsForm from "../InputsForm/InputsForm";
 
 function ForgotPasswordForm() {
   const inputMail = React.createRef(null);
@@ -75,9 +76,7 @@ function ForgotPasswordForm() {
         </div>
       )}
       <p>Enter your email below to receive your password reset instructions.</p>
-      <div className="input--mail">
-        <input type="mail" ref={inputMail} placeholder="Your Email."></input>
-      </div>
+      <InputsForm spaceName="forgotPswd" fieldName="mail" placeholderInput="Email" inputRef={inputMail} />
       <button onClick={() => checkMail()}>Send password</button>
       <div className="link--to--home">
         <Link to="/">I remember the password</Link>
