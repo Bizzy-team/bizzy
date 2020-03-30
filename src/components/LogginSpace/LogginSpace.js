@@ -6,6 +6,7 @@ import {
 } from "../../style/LogginSpaceStyled.style";
 import { ReactSVG } from "react-svg";
 import LoaderSvg from "../../img/loader.svg";
+import InputsForm from "../InputsForm/InputsForm";
 
 function LogginSpace() {
   const inputMail = React.createRef(null);
@@ -48,14 +49,22 @@ function LogginSpace() {
       setData({
         loader: true
       });
-      return fetch("https://bizzy.now.sh/api/oauth/login", {
+      return fetch("http://localhost:3000/api/oauth/login", {
+      // return fetch("https://bizzy.now.sh/api/oauth/login", {
+        // credentials: 'include',
         method: "POST",
         body: JSON.stringify({
           mail: inputMail.current.value,
           pswd: inputPswd.current.value
-        })
+        }),
       })
         .then(response => {
+          if (response.ok) {
+            console.log(response.headers.get("Set-Cookie"));
+
+
+            sessionStorage.setItem("UserCookie", response.headers.get("Set-Cookie"));
+          }
           if (response.status >= 500 && response.status <= 600) {
             return setData({
               error: true,
@@ -91,30 +100,13 @@ function LogginSpace() {
         </div>
       )}
       <LogginSpaceStyled className="loggin--space">
-        <div className="loggin--space--mail">
-          <input
-            type="mail"
-            id="input--mail"
-            placeholder="Email"
-            ref={inputMail}
-            required
-          ></input>
-        </div>
-        <div className="loggin--space--password">
-          <input
-            type="password"
-            id="input--password"
-            minLength="6"
-            ref={inputPswd}
-            placeholder="Password"
-            required
-          ></input>
+        <InputsForm spaceName="loggin" fieldName="mail" placeholderInput="Email" inputRef={inputMail} />
+        <InputsForm spaceName="loggin" fieldName="password" placeholderInput="Password" inputRef={inputPswd} />
           <p>
             <small className="text-muted" style={{ fontSize: "0.4em" }}>
               6 characters minimum.
             </small>
           </p>
-        </div>
         <div className="loggin--space--btn">
           <button onClick={() => userAuth()}>Log in</button>
         </div>
