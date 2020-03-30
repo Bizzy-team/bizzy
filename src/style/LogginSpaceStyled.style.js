@@ -24,17 +24,13 @@ export const LogginSpaceStyled = styled.div`
   font-family: "Roboto";
   div {
     margin-bottom: 4%;
-    input {
-      border: none;
-      background: none;
-      border-bottom: solid 1px ${props => props.theme.color};
-    }
     button {
       border: none;
       background-color: ${props => props.theme.color};
       color: white;
-      border-radius: 5px;
-      padding: 3px 8px;
+      border-radius: 25px;
+      padding: 6px 8px;
+      width: 56%;
         &:active {
           background-color: ${props => props.theme.color};
         }
