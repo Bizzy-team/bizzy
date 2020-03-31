@@ -5,7 +5,7 @@ input {
   border-radius: 25px;
   background: white;
   border: solid 1px ${props => props.theme.color};
-  padding: 5px 10px;
+  padding: 10px 10px;
     &:focus {
       outline: none;
     }
