@@ -56,7 +56,7 @@ function LogginSpace() {
         body: JSON.stringify({
           mail: inputMail.current.value,
           pswd: inputPswd.current.value
-        }),
+        })
       })
         .then(response => {
           if (response.ok) {
