@@ -40,26 +40,26 @@ function ForgotPasswordForm() {
       return fetch("https://bizzy.now.sh/api/password/forgot", {
         method: "POST",
         body: JSON.stringify({
-          mail: inputMail.current.value,
+          mail: inputMail.current.value
         })
       })
-      .then(response => {
-        if (response.status >= 500 && response.status <= 600) {
-          return setData({
-            error: true,
-            errorMessage: "Something went wrong with the server."
-          });
-        }
-        return response.json();
-      })
-      .then(dataParsed => {
-        if (dataParsed.error) {
-          return setData({
-            error: dataParsed.error,
-            errorMessage: dataParsed.message
-          });
-        }
-      });
+        .then(response => {
+          if (response.status >= 500 && response.status <= 600) {
+            return setData({
+              error: true,
+              errorMessage: "Something went wrong with the server."
+            });
+          }
+          return response.json();
+        })
+        .then(dataParsed => {
+          if (dataParsed.error) {
+            return setData({
+              error: dataParsed.error,
+              errorMessage: dataParsed.message
+            });
+          }
+        });
     }
   }
 
@@ -76,7 +76,12 @@ function ForgotPasswordForm() {
         </div>
       )}
       <p>Enter your email below to receive your password reset instructions.</p>
-      <InputsForm spaceName="forgotPswd" fieldName="mail" placeholderInput="Email" inputRef={inputMail} />
+      <InputsForm
+        spaceName="forgotPswd"
+        fieldName="mail"
+        placeholderInput="Email"
+        inputRef={inputMail}
+      />
       <button onClick={() => checkMail()}>Send password</button>
       <div className="link--to--home">
         <Link to="/">I remember the password</Link>

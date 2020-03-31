@@ -56,12 +56,11 @@ function LogginSpace() {
         body: JSON.stringify({
           mail: inputMail.current.value,
           pswd: inputPswd.current.value
-        }),
+        })
       })
         .then(response => {
           if (response.ok) {
             console.log(response.headers.get("Set-Cookie"));
-
 
             sessionStorage.setItem("UserCookie", response.headers.get("Set-Cookie"));
           }
@@ -100,13 +99,23 @@ function LogginSpace() {
         </div>
       )}
       <LogginSpaceStyled className="loggin--space">
-        <InputsForm spaceName="loggin" fieldName="mail" placeholderInput="Email" inputRef={inputMail} />
-        <InputsForm spaceName="loggin" fieldName="password" placeholderInput="Password" inputRef={inputPswd} />
-          <p>
-            <small className="text-muted" style={{ fontSize: "0.4em" }}>
-              6 characters minimum.
-            </small>
-          </p>
+        <InputsForm
+          spaceName="loggin"
+          fieldName="mail"
+          placeholderInput="Email"
+          inputRef={inputMail}
+        />
+        <InputsForm
+          spaceName="loggin"
+          fieldName="password"
+          placeholderInput="Password"
+          inputRef={inputPswd}
+        />
+        <p>
+          <small className="text-muted" style={{ fontSize: "0.4em" }}>
+            6 characters minimum.
+          </small>
+        </p>
         <div className="loggin--space--btn">
           <button onClick={() => userAuth()}>Log in</button>
         </div>
