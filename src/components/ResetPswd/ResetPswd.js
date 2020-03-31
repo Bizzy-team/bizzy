@@ -60,10 +60,10 @@ function ResetPswd() {
           <h3>John Doe</h3>
         </div>
         {data.error && (
-        <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
-          <p className="text-light">{data.errorMessage}</p>
-        </div>
-      )}
+          <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
+            <p className="text-light">{data.errorMessage}</p>
+          </div>
+        )}
         <div className="resetPswd">
           <div className="resetPswd--title">
             <h1>Reset Password</h1>
@@ -71,15 +71,27 @@ function ResetPswd() {
           <div className="resetPswd--intro">
             <p>Enter a new password for your account.</p>
           </div>
-          {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />}
+          {data.loader && (
+            <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />
+          )}
           <InputFormStyled>
-            <InputsForm spaceName="resetPswd" fieldName="password" placeholderInput="Password" inputRef={pswd} />
-            <InputsForm spaceName="resetPswd" fieldName="confirm--password" placeholderInput="Confirm Password" inputRef={checkPswd} />
+            <InputsForm
+              spaceName="resetPswd"
+              fieldName="password"
+              placeholderInput="Password"
+              inputRef={pswd}
+            />
+            <InputsForm
+              spaceName="resetPswd"
+              fieldName="confirm--password"
+              placeholderInput="Confirm Password"
+              inputRef={checkPswd}
+            />
           </InputFormStyled>
           <p>
             <small className="text-muted" style={{ fontSize: "0.5em" }}>
               6 characters minimum.
-          </small>
+            </small>
           </p>
           <div className="reset--space--sign--btn">
             <button onClick={() => checkNewPswd()}>Reset password</button>
@@ -87,7 +99,7 @@ function ResetPswd() {
         </div>
       </ResetPswdStyled>
     </section>
-  )
-};
+  );
+}
 
 export default ResetPswd;
