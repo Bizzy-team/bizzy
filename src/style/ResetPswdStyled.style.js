@@ -5,11 +5,10 @@ const ResetPswdStyled = styled.div`
   flex-direction: column;
   align-items: left;
   margin-top: 5vh;
-  margin-left: 24px;
   width: 100vw;
   font-size: 1.2em;
   font-family: "Roboto";
-  .icon--reset {
+  .user--icon--reset {
     display: flex;
     justify-content: center;
     margin-bottom: 20%;
@@ -17,9 +16,40 @@ const ResetPswdStyled = styled.div`
       font-size: 5em;
       padding: 15px 15px;
       color: ${props => props.theme.color};
-      background-color: #EDF8EF;
     }
   }
+  .user--username--reset {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 20%;
+      h3 {
+        position: relative;
+        display: inline-block;
+          :before, :after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 9999px;
+            height: 1px;
+            background: ${props => props.theme.color};
+          }
+          :before {
+            right: 100%;
+            margin-right: 15px;
+          }
+          :after {
+            left: 100%;
+            margin-left: 15px;
+          }
+      }
+  }
+
+  .resetPswd {
+    padding-left: 20px;
+  }
+
   div {
     margin-bottom: 4%;
     button {
