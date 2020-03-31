@@ -1,7 +1,7 @@
 import React from "react";
 import InputFormStyled from "../../style/InputFormStyled.style";
 function InputsForm(props) {
-  return(
+  return (
     <InputFormStyled>
       <div className={`${props.spaceName}--space--${props.fieldName}`}>
         <input
@@ -10,10 +10,10 @@ function InputsForm(props) {
           placeholder={`${props.placeholderInput}`}
           ref={props.inputRef}
           required
-          ></input>
+        ></input>
       </div>
     </InputFormStyled>
-  )
-};
+  );
+}
 
 export default InputsForm;
