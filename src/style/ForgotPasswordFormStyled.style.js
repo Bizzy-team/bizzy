@@ -21,12 +21,12 @@ const ForgotPasswordFormStyled = styled.section`
   #input--mail {
     padding-left: 20px;
     width: 90%;
-      input {
-        width: 90%;
-        &:focus {
-          outline: none;
-        }
+    input {
+      width: 90%;
+      &:focus {
+        outline: none;
       }
+    }
   }
 
   p {
