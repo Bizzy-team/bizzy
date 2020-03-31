@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 process.env.NODE_ENV === "development" && require("dotenv").config();
 const { MongoClient } = require("mongodb");
 
