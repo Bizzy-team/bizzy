@@ -12,6 +12,12 @@ import Home from "./components/Home/Home";
 import ResetPswd from "./components/ResetPswd/ResetPswd";
 
 function App() {
+  if (process.env.NODE_ENV === "development") {
+    process.env.APIKEY = "http://localhost:54368/api"
+  } else {
+    process.env.APIKEY = "https://bizzy.now.sh/api"
+  }
+
   const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${props => props.theme.backgroundColor};
