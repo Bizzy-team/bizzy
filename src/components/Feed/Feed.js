@@ -9,7 +9,7 @@ import Footer from "../Footer/Footer";
 function Feed() {
   const [data, setData] = useState({
     iconsMood: false,
-    moodLink: ["utensils", "running", "film", "beer"],
+    moodLink: ["utensils", "running", "film", "beer"]
   });
   const [position, setPosition] = React.useState({
     userLat: "",
@@ -22,15 +22,15 @@ function Feed() {
     return setPosition({
       ...position,
       userLat: pos.coords.latitude,
-      userLong: pos.coords.longitude,
-    })
+      userLong: pos.coords.longitude
+    });
   }
 
   function filterChoose(e) {
     return setPosition({
       ...position,
       filterByUser: e.target.value
-    })
+    });
   }
 
   function userAvailable() {
@@ -75,13 +75,15 @@ function Feed() {
           </div>
           <div className="filter--km">
             <h2>In which perimeter ?</h2>
-              <select name="km" onChange={(e) => filterChoose(e)}>
-                {
-                  position.filtersKm.map((filter, index) => {
-                    return <option value={filter} key={index}>{filter}</option>
-                  })
-                }
-              </select>
+            <select name="km" onChange={e => filterChoose(e)}>
+              {position.filtersKm.map((filter, index) => {
+                return (
+                  <option value={filter} key={index}>
+                    {filter}
+                  </option>
+                );
+              })}
+            </select>
           </div>
         </IconsMoodStyled>
       )}
