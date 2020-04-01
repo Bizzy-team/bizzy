@@ -11,8 +11,29 @@ function Feed() {
     iconsMood: false,
     moodLink: ["utensils", "running", "film", "beer"]
   });
+  const [position, setPosition] = React.useState({
+    userLat: "",
+    userLong: "",
+    filtersKm: ["2", "4", "6", "+8"],
+    filterByUser: "2"
+  });
 
-  function displayIcons() {
+  function userLocation(pos) {
+    return setPosition({
+      ...position,
+      userLat: pos.coords.latitude,
+      userLong: pos.coords.longitude
+    });
+  }
+
+  function filterChoose(e) {
+    return setPosition({
+      ...position,
+      filterByUser: e.target.value
+    });
+  }
+
+  function userAvailable() {
     const newState = { ...data };
 
     if (newState.iconsMood) {
@@ -20,6 +41,7 @@ function Feed() {
       return setData(newState);
     }
 
+    navigator.geolocation.getCurrentPosition(userLocation);
     newState.iconsMood = true;
     return setData(newState);
   }
@@ -28,7 +50,7 @@ function Feed() {
     <React.Fragment>
       <HeaderFeedStyled as="header">
         <label className="el-switch">
-          <input type="checkbox" name="switch" onClick={displayIcons}></input>
+          <input type="checkbox" name="switch" onClick={userAvailable}></input>
           <span className="el-switch-style"></span>
         </label>
         <Link to="/user_profile">
@@ -50,6 +72,18 @@ function Feed() {
                 </Link>
               </p>
             ))}
+          </div>
+          <div className="filter--km">
+            <h2>In which perimeter ?</h2>
+            <select name="km" onChange={e => filterChoose(e)}>
+              {position.filtersKm.map((filter, index) => {
+                return (
+                  <option value={filter} key={index}>
+                    {filter}
+                  </option>
+                );
+              })}
+            </select>
           </div>
         </IconsMoodStyled>
       )}
