@@ -1,5 +1,5 @@
 const { compare } = require("bcrypt");
-const mongo = require("./index");
+const mongo = require("../index");
 /**
  * Check if an user exist.
  * @param {Object} data An object of parsed parameters.
@@ -22,8 +22,8 @@ module.exports = async data => {
     return Promise.resolve({
       code: 200,
       serverHeader: {
-        "Set-Cookie": `sessionId=${user._id}; Expires=${new Date(Date.now() + 6.04e+8)}; ${
-          process.env.NODE_ENV === "development" ? "" : "Secure"};`
+        "Set-Cookie": `sid=${user._id}; Expires=${new Date(Date.now() + 6.04e+8)}; ${
+          process.env.NODE_ENV === "development" ? "" : "Secure"}; Path=/; HttpOnly`
       },
       data: {
         token: user.token
