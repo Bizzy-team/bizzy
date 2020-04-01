@@ -2,7 +2,7 @@ const { randomFill } = require("crypto");
 const { promisify } = require("util");
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
-const mongo = require("./index");
+const mongo = require("../index");
 
 const signJwtPromise = promisify(sign);
 const createToken = promisify(randomFill);
@@ -13,7 +13,7 @@ const createToken = promisify(randomFill);
 module.exports = async body => {
   const bizzyUsers = (await mongo.connect()).db("bizzy").collection("users");
 
-  if ((await bizzyUsers.findOne({ mail: body.mail, username: body.username })) === null) {
+  if ((await bizzyUsers.findOne({ mail: body.mail})) === null) {
     const JWTToken = await createToken(Buffer.alloc(16));
     const userPassword = await hash(body.pswd, 10);
     const token = await signJwtPromise(
@@ -36,7 +36,7 @@ module.exports = async body => {
       code: 201,
       serverHeader: {
         "Set-Cookie": `sessionId=${newUser.ops[0]._id}; Expires=${new Date(Date.now() + 6.04e+8)}; ${
-          process.env.NODE_ENV === "development" ? "" : "Secure"};`
+          process.env.NODE_ENV === "development" ? "" : "Secure"}; Path=/; HttpOnly`
       },
       data: {
         token: newUser.ops[0].token
