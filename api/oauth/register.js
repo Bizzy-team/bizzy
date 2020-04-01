@@ -1,6 +1,6 @@
 const responseHeader = require("../_utils/responseHeader");
 const parseBody = require("../_utils/parseBody");
-const registerDb = require("../_db/register");
+const registerDb = require("../_db/models/register");
 
 module.exports = function register(req, res) {
   if (req.method !== "POST") {
