@@ -1,5 +1,5 @@
 /**
- * Parse the body request when there is a POST method
+ * Parse the body request when there is a POST, PUT method
  * @param {Object} request - A NodeJs HttpIncomingMessage object.
  */
 module.exports = request => {
