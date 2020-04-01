@@ -16,6 +16,9 @@ function App() {
   body {
     background-color: ${props => props.theme.backgroundColor};
   };
+  #root {
+    overflow-x: hidden;
+  };
   `;
 
   return (
