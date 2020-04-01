@@ -3,12 +3,13 @@ import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { Route, BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import LogginSpace from "./components/LogginSpace/LogginSpace";
-import SigninSpace from "./components/SigninSpace/SigninSpace";
+import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
 import Feed from "./components/Feed/Feed";
 import UserProfile from "./components/UserProfile/UserProfile";
 import ShareYourMood from "./components/YourMood/ShareYourMood";
 import variables from "./variables";
+import Home from "./components/Home/Home";
+import ResetPswd from "./components/ResetPswd/ResetPswd";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -22,8 +23,9 @@ function App() {
       <BrowserRouter>
         <ThemeProvider theme={{ ...variables }}>
           <GlobalStyle></GlobalStyle>
-          <Route exact path="/" component={LogginSpace}></Route>
-          <Route exact path="/subscription" component={SigninSpace}></Route>
+          <Route exact path="/" component={Home}></Route>
+          <Route exact path="/forgotPasswordForm" component={ForgotPasswordForm}></Route>
+          <Route exact path="/reset_pswd_form" component={ResetPswd}></Route>
           <Route exact path="/feed" component={Feed}></Route>
           <Route exact path="/user_profile" component={UserProfile}></Route>
           <Route exact path="/createYourCard/:icon" component={ShareYourMood}></Route>
