@@ -32,6 +32,7 @@ module.exports = async body => {
       verifyJWTToken: JWTToken.toString("hex")
     });
 
+    await mongo.close();
     return Promise.resolve({
       code: 201,
       serverHeader: {
@@ -45,6 +46,7 @@ module.exports = async body => {
     });
   }
 
+  await mongo.close();
   return Promise.resolve({
     code: 409,
     error: true,
