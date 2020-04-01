@@ -29,7 +29,7 @@ function FeedCard() {
           <i className="fas fa-beer"></i>
         </div>
         <div className="card--user--distance">
-          <p>1.8km</p>
+          <p>1.5km</p>
         </div>
       </div>
     </div>

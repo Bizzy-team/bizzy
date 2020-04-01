@@ -2,10 +2,9 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "build": {
-      "env": {
-          "NODEJS_HELPERS": "0"
-      }
+  "env": {
+      "NODEJS_HELPERS": "0",
+      "DB_URL": "@mongo"
   },
   "headers": [
       {
@@ -22,6 +21,10 @@
               {
                   "key": "X-XSS-Protection",
                   "value": "1; mode=block"
+              },
+              {
+                  "key": "Content-Type",
+                  "value": "Application/json; charset=utf-8"
               }
           ]
       }
