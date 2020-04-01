@@ -1,5 +1,5 @@
 const responseHeader = require("../_utils/responseHeader");
-const loginDB = require("../_db/login");
+const loginDB = require("../_db/models/login");
 const parseBody = require("../_utils/parseBody");
 
 module.exports = function Login(req, res) {
