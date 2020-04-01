@@ -22,8 +22,9 @@ module.exports = async data => {
     return Promise.resolve({
       code: 200,
       serverHeader: {
-        "Set-Cookie": `sid=${user._id}; Expires=${new Date(Date.now() + 6.04e+8)}; ${
-          process.env.NODE_ENV === "development" ? "" : "Secure"}; Path=/; HttpOnly`
+        "Set-Cookie": `sid=${user._id}; Expires=${new Date(Date.now() + 6.04e8)}; ${
+          process.env.NODE_ENV === "development" ? "" : "Secure"
+        }; Path=/; HttpOnly`
       },
       data: {
         token: user.token
