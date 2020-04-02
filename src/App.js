@@ -12,12 +12,6 @@ import Home from "./components/Home/Home";
 import ResetPswd from "./components/ResetPswd/ResetPswd";
 
 function App() {
-  if (process.env.NODE_ENV === "development") {
-    process.env.APIKEY = "http://localhost:54368/api"
-  } else {
-    process.env.APIKEY = "https://bizzy.now.sh/api"
-  }
-
   const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${props => props.theme.backgroundColor};
@@ -27,17 +21,29 @@ function App() {
   };
   `;
 
+  console.log(sessionStorage);
+  
+
   return (
     <React.Fragment>
-      <BrowserRouter>
+      <BrowserRouter forceRefresh={true}>
         <ThemeProvider theme={{ ...variables }}>
           <GlobalStyle></GlobalStyle>
-          <Route exact path="/" component={Home}></Route>
-          <Route exact path="/forgotPasswordForm" component={ForgotPasswordForm}></Route>
-          <Route exact path="/reset_pswd_form" component={ResetPswd}></Route>
-          <Route exact path="/feed" component={Feed}></Route>
-          <Route exact path="/user_profile" component={UserProfile}></Route>
-          <Route exact path="/createYourCard/:icon" component={ShareYourMood}></Route>
+          {
+            sessionStorage.UserToken ?  (
+              <>
+                <Route exact path="/feed" component={Feed}></Route>
+                <Route exact path="/user_profile" component={UserProfile}></Route>
+                <Route exact path="/createYourCard/:icon" component={ShareYourMood}></Route>
+              </>
+              ) : (
+                <>
+                  <Route exact path="/" component={Home}></Route>
+                  <Route exact path="/forgotPasswordForm" component={ForgotPasswordForm}></Route>
+                  <Route exact path="/reset_pswd_form" component={ResetPswd}></Route>
+                </>
+                )
+            }
         </ThemeProvider>
       </BrowserRouter>
     </React.Fragment>
