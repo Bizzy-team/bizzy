@@ -69,9 +69,6 @@ function LogginSpace() {
           return response.json();
         })
         .then(dataParsed => {
-          console.log(dataParsed);
-          // sessionStorage.setItem("UserToken", dataParsed.token);
-
           if (dataParsed.error) {
             return setData({
               error: dataParsed.error,
@@ -85,8 +82,7 @@ function LogginSpace() {
     }
   }
 
-  if (redirect) return <Redirect push to="/feed"></Redirect>;
-  // if (redirect) return <Redirect to="/feed"></Redirect>;
+  if (redirect) return <Redirect to="/feed"></Redirect>;
 
   return (
     <React.Fragment>
