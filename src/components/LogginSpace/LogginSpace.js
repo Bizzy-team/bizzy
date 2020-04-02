@@ -49,10 +49,9 @@ function LogginSpace() {
       setData({
         loader: true
       });
+      return fetch("http://localhost:3000/api/login", {
       // return fetch("https://bizzy.now.sh/api/login", {
-      return fetch(`${process.env.APIKEY}/login`, {
-      // return fetch("http://localhost:3000/api/login", {
-      // return fetch("https://bizzy.now.sh/api/oauth/login", {
+      // return fetch(`${process.env.APIKEY}/login`, {
         credentials: 'include',
         method: "POST",
         body: JSON.stringify({
@@ -61,11 +60,6 @@ function LogginSpace() {
         })
       })
         .then(response => {
-          if (response.ok) {
-            console.log(response.headers.get("Set-Cookie"));
-
-            sessionStorage.setItem("UserCookie", response.headers.get("Set-Cookie"));
-          }
           if (response.status >= 500 && response.status <= 600) {
             return setData({
               error: true,
@@ -75,18 +69,24 @@ function LogginSpace() {
           return response.json();
         })
         .then(dataParsed => {
+          console.log(dataParsed);
+          // sessionStorage.setItem("UserToken", dataParsed.token);
+
           if (dataParsed.error) {
             return setData({
               error: dataParsed.error,
               errorMessage: dataParsed.message
             });
           }
+
+          sessionStorage.setItem("UserToken", dataParsed.token);
           return setRedirect(true);
-        });
+        })
     }
   }
 
-  if (redirect) return <Redirect to="/feed"></Redirect>;
+  if (redirect) return <Redirect push to="/feed"></Redirect>;
+  // if (redirect) return <Redirect to="/feed"></Redirect>;
 
   return (
     <React.Fragment>
