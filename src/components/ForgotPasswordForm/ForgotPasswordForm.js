@@ -46,9 +46,6 @@ function ForgotPasswordForm() {
         })
       })
         .then(response => {
-          console.log(response.status);
-          
-          // debugger;
           if (response.status >= 500 && response.status <= 600) {
             return setData({
               error: true,
@@ -58,9 +55,13 @@ function ForgotPasswordForm() {
           return response.json();
         })
         .then(dataParsed => {
-          console.log(dataParsed);
-          // debugger;
-          
+          if (dataParsed === undefined) {
+            return setData({
+              error: true,
+              errorMessage: "Oops something went wrong with the server. Please try again in a few minutes."
+            });
+          }
+
           if (dataParsed.error) {
             return setData({
               error: dataParsed.error,
@@ -72,13 +73,10 @@ function ForgotPasswordForm() {
     }
   }
 
-  console.log(data);
-  
-
   if (redirect) return <Redirect to="/confirmSendEmail"></Redirect>;
 
   return (
-    <ForgotPasswordFormStyled>
+    <ForgotPasswordFormStyled as="section">
       <h1>Forgot password</h1>
       <div className="icon--unlock">
         <i className="fas fa-unlock-alt"></i>
@@ -91,10 +89,10 @@ function ForgotPasswordForm() {
       )}
       <p>Enter your email below to receive your password reset instructions.</p>
       <InputsForm
-        spaceName="forgotPswd"
         fieldName="mail"
         placeholderInput="Email"
         inputRef={inputMail}
+        marginLeft="10px"
       />
       <button onClick={() => checkMail()}>Send password</button>
       <div className="link--to--home">
