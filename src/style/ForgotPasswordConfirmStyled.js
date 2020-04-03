@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import GlobalContainer from "../utlis/GlobalContainer";
 
-const ForgotPasswordConfirmStyled = styled.div`
+const ForgotPasswordConfirmStyled = styled(GlobalContainer)`
   text-align: center;
     .success--icon {
       margin-top: 20%;
@@ -19,12 +20,12 @@ const ForgotPasswordConfirmStyled = styled.div`
     .success--title {
       margin-bottom: 6%;
       h1 {
-        font-family: "Roboto";
+        font-family: ${props => props.theme.fontFamilyTitle};
       }
     }
     .success--content {
-      font-family: "Nunito";
-      line-height: 15px;
+      font-family: ${props => props.theme.fontFamilyText};
+      line-height: 25px;
       p {
         color: #969DAD;
       }
