@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import ForgotPasswordFormStyled from "../../style/ForgotPasswordFormStyled.style";
 import { ReactSVG } from "react-svg";
 import LoaderSvg from "../../img/loader.svg";
@@ -12,6 +12,7 @@ function ForgotPasswordForm() {
     error: false,
     errorMessage: ""
   });
+  const [redirect, setRedirect] = React.useState(false);
 
   function checkMail() {
     if (inputMail.current.value === "") {
@@ -37,13 +38,17 @@ function ForgotPasswordForm() {
       setData({
         loader: true
       });
-      return fetch("https://bizzy.now.sh/api/password/forgot", {
+      return fetch("http://localhost:3000/api/forgot", {
+      // return fetch("https://bizzy.now.sh/api/forgot", {
         method: "POST",
         body: JSON.stringify({
           mail: inputMail.current.value
         })
       })
         .then(response => {
+          console.log(response.status);
+          
+          // debugger;
           if (response.status >= 500 && response.status <= 600) {
             return setData({
               error: true,
@@ -53,15 +58,24 @@ function ForgotPasswordForm() {
           return response.json();
         })
         .then(dataParsed => {
+          console.log(dataParsed);
+          // debugger;
+          
           if (dataParsed.error) {
             return setData({
               error: dataParsed.error,
               errorMessage: dataParsed.message
             });
           }
+          return setRedirect(true);
         });
     }
   }
+
+  console.log(data);
+  
+
+  if (redirect) return <Redirect to="/confirmSendEmail"></Redirect>;
 
   return (
     <ForgotPasswordFormStyled>
