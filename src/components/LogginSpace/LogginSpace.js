@@ -100,13 +100,11 @@ function LogginSpace() {
       )}
       <LogginSpaceStyled className="loggin--space">
         <InputsForm
-          spaceName="loggin"
           fieldName="mail"
           placeholderInput="Email"
           inputRef={inputMail}
         />
         <InputsForm
-          spaceName="loggin"
           fieldName="password"
           placeholderInput="Password"
           inputRef={inputPswd}
