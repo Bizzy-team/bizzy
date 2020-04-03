@@ -4,7 +4,7 @@ import ForgotPasswordConfirmStyled from "../../style/ForgotPasswordConfirmStyled
 
 function ForgotPasswordConfirm() {
   return(
-    <ForgotPasswordConfirmStyled>
+    <ForgotPasswordConfirmStyled as="div">
       <div className="success--icon">
         <i className="far fa-check-circle"></i>
       </div>
@@ -12,11 +12,9 @@ function ForgotPasswordConfirm() {
         <h2>Password recovered... !</h2>
       </div>
       <div className="success--content">
-        <p>Your password Recovered Successfully</p>
+        <p>Your password Recovered Successfully, check yours mails and</p>
         <p>Please login</p>
-        <button>
-          <Link to="/">Login</Link>
-          </button>
+        <button><Link to="/">Login</Link></button>
       </div>
     </ForgotPasswordConfirmStyled>
   )
