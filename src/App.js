@@ -3,6 +3,7 @@ import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { Route, BrowserRouter, Link } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import ErrorMessageTokenStyled from "./style/ErrorMessageTokenStyled.style";
 import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
 import Feed from "./components/Feed/Feed";
 import UserProfile from "./components/UserProfile/UserProfile";
