@@ -14,6 +14,7 @@ function SigninSpace() {
   const pswd = React.createRef(null);
   const checkPswd = React.createRef(null);
   const [data, setData] = useState({
+    loader: false,
     error: false,
     errorMessage: ""
   });
@@ -72,7 +73,9 @@ function SigninSpace() {
         loader: true
       });
 
-      return fetch("https://bizzy.now.sh/api/oauth/register", {
+      return fetch("http://localhost:3000/api/register", {
+      // return fetch("https://bizzy.now.sh/api/oauth/register", {
+        credentials: 'include',
         method: "POST",
         body: JSON.stringify({
           mail: inputMail.current.value,
@@ -120,18 +123,21 @@ function SigninSpace() {
       <LogginSpaceStyled className="loggin--space">
         <InputsForm
           spaceName="loggin"
+          type="text"
           fieldName="username"
           placeholderInput="Username"
           inputRef={inputUsername}
         />
         <InputsForm
           spaceName="loggin"
+          type="mail"
           fieldName="mail"
           placeholderInput="Email"
           inputRef={inputMail}
         />
         <InputsForm
           spaceName="loggin"
+          type="password"
           fieldName="password"
           placeholderInput="Password"
           inputRef={pswd}
@@ -139,6 +145,7 @@ function SigninSpace() {
         />
         <InputsForm
           spaceName="loggin"
+          type="password"
           fieldName="confirm--password"
           placeholderInput="Confirm Password"
           inputRef={checkPswd}

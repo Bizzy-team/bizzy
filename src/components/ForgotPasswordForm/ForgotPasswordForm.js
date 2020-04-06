@@ -78,6 +78,7 @@ function ForgotPasswordForm() {
       <p>Enter your email below to receive your password reset instructions.</p>
       <InputsForm
         spaceName="forgotPswd"
+        type="mail"
         fieldName="mail"
         placeholderInput="Email"
         inputRef={inputMail}
