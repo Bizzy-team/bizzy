@@ -76,11 +76,13 @@ function ResetPswd() {
           )}
           <InputFormStyled>
             <InputsForm
+              spaceName="resetPswd"
               fieldName="password"
               placeholderInput="Password"
               inputRef={pswd}
             />
             <InputsForm
+              spaceName="resetPswd"
               fieldName="confirm--password"
               placeholderInput="Confirm Password"
               inputRef={checkPswd}

@@ -49,9 +49,10 @@ function LogginSpace() {
       setData({
         loader: true
       });
-      return fetch("http://localhost:3000/api/oauth/login", {
-        // return fetch("https://bizzy.now.sh/api/oauth/login", {
-        credentials: "include",
+      return fetch("http://localhost:3000/api/login", {
+      // return fetch("https://bizzy.now.sh/api/login", {
+      // return fetch(`${process.env.APIKEY}/login`, {
+        credentials: 'include',
         method: "POST",
         body: JSON.stringify({
           mail: inputMail.current.value,
@@ -59,11 +60,6 @@ function LogginSpace() {
         })
       })
         .then(response => {
-          if (response.ok) {
-            console.log(response.headers.get("Set-Cookie"));
-
-            sessionStorage.setItem("UserCookie", response.headers.get("Set-Cookie"));
-          }
           if (response.status >= 500 && response.status <= 600) {
             return setData({
               error: true,
@@ -79,8 +75,10 @@ function LogginSpace() {
               errorMessage: dataParsed.message
             });
           }
+
+          sessionStorage.setItem("UserToken", dataParsed.token);
           return setRedirect(true);
-        });
+        })
     }
   }
 
@@ -90,7 +88,7 @@ function LogginSpace() {
     <React.Fragment>
       <IntroductionLogginSpace className="introduction">
         <h1>Welcome back</h1>
-        <p>It's time to log in and see who is around you.</p>
+        <p>It's time to log in and see who is around you</p>
       </IntroductionLogginSpace>
       {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />}
       {data.error && (
@@ -99,8 +97,14 @@ function LogginSpace() {
         </div>
       )}
       <LogginSpaceStyled className="loggin--space">
-        <InputsForm fieldName="mail" placeholderInput="Email" inputRef={inputMail} />
         <InputsForm
+          spaceName="loggin"
+          fieldName="mail"
+          placeholderInput="Email"
+          inputRef={inputMail}
+        />
+        <InputsForm
+          spaceName="loggin"
           fieldName="password"
           placeholderInput="Password"
           inputRef={inputPswd}
