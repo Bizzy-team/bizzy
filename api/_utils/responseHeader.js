@@ -1,6 +1,11 @@
 module.exports = (response, data) => {
   const defaultHeader = {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Origin": `${
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:52185"
+        : "https://bizzy.now.sh"
+    }`,
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Expose-Headers":
       "Authorization ,ETag, Link, Location, Retry-After, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
