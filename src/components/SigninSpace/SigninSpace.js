@@ -123,11 +123,7 @@ function SigninSpace() {
           placeholderInput="Username"
           inputRef={inputUsername}
         />
-        <InputsForm
-          fieldName="mail"
-          placeholderInput="Email"
-          inputRef={inputMail}
-        />
+        <InputsForm fieldName="mail" placeholderInput="Email" inputRef={inputMail} />
         <InputsForm
           fieldName="password"
           placeholderInput="Password"
