@@ -9,7 +9,6 @@ module.exports = async data => {
   const user = await bizzyUsers.findOne({ mail: data.mail });
 
   if (user === null) {
-    await mongo.close();
     return Promise.resolve({
       code: 403,
       data: {
@@ -20,7 +19,6 @@ module.exports = async data => {
   }
 
   if (await compare(data.pswd, user.password)) {
-    await mongo.close();
     return Promise.resolve({
       code: 200,
       serverHeader: {
@@ -34,7 +32,6 @@ module.exports = async data => {
     });
   }
 
-  await mongo.close();
   return Promise.resolve({
     code: 401,
     data: {
