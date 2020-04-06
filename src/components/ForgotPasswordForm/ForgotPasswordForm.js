@@ -60,7 +60,6 @@ function ForgotPasswordForm() {
                 "Oops something went wrong with the server. Please try again in a few minutes."
             });
           }
-
           if (dataParsed.error) {
             return setData({
               error: dataParsed.error,
@@ -86,6 +85,7 @@ function ForgotPasswordForm() {
       <p>Enter your email below to receive your password reset instructions.</p>
       <InputsForm
         spaceName="forgotPswd"
+        type="mail"
         fieldName="mail"
         placeholderInput="Email"
         inputRef={inputMail}

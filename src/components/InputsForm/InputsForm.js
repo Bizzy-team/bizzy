@@ -5,7 +5,7 @@ function InputsForm(props) {
     <InputFormStyled>
       <div className={`${props.spaceName}--space--${props.fieldName}`}>
         <input
-          type={`${props.fieldName}`}
+          type={`${props.type}`}
           id={`input--${props.fieldName}`}
           placeholder={`${props.placeholderInput}`}
           ref={props.inputRef}
