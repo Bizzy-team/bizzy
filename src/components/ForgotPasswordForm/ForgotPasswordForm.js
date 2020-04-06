@@ -37,7 +37,8 @@ function ForgotPasswordForm() {
       setData({
         loader: true
       });
-      return fetch("https://bizzy.now.sh/api/password/forgot", {
+      return fetch("http://localhost:3000/api/forgot", {
+      // return fetch("https://bizzy.now.sh/api/password/forgot", {
         method: "POST",
         body: JSON.stringify({
           mail: inputMail.current.value
@@ -57,7 +58,7 @@ function ForgotPasswordForm() {
             return setData({
               error: true,
               errorMessage:
-                "Oops something went wrong with the server. Please try again in a few minutes."
+                "Oops something went wrong with the server. Please try again in a few minutes or send me a message if the problem persists."
             });
           }
           if (dataParsed.error) {
