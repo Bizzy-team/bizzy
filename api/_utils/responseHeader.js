@@ -3,7 +3,7 @@ module.exports = (response, data) => {
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Origin": `${
       process.env.NODE_ENV === "development"
-        ? "http://localhost:52185"
+        ? "http://localhost:54368"
         : "https://bizzy.now.sh"
     }`,
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
