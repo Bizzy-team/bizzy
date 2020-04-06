@@ -53,6 +53,14 @@ function ForgotPasswordForm() {
           return response.json();
         })
         .then(dataParsed => {
+          if (dataParsed === undefined) {
+            return setData({
+              error: true,
+              errorMessage:
+                "Oops something went wrong with the server. Please try again in a few minutes."
+            });
+          }
+
           if (dataParsed.error) {
             return setData({
               error: dataParsed.error,

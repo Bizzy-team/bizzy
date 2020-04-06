@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import GlobalContainer from "../utlis/GlobalContainer";
 
-const ForgotPasswordFormStyled = styled.section`
+const ForgotPasswordFormStyled = styled(GlobalContainer)`
   h1 {
     text-align: center;
     margin-top: 10%;
