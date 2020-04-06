@@ -94,6 +94,14 @@ function SigninSpace() {
           return response.json();
         })
         .then(dataParsed => {
+          if (dataParsed === undefined) {
+            return setData({
+              error: true,
+              errorMessage:
+                "Oops something went wrong with the server. Please try again in a few minutes or send me a message if the problem persists."
+            });
+          }
+
           if (dataParsed.error) {
             return setData({
               ...data,
