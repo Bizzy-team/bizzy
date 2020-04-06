@@ -119,26 +119,18 @@ function SigninSpace() {
       )}
       <LogginSpaceStyled className="loggin--space">
         <InputsForm
-          spaceName="loggin"
           fieldName="username"
           placeholderInput="Username"
           inputRef={inputUsername}
         />
+        <InputsForm fieldName="mail" placeholderInput="Email" inputRef={inputMail} />
         <InputsForm
-          spaceName="loggin"
-          fieldName="mail"
-          placeholderInput="Email"
-          inputRef={inputMail}
-        />
-        <InputsForm
-          spaceName="loggin"
           fieldName="password"
           placeholderInput="Password"
           inputRef={pswd}
           minLength="6"
         />
         <InputsForm
-          spaceName="loggin"
           fieldName="confirm--password"
           placeholderInput="Confirm Password"
           inputRef={checkPswd}

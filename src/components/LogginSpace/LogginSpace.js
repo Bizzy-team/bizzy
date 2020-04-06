@@ -50,8 +50,8 @@ function LogginSpace() {
         loader: true
       });
       return fetch("http://localhost:3000/api/oauth/login", {
-      // return fetch("https://bizzy.now.sh/api/oauth/login", {
-        credentials: 'include',
+        // return fetch("https://bizzy.now.sh/api/oauth/login", {
+        credentials: "include",
         method: "POST",
         body: JSON.stringify({
           mail: inputMail.current.value,
@@ -99,14 +99,8 @@ function LogginSpace() {
         </div>
       )}
       <LogginSpaceStyled className="loggin--space">
+        <InputsForm fieldName="mail" placeholderInput="Email" inputRef={inputMail} />
         <InputsForm
-          spaceName="loggin"
-          fieldName="mail"
-          placeholderInput="Email"
-          inputRef={inputMail}
-        />
-        <InputsForm
-          spaceName="loggin"
           fieldName="password"
           placeholderInput="Password"
           inputRef={inputPswd}

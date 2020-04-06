@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import ForgotPasswordFormStyled from "../../style/ForgotPasswordFormStyled.style";
 import { ReactSVG } from "react-svg";
 import LoaderSvg from "../../img/loader.svg";
@@ -12,6 +12,7 @@ function ForgotPasswordForm() {
     error: false,
     errorMessage: ""
   });
+  const [redirect, setRedirect] = React.useState(false);
 
   function checkMail() {
     if (inputMail.current.value === "") {
@@ -37,7 +38,8 @@ function ForgotPasswordForm() {
       setData({
         loader: true
       });
-      return fetch("https://bizzy.now.sh/api/password/forgot", {
+      return fetch("http://localhost:3000/api/forgot", {
+        // return fetch("https://bizzy.now.sh/api/forgot", {
         method: "POST",
         body: JSON.stringify({
           mail: inputMail.current.value
@@ -53,18 +55,29 @@ function ForgotPasswordForm() {
           return response.json();
         })
         .then(dataParsed => {
+          if (dataParsed === undefined) {
+            return setData({
+              error: true,
+              errorMessage:
+                "Oops something went wrong with the server. Please try again in a few minutes."
+            });
+          }
+
           if (dataParsed.error) {
             return setData({
               error: dataParsed.error,
               errorMessage: dataParsed.message
             });
           }
+          return setRedirect(true);
         });
     }
   }
 
+  if (redirect) return <Redirect to="/confirmSendEmail"></Redirect>;
+
   return (
-    <ForgotPasswordFormStyled>
+    <ForgotPasswordFormStyled as="section">
       <h1>Forgot password</h1>
       <div className="icon--unlock">
         <i className="fas fa-unlock-alt"></i>
@@ -77,10 +90,10 @@ function ForgotPasswordForm() {
       )}
       <p>Enter your email below to receive your password reset instructions.</p>
       <InputsForm
-        spaceName="forgotPswd"
         fieldName="mail"
         placeholderInput="Email"
         inputRef={inputMail}
+        marginLeft="10px"
       />
       <button onClick={() => checkMail()}>Send password</button>
       <div className="link--to--home">
