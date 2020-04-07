@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 const HeaderFeedStyled = styled.header`
   display: flex;
-  // background-color: ${props => props.theme.color};
   background-color: white;
   border-bottom: solid 1px ${props => props.theme.color};
-  margin-bottom: 20px;
   height: 8vh;
+  ${props => props.marginBottom && `margin-bottom: ${props.marginBottom}`};
   label {
     margin-right: 72%;
     margin-top: 22px;
@@ -21,6 +20,35 @@ const HeaderFeedStyled = styled.header`
   i {
     margin-left: 10px;
     font-size: 2em;
+  }
+  .el-switch {
+    margin-left: 84%;
+    position: fixed;
+  }
+  .user--menu {
+    margin-left: 12px;
+      i {
+        position: absolute;
+        opacity: 0.6em;
+        top: 59px;
+        left: 6px;
+        color: ${props => props.theme.color};
+      }
+    .dropdown--links {
+      opacity: 1;
+      font-family: "Nunito";
+      color: black;
+      // margin-top: 12%;
+      background-color: rgba(255, 255, 255, 1.5);
+      // background-color: white;
+      border: solid 1px ${props => props.theme.color};
+      border-radius: 10px;
+      padding: 6px 12px;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
   }
 `;
 
