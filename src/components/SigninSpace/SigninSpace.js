@@ -109,6 +109,8 @@ function SigninSpace() {
               errorMessage: dataParsed.message
             });
           }
+
+          sessionStorage.setItem("UserToken", dataParsed.token);
           return setRedirect(true);
         });
     }
