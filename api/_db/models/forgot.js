@@ -11,7 +11,7 @@ module.exports = async data => {
   const user = await bizzyUsers.findOne({ mail: data.mail });
 
   if (user === null) {
-    mongobdd.close();
+    await mongobdd.close();
     return Promise.resolve({
       code: 403,
       data: {
@@ -53,17 +53,13 @@ module.exports = async data => {
         });
       }
 
-      const token = await createToken(Buffer.alloc(16));
+      const token = await createToken(Buffer.alloc(24));
       let url;
 
       if (process.env.NODE_ENV === "development") {
-        url = `http://localhost:3000/reset_pswd_form?token=${token.toString("hex")}&id=${
-          user._id
-        }`;
+        url = `http://localhost:3000/reset_pswd_form?token=${token.toString("hex")}`;
       } else {
-        url = `https://bizzy.now.sh/reset_pswd_form?token=${token.toString("hex")}&id=${
-          user._id
-        }`;
+        url = `https://bizzy.now.sh/reset_pswd_form?token=${token.toString("hex")}`;
       }
 
       return mail
@@ -86,7 +82,7 @@ module.exports = async data => {
                   forgotPassword: token.toString("hex"),
                   expireAt:
                     process.env.NODE_ENV === "development"
-                      ? new Date(Date.now() + 60 * 2 * 1000)
+                      ? new Date(Date.now() + 60 * 10 * 1000)
                       : new Date(Date.now() + 60 * 60 * 1000)
                 }
               },
