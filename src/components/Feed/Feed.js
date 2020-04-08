@@ -62,7 +62,11 @@ function Feed() {
     return setData(newState);
   }
 
-  console.log(data.showUserMenu);
+  function clearSession() {
+    document.querySelector(".modal-open").classList.remove("modal-open");
+    document.querySelector(".modal-backdrop").remove();
+    sessionStorage.clear();
+  }
 
   return (
     <React.Fragment>
@@ -73,12 +77,11 @@ function Feed() {
             alt="avatar"
             src="https://kitt.lewagon.com/placeholder/users/cveneziani"
           />
-
           {
             data.showUserMenu && (
               <div className="dropdown--links">
                 <Link to="/user_profile">Parameters</Link>
-                <button data-toggle="modal" data-target=".bs-example-modal-sm">Logout</button>
+                <button className="btn--logout" data-toggle="modal" data-target=".bs-example-modal-sm">Logout</button>
               </div>
             )
           }
@@ -88,15 +91,15 @@ function Feed() {
           <span className="el-switch-style"></span>
         </label>
       </HeaderFeedStyled>
-      <div className="modal bs-example-modal-sm" tabIndex="-1" role="dialog" aria-hidden="true" style={{ marginTop: "70%" }}>
-        <div className="modal-dialog modal-sm">
-          <div className="modal-content">
-            <div className="modal-header"><h4>Logout <i className="fa fa-lock"></i></h4></div>
-            <div className="modal-body"><i className="fa fa-question-circle"></i> Are you sure you want to log-off?</div>
-            <div className="modal-footer"><a href="*" className="btn btn-primary btn-block">Logout</a></div>
+        <div className="modal bs-example-modal-sm " tabIndex="-1" role="dialog" aria-hidden="true">
+          <div className="modal-dialog modal-sm" style={{top: "34%"}}>
+            <div className="modal-content">
+              <div className="modal-header"><h4>Logout <i className="fa fa-lock"></i></h4></div>
+              <div className="modal-body"><i className="fa fa-question-circle"></i> Are you sure you want to log-off?</div>
+              <div className="modal-footer"><Link to="/" className="btn btn-primary btn-block" onClick={() => clearSession()}>Logout</Link></div>
+            </div>
           </div>
         </div>
-      </div>
       {data.iconsMood && (
         <IconsMoodStyled as="section">
           <h2>It's time to: </h2>
