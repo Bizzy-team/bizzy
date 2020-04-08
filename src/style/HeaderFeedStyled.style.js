@@ -43,6 +43,12 @@ const HeaderFeedStyled = styled.header`
         text-decoration: none;
         color: black;
       }
+      button {
+        font-weight: bold;
+        color: black;
+        font-size: 1.2em;
+        padding: 0;
+      }
     }
   }
 `;
