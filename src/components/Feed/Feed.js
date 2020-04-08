@@ -5,13 +5,15 @@ import HeaderFeedStyled from "../../style/HeaderFeedStyled.style";
 import { FeedStyle } from "../../style/FeedStyled.style";
 import IconsMoodStyled from "../../style/IconsMoodStyled.style";
 import Footer from "../Footer/Footer";
+import LogoutModal from "./LogoutModal";
 
 function Feed() {
   const [data, setData] = useState({
     iconsMood: false,
     moodLink: ["utensils", "running", "film", "beer"],
     showUserMenu: false,
-    marginBottomHeader: "20px"
+    marginBottomHeader: "20px",
+    isModalOpen: false
   });
   const [position, setPosition] = React.useState({
     userLat: "",
@@ -48,7 +50,7 @@ function Feed() {
     return setData(newState);
   }
 
-  function showMenu(e) {
+  function showMenu() {
     const newState = { ...data };
 
     if (!newState.showUserMenu) {
@@ -63,25 +65,33 @@ function Feed() {
   }
 
   function clearSession() {
-    document.querySelector(".modal-open").classList.remove("modal-open");
-    document.querySelector(".modal-backdrop").remove();
-    sessionStorage.clear();
+    const newState = { ...data };
+
+    if (!newState.isModalOpen) {
+      newState.isModalOpen = true;
+      sessionStorage.clear();
+      return setData(newState);
+    }
+
+    newState.isModalOpen = false;
+    return setData(newState);
   }
 
   return (
     <React.Fragment>
       <HeaderFeedStyled as="header" marginBottom={data.marginBottomHeader}>
-        <div className=" user--menu" onClick={(e) => showMenu(e)}>
+        <div className=" user--menu">
           <img
             className="avatar"
             alt="avatar"
             src="https://kitt.lewagon.com/placeholder/users/cveneziani"
+            onClick={() => showMenu()}
           />
           {
             data.showUserMenu && (
               <div className="dropdown--links">
                 <Link to="/user_profile">Parameters</Link>
-                <button className="btn--logout" data-toggle="modal" data-target=".bs-example-modal-sm">Logout</button>
+                <button className="btn--logout" onClick={(e) => clearSession(e)}>Logout</button>
               </div>
             )
           }
@@ -91,15 +101,9 @@ function Feed() {
           <span className="el-switch-style"></span>
         </label>
       </HeaderFeedStyled>
-        <div className="modal bs-example-modal-sm " tabIndex="-1" role="dialog" aria-hidden="true">
-          <div className="modal-dialog modal-sm" style={{top: "34%"}}>
-            <div className="modal-content">
-              <div className="modal-header"><h4>Logout <i className="fa fa-lock"></i></h4></div>
-              <div className="modal-body"><i className="fa fa-question-circle"></i> Are you sure you want to log-off?</div>
-              <div className="modal-footer"><Link to="/" className="btn btn-primary btn-block" onClick={() => clearSession()}>Logout</Link></div>
-            </div>
-          </div>
-        </div>
+      {
+        data.isModalOpen && (<LogoutModal clearSession={() => clearSession()}></LogoutModal>)
+      }
       {data.iconsMood && (
         <IconsMoodStyled as="section">
           <h2>It's time to: </h2>
