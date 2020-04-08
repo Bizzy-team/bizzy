@@ -19,7 +19,7 @@ module.exports = async body => {
     const token = await signJwtPromise(
       `{
                 "name": "${body.username}",
-                "exp": 345600
+                "exp": ${Math.floor(Date.now() + 60 * 8640 * 1000)}
             }`,
       JWTToken.toString("hex")
     );
