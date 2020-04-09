@@ -23,13 +23,13 @@ const HeaderFeedStyled = styled.header`
   .user--menu {
     margin-left: 12px;
     width: 100%;
-      i {
-        position: absolute;
-        opacity: 0.6em;
-        top: 59px;
-        left: 6px;
-        color: ${props => props.theme.color};
-      }
+    i {
+      position: absolute;
+      opacity: 0.6em;
+      top: 59px;
+      left: 6px;
+      color: ${props => props.theme.color};
+    }
     .dropdown--links {
       width: 40%;
       opacity: 1;

@@ -38,7 +38,7 @@ function ForgotPasswordForm() {
         loader: true
       });
       return fetch("http://localhost:3000/api/forgot", {
-      // return fetch("https://bizzy.now.sh/api/password/forgot", {
+        // return fetch("https://bizzy.now.sh/api/password/forgot", {
         method: "POST",
         body: JSON.stringify({
           mail: inputMail.current.value

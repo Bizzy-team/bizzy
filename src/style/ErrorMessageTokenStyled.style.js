@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ErrorMessageToken = styled.div`
-padding: 10px 6px;
+  padding: 10px 6px;
   h2 {
     font-family: "Roboto";
   }
