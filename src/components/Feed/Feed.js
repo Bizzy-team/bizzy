@@ -69,12 +69,21 @@ function Feed() {
 
     if (!newState.isModalOpen) {
       newState.isModalOpen = true;
-      sessionStorage.clear();
       return setData(newState);
     }
 
     newState.isModalOpen = false;
+    sessionStorage.clear();
     return setData(newState);
+  }
+
+  function closeModal(e) {
+    if (e.target === document.querySelector(".modal--logout")) {
+      return setData({
+        ...data,
+        isModalOpen: false
+      });
+    }
   }
 
   return (
@@ -87,23 +96,26 @@ function Feed() {
             src="https://kitt.lewagon.com/placeholder/users/cveneziani"
             onClick={() => showMenu()}
           />
-          {
-            data.showUserMenu && (
-              <div className="dropdown--links">
-                <Link to="/user_profile">Parameters</Link>
-                <button className="btn--logout" onClick={(e) => clearSession(e)}>Logout</button>
-              </div>
-            )
-          }
+          {data.showUserMenu && (
+            <div className="dropdown--links">
+              <Link to="/user_profile">Parameters</Link>
+              <button className="btn--logout" onClick={e => clearSession(e)}>
+                Logout
+              </button>
+            </div>
+          )}
         </div>
         <label className="el-switch">
           <input type="checkbox" name="switch" onClick={userAvailable}></input>
           <span className="el-switch-style"></span>
         </label>
       </HeaderFeedStyled>
-      {
-        data.isModalOpen && (<LogoutModal clearSession={() => clearSession()}></LogoutModal>)
-      }
+      {data.isModalOpen && (
+        <LogoutModal
+          clearSession={clearSession}
+          closeModal={e => closeModal(e)}
+        ></LogoutModal>
+      )}
       {data.iconsMood && (
         <IconsMoodStyled as="section">
           <h2>It's time to: </h2>
