@@ -74,8 +74,8 @@ function SigninSpace() {
       });
 
       return fetch("http://localhost:3000/api/register", {
-      // return fetch("https://bizzy.now.sh/api/oauth/register", {
-        credentials: 'include',
+        // return fetch("https://bizzy.now.sh/api/oauth/register", {
+        credentials: "include",
         method: "POST",
         body: JSON.stringify({
           mail: inputMail.current.value,
