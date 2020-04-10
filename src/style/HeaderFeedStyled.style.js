@@ -38,7 +38,10 @@ const HeaderFeedStyled = styled.header`
       background-color: white;
       border: solid 1px ${props => props.theme.color};
       border-radius: 10px;
-      padding: 6px 12px;
+      padding: 10px 12px;
+      p {
+        margin: 0;
+      }
       a {
         text-decoration: none;
         color: black;
