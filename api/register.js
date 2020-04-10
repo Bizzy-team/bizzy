@@ -5,7 +5,7 @@ const registerDb = require("./_db/models/register");
 module.exports = function register(req, res) {
   if (req.method !== "POST") {
     responseHeader(res, {
-      code: 401,
+      code: 405,
       serverHeader: {
         Allow: "POST"
       }
