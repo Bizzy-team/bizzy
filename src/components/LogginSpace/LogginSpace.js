@@ -130,7 +130,7 @@ function LogginSpace() {
         </div>
         <div className="forgot--password">
           <p>
-            <Link to="/forgotPasswordForm">
+            <Link to="/forgot_password_form">
               {" "}
               <strong>Forgot password ?</strong>
             </Link>

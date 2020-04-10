@@ -4,7 +4,9 @@
   "trailingSlash": false,
   "env": {
       "NODEJS_HELPERS": "0",
-      "DB_URL": "@mongo"
+      "DB_URL": "@mongo",
+      "MAILUSER": "@mailuserdev",
+      "MAILMDP": "@mailmdpdev"
   },
   "headers": [
       {

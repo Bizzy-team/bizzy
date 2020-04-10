@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import ForgotPasswordFormStyled from "../../style/ForgotPasswordFormStyled.style";
 import { ReactSVG } from "react-svg";
 import LoaderSvg from "../../img/loader.svg";
@@ -12,6 +12,7 @@ function ForgotPasswordForm() {
     error: false,
     errorMessage: ""
   });
+  const [redirect, setRedirect] = React.useState(false);
 
   function checkMail() {
     if (inputMail.current.value === "") {
@@ -67,9 +68,12 @@ function ForgotPasswordForm() {
               errorMessage: dataParsed.message
             });
           }
+          return setRedirect(true);
         });
     }
   }
+
+  if (redirect) return <Redirect to="/forgot_password_confirmation"></Redirect>;
 
   return (
     <ForgotPasswordFormStyled>

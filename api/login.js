@@ -5,7 +5,7 @@ const parseBody = require("./_utils/parseBody");
 module.exports = function Login(req, res) {
   if (req.method !== "POST") {
     responseHeader(res, {
-      code: 401,
+      code: 405,
       serverHeader: {
         Allow: "POST"
       }

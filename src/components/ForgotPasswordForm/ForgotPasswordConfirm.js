@@ -12,7 +12,10 @@ function ForgotPasswordConfirm() {
         <h2>Password recovered... !</h2>
       </div>
       <div className="success--content">
-        <p>Your password Recovered Successfully, check yours mails and</p>
+        <p>
+          Your password Recovered Successfully, check your mailbox to follow instructions
+          and
+        </p>
         <p>Please login</p>
         <button>
           <Link to="/">Login</Link>

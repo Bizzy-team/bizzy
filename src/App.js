@@ -11,6 +11,7 @@ import ShareYourMood from "./components/YourMood/ShareYourMood";
 import variables from "./variables";
 import Home from "./components/Home/Home";
 import ResetPswd from "./components/ResetPswd/ResetPswd";
+import ForgotPasswordConfirm from "./components/ForgotPasswordForm/ForgotPasswordConfirm";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -67,8 +68,13 @@ function App() {
           <Route exact path="/" render={() => unavailableToken(Home)}></Route>
           <Route
             exact
-            path="/forgotPasswordForm"
+            path="/forgot_password_form"
             render={() => unavailableToken(ForgotPasswordForm)}
+          ></Route>
+          <Route
+            exact
+            path="/forgot_password_confirmation"
+            render={() => unavailableToken(ForgotPasswordConfirm)}
           ></Route>
           <Route exact path="/reset_pswd_form" component={ResetPswd} />
           <Route exact path="/feed" render={() => availableToken(Feed)} />
