@@ -1,84 +1,37 @@
-const responseHeader = require("./_utils/responseHeader");
+const responseServer = require("./_utils/responseServer");
 const loginDB = require("./_db/models/login");
 const parseBody = require("./_utils/parseBody");
 
 module.exports = function Login(req, res) {
   if (req.method !== "POST") {
-    responseHeader(res, {
-      code: 405,
-      serverHeader: {
-        Allow: "POST"
-      }
+    return responseServer(res, 405, {
+      serverHeader: {Allow: "POST"},
+      content: "POST"
     });
-
-    return res.end(
-      JSON.stringify({
-        error: true,
-        message: "This route can only be access with POST method."
-      })
-    );
   }
 
-  parseBody(req);
+  parseBody(req, res);
   return req.on("bodyParsed", httpBody => {
-    if (httpBody.error) {
-      responseHeader(res, {
-        code: httpBody.code,
-        serverHeader: { ...httpBody.serverHeader }
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: httpBody.message
-        })
-      );
-    }
-
     const q = Object.keys(httpBody);
 
     if (q.length >= 3) {
-      responseHeader(res, {
-        code: 400
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "You can only have two parameters."
-        })
-      );
-    }
+      responseServer(res, 400, {
+        content: "Too many parameters"
+      })
+    };
 
     if (!q.includes("mail") || !q.includes("pswd")) {
-      responseHeader(res, {
-        code: 422
+      responseServer(res, 422, {
+        content: "Wrong parameter."
       });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "Wrong parameter."
-        })
-      );
     }
 
     return loginDB(httpBody).then(userData => {
-      if (userData.data.error) {
-        responseHeader(res, {
-          code: userData.code,
-          serverHeader: { ...userData.serverHeader }
-        });
-
-        return res.end(JSON.stringify({ ...userData.data }));
-      }
-
-      responseHeader(res, {
-        code: userData.code,
-        serverHeader: { ...userData.serverHeader }
-      });
-
-      return res.end(JSON.stringify({ ...userData.data }));
+      responseServer(res, userData.code, {
+        serverHeader: userData.serverHeader ? {...userData.serverHeader} : {},
+        content: userData.content ? userData.content : undefined,
+        modifyResponse: userData.data ? {...userData.data} : undefined
+      })
     });
   });
 };
