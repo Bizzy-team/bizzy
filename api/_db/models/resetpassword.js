@@ -51,10 +51,7 @@ export async function PUT(data) {
   let user;
 
   if (cookie) {
-    user = await sessionValid(
-      cookie, 
-      { checkToken: false }
-    );
+    user = await sessionValid(cookie, { checkToken: false });
     if (!user._id) return user;
   } else {
     user = await passwordForgetCollection.findOne(
@@ -82,7 +79,7 @@ export async function PUT(data) {
     }
   );
 
-  return verify(jwtToken, userData.verifyJWTToken, async function(err) {
+  return verify(jwtToken, userData.verifyJWTToken, async function v(err) {
     const newPassword = await hash(newpswd, 10);
 
     if (err) {
