@@ -1,22 +1,15 @@
-const responseHeader = require("./_utils/responseHeader");
+const responseServer = require("./_utils/responseServer");
 const parseBody = require("./_utils/parseBody");
 const forgotDb = require("./_db/models/forgot");
 
 module.exports = function Forgot(req, res) {
   if (req.method !== "POST") {
-    responseHeader(res, {
-      code: 405,
+    responseServer(res, 405, {
+      content: "POST",
       serverHeader: {
         Allow: "POST"
       }
-    });
-
-    return res.end(
-      JSON.stringify({
-        error: true,
-        message: "This route can only be access with a POST method."
-      })
-    );
+    })
   }
   parseBody(req);
 
