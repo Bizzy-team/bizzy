@@ -14,13 +14,13 @@ module.exports = async data => {
   const bizzyUsers = mongobdd.db("bizzy").collection("users");
   const user = await bizzyUsers.findOne(
     { mail: data.mail },
-    { projection: { _id: 1, password: 1, token: 1} }
+    { projection: { _id: 1, password: 1, token: 1 } }
   );
 
   if (user === null) {
     await mongobdd.close();
     return {
-      code: 403,
+      code: 403
     };
   }
 

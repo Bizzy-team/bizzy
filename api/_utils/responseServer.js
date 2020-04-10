@@ -60,7 +60,7 @@ module.exports = (response, code, data = {}) => {
       message: "This route can only be access by JSON data."
     },
     409: {
-      error: true,
+      error: true
     },
     422: {
       error: true,
@@ -69,7 +69,7 @@ module.exports = (response, code, data = {}) => {
     500: {
       error: true,
       message: error && error.message,
-      file: error && rror.stack
+      file: error && error.stack
     }
   };
 
@@ -79,7 +79,7 @@ module.exports = (response, code, data = {}) => {
   });
 
   if (data.modifyResponse) {
-    httpCode[code] = {...data.modifyResponse}
+    httpCode[code] = { ...data.modifyResponse };
   }
 
   return response.end(JSON.stringify(httpCode[code]));

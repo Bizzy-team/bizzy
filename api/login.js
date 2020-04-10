@@ -5,7 +5,7 @@ const parseBody = require("./_utils/parseBody");
 module.exports = function Login(req, res) {
   if (req.method !== "POST") {
     return responseServer(res, 405, {
-      serverHeader: {Allow: "POST"},
+      serverHeader: { Allow: "POST" },
       content: "POST"
     });
   }
@@ -17,8 +17,8 @@ module.exports = function Login(req, res) {
     if (q.length >= 3) {
       responseServer(res, 400, {
         content: "Too many parameters"
-      })
-    };
+      });
+    }
 
     if (!q.includes("mail") || !q.includes("pswd")) {
       responseServer(res, 422, {
@@ -28,10 +28,10 @@ module.exports = function Login(req, res) {
 
     return loginDB(httpBody).then(userData => {
       responseServer(res, userData.code, {
-        serverHeader: userData.serverHeader ? {...userData.serverHeader} : {},
+        serverHeader: userData.serverHeader ? { ...userData.serverHeader } : {},
         content: userData.content ? userData.content : undefined,
-        modifyResponse: userData.data ? {...userData.data} : undefined
-      })
+        modifyResponse: userData.data ? { ...userData.data } : undefined
+      });
     });
   });
 };

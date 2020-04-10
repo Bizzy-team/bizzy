@@ -1,5 +1,5 @@
 const { parse } = require("url");
-const responseHeader = require("./_utils/responseHeader");
+const responseHeader = require("./_utils/responseServer");
 const { GET, PUT } = require("./_db/models/resetpassword");
 const parseBody = require("./_utils/parseBody");
 

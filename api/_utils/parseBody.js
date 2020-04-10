@@ -1,4 +1,4 @@
-const responserServer = require("../_utils/responseServer");
+const responserServer = require("./responseServer");
 
 /**
  * Parse the body request when there is a POST, PUT method
