@@ -51,9 +51,9 @@ function LogginSpace() {
       });
 
       return fetch("http://localhost:3000/api/login", {
-      // return fetch("https://bizzy.now.sh/api/login", {
-      // return fetch(`${process.env.APIKEY}/login`, {
-        credentials: 'include',
+        // return fetch("https://bizzy.now.sh/api/login", {
+        // return fetch(`${process.env.APIKEY}/login`, {
+        credentials: "include",
         method: "POST",
         body: JSON.stringify({
           mail: inputMail.current.value,
@@ -87,7 +87,7 @@ function LogginSpace() {
 
           sessionStorage.setItem("UserToken", dataParsed.token);
           return setRedirect(true);
-        })
+        });
     }
   }
 
@@ -130,7 +130,7 @@ function LogginSpace() {
         </div>
         <div className="forgot--password">
           <p>
-            <Link to="/forgotPasswordForm">
+            <Link to="/forgot_password_form">
               {" "}
               <strong>Forgot password ?</strong>
             </Link>
