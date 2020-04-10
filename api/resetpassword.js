@@ -124,7 +124,7 @@ module.exports = function ResetPassword(req, res) {
 
       dataParsed.jwtToken = req.headers.authorization;
       req.headers.cookie
-        ? (dataParsed.cookie = Object.fromEntries([req.headers.cookie.split("=")]))
+        ? (dataParsed.cookie = req.headers.cookie)
         : null;
       return PUT(dataParsed).then(result => {
         responseHeader(res, {
