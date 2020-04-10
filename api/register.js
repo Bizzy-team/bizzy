@@ -1,4 +1,4 @@
-const responseHeader = require("./_utils/responseHeader");
+const responseHeader = require("./_utils/responseServer");
 const parseBody = require("./_utils/parseBody");
 const registerDb = require("./_db/models/register");
 

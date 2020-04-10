@@ -9,13 +9,13 @@ module.exports = function Forgot(req, res) {
       serverHeader: {
         Allow: "POST"
       }
-    })
+    });
   }
   parseBody(req);
 
   return req.on("bodyParsed", httpBody => {
     if (httpBody.error) {
-      responseHeader(res, {
+      responseServer(res, {
         code: httpBody.code,
         ...httpBody.serverHeader
       });
@@ -31,7 +31,7 @@ module.exports = function Forgot(req, res) {
     const q = Object.keys(httpBody);
 
     if (q.length > 1) {
-      responseHeader(res, {
+      responseServer(res, {
         code: 400
       });
 
@@ -44,7 +44,7 @@ module.exports = function Forgot(req, res) {
     }
 
     if (!q.includes("mail")) {
-      responseHeader(res, {
+      responseServer(res, {
         code: 400
       });
 
@@ -57,7 +57,7 @@ module.exports = function Forgot(req, res) {
     }
 
     if (typeof httpBody.mail !== "string") {
-      responseHeader(res, {
+      responseServer(res, {
         code: 400
       });
 
@@ -70,7 +70,7 @@ module.exports = function Forgot(req, res) {
     }
 
     return forgotDb(httpBody).then(result => {
-      responseHeader(res, {
+      responseServer(res, {
         code: result.code,
         ...result.serverHeader
       });
