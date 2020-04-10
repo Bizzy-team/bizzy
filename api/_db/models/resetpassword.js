@@ -2,7 +2,9 @@ const { verify, sign } = require("jsonwebtoken");
 const { promisify } = require("util");
 const { randomFill } = require("crypto");
 const { hash } = require("bcrypt");
+
 const mongo = require("../index");
+const sessionValid = require("../../_utils/sessionValid");
 
 const createTokenKey = promisify(randomFill);
 const signJwtPromise = promisify(sign);
@@ -40,7 +42,6 @@ export async function GET(params) {
 }
 
 export async function PUT(data) {
-  console.log(data);
   const mongobdd = await mongo.connect();
   const passwordForgetCollection = await mongobdd
     .db("bizzy")
@@ -50,8 +51,11 @@ export async function PUT(data) {
   let user;
 
   if (cookie) {
-    // TODO: Check session
-    // Return user data.
+    user = await sessionValid(
+      cookie, 
+      { checkToken: false }
+    );
+    if (!user._id) return user;
   } else {
     user = await passwordForgetCollection.findOne(
       { forgotPassword: token },
@@ -78,7 +82,7 @@ export async function PUT(data) {
     }
   );
 
-  return verify(jwtToken, userData.verifyJWTToken, async function(err, token) {
+  return verify(jwtToken, userData.verifyJWTToken, async function(err) {
     const newPassword = await hash(newpswd, 10);
 
     if (err) {
