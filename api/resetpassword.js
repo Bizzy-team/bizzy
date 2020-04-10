@@ -75,7 +75,7 @@ module.exports = function ResetPassword(req, res) {
     }
 
     parseBody(req);
-    return req.on("bodyParsed", function(dataParsed) {
+    return req.on("bodyParsed", function bp(dataParsed) {
       if (dataParsed.error) {
         responseHeader(res, {
           code: dataParsed.code,
@@ -122,11 +122,12 @@ module.exports = function ResetPassword(req, res) {
         );
       }
 
-      dataParsed.jwtToken = req.headers.authorization;
-      req.headers.cookie
-        ? (dataParsed.cookie = req.headers.cookie)
-        : null;
-      return PUT(dataParsed).then(result => {
+      const PUTData = { ...dataParsed };
+
+      PUTData.jwtToken = req.headers.authorization;
+      if (req.headers.cookie) PUTData.cookie = req.headers.cookie;
+
+      return PUT(PUTData).then(result => {
         responseHeader(res, {
           code: result.code,
           serverHeader: { ...result.serverHeader }
