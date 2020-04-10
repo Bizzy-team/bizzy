@@ -98,7 +98,9 @@ function Feed() {
           />
           {data.showUserMenu && (
             <div className="dropdown--links">
-              <Link to="/user_profile">Parameters</Link>
+              <p>
+                <Link to="/user_profile">Profile</Link>
+              </p>
               <button className="btn--logout" onClick={e => clearSession(e)}>
                 Logout
               </button>
