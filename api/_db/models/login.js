@@ -10,20 +10,18 @@ const createToken = promisify(randomFill);
  * @param {Object} data An object of parsed parameters.
  */
 module.exports = async data => {
-  const bizzyUsers = (await mongo.connect()).db("bizzy").collection("users");
+  const mongobdd = await mongo.connect();
+  const bizzyUsers = mongobdd.db("bizzy").collection("users");
   const user = await bizzyUsers.findOne(
     { mail: data.mail },
-    { projection: { _id: 1, password: 1 } }
+    { projection: { _id: 1, password: 1, token: 1} }
   );
 
   if (user === null) {
-    return Promise.resolve({
+    await mongobdd.close();
+    return {
       code: 403,
-      data: {
-        error: true,
-        message: "User unknown."
-      }
-    });
+    };
   }
 
   if (await compare(data.pswd, user.password)) {
@@ -41,7 +39,7 @@ module.exports = async data => {
       }
     );
 
-    return Promise.resolve({
+    return {
       code: 200,
       serverHeader: {
         "Set-Cookie": `sid=${sessionId.toString("hex")}; Expires=${new Date(
@@ -51,14 +49,12 @@ module.exports = async data => {
       data: {
         token: user.token
       }
-    });
+    };
   }
 
-  return Promise.resolve({
+  await mongobdd.close();
+  return {
     code: 401,
-    data: {
-      error: true,
-      message: "That email and password combination is incorrect."
-    }
-  });
+    content: "That email and password combination is incorrect."
+  };
 };
