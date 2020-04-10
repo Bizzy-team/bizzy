@@ -50,7 +50,7 @@ module.exports = function Login(req, res) {
       );
     }
 
-    if (!q.includes("mail")) {
+    if (!q.includes("mail") || !q.includes("pswd")) {
       responseHeader(res, {
         code: 422
       });
@@ -58,20 +58,7 @@ module.exports = function Login(req, res) {
       return res.end(
         JSON.stringify({
           error: true,
-          message: "Missing mail parameter."
-        })
-      );
-    }
-
-    if (!q.includes("pswd")) {
-      responseHeader(res, {
-        code: 422
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "Missing pswd parameter."
+          message: "Wrong parameter."
         })
       );
     }
