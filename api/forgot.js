@@ -5,7 +5,7 @@ const forgotDb = require("./_db/models/forgot");
 module.exports = function Forgot(req, res) {
   if (req.method !== "POST") {
     responseHeader(res, {
-      code: 401,
+      code: 405,
       serverHeader: {
         Allow: "POST"
       }
@@ -86,7 +86,6 @@ module.exports = function Forgot(req, res) {
         return res.end(JSON.stringify({ ...result.data }));
       }
 
-      // TODO: Send mail to httpBody.mail
       return res.end(JSON.stringify({ ...result.data }));
     });
   });
