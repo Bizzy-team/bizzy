@@ -1,67 +1,26 @@
-const responseHeader = require("./_utils/responseServer");
+const responseServer = require("./_utils/responseServer");
 const parseBody = require("./_utils/parseBody");
 const registerDb = require("./_db/models/register");
 
 module.exports = function register(req, res) {
   if (req.method !== "POST") {
-    responseHeader(res, {
-      code: 405,
-      serverHeader: {
-        Allow: "POST"
-      }
-    });
-
-    return res.end(
-      JSON.stringify({
-        error: true,
-        message: "This route can only be acces with a POST method."
-      })
-    );
+    responseServer(res, 405, {
+      content: "POST"
+    })
   }
 
-  parseBody(req);
-
+  parseBody(req, res);
   return req.on("bodyParsed", httpBody => {
-    if (httpBody.error) {
-      responseHeader(res, {
-        code: httpBody.code,
-        ...httpBody.serverHeader
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: httpBody.message
-        })
-      );
-    }
-
     const q = Object.keys(httpBody);
 
     if (q.length >= 4) {
-      responseHeader(res, {
-        code: 400
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "You can only have three parameters."
-        })
-      );
+      responseServer(res, 400, {
+        content: "Too many parameters."
+      })
     }
 
     if (!q.includes("mail") || !q.includes("pswd") || !q.includes("username")) {
-      responseHeader(res, {
-        code: 400
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "Missing parameters."
-        })
-      );
+      responseServer(res, 422);
     }
 
     if (
@@ -69,38 +28,17 @@ module.exports = function register(req, res) {
       typeof httpBody.pswd !== "string" ||
       typeof httpBody.username !== "string"
     ) {
-      responseHeader(res, {
-        code: 400
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "Properties should be string."
-        })
-      );
+      responseServer(res, 400, {
+        content: "Data must be string."
+      })
     }
 
-    return registerDb(httpBody).then(userData => {
-      if (userData.error) {
-        responseHeader(res, {
-          code: userData.code
-        });
-
-        return res.end(
-          JSON.stringify({
-            error: true,
-            message: userData.message
-          })
-        );
-      }
-
-      responseHeader(res, {
-        code: userData.code,
-        serverHeader: { ...userData.serverHeader }
-      });
-
-      return res.end(JSON.stringify({ ...userData.data }));
+    return registerDb(httpBody).then(result => {
+      responseServer(res, result.code, {
+        serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
+        content: result.content ? result.content : undefined,
+        modifyResponse: result.data ? { ...result.data } : undefined
+      })
     });
   });
 };
