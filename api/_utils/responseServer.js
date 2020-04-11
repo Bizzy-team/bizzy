@@ -59,7 +59,7 @@ module.exports = (response, code, data = {}) => {
     },
     405: {
       error: true,
-      message: `This route can only be access with ${data.content}`
+      message: `This route can only be access with ${data.content} method.`
     },
     406: {
       error: true,
@@ -93,5 +93,9 @@ module.exports = (response, code, data = {}) => {
     httpCode[code] = { ...data.modifyResponse };
   }
 
-  return response.end(JSON.stringify(httpCode[code]));
+  if (code === 204) {
+    response.end();
+  } else {
+    response.end(JSON.stringify(httpCode[code]));
+  }
 };
