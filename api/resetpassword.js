@@ -1,23 +1,13 @@
 const { parse } = require("url");
-const responseHeader = require("./_utils/responseServer");
+const responseServer = require("./_utils/responseServer");
 const { GET, PUT } = require("./_db/models/resetpassword");
 const parseBody = require("./_utils/parseBody");
 
 module.exports = function ResetPassword(req, res) {
   if (!["GET", "PUT"].includes(req.method)) {
-    responseHeader(res, {
-      code: 405,
-      serverHeader: {
-        Allow: "GET, PUT"
-      }
-    });
-
-    return res.end(
-      JSON.stringify({
-        error: true,
-        message: "Only GET and PUT methods are allowed on this route."
-      })
-    );
+    responseServer(res, 405, {
+      content: "POST, PUT"
+    })
   }
 
   if (req.method === "GET") {
@@ -25,84 +15,41 @@ module.exports = function ResetPassword(req, res) {
     const paramsLength = Array.from(params).length;
 
     if (paramsLength === 0 || !params.get("token")) {
-      responseHeader(res, {
-        code: 422
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "Missing parameters"
-        })
-      );
+      responseServer(res, 422, {
+        content: "Missing parameter"
+      })
     }
 
     if (paramsLength > 1) {
-      responseHeader(res, {
-        code: 403
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "Too many parameters"
-        })
-      );
+      responseServer(res, 400, {
+        content: "Too many parameters"
+      })
     }
 
     return GET(params).then(result => {
-      responseHeader(res, {
-        code: result.code,
-        serverHeader: { ...result.serverHeader }
+      responseServer(res, result.code, {
+        serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
+        content: result.content ? result.content : undefined,
+        modifyResponse: result.data ? { ...result.data } : undefined
       });
-
-      return res.end(JSON.stringify({ ...result.data }));
     });
   }
 
   if (req.method === "PUT") {
     if (!req.headers.authorization) {
-      responseHeader(res, {
-        code: 403
+      responseServer(res, 403, {
+        content: "Missing 'Authorization: <token>' header in your request."
       });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "Missing 'Authorization: <token>' header in your request."
-        })
-      );
     }
 
-    parseBody(req);
+    parseBody(req, res);
     return req.on("bodyParsed", function bp(dataParsed) {
-      if (dataParsed.error) {
-        responseHeader(res, {
-          code: dataParsed.code,
-          serverHeader: { ...dataParsed.serverHeader }
-        });
-
-        return res.end(
-          JSON.stringify({
-            error: true,
-            message: dataParsed.message
-          })
-        );
-      }
-
       const q = Object.keys(dataParsed);
 
       if (req.headers.cookie ? q.length > 1 : q.length > 2) {
-        responseHeader(res, {
-          code: 403
-        });
-
-        return res.end(
-          JSON.stringify({
-            error: true,
-            message: "Too many parameters"
-          })
-        );
+        responseServer(res, 400, {
+          content: "Too many parameters"
+        })
       }
 
       if (
@@ -110,16 +57,7 @@ module.exports = function ResetPassword(req, res) {
           ? !q.includes("newpswd")
           : !q.includes("newpswd") || !q.includes("token")
       ) {
-        responseHeader(res, {
-          code: 422
-        });
-
-        return res.end(
-          JSON.stringify({
-            error: true,
-            message: "Missing parameters"
-          })
-        );
+        responseServer(res, 422);
       }
 
       const PUTData = { ...dataParsed };
@@ -128,12 +66,11 @@ module.exports = function ResetPassword(req, res) {
       if (req.headers.cookie) PUTData.cookie = req.headers.cookie;
 
       return PUT(PUTData).then(result => {
-        responseHeader(res, {
-          code: result.code,
-          serverHeader: { ...result.serverHeader }
+        responseServer(res, result.code, {
+          serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
+          content: result.content ? result.content : undefined,
+          modifyResponse: result.data ? { ...result.data } : undefined
         });
-
-        return res.end(JSON.stringify({ ...result.data }));
       });
     });
   }
