@@ -7,7 +7,7 @@ module.exports = function ResetPassword(req, res) {
   if (!["GET", "PUT"].includes(req.method)) {
     responseServer(res, 405, {
       content: "POST, PUT"
-    })
+    });
   }
 
   if (req.method === "GET") {
@@ -17,13 +17,13 @@ module.exports = function ResetPassword(req, res) {
     if (paramsLength === 0 || !params.get("token")) {
       responseServer(res, 422, {
         content: "Missing parameter"
-      })
+      });
     }
 
     if (paramsLength > 1) {
       responseServer(res, 400, {
         content: "Too many parameters"
-      })
+      });
     }
 
     return GET(params).then(result => {
@@ -49,7 +49,7 @@ module.exports = function ResetPassword(req, res) {
       if (req.headers.cookie ? q.length > 1 : q.length > 2) {
         responseServer(res, 400, {
           content: "Too many parameters"
-        })
+        });
       }
 
       if (

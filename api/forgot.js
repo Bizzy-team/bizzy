@@ -16,7 +16,7 @@ module.exports = function Forgot(req, res) {
     if (q.length > 1) {
       responseServer(res, 400, {
         content: "Too many parameters."
-      })
+      });
     }
 
     if (!q.includes("mail")) {

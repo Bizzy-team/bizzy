@@ -6,7 +6,7 @@ module.exports = function register(req, res) {
   if (req.method !== "POST") {
     responseServer(res, 405, {
       content: "POST"
-    })
+    });
   }
 
   parseBody(req, res);
@@ -16,7 +16,7 @@ module.exports = function register(req, res) {
     if (q.length >= 4) {
       responseServer(res, 400, {
         content: "Too many parameters."
-      })
+      });
     }
 
     if (!q.includes("mail") || !q.includes("pswd") || !q.includes("username")) {
@@ -30,7 +30,7 @@ module.exports = function register(req, res) {
     ) {
       responseServer(res, 400, {
         content: "Data must be string."
-      })
+      });
     }
 
     return registerDb(httpBody).then(result => {
@@ -38,7 +38,7 @@ module.exports = function register(req, res) {
         serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
         content: result.content ? result.content : undefined,
         modifyResponse: result.data ? { ...result.data } : undefined
-      })
+      });
     });
   });
 };
