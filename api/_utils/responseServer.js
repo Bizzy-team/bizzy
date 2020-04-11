@@ -10,6 +10,7 @@
 module.exports = (response, code, data = {}) => {
   let error;
   const defaultHeader = {
+    Allow: `${code === 405 && data.content}`,
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Origin": `${
       process.env.NODE_ENV === "development"
@@ -27,7 +28,8 @@ module.exports = (response, code, data = {}) => {
     "Referrer-Policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "deny",
-    "X-RateLimit-Limit": 60
+    "X-RateLimit-Limit": 60,
+    "WWW-Authenticate": `${code === 401 || code === 403 && "Bearer"}`
   };
 
   // Server error
@@ -37,7 +39,10 @@ module.exports = (response, code, data = {}) => {
 
   const httpCode = {
     200: {
-      message: data.content ? data.content : ""
+      message: data.content ? data.content : "Ok"
+    },
+    201: {
+      message: data.content ? data.content : "Created"
     },
     400: {
       error: true,
@@ -60,7 +65,8 @@ module.exports = (response, code, data = {}) => {
       message: "This route can only be access by JSON data."
     },
     409: {
-      error: true
+      error: true,
+      message: data.content ? data.content : "Conclict"
     },
     422: {
       error: true,
@@ -70,6 +76,10 @@ module.exports = (response, code, data = {}) => {
       error: true,
       message: error && error.message,
       file: error && error.stack
+    },
+    502: {
+      error: true,
+      message: data.content ? data.content : "Error server, try later or contact us."
     }
   };
 
