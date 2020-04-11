@@ -22,7 +22,7 @@ module.exports = async (
   options = { checkToken: true, returnBool: false, JWT: "" }
 ) => {
   if (!cookie || typeof cookie !== "string") {
-    if (options && options.returnBool) return false;
+    if (options.returnBool) return false;
 
     return {
       code: 500
@@ -32,7 +32,7 @@ module.exports = async (
   const cookieObject = Object.fromEntries([cookie.split("=")]);
 
   if (!cookieObject.sid || typeof cookieObject.sid !== "string") {
-    if (options && options.returnBool) return false;
+    if (options.returnBool) return false;
 
     return {
       code: 500
@@ -52,7 +52,7 @@ module.exports = async (
 
   if (user === null) {
     await mongobdd.close();
-    if (options && options.returnBool) return false;
+    if (options.returnBool) return false;
 
     return {
       code: 401
@@ -64,10 +64,11 @@ module.exports = async (
     await userCollection.findOneAndUpdate({ _id: user._id }, { $unset: { session: "" } });
 
     await mongobdd.close();
-    if (options && options.returnBool) return false;
+    if (options.returnBool) return false;
 
     return {
-      code: 401
+      code: 401,
+      content: "Session expired"
     };
   }
 
@@ -75,7 +76,7 @@ module.exports = async (
   if (options.checkToken) {
     return verify(options.JWT, user.verifyJWTToken, async function v(err) {
       if (err) {
-        // Token is good but expiration date is over so juste reset the token.
+        // Token is good but expiration date is over so just reset the token.
         if (err.name === "TokenExpiredError") {
           const newJWTTKey = await createTokenKey(Buffer.alloc(16));
           const newJWT = await JWTPromise(
@@ -103,11 +104,12 @@ module.exports = async (
             }
           );
 
-          if (options && options.returnBool) return false;
+          if (options.returnBool) return true;
           return dataToReturn.value;
         }
 
         // Error token sent is not the same in bdd.
+        if (options.returnBool) return false;
         return {
           code: 401
         };
@@ -124,7 +126,7 @@ module.exports = async (
         }
       );
 
-      if (options && options.returnBool) return false;
+      if (options.returnBool) return true;
       return dataToReturn.value;
     });
   }
@@ -140,6 +142,6 @@ module.exports = async (
     }
   );
 
-  if (options && options.returnBool) return false;
+  if (options.returnBool) return true;
   return dataToReturn.value;
 };
