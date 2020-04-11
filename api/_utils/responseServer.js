@@ -29,7 +29,7 @@ module.exports = (response, code, data = {}) => {
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "deny",
     "X-RateLimit-Limit": 60,
-    "WWW-Authenticate": `${code === 401 || code === 403 && "Bearer"}`
+    "WWW-Authenticate": `${code === 401 || (code === 403 && "Bearer")}`
   };
 
   // Server error

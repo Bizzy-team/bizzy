@@ -61,7 +61,7 @@ export async function PUT(data) {
       return {
         code: 401,
         content:
-            "One parameter in the body is either expired or not correct please try to send a new forgot password request."
+          "One parameter in the body is either expired or not correct please try to send a new forgot password request."
       };
     }
   }
@@ -106,7 +106,7 @@ export async function PUT(data) {
       }
 
       return {
-        code: 401,
+        code: 401
       };
     }
 

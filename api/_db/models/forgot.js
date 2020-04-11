@@ -41,7 +41,7 @@ module.exports = async data => {
       if (!configisGood) {
         await mongobdd.close();
         return {
-          code: 502,
+          code: 502
         };
       }
 
@@ -92,7 +92,7 @@ module.exports = async data => {
           }
 
           return {
-            code: 502,
+            code: 502
           };
         });
     });
