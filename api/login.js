@@ -5,7 +5,6 @@ const parseBody = require("./_utils/parseBody");
 module.exports = function Login(req, res) {
   if (req.method !== "POST") {
     return responseServer(res, 405, {
-      serverHeader: { Allow: "POST" },
       content: "POST"
     });
   }
@@ -21,9 +20,7 @@ module.exports = function Login(req, res) {
     }
 
     if (!q.includes("mail") || !q.includes("pswd")) {
-      responseServer(res, 422, {
-        content: "Wrong parameter."
-      });
+      responseServer(res, 422);
     }
 
     return loginDB(httpBody).then(userData => {
