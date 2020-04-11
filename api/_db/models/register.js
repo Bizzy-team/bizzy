@@ -37,7 +37,7 @@ module.exports = async body => {
       }
     });
 
-    return Promise.resolve({
+    return {
       code: 201,
       serverHeader: {
         "Set-Cookie": `sid=${sessionId.toString("hex")}; Expires=${new Date(
@@ -47,12 +47,10 @@ module.exports = async body => {
       data: {
         token: newUser.ops[0].token
       }
-    });
+    };
   }
 
-  return Promise.resolve({
-    code: 409,
-    error: true,
-    message: "User already exist."
-  });
+  return {
+    code: 409
+  };
 };
