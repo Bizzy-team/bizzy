@@ -4,78 +4,31 @@ const forgotDb = require("./_db/models/forgot");
 
 module.exports = function Forgot(req, res) {
   if (req.method !== "POST") {
-    responseServer(res, 405, {
-      content: "POST",
-      serverHeader: {
-        Allow: "POST"
-      }
+    return responseServer(res, 405, {
+      content: "POST"
     });
   }
-  parseBody(req);
 
+  parseBody(req, res);
   return req.on("bodyParsed", httpBody => {
-    if (httpBody.error) {
-      responseServer(res, {
-        code: httpBody.code,
-        ...httpBody.serverHeader
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: httpBody.message
-        })
-      );
-    }
-
     const q = Object.keys(httpBody);
 
     if (q.length > 1) {
-      responseServer(res, {
-        code: 400
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "You can only have one parameter"
-        })
-      );
+      responseServer(res, 400, {
+        content: "Too many parameters."
+      })
     }
 
     if (!q.includes("mail")) {
-      responseServer(res, {
-        code: 400
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "Missing mail parameter."
-        })
-      );
-    }
-
-    if (typeof httpBody.mail !== "string") {
-      responseServer(res, {
-        code: 400
-      });
-
-      return res.end(
-        JSON.stringify({
-          error: true,
-          message: "Property should be string."
-        })
-      );
+      responseServer(res, 422);
     }
 
     return forgotDb(httpBody).then(result => {
-      responseServer(res, {
-        code: result.code,
-        ...result.serverHeader
+      responseServer(res, result.code, {
+        serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
+        content: result.content ? result.content : undefined,
+        modifyResponse: result.data ? { ...result.data } : undefined
       });
-
-      return res.end(JSON.stringify({ ...result.data }));
     });
   });
 };
