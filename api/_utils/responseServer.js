@@ -10,7 +10,6 @@
 module.exports = (response, code, data = {}) => {
   let error;
   const defaultHeader = {
-    Allow: `${code === 405 && data.content}`,
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Origin": `${
       process.env.NODE_ENV === "development"
@@ -29,13 +28,20 @@ module.exports = (response, code, data = {}) => {
     "Referrer-Policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "deny",
-    "X-RateLimit-Limit": 60,
-    "WWW-Authenticate": `${code === 401 || (code === 403 && "Bearer")}`
+    "X-RateLimit-Limit": 60
   };
 
   // Server error
   if (!code || code >= 500) {
     error = new Error("Server error");
+  }
+
+  if (code === 405) {
+    defaultHeader.Allow = data.content;
+  }
+
+  if (code === 401 || code === 403) {
+    defaultHeader["WWW-Authenticate"] = "Bearer";
   }
 
   const httpCode = {
