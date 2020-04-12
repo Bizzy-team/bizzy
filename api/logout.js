@@ -22,8 +22,8 @@ module.exports = function Logout(req, res) {
       responserServer(res, 401, {
         content: userIsValid.content ? userIsValid.content : undefined
       });
-    
-      //TODO: fix mongo error Topology was closed
+
+    // TODO: fix mongo error Topology was closed
     // const mongoBdd = await mongo.connect();
     // const userCollection = mongoBdd.db("bizzy").collection("users");
 
