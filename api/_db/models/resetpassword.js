@@ -20,10 +20,7 @@ export async function GET(params) {
   if (user === null) {
     return {
       code: 401,
-      data: {
-        error: true,
-        message: "Token parameter is not valid, try resend a forgot password request."
-      }
+      content: "Token parameter is not valid, try resend a forgot password request."
     };
   }
 
@@ -63,11 +60,8 @@ export async function PUT(data) {
       await mongobdd.close();
       return {
         code: 401,
-        data: {
-          error: true,
-          message:
-            "One parameter in the body is either expired or not correct please try to send a new forgot password request."
-        }
+        content:
+          "One parameter in the body is either expired or not correct please try to send a new forgot password request."
       };
     }
   }
@@ -107,18 +101,12 @@ export async function PUT(data) {
 
         return {
           code: 200,
-          data: {
-            message: `Password update for ${userData.mail}.`
-          }
+          content: `Password update for ${userData.mail}.`
         };
       }
 
       return {
-        code: 401,
-        data: {
-          error: true,
-          message: "You don't have access here"
-        }
+        code: 401
       };
     }
 
@@ -129,10 +117,8 @@ export async function PUT(data) {
     await passwordForgetCollection.findOneAndDelete({ _id: userData._id });
 
     return {
-      code: 200,
-      data: {
-        message: `Password update for ${userData.mail}.`
-      }
+      code: 201,
+      content: `Password update for ${userData.mail}.`
     };
   });
 }

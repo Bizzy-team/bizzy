@@ -12,13 +12,9 @@ module.exports = async data => {
 
   if (user === null) {
     await mongobdd.close();
-    return Promise.resolve({
-      code: 403,
-      data: {
-        error: true,
-        message: "This email is not register."
-      }
-    });
+    return {
+      code: 403
+    };
   }
 
   let transporter = {};
@@ -44,13 +40,9 @@ module.exports = async data => {
     .then(async configisGood => {
       if (!configisGood) {
         await mongobdd.close();
-        return Promise.resolve({
-          code: 421,
-          data: {
-            error: true,
-            message: "Can't send email for now try later."
-          }
-        });
+        return {
+          code: 502
+        };
       }
 
       const token = await createToken(Buffer.alloc(24));
@@ -93,20 +85,15 @@ module.exports = async data => {
               { expireAfterSeconds: 0, unique: true }
             );
 
-            return Promise.resolve({
+            return {
               code: 200,
-              data: {
-                mail: `Mail send to ${data.mail}`
-              }
-            });
+              content: `Mail send to ${data.mail}`
+            };
           }
 
-          return Promise.resolve({
-            code: 400,
-            data: {
-              mail: "Oups.. There is an error please try later or contact us."
-            }
-          });
+          return {
+            code: 502
+          };
         });
     });
 };
