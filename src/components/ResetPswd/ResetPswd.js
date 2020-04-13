@@ -19,63 +19,40 @@ function ResetPswd() {
 
 
   useEffect(() => {
-    fetch(`http://localhost:3000/reset_pswd_form?token=${data.urlToken}`)
-    .then(response => {
-      console.log(response);
-      
-      if (response.status >= 500 && response.status <= 600) {
-        return setData({
-          error: true,
-          errorMessage: "Something went wrong with the server."
-        });
-      }
-      return response.json();
-    })
-    // .then(response => {
-      // console.log(response);
-      // return response.json().then(dataParsed =>{console.log(dataParsed);})
-      // response.json();
-    // })
-    .then(dataParsed => {
-      console.log(dataParsed)
-      return setData({
-        responseToken: dataParsed.token
+    fetch(`http://localhost:3000/api/resetpassword?token=${data.urlToken}`)
+      .then(response => {
+        if (response.status >= 500 && response.status <= 600) {
+          return setData({
+            error: true,
+            errorMessage: "Something went wrong with the server."
+          });
+        }
+        return response.json();
       })
-    })
+      .then(dataParsed => {
+        if (dataParsed === undefined) {
+          return setData({
+            error: true,
+            errorMessage:
+              "Oops something went wrong with the server. Please try again in a few minutes or send me a message if the problem persists."
+          });
+        }
 
-    // .then(response => {
-    //   if (response.status >= 500 && response.status <= 600) {
-    //     return setData({
-    //       error: true,
-    //       errorMessage: "Something went wrong with the server."
-    //     });
-    //   }
-    //   return response.json();
-    // })
-    // .then(dataParsed => {
-    //   console.log(dataParsed);
-    //   if (dataParsed === undefined) {
-    //     return setData({
-    //       error: true,
-    //       errorMessage:
-    //         "Oops something went wrong with the server. Please try again in a few minutes or send me a message if the problem persists."
-    //     });
-    //   }
+        if (dataParsed.error) {
+          return setData({
+            error: dataParsed.error,
+            errorMessage: dataParsed.message
+          });
+        }
 
-    //   if (dataParsed.error) {
-    //     return setData({
-    //       error: dataParsed.error,
-    //       errorMessage: dataParsed.message
-    //     });
-    //   }
-      
-    //   return setData({
-    //     responseToken: dataParsed.token
-    //   })
-    // });
+        return setData({
+          ...data,
+          responseToken: dataParsed.token
+        })
+      });
   }, [])
 
-console.log(data.responseToken);
+  console.log(data.responseToken);
 
 
 
@@ -108,11 +85,55 @@ console.log(data.responseToken);
       setData({
         loader: true
       });
-      return setRedirect(true);
+
+      fetch("http://localhost:3000/api/resetpassword", {
+        method: "PUT",
+        headers: {
+          "Authorization": data.responseToken
+        },
+        body: JSON.stringify({
+          "newpswd": pswd.current.value,
+          "token": data.urlToken
+        })
+      })
+        .then(response => {
+          if (response.status >= 500 && response.status <= 600) {
+            return setData({
+              ...data,
+              error: true,
+              errorMessage: "Something went wrong with the server."
+            });
+          }
+          return response.json();
+        })
+        .then(dataParsed => {
+          if (dataParsed === undefined) {
+            return setData({
+              ...data,
+              error: true,
+              errorMessage:
+                "Oops something went wrong with the server. Please try again in a few minutes or send me a message if the problem persists."
+            });
+          }
+
+          if (dataParsed.error) {
+            return setData({
+              ...data,
+              error: dataParsed.error,
+              errorMessage: dataParsed.message
+            });
+          }
+          return setRedirect(true);
+        });
+
     }
   }
 
   if (redirect) return <Redirect to="/"></Redirect>;
+
+  if (!data.responseToken) return <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />
+  // If token is false, make a redirection
+  // "your token is expired, go to /forgot"
 
   return (
     <section>
@@ -157,7 +178,7 @@ console.log(data.responseToken);
           <p>
             <small className="text-muted" style={{ fontSize: "0.5em" }}>
               6 characters minimum.
-            </small>
+              </small>
           </p>
           <div className="reset--space--sign--btn">
             <button onClick={() => checkNewPswd()}>Reset password</button>
