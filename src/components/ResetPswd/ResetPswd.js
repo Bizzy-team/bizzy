@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ReactSVG } from "react-svg";
 import ResetPswdStyled from "../../style/ResetPswdStyled.style";
 import InputFormStyled from "../../style/InputFormStyled.style";
@@ -11,9 +11,73 @@ function ResetPswd() {
   const checkPswd = React.createRef(null);
   const [data, setData] = React.useState({
     error: false,
-    errorMessage: ""
+    errorMessage: "",
+    urlToken: new URLSearchParams(window.location.search).get("token"),
+    responseToken: ""
   });
   const [redirect, setRedirect] = React.useState(false);
+
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/reset_pswd_form?token=${data.urlToken}`)
+    .then(response => {
+      console.log(response);
+      
+      if (response.status >= 500 && response.status <= 600) {
+        return setData({
+          error: true,
+          errorMessage: "Something went wrong with the server."
+        });
+      }
+      return response.json();
+    })
+    // .then(response => {
+      // console.log(response);
+      // return response.json().then(dataParsed =>{console.log(dataParsed);})
+      // response.json();
+    // })
+    .then(dataParsed => {
+      console.log(dataParsed)
+      return setData({
+        responseToken: dataParsed.token
+      })
+    })
+
+    // .then(response => {
+    //   if (response.status >= 500 && response.status <= 600) {
+    //     return setData({
+    //       error: true,
+    //       errorMessage: "Something went wrong with the server."
+    //     });
+    //   }
+    //   return response.json();
+    // })
+    // .then(dataParsed => {
+    //   console.log(dataParsed);
+    //   if (dataParsed === undefined) {
+    //     return setData({
+    //       error: true,
+    //       errorMessage:
+    //         "Oops something went wrong with the server. Please try again in a few minutes or send me a message if the problem persists."
+    //     });
+    //   }
+
+    //   if (dataParsed.error) {
+    //     return setData({
+    //       error: dataParsed.error,
+    //       errorMessage: dataParsed.message
+    //     });
+    //   }
+      
+    //   return setData({
+    //     responseToken: dataParsed.token
+    //   })
+    // });
+  }, [])
+
+console.log(data.responseToken);
+
+
 
   function checkNewPswd() {
     if (pswd.current.value === "" && checkPswd.current.value === "") {
