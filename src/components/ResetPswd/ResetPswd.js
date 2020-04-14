@@ -3,21 +3,22 @@ import { ReactSVG } from "react-svg";
 import ResetPswdStyled from "../../style/ResetPswdStyled.style";
 import InputFormStyled from "../../style/InputFormStyled.style";
 import LoaderSvg from "../../img/loader.svg";
-import { Redirect } from "react-router-dom";
 import InputsForm from "../InputsForm/InputsForm";
 import ResetPswdError from "./ResetPswdError";
+import ResetSuccessModal from "./ResetSuccessModal";
 
 function ResetPswd() {
   const pswd = React.createRef(null);
   const checkPswd = React.createRef(null);
   const [data, setData] = React.useState({
     loader: false,
+    submitLoader: false,
+    successResetModal: false,
     error: false,
     errorMessage: "",
     urlToken: new URLSearchParams(window.location.search).get("token"),
     responseToken: ""
   });
-  const [redirect, setRedirect] = React.useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/resetpassword?token=${data.urlToken}`)
@@ -63,11 +64,6 @@ function ResetPswd() {
   }, [])
 
   function checkNewPswd() {
-    setData({
-      ...data,
-      loader: true
-    });
-
     if (pswd.current.value === "" && checkPswd.current.value === "") {
       return setData({
         ...data,
@@ -126,20 +122,35 @@ function ResetPswd() {
           if (dataParsed.error) {
             return setData({
               ...data,
-              loader: true,
               error: dataParsed.error,
               errorMessage: dataParsed.message
             });
           }
-          return setRedirect(true);
+
+          if (!dataParsed.error) {
+            return setData({
+              ...data,
+              submitLoader: true,
+              successResetModal: true,
+              errorMessage: dataParsed.message
+            })
+          }
         });
+      return setData({
+        ...data,
+        submitLoader: true
+      })
     }
   }
 
-  if (redirect) return <Redirect to="/"></Redirect>;
-
-  if (!data.loader) return <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }}/>;
+  if (!data.loader) return <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />;
   if (!data.responseToken) return <ResetPswdError></ResetPswdError>;
+  if (data.successResetModal) return (
+    <ResetSuccessModal
+      updateMessage={data.errorMessage}
+    >
+    </ResetSuccessModal>
+  )
 
   return (
     <section>
@@ -155,6 +166,10 @@ function ResetPswd() {
             <p className="text-light">{data.errorMessage}</p>
           </div>
         )}
+        {
+          data.submitLoader && (
+            <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />
+          )}
         <div className="resetPswd">
           <div className="resetPswd--title">
             <h1>Reset Password</h1>
