@@ -5,11 +5,13 @@ import InputFormStyled from "../../style/InputFormStyled.style";
 import LoaderSvg from "../../img/loader.svg";
 import { Redirect } from "react-router-dom";
 import InputsForm from "../InputsForm/InputsForm";
+import ResetPswdError from "./ResetPswdError";
 
 function ResetPswd() {
   const pswd = React.createRef(null);
   const checkPswd = React.createRef(null);
   const [data, setData] = React.useState({
+    loader: false,
     error: false,
     errorMessage: "",
     urlToken: new URLSearchParams(window.location.search).get("token"),
@@ -17,12 +19,12 @@ function ResetPswd() {
   });
   const [redirect, setRedirect] = React.useState(false);
 
-
   useEffect(() => {
     fetch(`http://localhost:3000/api/resetpassword?token=${data.urlToken}`)
       .then(response => {
         if (response.status >= 500 && response.status <= 600) {
           return setData({
+            ...data,
             error: true,
             errorMessage: "Something went wrong with the server."
           });
@@ -30,8 +32,13 @@ function ResetPswd() {
         return response.json();
       })
       .then(dataParsed => {
+        setData({
+          ...data,
+          loader: true
+        })
         if (dataParsed === undefined) {
           return setData({
+            ...data,
             error: true,
             errorMessage:
               "Oops something went wrong with the server. Please try again in a few minutes or send me a message if the problem persists."
@@ -40,6 +47,8 @@ function ResetPswd() {
 
         if (dataParsed.error) {
           return setData({
+            ...data,
+            loader: true,
             error: dataParsed.error,
             errorMessage: dataParsed.message
           });
@@ -47,16 +56,18 @@ function ResetPswd() {
 
         return setData({
           ...data,
+          loader: true,
           responseToken: dataParsed.token
         })
       });
   }, [])
 
-  console.log(data.responseToken);
-
-
-
   function checkNewPswd() {
+    setData({
+      ...data,
+      loader: true
+    });
+
     if (pswd.current.value === "" && checkPswd.current.value === "") {
       return setData({
         ...data,
@@ -81,10 +92,6 @@ function ResetPswd() {
           errorMessage: "Confirm Password incorrect."
         });
       }
-
-      setData({
-        loader: true
-      });
 
       fetch("http://localhost:3000/api/resetpassword", {
         method: "PUT",
@@ -119,21 +126,20 @@ function ResetPswd() {
           if (dataParsed.error) {
             return setData({
               ...data,
+              loader: true,
               error: dataParsed.error,
               errorMessage: dataParsed.message
             });
           }
           return setRedirect(true);
         });
-
     }
   }
 
   if (redirect) return <Redirect to="/"></Redirect>;
 
-  if (!data.responseToken) return <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />
-  // If token is false, make a redirection
-  // "your token is expired, go to /forgot"
+  if (!data.loader) return <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }}/>;
+  if (!data.responseToken) return <ResetPswdError></ResetPswdError>;
 
   return (
     <section>
@@ -156,9 +162,6 @@ function ResetPswd() {
           <div className="resetPswd--intro">
             <p>Enter a new password for your account.</p>
           </div>
-          {data.loader && (
-            <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />
-          )}
           <InputFormStyled>
             <InputsForm
               spaceName="resetPswd"
