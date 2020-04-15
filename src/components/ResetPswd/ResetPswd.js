@@ -6,6 +6,7 @@ import LoaderSvg from "../../img/loader.svg";
 import InputsForm from "../InputsForm/InputsForm";
 import ResetPswdError from "./ResetPswdError";
 import ResetSuccessModal from "./ResetSuccessModal";
+import FetchFunction from "../../utlis/FetchFunction";
 
 function ResetPswd() {
   const pswd = React.createRef(null);
@@ -89,56 +90,34 @@ function ResetPswd() {
         });
       }
 
-      fetch("http://localhost:3000/api/resetpassword", {
-        method: "PUT",
+      return FetchFunction("/resetpassword", "PUT", {
         headers: {
           "Authorization": data.responseToken
         },
-        body: JSON.stringify({
+        body: {
           "newpswd": pswd.current.value,
           "token": data.urlToken
+        }
+      })
+      .then(dataParsed => {
+        if (!dataParsed.error) {
+          return setData({
+            ...data,
+            submitLoader: true,
+            successResetModal: true,
+            errorMessage: dataParsed.message
+          })
+        }
+        return setData({
+          ...data,
+          submitLoader: true
         })
       })
-        .then(response => {
-          if (response.status >= 500 && response.status <= 600) {
-            return setData({
-              ...data,
-              error: true,
-              errorMessage: "Something went wrong with the server."
-            });
-          }
-          return response.json();
+      .catch(error => {
+        setData({
+          error: true,
+          errorMessage: error.message
         })
-        .then(dataParsed => {
-          if (dataParsed === undefined) {
-            return setData({
-              ...data,
-              error: true,
-              errorMessage:
-                "Oops something went wrong with the server. Please try again in a few minutes or send me a message if the problem persists."
-            });
-          }
-
-          if (dataParsed.error) {
-            return setData({
-              ...data,
-              error: dataParsed.error,
-              errorMessage: dataParsed.message
-            });
-          }
-
-          if (!dataParsed.error) {
-            return setData({
-              ...data,
-              submitLoader: true,
-              successResetModal: true,
-              errorMessage: dataParsed.message
-            })
-          }
-        });
-      return setData({
-        ...data,
-        submitLoader: true
       })
     }
   }
