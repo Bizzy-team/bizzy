@@ -23,13 +23,13 @@ margin-bottom: 10%;
     &:focus ~ .placeholder--for--Email,
     &:not(:focus):valid ~ .placeholder--for--Email {
       top: 339px;
-      left: 10%;
+      left: 8%;
       opacity: 1;
     }
     &:focus ~ .placeholder--for--Password,
     &:not(:focus):valid ~ .placeholder--for--Password {
       top: 450px;
-      left: 10%;
+      left: 8%;
       opacity: 1;
     }
   }
