@@ -21,6 +21,7 @@ const HeaderStyled = styled.header`
         button {
           background: none;
           border: none;
+          color: white;
           &:focus {
             outline: none;
             border-bottom: solid 1px ${props => props.theme.color};
