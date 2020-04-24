@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { ReactSVG } from "react-svg";
-import {
-  IntroductionLogginSpace,
-  LogginSpaceStyled
-} from "../../style/LogginSpaceStyled.style";
+import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 import LoaderSvg from "../../img/loader.svg";
 import InputsForm from "../InputsForm/InputsForm";
 
@@ -120,10 +117,6 @@ function SigninSpace() {
 
   return (
     <React.Fragment>
-      <IntroductionLogginSpace className="introduction">
-        <h1>Welcome,</h1>
-        <p>It's time to register and share your mood.</p>
-      </IntroductionLogginSpace>
       {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />}
       {data.error && (
         <div className="form-group bg-danger rounded p-2 ml-2">
@@ -131,6 +124,7 @@ function SigninSpace() {
         </div>
       )}
       <LogginSpaceStyled className="loggin--space">
+        <h1>Welcome,</h1>
         <InputsForm
           spaceName="loggin"
           type="text"
@@ -162,7 +156,7 @@ function SigninSpace() {
           minLength="6"
         />
         <p>
-          <small className="text-muted" style={{ fontSize: "0.5em" }}>
+          <small className="text-muted">
             6 characters minimum.
           </small>
         </p>

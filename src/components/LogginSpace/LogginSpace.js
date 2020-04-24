@@ -1,9 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import {
-  IntroductionLogginSpace,
-  LogginSpaceStyled
-} from "../../style/LogginSpaceStyled.style";
+import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 import { ReactSVG } from "react-svg";
 import LoaderSvg from "../../img/loader.svg";
 import InputsForm from "../InputsForm/InputsForm";
@@ -95,10 +92,6 @@ function LogginSpace() {
 
   return (
     <React.Fragment>
-      <IntroductionLogginSpace className="introduction">
-        <h1>Welcome back</h1>
-        <p>It's time to log in and see who is around you</p>
-      </IntroductionLogginSpace>
       {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />}
       {data.error && (
         <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
@@ -106,6 +99,7 @@ function LogginSpace() {
         </div>
       )}
       <LogginSpaceStyled className="loggin--space">
+        <h1>Welcome back.</h1>
         <InputsForm
           spaceName="loggin"
           type="mail"
@@ -121,13 +115,10 @@ function LogginSpace() {
           inputRef={inputPswd}
         />
         <p>
-          <small className="text-muted" style={{ fontSize: "0.4em" }}>
+          <small className="text-muted">
             6 characters minimum.
           </small>
         </p>
-        <div className="loggin--space--btn">
-          <button onClick={() => userAuth()}>Log in</button>
-        </div>
         <div className="forgot--password">
           <p>
             <Link to="/forgot_password_form">
@@ -135,6 +126,9 @@ function LogginSpace() {
               <strong>Forgot password ?</strong>
             </Link>
           </p>
+        </div>
+        <div className="loggin--space--btn">
+          <button onClick={() => userAuth()}>Log in</button>
         </div>
       </LogginSpaceStyled>
     </React.Fragment>
