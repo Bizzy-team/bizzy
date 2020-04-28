@@ -123,24 +123,24 @@ function SigninSpace() {
           <p className="text-light">{data.errorMessage}</p>
         </div>
       )}
-      <LogginSpaceStyled className="loggin--space">
+      <LogginSpaceStyled className="sign--up--space">
         <h1>Welcome,</h1>
         <InputsForm
-          spaceName="loggin"
+          spaceName="sign"
           type="text"
           fieldName="username"
           placeholderInput="Username"
           inputRef={inputUsername}
         />
         <InputsForm
-          spaceName="loggin"
+          spaceName="sign"
           type="mail"
           fieldName="mail"
           placeholderInput="Email"
           inputRef={inputMail}
         />
         <InputsForm
-          spaceName="loggin"
+          spaceName="sign"
           type="password"
           fieldName="password"
           placeholderInput="Password"
@@ -148,7 +148,7 @@ function SigninSpace() {
           minLength="6"
         />
         <InputsForm
-          spaceName="loggin"
+          spaceName="sign"
           type="password"
           fieldName="confirm--password"
           placeholderInput="Confirm Password"
