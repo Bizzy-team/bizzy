@@ -7,7 +7,6 @@ function InputsForm(props) {
         <input
           type={`${props.type}`}
           id={`input--${props.fieldName}`}
-          // placeholder={`${props.placeholderInput}`}
           ref={props.inputRef}
           required
           ></input>
