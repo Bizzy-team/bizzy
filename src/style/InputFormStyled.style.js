@@ -92,6 +92,25 @@ margin-bottom: 10%;
     }
   }
 }
+
+.resetPswd--space--password {
+  input {
+    &:focus ~ .placeholder--for--Password,
+    &:not(:focus):valid ~ .placeholder--for--Password {
+      top: 503px;
+    }
+  }
+}
+
+.resetPswd--space--confirm--password {
+  input {
+    &:focus ~ .placeholder--for--Confirm,
+    &:not(:focus):valid ~ .placeholder--for--Confirm {
+      top: 600px;
+      left: 8%;
+    }
+  }
+}
 `;
 
 export default InputsForm;
