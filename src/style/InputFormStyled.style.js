@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const InputsForm = styled.div`
-color: white;
+color: ${props => props.theme.colorSecondary};
 div {
 display: flex;
 flex-direction: column;
@@ -11,7 +11,7 @@ margin-bottom: 10%;
     background: none;
     font-family: ${props => props.theme.fontFamilyText};
     font-weight: 200;
-    color: white;
+    color: ${props => props.theme.colorSecondary};
     border: none;
     border-bottom: solid 1px ${props => props.theme.color};
     padding-bottom: 10px;
@@ -36,7 +36,7 @@ margin-bottom: 10%;
       opacity: 1;
     }
   }
-  
+
   span {
     position: absolute;
     pointer-events: none;
@@ -80,6 +80,15 @@ margin-bottom: 10%;
     &:not(:focus):valid ~ .placeholder--for--Confirm {
       top: 602px;
       left: 8%
+    }
+  }
+}
+
+.forgotPswd--space--mail {
+  input {
+    &:focus ~ .placeholder--for--Email,
+    &:not(:focus):valid ~ .placeholder--for--Email {
+      top: 184px;
     }
   }
 }

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const IconsMoodStyled = styled.section`
-  background-color: white;
+  background-color: ${props => props.theme.colorSecondary};
   padding-left: 22px;
   margin-bottom: 20px;
   height: 28vh;

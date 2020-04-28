@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const HeaderFeedStyled = styled.header`
   display: flex;
-  background-color: white;
+  background-color: ${props => props.theme.colorSecondary};
   border-bottom: solid 1px ${props => props.theme.color};
   height: 8vh;
   ${props => props.marginBottom && `margin-bottom: ${props.marginBottom}`};
@@ -35,7 +35,7 @@ const HeaderFeedStyled = styled.header`
       opacity: 1;
       font-family: "Nunito";
       color: black;
-      background-color: white;
+      background-color: ${props => props.theme.colorSecondary};
       border: solid 1px ${props => props.theme.color};
       border-radius: 10px;
       padding: 10px 12px;

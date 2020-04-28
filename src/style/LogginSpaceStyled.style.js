@@ -12,7 +12,7 @@ const LogginSpaceStyled = styled(GlobalContainer)`
     font-family: "Roboto";
     font-weight: bold;
     font-size: 3.1em;
-    color: white;
+    color: ${props => props.theme.colorSecondary};
     margin-bottom: 12%;
   }
   div {
@@ -20,7 +20,7 @@ const LogginSpaceStyled = styled(GlobalContainer)`
     button {
       border: none;
       background-color: ${props => props.theme.color};
-      color: white;
+      color: ${props => props.theme.colorSecondary};
       border-radius: 10px;
       padding: 6px 8px;
       width: 100%;
@@ -41,7 +41,7 @@ const LogginSpaceStyled = styled(GlobalContainer)`
       font-size: 0.8em;
       a {
         text-decoration: none;
-        color: white;
+        color: ${props => props.theme.colorSecondary};
       }
     }
   }

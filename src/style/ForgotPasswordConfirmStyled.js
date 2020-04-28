@@ -37,7 +37,7 @@ const ForgotPasswordConfirmStyled = styled(GlobalContainer)`
       border-radius: 10px;
       a {
         text-decoration: none;
-        color: white;
+        color: ${props => props.theme.colorSecondary};
       }
     }
   }

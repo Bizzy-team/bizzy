@@ -55,7 +55,7 @@ const ResetPswdStyled = styled.div`
     button {
       border: none;
       background-color: ${props => props.theme.color};
-      color: white;
+      color: ${props => props.theme.colorSecondary};
       border-radius: 25px;
       padding: 6px 8px;
       width: 56%;
