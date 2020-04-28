@@ -8,6 +8,7 @@ const ResetPswdStyled = styled.div`
   width: 100vw;
   font-size: 1.2em;
   font-family: "Roboto";
+  color: ${props => props.theme.colorSecondary};
   .user--icon--reset {
     display: flex;
     justify-content: center;
@@ -50,6 +51,10 @@ const ResetPswdStyled = styled.div`
     padding-left: 20px;
   }
 
+  .resetPswd--space--confirm--password {
+    margin-bottom: 0;
+  }
+
   div {
     margin-bottom: 4%;
     button {
@@ -65,7 +70,7 @@ const ResetPswdStyled = styled.div`
     }
   }
   .reset--space--sign--btn {
-    margin-top 15%;
+    margin-top: 15%;
   }
 `;
 
