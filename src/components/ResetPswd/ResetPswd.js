@@ -68,7 +68,7 @@ function ResetPswd() {
           <div className="resetPswd--title">
             <h1>Reset Password</h1>
           </div>
-          <div className="resetPswd--intro">
+          <div className="resetPswd--intro mb-5">
             <p>Enter a new password for your account.</p>
           </div>
           {data.loader && (
