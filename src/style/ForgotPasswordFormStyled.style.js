@@ -2,21 +2,10 @@ import styled from "styled-components";
 import GlobalContainer from "../utlis/GlobalContainer";
 
 const ForgotPasswordFormStyled = styled(GlobalContainer)`
+color: ${props => props.theme.colorSecondary};
   h1 {
     text-align: center;
-    margin-top: 10%;
-  }
-
-  .icon--unlock {
-    text-align: center;
-    margin: 20% 0;
-    i {
-      background-color: #edf8ef;
-      padding: 30px;
-      font-size: 10em;
-      color: ${props => props.theme.color};
-      border-radius: 50px;
-    }
+    margin: 10% 0 8% 0;
   }
 
   #input--mail {
@@ -33,12 +22,13 @@ const ForgotPasswordFormStyled = styled(GlobalContainer)`
   p {
     font-family: "Nunito";
     text-align: center;
+    margin-bottom: 8%;
   }
 
   button {
     background-color: ${props => props.theme.color};
     width: 90%;
-    color: white;
+    color: ${props => props.theme.colorSecondary};
     font-family: "Roboto";
     border: none;
     border-radius: 30px;
@@ -50,7 +40,7 @@ const ForgotPasswordFormStyled = styled(GlobalContainer)`
     text-align: center;
     margin-top: 20%;
     a {
-      color: black;
+      color: ${props => props.theme.colorSecondary};
     }
   }
 `;
