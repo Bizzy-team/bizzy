@@ -10,7 +10,7 @@ function InputsForm(props) {
           ref={props.inputRef}
           required
           ></input>
-          <span className={`placeholder--for--${props.placeholderInput}`}>{props.placeholderInput}</span>
+          <span className={props.error ? `placeholder--for--${props.placeholderInput}--error` : `placeholder--for--${props.placeholderInput}`}>{props.placeholderInput}</span>
       </div>
     </InputFormStyled>
   );
