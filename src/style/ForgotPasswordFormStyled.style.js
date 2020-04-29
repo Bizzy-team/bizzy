@@ -2,7 +2,7 @@ import styled from "styled-components";
 import GlobalContainer from "../utlis/GlobalContainer";
 
 const ForgotPasswordFormStyled = styled(GlobalContainer)`
-color: ${props => props.theme.colorSecondary};
+  color: ${props => props.theme.colorSecondary};
   h1 {
     text-align: center;
     margin: 10% 0 8% 0;

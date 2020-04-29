@@ -24,9 +24,9 @@ const LogginSpaceStyled = styled(GlobalContainer)`
       border-radius: 10px;
       padding: 6px 8px;
       width: 100%;
-        &:active {
-          background-color: ${props => props.theme.color};
-        }
+      &:active {
+        background-color: ${props => props.theme.color};
+      }
     }
   }
   .loggin--space--password {

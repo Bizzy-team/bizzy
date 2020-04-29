@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import GlobalContainer from '../utlis/GlobalContainer'
+import styled from "styled-components";
+import GlobalContainer from "../utlis/GlobalContainer";
 
 const NotAvailablestyle = styled(GlobalContainer)`
   align-items: center;
@@ -8,7 +8,7 @@ const NotAvailablestyle = styled(GlobalContainer)`
   min-height: 90vh;
   h1 {
     color: ${props => props.theme.colorSecondary};
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: bold;
     text-align: center;
     margin: 0;
@@ -18,6 +18,6 @@ const NotAvailablestyle = styled(GlobalContainer)`
       font-size: 2em;
     }
   }
-`
+`;
 
-export default NotAvailablestyle
+export default NotAvailablestyle;

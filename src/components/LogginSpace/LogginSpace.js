@@ -117,9 +117,7 @@ function LogginSpace() {
           inputRef={inputPswd}
         />
         <p>
-          <small className="text-muted">
-            6 characters minimum.
-          </small>
+          <small className="text-muted">6 characters minimum.</small>
         </p>
         <div className="forgot--password">
           <p>

@@ -160,9 +160,7 @@ function SigninSpace() {
           minLength="6"
         />
         <p>
-          <small className="text-muted">
-            6 characters minimum.
-          </small>
+          <small className="text-muted">6 characters minimum.</small>
         </p>
         <div className="loggin--space--sign--btn">
           <button onClick={() => checkUserSub()}>Sign in</button>

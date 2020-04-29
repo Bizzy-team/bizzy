@@ -9,8 +9,16 @@ function InputsForm(props) {
           id={`input--${props.fieldName}`}
           ref={props.inputRef}
           required
-          ></input>
-          <span className={props.error ? `placeholder--for--${props.placeholderInput}--error` : `placeholder--for--${props.placeholderInput}`}>{props.placeholderInput}</span>
+        ></input>
+        <span
+          className={
+            props.error
+              ? `placeholder--for--${props.placeholderInput}--error`
+              : `placeholder--for--${props.placeholderInput}`
+          }
+        >
+          {props.placeholderInput}
+        </span>
       </div>
     </InputFormStyled>
   );

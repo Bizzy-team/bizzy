@@ -6,7 +6,7 @@ function NotAvailable({ content }) {
     <NotAvailableStyled as="main">
       <h1>{content}</h1>
     </NotAvailableStyled>
-  )
-};
+  );
+}
 
 export default NotAvailable;

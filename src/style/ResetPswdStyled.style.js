@@ -25,26 +25,27 @@ const ResetPswdStyled = styled.div`
     overflow: hidden;
     white-space: nowrap;
     margin-bottom: 20%;
-      h3 {
-        position: relative;
-        display: inline-block;
-          :before, :after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            width: 9999px;
-            height: 1px;
-            background: ${props => props.theme.color};
-          }
-          :before {
-            right: 100%;
-            margin-right: 15px;
-          }
-          :after {
-            left: 100%;
-            margin-left: 15px;
-          }
+    h3 {
+      position: relative;
+      display: inline-block;
+      :before,
+      :after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 9999px;
+        height: 1px;
+        background: ${props => props.theme.color};
       }
+      :before {
+        right: 100%;
+        margin-right: 15px;
+      }
+      :after {
+        left: 100%;
+        margin-left: 15px;
+      }
+    }
   }
 
   .resetPswd {
@@ -64,9 +65,9 @@ const ResetPswdStyled = styled.div`
       border-radius: 25px;
       padding: 6px 8px;
       width: 56%;
-        &:active {
-          background-color: ${props => props.theme.color};
-        }
+      &:active {
+        background-color: ${props => props.theme.color};
+      }
     }
   }
   .reset--space--sign--btn {
