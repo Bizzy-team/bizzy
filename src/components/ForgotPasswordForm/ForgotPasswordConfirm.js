@@ -5,11 +5,8 @@ import ForgotPasswordConfirmStyled from "../../style/ForgotPasswordConfirmStyled
 function ForgotPasswordConfirm() {
   return (
     <ForgotPasswordConfirmStyled as="div">
-      <div className="success--icon">
-        <i className="far fa-check-circle"></i>
-      </div>
       <div className="success--title">
-        <h2>Password recovered... !</h2>
+        <h1>Password recovered... !</h1>
       </div>
       <div className="success--content">
         <p>
