@@ -12,6 +12,7 @@ import variables from "./variables";
 import Home from "./components/Home/Home";
 import ResetPswd from "./components/ResetPswd/ResetPswd";
 import ForgotPasswordConfirm from "./components/ForgotPasswordForm/ForgotPasswordConfirm";
+import NotAvailable from "./components/NotAvailable/NotAvailable";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -38,26 +39,26 @@ function App() {
     return sessionStorage.UserToken ? (
       <Component {...propsFromRoute} />
     ) : (
-      <ErrorMessage
-        errorTitle="You need to be connected."
-        errorContent="To access to this page, please"
-        redirectLink="/"
-        errorAdvice="use your account."
-      />
-    );
+        <ErrorMessage
+          errorTitle="You need to be connected."
+          errorContent="To access to this page, please"
+          redirectLink="/"
+          errorAdvice="use your account."
+        />
+      );
   }
 
   function unavailableToken(Component) {
     return !sessionStorage.UserToken ? (
       <Component />
     ) : (
-      <ErrorMessage
-        errorTitle="You are already connected."
-        errorContent="You need to log out if you want to do"
-        redirectLink="/feed"
-        errorAdvice="something else."
-      />
-    );
+        <ErrorMessage
+          errorTitle="You are already connected."
+          errorContent="You need to log out if you want to do"
+          redirectLink="/feed"
+          errorAdvice="something else."
+        />
+      );
   }
 
   return (
@@ -65,25 +66,34 @@ function App() {
       <BrowserRouter>
         <ThemeProvider theme={{ ...variables }}>
           <GlobalStyle></GlobalStyle>
-          <Route exact path="/" render={() => unavailableToken(Home)}></Route>
-          <Route
-            exact
-            path="/forgot_password_form"
-            render={() => unavailableToken(ForgotPasswordForm)}
-          ></Route>
-          <Route
-            exact
-            path="/forgot_password_confirmation"
-            render={() => unavailableToken(ForgotPasswordConfirm)}
-          ></Route>
-          <Route exact path="/reset_pswd_form" component={ResetPswd} />
-          <Route exact path="/feed" render={() => availableToken(Feed)} />
-          <Route exact path="/user_profile" render={() => availableToken(UserProfile)} />
-          <Route
-            exact
-            path="/createYourCard/:icon"
-            render={routeProps => availableToken(ShareYourMood, routeProps)}
-          />
+          {
+            !navigator.userAgent.includes("Mobile") ?
+              <NotAvailable content="Bizzy is only available on smartphone."></NotAvailable> :
+              (
+                <>
+                  <Route exact path="/" render={() => unavailableToken(Home)}></Route>
+                  <Route
+                    exact
+                    path="/forgot_password_form"
+                    render={() => unavailableToken(ForgotPasswordForm)}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/forgot_password_confirmation"
+                    render={() => unavailableToken(ForgotPasswordConfirm)}
+                  ></Route>
+                  <Route exact path="/reset_pswd_form" component={ResetPswd} />
+                  <Route exact path="/feed" render={() => availableToken(Feed)} />
+                  <Route exact path="/user_profile" render={() => availableToken(UserProfile)} />
+                  <Route
+                    exact
+                    path="/createYourCard/:icon"
+                    render={routeProps => availableToken(ShareYourMood, routeProps)}
+                  />
+                </>
+              )
+          }
+
         </ThemeProvider>
       </BrowserRouter>
     </React.Fragment>
