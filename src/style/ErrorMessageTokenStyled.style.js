@@ -11,7 +11,7 @@ const ErrorMessageToken = styled.div`
   a {
     font-weight: bold;
     text-decoration: none;
-    color: black;
+    color: ${props => props.theme.colorSecondary};
   }
 `;
 
