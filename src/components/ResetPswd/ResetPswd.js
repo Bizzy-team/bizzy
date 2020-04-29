@@ -11,7 +11,8 @@ function ResetPswd() {
   const checkPswd = React.createRef(null);
   const [data, setData] = React.useState({
     error: false,
-    errorMessage: ""
+    errorMessage: "",
+    loader: false
   });
   const [redirect, setRedirect] = React.useState(false);
 
@@ -72,7 +73,7 @@ function ResetPswd() {
             <p>Enter a new password for your account.</p>
           </div>
           {data.loader && (
-            <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />
+            <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />
           )}
           <InputFormStyled>
             <InputsForm
@@ -81,6 +82,7 @@ function ResetPswd() {
               fieldName="password"
               placeholderInput="Password"
               error={data.error}
+              loader={data.loader}
               inputRef={pswd}
             />
             <InputsForm
@@ -89,6 +91,7 @@ function ResetPswd() {
               fieldName="confirm--password"
               placeholderInput="Confirm Password"
               error={data.error}
+              loader={data.loader}
               inputRef={checkPswd}
             />
           </InputFormStyled>

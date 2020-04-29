@@ -117,7 +117,7 @@ function SigninSpace() {
 
   return (
     <React.Fragment>
-      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />}
+      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />}
       {data.error && (
         <div className="form-group bg-danger rounded p-2 ml-2">
           <p className="text-light">{data.errorMessage}</p>
@@ -131,6 +131,7 @@ function SigninSpace() {
           fieldName="username"
           placeholderInput="Username"
           error={data.error}
+          loader={data.loader}
           inputRef={inputUsername}
         />
         <InputsForm
@@ -139,6 +140,7 @@ function SigninSpace() {
           fieldName="mail"
           placeholderInput="Email"
           error={data.error}
+          loader={data.loader}
           inputRef={inputMail}
         />
         <InputsForm
@@ -147,6 +149,7 @@ function SigninSpace() {
           fieldName="password"
           placeholderInput="Password"
           error={data.error}
+          loader={data.loader}
           inputRef={pswd}
           minLength="6"
         />
@@ -156,6 +159,7 @@ function SigninSpace() {
           fieldName="confirm--password"
           placeholderInput="Confirm Password"
           error={data.error}
+          loader={data.loader}
           inputRef={checkPswd}
           minLength="6"
         />

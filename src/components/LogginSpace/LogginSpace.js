@@ -92,7 +92,7 @@ function LogginSpace() {
 
   return (
     <React.Fragment>
-      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />}
+      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />}
       {data.error && (
         <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
           <p className="text-light">{data.errorMessage}</p>
@@ -106,6 +106,7 @@ function LogginSpace() {
           fieldName="mail"
           placeholderInput="Email"
           error={data.error}
+          loader={data.loader}
           inputRef={inputMail}
         />
         <InputsForm
@@ -114,6 +115,7 @@ function LogginSpace() {
           fieldName="password"
           placeholderInput="Password"
           error={data.error}
+          loader={data.loader}
           inputRef={inputPswd}
         />
         <p>
