@@ -43,9 +43,23 @@ const InputsForm = styled.div`
         left: 8%;
       }
 
+
       &:focus ~ .placeholder--for--Password--error,
       &:not(:focus):valid ~ .placeholder--for--Password--error {
         top: 550px;
+        left: 8%;
+      }
+
+      /* Focus if loader */
+      &:focus ~ .placeholder--for--Email--loader,
+      &:not(:focus):valid ~ .placeholder--for--Email--loader {
+        top: 583px;
+        left: 8%;
+      }
+
+      &:focus ~ .placeholder--for--Password--loader,
+      &:not(:focus):valid ~ .placeholder--for--Password--loader {
+        top: 700px;
         left: 8%;
       }
     }
@@ -73,6 +87,13 @@ const InputsForm = styled.div`
         top: 367px;
         left: 8%;
       }
+
+      /* Focus if loader */
+      &:focus ~ .placeholder--for--Username--loader,
+      &:not(:focus):valid ~ .placeholder--for--Username--loader {
+        top: 511px;
+        left: 8%;
+      }
     }
   }
 
@@ -86,6 +107,14 @@ const InputsForm = styled.div`
       &:focus ~ .placeholder--for--Email--error,
       &:not(:focus):valid ~ .placeholder--for--Email-error {
         top: 480px;
+        left: 8%;
+      }
+
+      /* Focus if loader */
+      &:focus ~ .placeholder--for--Email--loader,
+      &:not(:focus):valid ~ .placeholder--for--Email--loader {
+        top: 629px;
+        left: 8%;
       }
     }
   }
@@ -101,6 +130,14 @@ const InputsForm = styled.div`
       &:focus ~ .placeholder--for--Password--error,
       &:not(:focus):valid ~ .placeholder--for--Password--error {
         top: 591px;
+        left: 8%;
+      }
+
+      /* Focus if loader */
+      &:focus ~ .placeholder--for--Password--loader,
+      &:not(:focus):valid ~ .placeholder--for--Password--loader {
+        top: 745px;
+        left: 8%;
       }
     }
   }
@@ -119,6 +156,13 @@ const InputsForm = styled.div`
         top: 702px;
         left: 8%;
       }
+
+      /* Focus if loader */
+      &:focus ~ .Password--loader,
+      &:not(:focus):valid ~ .Password--loader {
+        top: 860px;
+        left: 8%;
+      }
     }
   }
 
@@ -133,6 +177,14 @@ const InputsForm = styled.div`
       &:focus ~ .placeholder--for--Email--error,
       &:not(:focus):valid ~ .placeholder--for--Email--error {
         top: 267px;
+        left: 8%;
+      }
+
+      /* Focus if loader */
+      &:focus ~ .placeholder--for--Email--loader,
+      &:not(:focus):valid ~ .placeholder--for--Email--loader {
+        top: 384px;
+        left: 8%;
       }
     }
   }
@@ -148,6 +200,14 @@ const InputsForm = styled.div`
       &:focus ~ .placeholder--for--Password--error,
       &:not(:focus):valid ~ .placeholder--for--Password--error {
         top: 582px;
+        left: 8%;
+      }
+
+      /* Focus if loader */
+      &:focus ~ .placeholder--for--Password--loader,
+      &:not(:focus):valid ~ .placeholder--for--Password--loader {
+        top: 719px;
+        left: 8%;
       }
     }
   }
@@ -157,13 +217,19 @@ const InputsForm = styled.div`
       &:focus ~ .placeholder--for--Confirm,
       &:not(:focus):valid ~ .placeholder--for--Confirm {
         top: 600px;
-        left: 8%;
       }
 
       /* Focus if error */
       &:focus ~ .Password--error,
       &:not(:focus):valid ~ .Password--error {
         top: 678px;
+        left: 8%;
+      }
+
+      /* Focus if loader */
+      &:focus ~ .Password--loader,
+      &:not(:focus):valid ~ .Password--loader {
+        top: 816px;
         left: 8%;
       }
     }
