@@ -35,6 +35,20 @@ margin-bottom: 10%;
       left: 8%;
       opacity: 1;
     }
+
+    /* Focus if error */
+    &:focus ~ .placeholder--for--Email--error,
+    &:not(:focus):valid ~ .placeholder--for--Email--error {
+      top: 440px;
+      left: 8%;
+    }
+
+
+    &:focus ~ .placeholder--for--Password--error,
+    &:not(:focus):valid ~ .placeholder--for--Password--error {
+      top: 550px;
+      left: 8%;
+    }
   }
 
   span {
@@ -53,14 +67,28 @@ margin-bottom: 10%;
       top: 268px;
       left: 8%;
     }
+
+    /* Focus if error */
+    &:focus ~ .placeholder--for--Username--error,
+    &:not(:focus):valid ~ .placeholder--for--Username--error {
+      top: 367px;
+      left: 8%;
+    }
   }
 }
+
+
 
 .sign--space--mail {
   input {
     &:focus ~ .placeholder--for--Email,
     &:not(:focus):valid ~ .placeholder--for--Email {
       top: 378px;
+    }
+    /* Focus if error */
+    &:focus ~ .placeholder--for--Email--error,
+    &:not(:focus):valid ~ .placeholder--for--Email-error {
+      top: 480px;
     }
   }
 }
@@ -70,6 +98,12 @@ margin-bottom: 10%;
     &:focus ~ .placeholder--for--Password,
     &:not(:focus):valid ~ .placeholder--for--Password {
       top: 490px;
+    }
+
+    /* Focus if error */
+    &:focus ~ .placeholder--for--Password--error,
+    &:not(:focus):valid ~ .placeholder--for--Password--error {
+      top: 591px;
     }
   }
 }
@@ -81,6 +115,13 @@ margin-bottom: 10%;
       top: 602px;
       left: 8%
     }
+
+    /* Focus if error */
+    &:focus ~ .Password--error,
+    &:not(:focus):valid ~ .Password--error {
+      top: 702px;
+      left: 8%
+    }
   }
 }
 
@@ -89,6 +130,12 @@ margin-bottom: 10%;
     &:focus ~ .placeholder--for--Email,
     &:not(:focus):valid ~ .placeholder--for--Email {
       top: 184px;
+    }
+
+    /* Focus if error */
+    &:focus ~ .placeholder--for--Email--error,
+    &:not(:focus):valid ~ .placeholder--for--Email--error {
+      top: 267px;
     }
   }
 }
@@ -99,6 +146,12 @@ margin-bottom: 10%;
     &:not(:focus):valid ~ .placeholder--for--Password {
       top: 503px;
     }
+
+    /* Focus if error */
+    &:focus ~ .placeholder--for--Password--error,
+    &:not(:focus):valid ~ .placeholder--for--Password--error {
+      top: 582px;
+    }
   }
 }
 
@@ -107,6 +160,13 @@ margin-bottom: 10%;
     &:focus ~ .placeholder--for--Confirm,
     &:not(:focus):valid ~ .placeholder--for--Confirm {
       top: 600px;
+      left: 8%;
+    }
+
+    /* Focus if error */
+    &:focus ~ .Password--error,
+    &:not(:focus):valid ~ .Password--error {
+      top: 678px;
       left: 8%;
     }
   }
