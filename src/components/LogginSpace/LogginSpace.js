@@ -105,6 +105,7 @@ function LogginSpace() {
           type="mail"
           fieldName="mail"
           placeholderInput="Email"
+          error={data.error}
           inputRef={inputMail}
         />
         <InputsForm
@@ -112,6 +113,7 @@ function LogginSpace() {
           type="password"
           fieldName="password"
           placeholderInput="Password"
+          error={data.error}
           inputRef={inputPswd}
         />
         <p>

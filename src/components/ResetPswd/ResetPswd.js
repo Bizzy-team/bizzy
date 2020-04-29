@@ -80,6 +80,7 @@ function ResetPswd() {
               type="password"
               fieldName="password"
               placeholderInput="Password"
+              error={data.error}
               inputRef={pswd}
             />
             <InputsForm
@@ -87,6 +88,7 @@ function ResetPswd() {
               type="password"
               fieldName="confirm--password"
               placeholderInput="Confirm Password"
+              error={data.error}
               inputRef={checkPswd}
             />
           </InputFormStyled>

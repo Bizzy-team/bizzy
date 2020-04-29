@@ -90,6 +90,7 @@ function ForgotPasswordForm() {
         type="mail"
         fieldName="mail"
         placeholderInput="Email"
+        error={data.error}
         inputRef={inputMail}
       />
       <button onClick={() => checkMail()}>Send password</button>

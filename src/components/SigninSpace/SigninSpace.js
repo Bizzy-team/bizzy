@@ -130,6 +130,7 @@ function SigninSpace() {
           type="text"
           fieldName="username"
           placeholderInput="Username"
+          error={data.error}
           inputRef={inputUsername}
         />
         <InputsForm
@@ -137,6 +138,7 @@ function SigninSpace() {
           type="mail"
           fieldName="mail"
           placeholderInput="Email"
+          error={data.error}
           inputRef={inputMail}
         />
         <InputsForm
@@ -144,6 +146,7 @@ function SigninSpace() {
           type="password"
           fieldName="password"
           placeholderInput="Password"
+          error={data.error}
           inputRef={pswd}
           minLength="6"
         />
@@ -152,6 +155,7 @@ function SigninSpace() {
           type="password"
           fieldName="confirm--password"
           placeholderInput="Confirm Password"
+          error={data.error}
           inputRef={checkPswd}
           minLength="6"
         />
