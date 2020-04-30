@@ -51,6 +51,13 @@ const LogginSpaceStyled = styled(GlobalContainer)`
   .loggin--space--sign--btn {
     margin-top: 8%;
   }
+
+  /* Iphone SE: 320x568 */
+  @media screen and (width: 320px) {
+    h1 {
+      font-size: 2em;
+    }
+  }
 `;
 
 export default LogginSpaceStyled;
