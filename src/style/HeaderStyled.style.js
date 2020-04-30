@@ -30,6 +30,11 @@ const HeaderStyled = styled.header`
       }
     }
   }
+
+  /* Iphone SE: 320x568 */
+  @media screen and (width: 320px) {
+    margin-bottom: 10%;
+  }
 `;
 
 export default HeaderStyled;
