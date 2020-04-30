@@ -234,6 +234,109 @@ const InputsForm = styled.div`
       }
     }
   }
+
+  @media screen and (width: 375px) {
+    div {
+      input {
+        &:focus ~ .placeholder--for--Email,
+        &:not(:focus):valid ~ .placeholder--for--Email {
+          top: 318px;
+          left: 8%;
+        }
+      }
+    }
+  }
+
+/* Iphone SE: 320x568 */
+  @media screen and (width: 320px) {
+    div {
+      input {
+        &:focus ~ .placeholder--for--Email,
+        &:not(:focus):valid ~ .placeholder--for--Email {
+          top: 163px;
+          left: 8%;
+        }
+
+        &:focus ~ .placeholder--for--Password,
+        &:not(:focus):valid ~ .placeholder--for--Password {
+          top: 262px;
+          left: 8%;
+        }
+
+        /* Focus if error */
+        &:focus ~ .placeholder--for--Email--error,
+        &:not(:focus):valid ~ .placeholder--for--Email--error {
+          top: 247px;
+          left: 8%;
+        }
+
+        &:focus ~ .placeholder--for--Password--error,
+        &:not(:focus):valid ~ .placeholder--for--Password--error {
+          top: 348px;
+          left: 8%;
+        }
+
+        /* Focus if loader */
+        &:focus ~ .placeholder--for--Email--loader,
+        &:not(:focus):valid ~ .placeholder--for--Email--loader {
+          top: 391px;
+          left: 8%;
+        }
+        &:focus ~ .placeholder--for--Password--loader,
+        &:not(:focus):valid ~ .placeholder--for--Password--loader {
+          top: 491px;
+          left: 8%;
+        }
+      }
+    }
+
+    .sign--space--username {
+      input {
+        &:focus ~ .placeholder--for--Username,
+        &:not(:focus):valid ~ .placeholder--for--Username {
+          top: 162px;
+          left: 8%;
+        }
+
+        /* Focus if error */
+        &:focus ~ .placeholder--for--Username--error,
+        &:not(:focus):valid ~ .placeholder--for--Username--error {
+          top: 246px;
+          left: 8%;
+        }
+      }
+    }
+
+    .sign--space--mail {
+      input {
+        &:focus ~ .placeholder--for--Email,
+        &:not(:focus):valid ~ .placeholder--for--Email {
+          top: 263px;
+          left: 8%;
+        }
+      }
+    }
+
+    .sign--space--password {
+      input {
+        &:focus ~ .placeholder--for--Password,
+        &:not(:focus):valid ~ .placeholder--for--Password {
+          top: 362px;
+          left: 8%;
+        }
+      }
+    }
+
+    .sign--space--confirm--password {
+      input {
+        &:focus ~ .placeholder--for--Confirm,
+        &:not(:focus):valid ~ .placeholder--for--Confirm {
+          top: 461px;
+          left: 8%;
+        }
+      }
+    }
+  }
 `;
 
 export default InputsForm;
