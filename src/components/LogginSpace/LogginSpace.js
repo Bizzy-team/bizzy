@@ -11,7 +11,10 @@ function LogginSpace() {
   const [data, setData] = React.useState({
     loader: false,
     error: false,
-    errorMessage: ""
+    errorMail: false,
+    errorMessage: "",
+    errorMessageMail: "",
+    errorMessagePassword: ""
   });
   const [redirect, setRedirect] = React.useState(false);
 
@@ -32,8 +35,10 @@ function LogginSpace() {
       ) {
         return setData({
           ...data,
-          error: true,
-          errorMessage: "Wrong format email."
+          errorMail: true,
+          // error: true,
+          errorMessageMail: "Wrong format email."
+          // errorMessage: "Wrong format email."
         });
       }
       if (inputPswd.current.value.length < 6) {
@@ -88,16 +93,19 @@ function LogginSpace() {
     }
   }
 
+  console.log(data.errorMessageMail);
+  
+
   if (redirect) return <Redirect to="/feed"></Redirect>;
 
   return (
     <React.Fragment>
       {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />}
-      {data.error && (
+      {/* {data.error && (
         <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
           <p className="text-light">{data.errorMessage}</p>
         </div>
-      )}
+      )} */}
       <LogginSpaceStyled className="loggin--space">
         <h1>Welcome back.</h1>
         <InputsForm
@@ -105,19 +113,25 @@ function LogginSpace() {
           type="mail"
           fieldName="mail"
           placeholderInput="Email"
-          error={data.error}
-          loader={data.loader}
           inputRef={inputMail}
         />
+         {data.errorMail && (
+            <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
+              <p className="text-light">{data.errorMessageMail}</p>
+            </div>
+          )}
         <InputsForm
           spaceName="loggin"
           type="password"
           fieldName="password"
           placeholderInput="Password"
-          error={data.error}
-          loader={data.loader}
           inputRef={inputPswd}
         />
+        {data.error && (
+            <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
+              <p className="text-light">{data.errorMessage}</p>
+            </div>
+          )}
         <p>
           <small className="text-muted">6 characters minimum.</small>
         </p>
