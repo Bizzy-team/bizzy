@@ -43,6 +43,12 @@ const ForgotPasswordFormStyled = styled(GlobalContainer)`
       color: ${props => props.theme.colorSecondary};
     }
   }
+
+  @media screen and (width: 320px) {
+    h1 {
+      font-size: 2.4em;
+    }
+  }
 `;
 
 export default ForgotPasswordFormStyled;
