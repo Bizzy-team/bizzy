@@ -1,3 +1,4 @@
+//eslint-disable no-useless-catch
 process.env.NODE_ENV === "development" && require("dotenv").config(); // eslint-disable-line global-require
 const { MongoClient } = require("mongodb");
 
@@ -8,7 +9,6 @@ module.exports = async function() {
       useUnifiedTopology: true
     });
   } catch (error) {
-    // eslint-disable-next-line no-useless-catch
     throw error;
   }
 };
