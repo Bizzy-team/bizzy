@@ -34,6 +34,15 @@ const ForgotPasswordConfirmStyled = styled(GlobalContainer)`
       }
     }
   }
+
+  @media screen and (width: 320px) {
+    margin-top: 4%;
+    .success--title {
+      h1 {
+        font-size: 1.7em;
+      }
+    }
+  }
 `;
 
 export default ForgotPasswordConfirmStyled;
