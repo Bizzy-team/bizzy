@@ -8,7 +8,7 @@ module.exports = async function() {
       useUnifiedTopology: true
     });
   } catch (error) {
-    console.log(error)
+    // eslint-disable-next-line no-useless-catch
     throw error;
   }
 };
