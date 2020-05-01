@@ -2,7 +2,7 @@ const { parse } = require("url");
 const responseServer = require("./_utils/responseServer");
 const { GET, PUT } = require("./_db/models/resetpassword");
 const parseBody = require("./_utils/parseBody");
-const parseQuery = require("./_utils/parseQuery")
+const parseQuery = require("./_utils/parseQuery");
 
 module.exports = function ResetPassword(req, res) {
   if (!["GET", "PUT"].includes(req.method)) {

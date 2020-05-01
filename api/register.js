@@ -1,7 +1,7 @@
 const responseServer = require("./_utils/responseServer");
 const parseBody = require("./_utils/parseBody");
 const registerDb = require("./_db/models/register");
-const parseQuery = require("./_utils/parseQuery")
+const parseQuery = require("./_utils/parseQuery");
 
 module.exports = function register(req, res) {
   if (req.method !== "POST") {

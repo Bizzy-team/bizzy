@@ -1,4 +1,3 @@
-const {parse} = require("url")
 const responseServer = require("./_utils/responseServer");
 const loginDB = require("./_db/models/login");
 const parseBody = require("./_utils/parseBody");
