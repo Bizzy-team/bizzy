@@ -1,6 +1,8 @@
+const {parse} = require("url")
 const responseServer = require("./_utils/responseServer");
 const loginDB = require("./_db/models/login");
 const parseBody = require("./_utils/parseBody");
+const parseQuery = require("./_utils/parseQuery");
 
 module.exports = function Login(req, res) {
   if (req.method !== "POST") {
@@ -27,7 +29,8 @@ module.exports = function Login(req, res) {
       responseServer(res, userData.code, {
         serverHeader: userData.serverHeader ? { ...userData.serverHeader } : {},
         content: userData.content ? userData.content : undefined,
-        modifyResponse: userData.data ? { ...userData.data } : undefined
+        modifyResponse: userData.data ? { ...userData.data } : undefined,
+        query: parseQuery(req.url)
       });
     });
   });

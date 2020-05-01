@@ -1,6 +1,7 @@
 const responseServer = require("./_utils/responseServer");
 const parseBody = require("./_utils/parseBody");
 const forgotDb = require("./_db/models/forgot");
+const parseQuery = require("./_utils/parseQuery")
 
 module.exports = function Forgot(req, res) {
   if (req.method !== "POST") {
@@ -27,7 +28,8 @@ module.exports = function Forgot(req, res) {
       responseServer(res, result.code, {
         serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
         content: result.content ? result.content : undefined,
-        modifyResponse: result.data ? { ...result.data } : undefined
+        modifyResponse: result.data ? { ...result.data } : undefined,
+        query: parseQuery(req.url)
       });
     });
   });
