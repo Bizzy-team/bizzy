@@ -11,7 +11,8 @@ const createToken = promisify(randomFill);
  * @param {Object} body Data send by the request
  */
 module.exports = async body => {
-  const bizzyUsers = (await mongo.connect()).db("bizzy").collection("users");
+  const mongobdd = await mongo();
+  const bizzyUsers = mongobdd.db("bizzy").collection("users");
 
   if ((await bizzyUsers.findOne({ mail: body.mail })) === null) {
     const JWTToken = await createToken(Buffer.alloc(16));
@@ -37,12 +38,13 @@ module.exports = async body => {
       }
     });
 
+    await mongobdd.close();
     return {
       code: 201,
       serverHeader: {
         "Set-Cookie": `sid=${sessionId.toString("hex")}; Expires=${new Date(
           Date.now() + 6.04e8
-        )}; ${process.env.NODE_ENV === "development" ? "" : "Secure"}; Path=/; HttpOnly`
+        )}; Secure; Path=/; HttpOnly`
       },
       data: {
         token: newUser.ops[0].token
@@ -50,6 +52,7 @@ module.exports = async body => {
     };
   }
 
+  await mongobdd.close();
   return {
     code: 409
   };

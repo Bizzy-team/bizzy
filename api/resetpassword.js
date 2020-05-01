@@ -2,6 +2,7 @@ const { parse } = require("url");
 const responseServer = require("./_utils/responseServer");
 const { GET, PUT } = require("./_db/models/resetpassword");
 const parseBody = require("./_utils/parseBody");
+const parseQuery = require("./_utils/parseQuery");
 
 module.exports = function ResetPassword(req, res) {
   if (!["GET", "PUT"].includes(req.method)) {
@@ -69,7 +70,8 @@ module.exports = function ResetPassword(req, res) {
         responseServer(res, result.code, {
           serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
           content: result.content ? result.content : undefined,
-          modifyResponse: result.data ? { ...result.data } : undefined
+          modifyResponse: result.data ? { ...result.data } : undefined,
+          query: parseQuery(req.url)
         });
       });
     });

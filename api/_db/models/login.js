@@ -10,7 +10,7 @@ const createToken = promisify(randomFill);
  * @param {Object} data An object of parsed parameters.
  */
 module.exports = async data => {
-  const mongobdd = await mongo.connect();
+  const mongobdd = await mongo();
   const bizzyUsers = mongobdd.db("bizzy").collection("users");
   const user = await bizzyUsers.findOne(
     { mail: data.mail },
@@ -44,7 +44,7 @@ module.exports = async data => {
       serverHeader: {
         "Set-Cookie": `sid=${sessionId.toString("hex")}; Expires=${new Date(
           Date.now() + 6.04e8
-        )}; ${process.env.NODE_ENV === "development" ? "" : "Secure"}; Path=/; HttpOnly`
+        )}; Secure; Path=/; HttpOnly`
       },
       data: {
         token: user.token

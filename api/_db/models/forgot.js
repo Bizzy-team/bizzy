@@ -6,8 +6,8 @@ const mongo = require("../index");
 const createToken = promisify(randomFill);
 
 module.exports = async data => {
-  const mongobdd = await mongo.connect();
-  const bizzyUsers = await mongobdd.db("bizzy").collection("users");
+  const mongobdd = await mongo();
+  const bizzyUsers = mongobdd.db("bizzy").collection("users");
   const user = await bizzyUsers.findOne({ mail: data.mail });
 
   if (user === null) {
@@ -80,17 +80,15 @@ module.exports = async data => {
               },
               { upsert: true }
             );
-            await passwordForget.createIndex(
-              { expireAt: 1 },
-              { expireAfterSeconds: 0, unique: true }
-            );
 
+            await mongobdd.close();
             return {
               code: 200,
               content: `Mail send to ${data.mail}`
             };
           }
 
+          await mongobdd.close();
           return {
             code: 502
           };

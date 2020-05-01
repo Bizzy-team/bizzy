@@ -1,6 +1,7 @@
 const responseServer = require("./_utils/responseServer");
 const parseBody = require("./_utils/parseBody");
 const registerDb = require("./_db/models/register");
+const parseQuery = require("./_utils/parseQuery");
 
 module.exports = function register(req, res) {
   if (req.method !== "POST") {
@@ -37,7 +38,8 @@ module.exports = function register(req, res) {
       responseServer(res, result.code, {
         serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
         content: result.content ? result.content : undefined,
-        modifyResponse: result.data ? { ...result.data } : undefined
+        modifyResponse: result.data ? { ...result.data } : undefined,
+        query: parseQuery(req.url)
       });
     });
   });

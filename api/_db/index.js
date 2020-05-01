@@ -1,7 +1,14 @@
 process.env.NODE_ENV === "development" && require("dotenv").config(); // eslint-disable-line global-require
 const { MongoClient } = require("mongodb");
 
-module.exports = new MongoClient(process.env.DB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+module.exports = async function() {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    return await MongoClient.connect(process.env.DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+  } catch (error) {
+    throw error;
+  }
+};
