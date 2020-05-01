@@ -73,6 +73,7 @@ const InputsForm = styled.div`
     }
   }
 
+/* *********** SIGN UP SPACE START **************** */
   .sign--space--username {
     input {
       &:focus ~ .placeholder--for--Username,
@@ -165,6 +166,7 @@ const InputsForm = styled.div`
       }
     }
   }
+/* *********** SIGN UP SPACE END **************** */
 
   .forgotPswd--space--mail {
     input {
@@ -290,6 +292,7 @@ const InputsForm = styled.div`
       }
     }
 
+/* *********** SIGN UP SPACE **************** */
     .sign--space--username {
       input {
         &:focus ~ .placeholder--for--Username,
@@ -304,6 +307,13 @@ const InputsForm = styled.div`
           top: 246px;
           left: 8%;
         }
+
+        /* Focus if loader */
+        &:focus ~ .placeholder--for--Username--loader,
+        &:not(:focus):valid ~ .placeholder--for--Username--loader {
+          top: 390px;
+          left: 8%;
+        }
       }
     }
 
@@ -312,6 +322,20 @@ const InputsForm = styled.div`
         &:focus ~ .placeholder--for--Email,
         &:not(:focus):valid ~ .placeholder--for--Email {
           top: 263px;
+          left: 8%;
+        }
+
+        /* Focus if error */
+        &:focus ~ .placeholder--for--Email--error,
+        &:not(:focus):valid ~ .placeholder--for--Email--error {
+          top: 347px;
+          left: 8%;
+        }
+
+        /* Focus if loader */
+        &:focus ~ .placeholder--for--Email--loader,
+        &:not(:focus):valid ~ .placeholder--for--Email--loader {
+          top: 492px;
           left: 8%;
         }
       }
@@ -324,6 +348,20 @@ const InputsForm = styled.div`
           top: 362px;
           left: 8%;
         }
+
+        /* Focus if error */
+        &:focus ~ .placeholder--for--Password--error,
+        &:not(:focus):valid ~ .placeholder--for--Password--error {
+          top: 447px;
+          left: 8%;
+        }
+
+        /* Focus if loader */
+        &:focus ~ .placeholder--for--Password--loader,
+        &:not(:focus):valid ~ .placeholder--for--Password--loader {
+          top: 591px;
+          left: 8%;
+        }
       }
     }
 
@@ -333,6 +371,87 @@ const InputsForm = styled.div`
         &:not(:focus):valid ~ .placeholder--for--Confirm {
           top: 461px;
           left: 8%;
+        }
+
+        /* Focus if error */
+        &:focus ~ .Password--error,
+        &:not(:focus):valid ~ .Password--error {
+          top: 547px;
+          left: 8%;
+        }
+
+        /* Focus if loader */
+        &:focus ~ .Password--loader,
+        &:not(:focus):valid ~ .Password--loader {
+          top: 691px;
+          left: 8%;
+        }
+      }
+    }
+
+/* *********** FORGOTPSWD SPACE **************** */
+    .forgotPswd--space--mail {
+      input {
+        &:focus ~ .placeholder--for--Email,
+        &:not(:focus):valid ~ .placeholder--for--Email {
+          top: 158px;
+        }
+
+        /* Focus if error */
+        &:focus ~ .placeholder--for--Email--error,
+        &:not(:focus):valid ~ .placeholder--for--Email--error {
+          top: 234px;
+        }
+
+        /* Focus if loader */
+        &:focus ~ .placeholder--for--Email--loader,
+        &:not(:focus):valid ~ .placeholder--for--Email--loader {
+          top: 358px;
+        }
+      }
+    }
+
+/* *********** RESETPSWD SPACE **************** */
+    .resetPswd--space--password {
+      input {
+        &:focus ~ .placeholder--for--Password,
+        &:not(:focus):valid ~ .placeholder--for--Password {
+          top: 475px;
+          left: 8%;
+        }
+
+        /* Focus if error */
+        &:focus ~ .placeholder--for--Password--error,
+        &:not(:focus):valid ~ .placeholder--for--Password--error {
+          top: 548px;
+        }
+
+        /* Focus if loader */
+        &:focus ~ .placeholder--for--Password--loader,
+        &:not(:focus):valid ~ .placeholder--for--Password--loader {
+          top: 687px;
+        }
+      }
+    }
+
+    .resetPswd--space--confirm--password {
+      input {
+        &:focus ~ .placeholder--for--Confirm ,
+        &:not(:focus):valid ~ .placeholder--for--Confirm {
+          top: 563px;
+          left: 8%;
+        }
+
+        /* Focus if error */
+        &:focus ~ .Password--error ,
+        &:not(:focus):valid ~ .Password--error {
+          top: 637px;
+        }
+
+        /* Focus if loader */
+        &:focus ~ .Password--loader ,
+        &:not(:focus):valid ~ .Password--loader {
+          top: 775px;
         }
       }
     }
