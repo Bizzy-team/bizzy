@@ -126,40 +126,28 @@ function SigninSpace() {
       <LogginSpaceStyled className="sign--up--space">
         <h1>Welcome,</h1>
         <InputsForm
-          spaceName="sign"
           type="text"
           fieldName="username"
           placeholderInput="Username"
-          error={data.error}
-          loader={data.loader}
           inputRef={inputUsername}
         />
         <InputsForm
-          spaceName="sign"
           type="mail"
           fieldName="mail"
           placeholderInput="Email"
-          error={data.error}
-          loader={data.loader}
           inputRef={inputMail}
         />
         <InputsForm
-          spaceName="sign"
           type="password"
           fieldName="password"
           placeholderInput="Password"
-          error={data.error}
-          loader={data.loader}
           inputRef={pswd}
           minLength="6"
         />
         <InputsForm
-          spaceName="sign"
           type="password"
           fieldName="confirm--password"
           placeholderInput="Confirm Password"
-          error={data.error}
-          loader={data.loader}
           inputRef={checkPswd}
           minLength="6"
         />
