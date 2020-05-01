@@ -8,6 +8,7 @@ module.exports = async function() {
       useUnifiedTopology: true
     });
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };
