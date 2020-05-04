@@ -4,3 +4,6 @@
 The future app for business travelers.
 
 ### `Work In Progress`
+
+## Documentation
+[Bizzy docs](https://bizzy-docs.now.sh)

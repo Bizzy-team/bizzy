@@ -1,8 +1,12 @@
+const responserServer = require("./responseServer");
+
 /**
  * Parse the body request when there is a POST method
  * @param {Object} request - A NodeJs HttpIncomingMessage object.
+ * @param {Object} response - A nodeJs HttpServerResponse object.
+ * @returns If there is an error the `response` object will be called with the `end()` method to abort the request either return the data parsed.
  */
-module.exports = request => {
+module.exports = (request, response) => {
   let body;
 
   request.setEncoding("utf-8");
@@ -16,18 +20,10 @@ module.exports = request => {
           const bodyParsed = JSON.parse(body);
           return request.emit("bodyParsed", bodyParsed);
         } catch (e) {
-          return request.emit("bodyParsed", {
-            code: 406,
-            error: true,
-            message: "This route can only receive JSON data."
-          });
+          return responserServer(response, 406);
         }
       }
 
-      return request.emit("bodyParsed", {
-        code: 422,
-        error: true,
-        message: "Missing data in body"
-      });
+      return responserServer(response, 422);
     });
 };
