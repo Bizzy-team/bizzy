@@ -2,7 +2,7 @@ function FetchData(path, method, data = {}) {
   let apiurl;
 
   if (process.env.NODE_ENV === "development") {
-    apiurl = "http://localhost:3000/api"
+    apiurl = `https://bizzy.now.sh/api${path}?mode=dev`
   } else {
     apiurl = "https://bizzy.now.sh/api"
   }
@@ -23,7 +23,7 @@ function FetchData(path, method, data = {}) {
     method = 'GET';
   }
 
-  return fetch(`${apiurl}${path}`, {
+  return fetch(`${apiurl}`, {
     method: method,
     body: data.body && JSON.stringify(data.body)
   })
