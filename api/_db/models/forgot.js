@@ -5,7 +5,7 @@ const mongo = require("../index");
 
 const createToken = promisify(randomFill);
 
-module.exports = async data => {
+module.exports = async (data, devMode) => {
   const mongobdd = await mongo();
   const bizzyUsers = mongobdd.db("bizzy").collection("users");
   const user = await bizzyUsers.findOne({ mail: data.mail });
@@ -19,7 +19,7 @@ module.exports = async data => {
 
   let transporter = {};
 
-  if (data.query) {
+  if (devMode) {
     transporter = {
       host: "smtp.mailtrap.io",
       port: 2525,

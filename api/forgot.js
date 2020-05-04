@@ -24,8 +24,7 @@ module.exports = function Forgot(req, res) {
       responseServer(res, 422);
     }
 
-    httpBody.query = parseQuery(req.url)
-    return forgotDb(httpBody).then(result => {
+    return forgotDb(httpBody, parseQuery(req.url)).then(result => {
       responseServer(res, result.code, {
         serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
         content: result.content ? result.content : undefined,
