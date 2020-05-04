@@ -19,7 +19,7 @@ module.exports = async data => {
 
   let transporter = {};
 
-  if (process.env.NODE_ENV === "development") {
+  if (data.query) {
     transporter = {
       host: "smtp.mailtrap.io",
       port: 2525,
