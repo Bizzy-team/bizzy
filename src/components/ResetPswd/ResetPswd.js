@@ -22,7 +22,10 @@ function ResetPswd() {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/resetpassword?token=${data.urlToken}`)
+    // fetch(`http://localhost:3000/api/resetpassword?token=${data.urlToken}`)
+    // FetchFunction(`/resetpassword?token=${data.urlToken}`)
+
+    fetch(`https://bizzy.sh.now/api/resetpassword?mode=dev&token=${data.urlToken}`)
       .then(response => {
         if (response.status >= 500 && response.status <= 600) {
           return setData({
