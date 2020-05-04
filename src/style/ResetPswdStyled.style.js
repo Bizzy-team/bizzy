@@ -73,6 +73,24 @@ const ResetPswdStyled = styled.div`
   .reset--space--sign--btn {
     margin-top: 15%;
   }
+
+  /* Ipad: 768x1024 */
+  @media screen and (width: 768px) {
+    .reset--space--sign--btn {
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  /* Ipad Pro: 1024x1356 */
+  @media screen and (width: 1024px) {
+    .reset--space--sign--btn {
+      button {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 export default ResetPswdStyled;

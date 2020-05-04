@@ -35,6 +35,30 @@ const HeaderStyled = styled.header`
   @media screen and (width: 320px) {
     margin-bottom: 10%;
   }
+
+  /* Ipad: 768x1024 */
+  @media screen and (width: 768px) {
+    margin-bottom: 10%;
+    div {
+      position: relative;
+      .buttons--sign {
+        position: absolute;
+        right: 8%;
+      }
+    }
+  }
+
+  /* Ipad Pro: 1024x1356 */
+  @media screen and (width: 1024px) {
+    margin-bottom: 10%;
+    div {
+      position: relative;
+      .buttons--sign {
+        position: absolute;
+        right: 6%;
+      }
+    }
+  }
 `;
 
 export default HeaderStyled;
