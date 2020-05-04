@@ -27,7 +27,7 @@ module.exports = request => {
       return request.emit("bodyParsed", {
         code: 422,
         error: true,
-        message: "Data incorrect or missing"
+        message: "Missing data in body"
       });
     });
 };

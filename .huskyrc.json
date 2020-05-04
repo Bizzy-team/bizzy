@@ -1,0 +1,6 @@
+{
+    "hooks": {
+        "pre-push": "npm run lint:fix",
+        "commit-msg": "Fix eslint, prettier errors."
+    }
+}

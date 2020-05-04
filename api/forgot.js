@@ -77,14 +77,10 @@ module.exports = function Forgot(req, res) {
     }
 
     return forgotDb(httpBody).then(result => {
-      if (result.data.error) {
-        responseHeader(res, {
-          code: result.code,
-          ...result.serverHeader
-        });
-
-        return res.end(JSON.stringify({ ...result.data }));
-      }
+      responseHeader(res, {
+        code: result.code,
+        ...result.serverHeader
+      });
 
       return res.end(JSON.stringify({ ...result.data }));
     });

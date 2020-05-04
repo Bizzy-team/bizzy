@@ -15,11 +15,12 @@ module.exports = async body => {
 
   if ((await bizzyUsers.findOne({ mail: body.mail })) === null) {
     const JWTToken = await createToken(Buffer.alloc(16));
+    const sessionId = await createToken(Buffer.alloc(8));
     const userPassword = await hash(body.pswd, 10);
     const token = await signJwtPromise(
       `{
                 "name": "${body.username}",
-                "exp": 345600
+                "exp": ${Math.floor(Date.now() + 60 * 8640 * 1000)}
             }`,
       JWTToken.toString("hex")
     );
@@ -29,14 +30,17 @@ module.exports = async body => {
       password: userPassword,
       username: body.username,
       token,
-      verifyJWTToken: JWTToken.toString("hex")
+      verifyJWTToken: JWTToken.toString("hex"),
+      session: {
+        id: sessionId.toString("hex"),
+        lastRequest: new Date()
+      }
     });
 
-    await mongo.close();
     return Promise.resolve({
       code: 201,
       serverHeader: {
-        "Set-Cookie": `sessionId=${newUser.ops[0]._id}; Expires=${new Date(
+        "Set-Cookie": `sid=${sessionId.toString("hex")}; Expires=${new Date(
           Date.now() + 6.04e8
         )}; ${process.env.NODE_ENV === "development" ? "" : "Secure"}; Path=/; HttpOnly`
       },
@@ -46,7 +50,6 @@ module.exports = async body => {
     });
   }
 
-  await mongo.close();
   return Promise.resolve({
     code: 409,
     error: true,
