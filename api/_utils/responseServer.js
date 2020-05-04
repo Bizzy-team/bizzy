@@ -12,7 +12,7 @@ module.exports = (response, code, data = {}) => {
   const defaultHeader = {
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Origin": `${
-      data.query ? "http://localhost:3000" : "https://bizzy.now.sh"
+      data.query ? "https://localhost:3000" : "https://bizzy.now.sh"
     }`,
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Expose-Headers":
