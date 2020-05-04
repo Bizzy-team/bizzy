@@ -4,6 +4,7 @@ import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 import { ReactSVG } from "react-svg";
 import LoaderSvg from "../../img/loader.svg";
 import InputsForm from "../InputsForm/InputsForm";
+import FetchFunction from "../../utlis/FetchFunction";
 
 function LogginSpace() {
   const inputMail = React.createRef(null);
@@ -51,46 +52,24 @@ function LogginSpace() {
       setData({
         loader: true
       });
-
-      return fetch("http://localhost:3000/api/login", {
-        // return fetch("https://bizzy.now.sh/api/login", {
-        // return fetch(`${process.env.APIKEY}/login`, {
-        credentials: "include",
-        method: "POST",
-        body: JSON.stringify({
-          mail: inputMail.current.value,
-          pswd: inputPswd.current.value
-        })
-      })
-        .then(response => {
-          if (response.status >= 500 && response.status <= 600) {
-            return setData({
-              error: true,
-              errorMessage: "Something went wrong with the server."
-            });
-          }
-          return response.json();
-        })
-        .then(dataParsed => {
-          if (dataParsed === undefined) {
-            return setData({
-              error: true,
-              errorMessage:
-                "Oops something went wrong with the server. Please try again in a few minutes or send me a message if the problem persists."
-            });
-          }
-
-          if (dataParsed.error) {
-            return setData({
-              error: dataParsed.error,
-              errorMessage: dataParsed.message
-            });
-          }
-
-          sessionStorage.setItem("UserToken", dataParsed.token);
-          return setRedirect(true);
-        });
     }
+    return FetchFunction("/login", "POST", {
+      credentials: 'include',
+      body: {
+        mail: inputMail.current.value,
+        pswd: inputPswd.current.value
+      }
+    })
+    .then(dataParsed => {
+      sessionStorage.setItem("UserToken", dataParsed.token);
+      return setRedirect(true);
+    })
+    .catch(error => {
+      setData({
+        error: true,
+        errorMessage: error.message
+      })
+    })
   }
 
   console.log(data.errorMessageMail);

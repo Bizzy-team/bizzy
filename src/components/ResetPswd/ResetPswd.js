@@ -1,20 +1,71 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ReactSVG } from "react-svg";
 import ResetPswdStyled from "../../style/ResetPswdStyled.style";
 import InputFormStyled from "../../style/InputFormStyled.style";
 import LoaderSvg from "../../img/loader.svg";
-import { Redirect } from "react-router-dom";
 import InputsForm from "../InputsForm/InputsForm";
+import ResetPswdError from "./ResetPswdError";
+import ResetSuccessModal from "./ResetSuccessModal";
+import FetchFunction from "../../utlis/FetchFunction";
 
 function ResetPswd() {
   const pswd = React.createRef(null);
   const checkPswd = React.createRef(null);
   const [data, setData] = React.useState({
+    loader: false,
+    submitLoader: false,
+    successResetModal: false,
     error: false,
     errorMessage: "",
-    loader: false
+    urlToken: new URLSearchParams(window.location.search).get("token"),
+    responseToken: ""
   });
-  const [redirect, setRedirect] = React.useState(false);
+
+  useEffect(() => {
+    // fetch(`http://localhost:3000/api/resetpassword?token=${data.urlToken}`)
+    // FetchFunction(`/resetpassword?token=${data.urlToken}`)
+
+    fetch(`https://bizzy.sh.now/api/resetpassword?mode=dev&token=${data.urlToken}`)
+      .then(response => {
+        if (response.status >= 500 && response.status <= 600) {
+          return setData({
+            ...data,
+            error: true,
+            errorMessage: "Something went wrong with the server."
+          });
+        }
+        return response.json();
+      })
+      .then(dataParsed => {
+        setData({
+          ...data,
+          loader: true
+        })
+        if (dataParsed === undefined) {
+          return setData({
+            ...data,
+            error: true,
+            errorMessage:
+              "Oops something went wrong with the server. Please try again in a few minutes or send me a message if the problem persists."
+          });
+        }
+
+        if (dataParsed.error) {
+          return setData({
+            ...data,
+            loader: true,
+            error: dataParsed.error,
+            errorMessage: dataParsed.message
+          });
+        }
+
+        return setData({
+          ...data,
+          loader: true,
+          responseToken: dataParsed.token
+        })
+      });
+  }, [])
 
   function checkNewPswd() {
     if (pswd.current.value === "" && checkPswd.current.value === "") {
@@ -42,14 +93,46 @@ function ResetPswd() {
         });
       }
 
-      setData({
-        loader: true
-      });
-      return setRedirect(true);
+      return FetchFunction("/resetpassword", "PUT", {
+        headers: {
+          "Authorization": data.responseToken
+        },
+        body: {
+          "newpswd": pswd.current.value,
+          "token": data.urlToken
+        }
+      })
+      .then(dataParsed => {
+        if (!dataParsed.error) {
+          return setData({
+            ...data,
+            submitLoader: true,
+            successResetModal: true,
+            errorMessage: dataParsed.message
+          })
+        }
+        return setData({
+          ...data,
+          submitLoader: true
+        })
+      })
+      .catch(error => {
+        setData({
+          error: true,
+          errorMessage: error.message
+        })
+      })
     }
   }
 
-  if (redirect) return <Redirect to="/"></Redirect>;
+  if (!data.loader) return <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />;
+  if (!data.responseToken) return <ResetPswdError></ResetPswdError>;
+  if (data.successResetModal) return (
+    <ResetSuccessModal
+      updateMessage={data.errorMessage}
+    >
+    </ResetSuccessModal>
+  )
 
   return (
     <section>
@@ -65,6 +148,10 @@ function ResetPswd() {
             <p className="text-light">{data.errorMessage}</p>
           </div>
         )}
+        {
+          data.submitLoader && (
+            <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />
+          )}
         <div className="resetPswd">
           <div className="resetPswd--title">
             <h1>Reset Password</h1>
@@ -94,7 +181,7 @@ function ResetPswd() {
           <p>
             <small className="text-muted" style={{ fontSize: "0.5em" }}>
               6 characters minimum.
-            </small>
+              </small>
           </p>
           <div className="reset--space--sign--btn">
             <button onClick={() => checkNewPswd()}>Reset password</button>
