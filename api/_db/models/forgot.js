@@ -48,8 +48,8 @@ module.exports = async (data, devMode) => {
       const token = await createToken(Buffer.alloc(24));
       let url;
 
-      if (process.env.NODE_ENV === "development") {
-        url = `http://localhost:3000/reset_pswd_form?token=${token.toString("hex")}`;
+      if (devMode) {
+        url = `https://localhost:3000/reset_pswd_form?token=${token.toString("hex")}`;
       } else {
         url = `https://bizzy.now.sh/reset_pswd_form?token=${token.toString("hex")}`;
       }

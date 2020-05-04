@@ -10,7 +10,7 @@ const createTokenKey = promisify(randomFill);
 const signJwtPromise = promisify(sign);
 
 export async function GET(params) {
-  const mongobdd = await mongo.connect();
+  const mongobdd = await mongo();
   const passwordForget = mongobdd.db("bizzy").collection("passwordforget");
   const user = await passwordForget.findOne(
     { forgotPassword: params.get("token") },
@@ -18,6 +18,7 @@ export async function GET(params) {
   );
 
   if (user === null) {
+    await mongobdd.close()
     return {
       code: 401,
       content: "Token parameter is not valid, try resend a forgot password request."
@@ -30,6 +31,7 @@ export async function GET(params) {
     { projection: { token: 1 } }
   );
 
+  await mongobdd.close()
   return {
     code: 200,
     data: {
@@ -39,11 +41,11 @@ export async function GET(params) {
 }
 
 export async function PUT(data) {
-  const mongobdd = await mongo.connect();
-  const passwordForgetCollection = await mongobdd
+  const mongobdd = await mongo();
+  const passwordForgetCollection = mongobdd
     .db("bizzy")
     .collection("passwordforget");
-  const userCollection = await mongobdd.db("bizzy").collection("users");
+  const userCollection = mongobdd.db("bizzy").collection("users");
   const { newpswd, token, jwtToken, cookie } = data;
   let user;
 
@@ -98,13 +100,15 @@ export async function PUT(data) {
           }
         );
         await passwordForgetCollection.findOneAndDelete({ _id: userData._id });
-
+        
+        await mongobdd.close()
         return {
           code: 200,
           content: `Password update for ${userData.mail}.`
         };
       }
 
+      await mongobdd.close()
       return {
         code: 401
       };
@@ -115,7 +119,8 @@ export async function PUT(data) {
       { $set: { password: newPassword } }
     );
     await passwordForgetCollection.findOneAndDelete({ _id: userData._id });
-
+    
+    await mongobdd.close()
     return {
       code: 201,
       content: `Password update for ${userData.mail}.`
