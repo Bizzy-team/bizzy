@@ -1,9 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import {
-  IntroductionLogginSpace,
-  LogginSpaceStyled
-} from "../../style/LogginSpaceStyled.style";
+import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 import { ReactSVG } from "react-svg";
 import LoaderSvg from "../../img/loader.svg";
 import InputsForm from "../InputsForm/InputsForm";
@@ -15,7 +12,10 @@ function LogginSpace() {
   const [data, setData] = React.useState({
     loader: false,
     error: false,
-    errorMessage: ""
+    errorMail: false,
+    errorMessage: "",
+    errorMessageMail: "",
+    errorMessagePassword: ""
   });
   const [redirect, setRedirect] = React.useState(false);
 
@@ -36,8 +36,10 @@ function LogginSpace() {
       ) {
         return setData({
           ...data,
-          error: true,
-          errorMessage: "Wrong format email."
+          errorMail: true,
+          // error: true,
+          errorMessageMail: "Wrong format email."
+          // errorMessage: "Wrong format email."
         });
       }
       if (inputPswd.current.value.length < 6) {
@@ -70,21 +72,21 @@ function LogginSpace() {
     })
   }
 
+  console.log(data.errorMessageMail);
+  
+
   if (redirect) return <Redirect to="/feed"></Redirect>;
 
   return (
     <React.Fragment>
-      <IntroductionLogginSpace className="introduction">
-        <h1>Welcome back</h1>
-        <p>It's time to log in and see who is around you</p>
-      </IntroductionLogginSpace>
-      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />}
-      {data.error && (
+      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />}
+      {/* {data.error && (
         <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
           <p className="text-light">{data.errorMessage}</p>
         </div>
-      )}
+      )} */}
       <LogginSpaceStyled className="loggin--space">
+        <h1>Welcome back.</h1>
         <InputsForm
           spaceName="loggin"
           type="mail"
@@ -92,6 +94,11 @@ function LogginSpace() {
           placeholderInput="Email"
           inputRef={inputMail}
         />
+         {data.errorMail && (
+            <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
+              <p className="text-light">{data.errorMessageMail}</p>
+            </div>
+          )}
         <InputsForm
           spaceName="loggin"
           type="password"
@@ -99,14 +106,14 @@ function LogginSpace() {
           placeholderInput="Password"
           inputRef={inputPswd}
         />
+        {data.error && (
+            <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
+              <p className="text-light">{data.errorMessage}</p>
+            </div>
+          )}
         <p>
-          <small className="text-muted" style={{ fontSize: "0.4em" }}>
-            6 characters minimum.
-          </small>
+          <small className="text-muted">6 characters minimum.</small>
         </p>
-        <div className="loggin--space--btn">
-          <button onClick={() => userAuth()}>Log in</button>
-        </div>
         <div className="forgot--password">
           <p>
             <Link to="/forgot_password_form">
@@ -114,6 +121,9 @@ function LogginSpace() {
               <strong>Forgot password ?</strong>
             </Link>
           </p>
+        </div>
+        <div className="loggin--space--btn">
+          <button onClick={() => userAuth()}>Log in</button>
         </div>
       </LogginSpaceStyled>
     </React.Fragment>

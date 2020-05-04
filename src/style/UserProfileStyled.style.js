@@ -3,7 +3,7 @@ import styled from "styled-components";
 const UserProfileStyled = styled.section`
 background-color: ${props => props.theme.backgroundColor};
   div {
-    background-color: white;
+    background-color: ${props => props.theme.colorSecondary};
     border-radius: 15px;
     border: solid 1px ${props => props.theme.color};
     width: 90%;

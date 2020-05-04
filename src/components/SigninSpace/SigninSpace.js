@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { ReactSVG } from "react-svg";
-import {
-  IntroductionLogginSpace,
-  LogginSpaceStyled
-} from "../../style/LogginSpaceStyled.style";
+import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 import LoaderSvg from "../../img/loader.svg";
 import InputsForm from "../InputsForm/InputsForm";
 import FetchFunction from "../../utlis/FetchFunction";
@@ -99,33 +96,27 @@ function SigninSpace() {
 
   return (
     <React.Fragment>
-      <IntroductionLogginSpace className="introduction">
-        <h1>Welcome,</h1>
-        <p>It's time to register and share your mood.</p>
-      </IntroductionLogginSpace>
-      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />}
+      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />}
       {data.error && (
         <div className="form-group bg-danger rounded p-2 ml-2">
           <p className="text-light">{data.errorMessage}</p>
         </div>
       )}
-      <LogginSpaceStyled className="loggin--space">
+      <LogginSpaceStyled className="sign--up--space">
+        <h1>Welcome,</h1>
         <InputsForm
-          spaceName="loggin"
           type="text"
           fieldName="username"
           placeholderInput="Username"
           inputRef={inputUsername}
         />
         <InputsForm
-          spaceName="loggin"
           type="mail"
           fieldName="mail"
           placeholderInput="Email"
           inputRef={inputMail}
         />
         <InputsForm
-          spaceName="loggin"
           type="password"
           fieldName="password"
           placeholderInput="Password"
@@ -133,7 +124,6 @@ function SigninSpace() {
           minLength="6"
         />
         <InputsForm
-          spaceName="loggin"
           type="password"
           fieldName="confirm--password"
           placeholderInput="Confirm Password"
@@ -141,9 +131,7 @@ function SigninSpace() {
           minLength="6"
         />
         <p>
-          <small className="text-muted" style={{ fontSize: "0.5em" }}>
-            6 characters minimum.
-          </small>
+          <small className="text-muted">6 characters minimum.</small>
         </p>
         <div className="loggin--space--sign--btn">
           <button onClick={() => checkUserSub()}>Sign in</button>

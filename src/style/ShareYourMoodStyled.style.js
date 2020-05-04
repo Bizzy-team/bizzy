@@ -5,7 +5,7 @@ export const ShareYourMoodStyledHeader = styled.header`
   background-size: cover;
   height: 30vh;
   h2 {
-    color: white;
+    color: ${props => props.theme.colorSecondary};
     font-family: "Roboto";
     text-align: center;
     line-height: 198px;
@@ -13,7 +13,7 @@ export const ShareYourMoodStyledHeader = styled.header`
 `;
 
 export const ShareYourMoodSection = styled.section`
-  background-color: white;
+  background-color: ${props => props.theme.colorSecondary};
   border-radius: 34px;
   width: 90vw;
   height: 56vh;

@@ -22,7 +22,10 @@ function ResetPswd() {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/resetpassword?token=${data.urlToken}`)
+    // fetch(`http://localhost:3000/api/resetpassword?token=${data.urlToken}`)
+    // FetchFunction(`/resetpassword?token=${data.urlToken}`)
+
+    fetch(`https://bizzy.sh.now/api/resetpassword?mode=dev&token=${data.urlToken}`)
       .then(response => {
         if (response.status >= 500 && response.status <= 600) {
           return setData({
@@ -153,9 +156,12 @@ function ResetPswd() {
           <div className="resetPswd--title">
             <h1>Reset Password</h1>
           </div>
-          <div className="resetPswd--intro">
+          <div className="resetPswd--intro mb-5">
             <p>Enter a new password for your account.</p>
           </div>
+          {data.loader && (
+            <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />
+          )}
           <InputFormStyled>
             <InputsForm
               spaceName="resetPswd"

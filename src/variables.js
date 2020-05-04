@@ -1,6 +1,7 @@
 export default {
-  color: "#5FBF73",
-  backgroundColor: "#F9FAFA",
+  color: "#20D760",
+  colorSecondary: "#ffff",
+  backgroundColor: "#000",
   fontFamilyTitle: "Roboto",
   fontFamilyText: "Nunito"
 };

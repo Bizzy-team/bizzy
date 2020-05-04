@@ -62,10 +62,7 @@ function ForgotPasswordForm() {
   return (
     <ForgotPasswordFormStyled>
       <h1>Forgot password</h1>
-      <div className="icon--unlock">
-        <i className="fas fa-unlock-alt"></i>
-      </div>
-      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />}
+      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />}
       {data.error && (
         <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
           <p className="text-light">{data.errorMessage}</p>
