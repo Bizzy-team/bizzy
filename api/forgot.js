@@ -1,6 +1,6 @@
 const responseServer = require("./_utils/responseServer");
 const parseBody = require("./_utils/parseBody");
-const forgotDb = require("./_db/models/forgot");
+const forgotDb = require("./_db/controllers/forgot");
 const parseQuery = require("./_utils/parseQuery");
 
 module.exports = function Forgot(req, res) {
