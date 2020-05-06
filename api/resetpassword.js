@@ -1,6 +1,6 @@
 const { parse } = require("url");
 const responseServer = require("./_utils/responseServer");
-const { GET, PUT } = require("./_db/models/resetpassword");
+const { GET, PUT } = require("./_db/controllers/resetpassword");
 const parseBody = require("./_utils/parseBody");
 const parseQuery = require("./_utils/parseQuery");
 
