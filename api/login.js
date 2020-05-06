@@ -4,7 +4,7 @@ const loginDB = require("./_db/controllers/login");
 const parseBody = require("./_utils/parseBody");
 
 module.exports = function Login(req, res) {
-  const parameters = parseQuery(req.url)
+  const parameters = parseQuery(req.url);
 
   if (req.method !== "POST") {
     return responseServer(res, 405, {
@@ -30,7 +30,6 @@ module.exports = function Login(req, res) {
       });
     }
 
-    
     return loginDB(httpBody, parameters).then(userData => {
       responseServer(res, userData.code, {
         serverHeader: userData.serverHeader ? { ...userData.serverHeader } : {},

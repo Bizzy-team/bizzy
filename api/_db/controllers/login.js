@@ -1,14 +1,13 @@
 const { compare } = require("bcrypt");
 const { promisify } = require("util");
 const { randomFill } = require("crypto");
-const {ObjectID} = require("mongodb")
+const { ObjectID } = require("mongodb");
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const mongo = require("../index");
 
 const createToken = promisify(randomFill);
 const signJwtPromise = promisify(sign);
-
 
 /**
  * Check if an user exist.
@@ -31,29 +30,38 @@ module.exports = async (data, devMode) => {
 
   if (await compare(data.pswd, user.password)) {
     // TODO: Check if user is already connected
-    const sessionsCollection = mongobdd.db().collection("sessions")
+    const sessionsCollection = mongobdd.db().collection("sessions");
     const key = await createToken(Buffer.alloc(16));
 
     const newSession = await sessionsCollection.insertOne({
       userId: new ObjectID(user._id),
       key: key.toString("hex"),
-      expireAt: devMode ? new Date(Date.now() + 60 * 5 * 1000) : new Date(Date.now() + 60 * 300 * 1000)
-    })
+      expireAt: devMode
+        ? new Date(Date.now() + 60 * 5 * 1000)
+        : new Date(Date.now() + 60 * 300 * 1000)
+    });
 
-    await mongobdd.close()
+    await mongobdd.close();
     return {
       code: 200,
       serverHeader: {
-        "Set-Cookie": `tokenRefresh=${await hash(key.toString("hex"), 10)}; Expires=${new Date(Date.now() + 60 * 2880 * 1000)}; ${devMode ? "" : "Secure;"} Path=/; HttpOnly`
+        "Set-Cookie": `tokenRefresh=${await hash(
+          key.toString("hex"),
+          10
+        )}; Expires=${new Date(Date.now() + 60 * 2880 * 1000)}; ${
+          devMode ? "" : "Secure;"
+        } Path=/; HttpOnly`
       },
       data: {
-        token: await signJwtPromise(`{
+        token: await signJwtPromise(
+          `{
           "iss": ${newSession.insertedId}
           "exp": ${Math.floor(Date.now() + 60 * 1440 * 1000)}
         }`,
-        key.toString("hex"))
+          key.toString("hex")
+        )
       }
-    }
+    };
   }
 
   await mongobdd.close();

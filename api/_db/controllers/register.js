@@ -2,7 +2,7 @@ const { randomFill } = require("crypto");
 const { promisify } = require("util");
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
-const { ObjectID } = require("mongodb")
+const { ObjectID } = require("mongodb");
 const mongo = require("../index");
 
 const signJwtPromise = promisify(sign);
@@ -17,27 +17,34 @@ module.exports = async (body, devMode) => {
   const bizzyUsers = mongobdd.db().collection("users");
 
   if ((await bizzyUsers.findOne({ mail: body.mail })) === null) {
-    const sessionsCollection = mongobdd.db().collection("sessions")
+    const sessionsCollection = mongobdd.db().collection("sessions");
     const JWTToken = await createToken(Buffer.alloc(16));
     const userPassword = await hash(body.pswd, 10);
 
     const newUser = await bizzyUsers.insertOne({
       mail: body.mail,
       password: userPassword,
-      username: body.username,
+      username: body.username
     });
 
     const newSession = await sessionsCollection.insertOne({
       userId: new ObjectID(newUser.insertedId),
       key: JWTToken.toString("hex"),
-      expireAt: devMode ? new Date(Date.now() + 60 * 5 * 1000) : new Date(Date.now() + 60 * 300 * 1000)
-    })
+      expireAt: devMode
+        ? new Date(Date.now() + 60 * 5 * 1000)
+        : new Date(Date.now() + 60 * 300 * 1000)
+    });
 
     await mongobdd.close();
     return {
       code: 201,
       serverHeader: {
-        "Set-Cookie": `tokenRefresh=${await hash(JWTToken.toString("hex"), 10)}; Expires=${new Date(Date.now() + 60 * 2880 * 1000)}; ${devMode ? "" : "Secure;"} Path=/; HttpOnly`
+        "Set-Cookie": `tokenRefresh=${await hash(
+          JWTToken.toString("hex"),
+          10
+        )}; Expires=${new Date(Date.now() + 60 * 2880 * 1000)}; ${
+          devMode ? "" : "Secure;"
+        } Path=/; HttpOnly`
       },
       data: {
         token: await signJwtPromise(
