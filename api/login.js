@@ -1,12 +1,15 @@
-const responseServer = require("./_utils/responseServer");
-const loginDB = require("./_db/models/login");
-const parseBody = require("./_utils/parseBody");
 const parseQuery = require("./_utils/parseQuery");
+const responseServer = require("./_utils/responseServer");
+const loginDB = require("./_db/controllers/login");
+const parseBody = require("./_utils/parseBody");
 
 module.exports = function Login(req, res) {
+  const parameters = parseQuery(req.url)
+
   if (req.method !== "POST") {
     return responseServer(res, 405, {
-      content: "POST"
+      content: "POST",
+      query: parameters
     });
   }
 
@@ -16,20 +19,24 @@ module.exports = function Login(req, res) {
 
     if (q.length >= 3) {
       responseServer(res, 400, {
-        content: "Too many parameters"
+        content: "Too many parameters",
+        query: parameters
       });
     }
 
     if (!q.includes("mail") || !q.includes("pswd")) {
-      responseServer(res, 422);
+      responseServer(res, 422, {
+        query: parameters
+      });
     }
 
-    return loginDB(httpBody).then(userData => {
+    
+    return loginDB(httpBody, parameters).then(userData => {
       responseServer(res, userData.code, {
         serverHeader: userData.serverHeader ? { ...userData.serverHeader } : {},
         content: userData.content ? userData.content : undefined,
         modifyResponse: userData.data ? { ...userData.data } : undefined,
-        query: parseQuery(req.url)
+        query: parameters
       });
     });
   });
