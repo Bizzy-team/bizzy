@@ -4,7 +4,7 @@ const registerDb = require("./_db/controllers/register");
 const parseQuery = require("./_utils/parseQuery");
 
 module.exports = function register(req, res) {
-  const query = parseQuery(req.url)
+  const query = parseQuery(req.url);
 
   if (req.method !== "POST") {
     responseServer(res, 405, {

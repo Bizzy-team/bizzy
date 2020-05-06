@@ -1,5 +1,5 @@
 export default {
-    userId: "ObjectId()",
-    key: String,
-    expireAt: Date
-}
+  userId: "ObjectId()",
+  key: String,
+  expireAt: Date
+};

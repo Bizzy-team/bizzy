@@ -1,5 +1,5 @@
 export default {
-    mail: String,
-    password: String,
-    username: String   
-}
+  mail: String,
+  password: String,
+  username: String
+};

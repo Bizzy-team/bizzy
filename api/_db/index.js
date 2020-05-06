@@ -1,10 +1,11 @@
 process.env.NODE_ENV === "development" && require("dotenv").config(); // eslint-disable-line global-require
 const { MongoClient } = require("mongodb");
+
 let db;
 
 module.exports = async function() {
   if (db) {
-    return db
+    return db;
   }
 
   // eslint-disable-next-line no-useless-catch
@@ -13,7 +14,7 @@ module.exports = async function() {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
-    return db
+    return db;
   } catch (error) {
     throw error;
   }
