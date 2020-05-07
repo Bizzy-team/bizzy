@@ -1,4 +1,4 @@
-const {decode, verify} = require("jsonwebtoken");
+const { decode, verify } = require("jsonwebtoken");
 const mongo = require("../_db/index");
 
 /**
@@ -8,73 +8,66 @@ const mongo = require("../_db/index");
  * @param {Boolean} [options.bool = false] - Return a boolean true if user is correctly connected or false.
  */
 module.exports = async function(authorization, options) {
-    const ops = {
-        bool: false,
-        ...options
+  const ops = {
+    bool: false,
+    ...options
+  };
+
+  if (typeof authorization !== "string" || !authorization) {
+    if (ops.bool) return false;
+    return {
+      code: 400
+    };
+  }
+
+  const [b, token] = authorization.split(" ");
+  if (b !== "Bearer" || !token || token.split(".").length !== 3) {
+    if (ops.bool) return false;
+    return {
+      code: 400
+    };
+  }
+
+  const tokenValue = decode(token, { json: true });
+
+  if (tokenValue) {
+    const tokenAsArray = Object.keys(tokenValue.payload);
+
+    if (tokenAsArray.length !== 2) {
+      if (ops.bool) return false;
+      return {
+        code: 401
+      };
     }
 
-    if (typeof authorization !== "string" || !authorization) {
-        if (ops.bool) return false
-        return {
-            code: 400
-        }
+    if (tokenAsArray[0] !== "iss" || tokenAsArray[1] !== "exp") {
+      if (ops.bool) return false;
+      return {
+        code: 401
+      };
     }
 
-    const [b, token] = authorization.split(" ")
-    if (b !== "Bearer" || !token || token.split(".").length !== 3) {
-        if (ops.bool) return false
-        return {
-            code: 400
-        }
+    const mongobdd = await mongo();
+    const sessionsCollection = mongobdd.db().collection("sessions");
+    const userSession = await sessionsCollection.findOne({ _id: tokenValue.iss });
+
+    if (!userSession) {
+      if (ops.bool) return false;
+      return {
+        code: 401
+      };
     }
 
-    const tokenValue = decode(token, {json: true})
+    try {
+      // const decoded = verify(token, userSession.key);
+    } catch (e) {}
 
-    console.log(typeof tokenValue)
-    if (tokenValue) {
-        const tokenAsArray = Object.keys(tokenValue.payload);
-
-        console.log(tokenAsArray, tokenValue.iss)
-        if (tokenAsArray.length !== 2) {
-            if (ops.bool) return false
-            return {
-                code: 401
-            }
-        }
-
-        if (tokenAsArray[0] !== "iss" || tokenAsArray[1] !== "exp") {
-            if (ops.bool) return false;
-            return {
-                code: 401
-            }
-        }
-
-        const mongobdd = await mongo();
-        const sessionsCollection = mongobdd.db().collection("sessions")
-        const userSession = await sessionsCollection.findOne({_id: tokenValue.iss})
-        console.log(userSession, tokenValue)
-
-        if (!userSession) {
-            if (ops.bool) return false
-            return {
-                code: 401
-            }
-        }
-    
-        try {
-            const decoded = verify(token, userSession.key)
-            console.log(decoded)
-        } catch (e) {
-            console.log(e)
-        }
-    
-        return {
-            code: 200
-        }
-    } else {
-        if (ops.bool) return false
-        return {
-            code: 401
-        }
-    }
+    return {
+      code: 200
+    };
+  }
+  if (ops.bool) return false;
+  return {
+    code: 401
+  };
 };
