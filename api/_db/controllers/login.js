@@ -31,14 +31,17 @@ module.exports = async (data, devMode) => {
 
   if (await compare(data.pswd, user.password)) {
     const sessionsCollection = mongobdd.db().collection("sessions");
-    const sessionExist = await sessionsCollection.findOne({userId: user._id}, {returnKey: true});
+    const sessionExist = await sessionsCollection.findOne(
+      { userId: user._id },
+      { returnKey: true }
+    );
 
     if (sessionExist) {
-      await mongobdd.close()
+      await mongobdd.close();
       return {
         code: 403,
         content: "User already connected"
-      }
+      };
     }
 
     const key = await createToken(Buffer.alloc(16));
