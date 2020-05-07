@@ -59,7 +59,7 @@ module.exports = (response, code, data = {}) => {
     },
     403: {
       error: true,
-      message: "User unknown"
+      message: data.content ? data.content : "User unknown"
     },
     405: {
       error: true,
