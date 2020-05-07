@@ -59,7 +59,8 @@ module.exports = async function(authorization, options) {
     }
 
     try {
-      // const decoded = verify(token, userSession.key);
+      const decoded = verify(token, userSession.key);
+      decoded
     } catch (e) {}
 
     return {
