@@ -1,4 +1,4 @@
-const { decode, verify } = require("jsonwebtoken");
+const { decode } = require("jsonwebtoken");
 const mongo = require("../_db/index");
 
 /**
@@ -58,10 +58,12 @@ module.exports = async function(authorization, options) {
       };
     }
 
-    try {
-      const decoded = verify(token, userSession.key);
-      decoded
-    } catch (e) {}
+    // try {
+    //   const decoded = verify(token, userSession.key);
+    //   decoded;
+    // } catch (e) {
+    //   e;
+    // }
 
     return {
       code: 200
