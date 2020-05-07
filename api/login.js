@@ -14,7 +14,7 @@ module.exports = function Login(req, res) {
   }
 
   parseBody(req, res);
-  return req.on("bodyParsed", httpBody => {
+  return req.on("bodyParsed", async httpBody => {
     const q = Object.keys(httpBody);
 
     if (q.length >= 3) {
@@ -30,13 +30,12 @@ module.exports = function Login(req, res) {
       });
     }
 
-    return loginDB(httpBody, parameters).then(userData => {
-      responseServer(res, userData.code, {
-        serverHeader: userData.serverHeader ? { ...userData.serverHeader } : {},
-        content: userData.content ? userData.content : undefined,
-        modifyResponse: userData.data ? { ...userData.data } : undefined,
-        query: parameters
-      });
+    const userData = await loginDB(httpBody, parameters);
+    responseServer(res, userData.code, {
+      serverHeader: userData.serverHeader ? { ...userData.serverHeader } : {},
+      content: userData.content ? userData.content : undefined,
+      modifyResponse: userData.data ? { ...userData.data } : undefined,
+      query: parameters
     });
   });
 };
