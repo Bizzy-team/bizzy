@@ -4,6 +4,7 @@ const { randomFill } = require("crypto");
 const { ObjectID } = require("mongodb");
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
+
 const mongo = require("../index");
 
 const createToken = promisify(randomFill);
@@ -29,8 +30,17 @@ module.exports = async (data, devMode) => {
   }
 
   if (await compare(data.pswd, user.password)) {
-    // TODO: Check if user is already connected
     const sessionsCollection = mongobdd.db().collection("sessions");
+    const sessionExist = await sessionsCollection.findOne({userId: user._id}, {returnKey: true});
+
+    if (sessionExist) {
+      await mongobdd.close()
+      return {
+        code: 403,
+        content: "User already connected"
+      }
+    }
+
     const key = await createToken(Buffer.alloc(16));
 
     const newSession = await sessionsCollection.insertOne({
