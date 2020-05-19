@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-console */
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
 const chalk = require("chalk");
@@ -39,8 +41,10 @@ MongoClient.connect(
 
     const newCollectionList = collectionsToCreate.map(async function(col) {
       if (!collectionsInBdd.includes(col)) {
-        return await client.db().createCollection(col);
+        return client.db().createCollection(col);
       }
+
+      return undefined;
     });
 
     Promise.all(newCollectionList).then(newCol => {
