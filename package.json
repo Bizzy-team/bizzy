@@ -51,7 +51,6 @@
         "dotenv": "^8.2.0",
         "jsonwebtoken": "^8.5.1",
         "mongodb": "^3.5.5",
-        "mongoose": "^5.9.14",
         "nodemailer": "^6.4.6",
         "react": "^16.13.0",
         "react-dom": "^16.13.0",
