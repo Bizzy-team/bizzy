@@ -3,14 +3,14 @@ const { MongoClient } = require("mongodb");
 
 let db;
 
-module.exports = async function() {
+module.exports = async function(devMode) {
   if (db) {
     return db;
   }
 
   // eslint-disable-next-line no-useless-catch
   try {
-    db = await MongoClient.connect(process.env.DB_URL, {
+    db = await MongoClient.connect(devMode ? process.env.DB_URL_TEST : process.env.DB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
