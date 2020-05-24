@@ -4,3 +4,4 @@ README.md
 .travis.yml
 .eslintcache
 yarn.lock
+.scripts/
