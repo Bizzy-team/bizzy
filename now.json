@@ -5,6 +5,7 @@
   "env": {
       "NODEJS_HELPERS": "0",
       "DB_URL": "@mongo",
+      "DB_URL_TEST": "@mongodev",
       "MAILUSER": "@mailuserdev",
       "MAILMDP": "@mailmdpdev"
   },
