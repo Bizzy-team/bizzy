@@ -10,10 +10,13 @@ module.exports = async function(devMode) {
 
   // eslint-disable-next-line no-useless-catch
   try {
-    db = await MongoClient.connect(devMode ? process.env.DB_URL_TEST : process.env.DB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    db = await MongoClient.connect(
+      devMode ? process.env.DB_URL_TEST : process.env.DB_URL,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      }
+    );
     return db;
   } catch (error) {
     throw error;
