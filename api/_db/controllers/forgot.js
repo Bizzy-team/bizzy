@@ -6,7 +6,7 @@ const mongo = require("../index");
 const createToken = promisify(randomFill);
 
 module.exports = async (data, devMode) => {
-  const mongobdd = await mongo();
+  const mongobdd = await mongo(devMode);
   const bizzyUsers = mongobdd.db("bizzy").collection("users");
   const user = await bizzyUsers.findOne({ mail: data.mail });
 
