@@ -4,15 +4,14 @@
     "private": true,
     "scripts": {
         "start:back": "now dev",
-        "mongo:dev": "NODE_ENV=development node mongo.config.js",
-        "mongo:build": "NODE_ENV=production node mongo.config.js",
+        "mongo": "node ./scripts/index.js",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "lint": "npx eslint --cache './api/**/*' ./mongo.config.js",
+        "lint": "npx eslint --cache './api/**/*' ./scripts/index.js",
         "lint:watch": "esw -w --clear --color --cache './api/**/*'",
-        "lint:fix": "npx eslint --fix './api/**/*' ./mongo.config.js",
+        "lint:fix": "npx eslint --fix './api/**/*' ./scripts/index.js",
         "style": "prettier -c './src/**/*' && prettier -c './api/**/*'",
         "style:fix": "prettier --c --write './src/**/*' && prettier -c './api/**/*'"
     },
