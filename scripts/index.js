@@ -98,17 +98,21 @@ inquirer
             type: "checkbox",
             name: "colToAddData",
             message: chalk`{gray In which collections you'll like to add fake data ?}`,
-            choices () {return collections.map(c => c.name)},
-            when (answer) {
+            choices() {
+              return collections.map(c => c.name);
+            },
+            when(answer) {
               if (!answer.injectData) return false;
-              return true
+              return true;
             }
           }
-        ])
+        ]);
 
         if (!answer.injectData) {
-          console.log(chalk`{green Your sandbox database is ready to be test, have fun :)}`)
-          process.exit(0)
+          console.log(
+            chalk`{green Your sandbox database is ready to be test, have fun :)}`
+          );
+          process.exit(0);
         }
 
         await insertFakeData(answer.colToAddData, client);
