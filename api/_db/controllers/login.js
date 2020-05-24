@@ -15,7 +15,7 @@ const signJwtPromise = promisify(sign);
  * @param {Object} data An object of parsed parameters.
  */
 module.exports = async (data, devMode) => {
-  const mongobdd = await mongo();
+  const mongobdd = await mongo(devMode);
   const bizzyUsers = mongobdd.db().collection("users");
   const user = await bizzyUsers.findOne(
     { mail: data.mail },

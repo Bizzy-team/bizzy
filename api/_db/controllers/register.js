@@ -13,7 +13,7 @@ const createToken = promisify(randomFill);
  * @param {(string|undefined[])} devMode If dev mode is development devMode will be a string with "dev" as value.
  */
 module.exports = async (body, devMode) => {
-  const mongobdd = await mongo();
+  const mongobdd = await mongo(devMode);
   const bizzyUsers = mongobdd.db().collection("users");
 
   if ((await bizzyUsers.findOne({ mail: body.mail })) === null) {
