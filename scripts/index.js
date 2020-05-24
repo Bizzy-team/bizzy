@@ -88,7 +88,7 @@ inquirer
 
       // When collections are created if mode is dev asking user is he wants some fake data ?
       if (answer.mode === "dev") {
-        const answer = await inquirer.prompt([
+        const answer2 = await inquirer.prompt([
           {
             type: "confirm",
             name: "injectData",
@@ -101,21 +101,21 @@ inquirer
             choices() {
               return collections.map(c => c.name);
             },
-            when(answer) {
-              if (!answer.injectData) return false;
+            when(shouldInsert) {
+              if (!shouldInsert.injectData) return false;
               return true;
             }
           }
         ]);
 
-        if (!answer.injectData) {
+        if (!answer2.injectData) {
           console.log(
             chalk`{green Your sandbox database is ready to be test, have fun :)}`
           );
           process.exit(0);
         }
 
-        await insertFakeData(answer.colToAddData, client);
+        await insertFakeData(answer2.colToAddData, client);
       }
 
       process.exit(0);
