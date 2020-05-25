@@ -58,7 +58,7 @@ module.exports = function (col, mclient, entries = 5) {
                     obj[props] = chance.email()
                 }
 
-                if (props === "password") {
+                if (props === "password" || props === "forgotPassword") {
                     obj[props] = chance.hash({length: 15})
                 }
 
@@ -67,9 +67,8 @@ module.exports = function (col, mclient, entries = 5) {
                 }
         
                 if (props === "expireAt") {
-                    if (c === "sessions") {
-                        obj[props] = new Date();
-                    }
+                    let mn = Math.random() * index
+                    obj[props] = new Date(Date.now() + 60 * mn * 1000);
                 }
             });
 
