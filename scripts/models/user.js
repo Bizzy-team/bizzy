@@ -21,5 +21,6 @@ module.exports = {
       }
     }
   },
+  validationLevel: "strict",
   validationAction: "warn"
 }
