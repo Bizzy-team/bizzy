@@ -4,6 +4,7 @@ require("dotenv").config();
 const inquirer = require("inquirer");
 const ora = require("ora");
 const chalk = require("chalk");
+const {isEqual} = require("lodash")
 const { MongoClient } = require("mongodb");
 
 const collections = require("./data/collections.json");
@@ -45,7 +46,7 @@ inquirer
       if (answer.mode === "dev") {
         dbName = process.env.DB_TEST_NAME;
       } else {
-        dbName = process.env.DB_URL;
+        dbName = process.env.DB_PROD_NAME;
       }
 
       // Fetch collections list in bdd.
@@ -61,7 +62,31 @@ inquirer
       // Collections are up to date no need to add, checking now if schema corresponding.
       if (collectionsMissing.length === 0) {
         spinner.text = chalk`{gray All collections are good, checking now if schemas are up to date.}`;
-        // TODO: Check schemas
+        const Schemas = collectionsInBdd.filter(col => !isEqual(models[col.name], col.options))
+        
+        if (Schemas.length !== 0) {
+          spinner.warn(chalk`{yellow Oupss, some schemas are not up to date, we're fixing that..}`);
+          
+          const collectionsUpdate = Schemas.map(async function (c) {
+            return await client.db(dbName).command({
+              collMod: c.name,
+              ...models[c.name]
+            })
+          })
+          
+          const SchemasName = Schemas.map(l => l.name);
+          return Promise.all(collectionsUpdate).then(function () {
+            console.log(chalk`
+            {cyan Fixed ${collectionsUpdate.length} Schemas.}
+
+            {gray collections name}
+            ${SchemasName.join(", ")}
+            `);
+            process.exit(0);
+          })
+        }
+
+        spinner.succeed(chalk`{green Collections and schemas are up to date :)}`);
         process.exit(0);
       }
 
@@ -71,7 +96,6 @@ inquirer
 
         if (c.indexOn) {
           await client.db(dbName).createIndex(c.name, c.indexOn, {
-            unique: true,
             expireAfterSeconds: 0
           });
         }
@@ -115,9 +139,10 @@ inquirer
           process.exit(0);
         }
 
-        await insertFakeData(answer2.colToAddData, client);
+        return insertFakeData(answer2.colToAddData, client);
       }
 
+      console.log(chalk`{green Collections and schemas are up to date :)}`);
       process.exit(0);
     });
   })
