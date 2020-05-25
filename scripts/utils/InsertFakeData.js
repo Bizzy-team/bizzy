@@ -67,7 +67,7 @@ module.exports = function (col, mclient, entries = 5) {
                 }
         
                 if (props === "expireAt") {
-                    let mn = Math.random() * index
+                    let mn = Math.floor(Math.random() * (10 - 5 + 1) + 5)
                     obj[props] = new Date(Date.now() + 60 * mn * 1000);
                 }
             });
