@@ -3,7 +3,8 @@
         "name": "users"
     },
     {
-        "name": "passwordforget"
+        "name": "passwordforget",
+        "indexOn": "expireAt"
     },
     {
         "name": "sessions",
