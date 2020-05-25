@@ -4,7 +4,7 @@ require("dotenv").config();
 const inquirer = require("inquirer");
 const ora = require("ora");
 const chalk = require("chalk");
-const {isEqual} = require("lodash")
+const { isEqual } = require("lodash");
 const { MongoClient } = require("mongodb");
 
 const collections = require("./data/collections.json");
@@ -62,20 +62,24 @@ inquirer
       // Collections are up to date no need to add, checking now if schema corresponding.
       if (collectionsMissing.length === 0) {
         spinner.text = chalk`{gray All collections are good, checking now if schemas are up to date.}`;
-        const Schemas = collectionsInBdd.filter(col => !isEqual(models[col.name], col.options))
-        
+        const Schemas = collectionsInBdd.filter(
+          col => !isEqual(models[col.name], col.options)
+        );
+
         if (Schemas.length !== 0) {
-          spinner.warn(chalk`{yellow Oupss, some schemas are not up to date, we're fixing that..}`);
-          
-          const collectionsUpdate = Schemas.map(async function (c) {
+          spinner.warn(
+            chalk`{yellow Oupss, some schemas are not up to date, we're fixing that..}`
+          );
+
+          const collectionsUpdate = Schemas.map(async function(c) {
             return await client.db(dbName).command({
               collMod: c.name,
               ...models[c.name]
-            })
-          })
-          
+            });
+          });
+
           const SchemasName = Schemas.map(l => l.name);
-          return Promise.all(collectionsUpdate).then(function () {
+          return Promise.all(collectionsUpdate).then(function() {
             console.log(chalk`
             {cyan Fixed ${collectionsUpdate.length} Schemas.}
 
@@ -83,7 +87,7 @@ inquirer
             ${SchemasName.join(", ")}
             `);
             process.exit(0);
-          })
+          });
         }
 
         spinner.succeed(chalk`{green Collections and schemas are up to date :)}`);
