@@ -72,7 +72,7 @@ inquirer
           );
 
           const collectionsUpdate = Schemas.map(async function(c) {
-            return await client.db(dbName).command({
+            return client.db(dbName).command({
               collMod: c.name,
               ...models[c.name]
             });
@@ -147,7 +147,7 @@ inquirer
       }
 
       console.log(chalk`{green Collections and schemas are up to date :)}`);
-      process.exit(0);
+      return process.exit(0);
     });
   })
   .catch(error => {
