@@ -18,130 +18,130 @@ const JWTPromise = promisify(sign);
  */
 
 module.exports = async (
-    cookie,
-    options = { checkToken: true, returnBool: false, JWT: "" }
+  cookie,
+  options = { checkToken: true, returnBool: false, JWT: "" }
 ) => {
-    if (!cookie || typeof cookie !== "string") {
-        if (options.returnBool) return false;
+  if (!cookie || typeof cookie !== "string") {
+    if (options.returnBool) return false;
 
-        return {
-            code: 500
-        };
+    return {
+      code: 500
+    };
+  }
+
+  const cookieObject = Object.fromEntries([cookie.split("=")]);
+
+  if (!cookieObject.sid || typeof cookieObject.sid !== "string") {
+    if (options.returnBool) return false;
+
+    return {
+      code: 500
+    };
+  }
+
+  const mongobdd = await mongo.connect();
+  const userCollection = await mongobdd.db("bizzy").collection("users");
+
+  // Check if cookie send in the header are correct.
+  const user = await userCollection.findOne(
+    { "session.id": cookieObject.sid },
+    {
+      projection: { _id: 1, session: 1, verifyJWTToken: 1, mail: 1 }
     }
+  );
 
-    const cookieObject = Object.fromEntries([cookie.split("=")]);
+  if (user === null) {
+    await mongobdd.close();
+    if (options.returnBool) return false;
 
-    if (!cookieObject.sid || typeof cookieObject.sid !== "string") {
-        if (options.returnBool) return false;
+    return {
+      code: 401
+    };
+  }
 
-        return {
-            code: 500
-        };
-    }
+  // Check that session has not expired. If last request is later than 5 hours delete session.
+  if (Math.round(Math.abs(new Date() - user.session.lastRequest) / 36e5) > 5) {
+    await userCollection.findOneAndUpdate({ _id: user._id }, { $unset: { session: "" } });
 
-    const mongobdd = await mongo.connect();
-    const userCollection = await mongobdd.db("bizzy").collection("users");
+    await mongobdd.close();
+    if (options.returnBool) return false;
 
-    // Check if cookie send in the header are correct.
-    const user = await userCollection.findOne(
-        { "session.id": cookieObject.sid },
-        {
-            projection: { _id: 1, session: 1, verifyJWTToken: 1, mail: 1 }
-        }
-    );
+    return {
+      code: 401,
+      content: "Session expired"
+    };
+  }
 
-    if (user === null) {
-        await mongobdd.close();
-        if (options.returnBool) return false;
+  // If options.checkToken add logic for checking if JWT is well associated to this session.
+  if (options.checkToken) {
+    return verify(options.JWT, user.verifyJWTToken, async function v(err) {
+      if (err) {
+        // Token is good but expiration date is over so just reset the token.
+        if (err.name === "TokenExpiredError") {
+          const newJWTTKey = await createTokenKey(Buffer.alloc(16));
+          const newJWT = await JWTPromise(
+            `{data: ${user.mail}, exp: ${Math.floor(Date.now() + 60 * 8640 * 1000)}}`,
+            newJWTTKey.toString("hex")
+          );
 
-        return {
-            code: 401
-        };
-    }
-
-    // Check that session has not expired. If last request is later than 5 hours delete session.
-    if (Math.round(Math.abs(new Date() - user.session.lastRequest) / 36e5) > 5) {
-        await userCollection.findOneAndUpdate({ _id: user._id }, { $unset: { session: "" } });
-
-        await mongobdd.close();
-        if (options.returnBool) return false;
-
-        return {
-            code: 401,
-            content: "Session expired"
-        };
-    }
-
-    // If options.checkToken add logic for checking if JWT is well associated to this session.
-    if (options.checkToken) {
-        return verify(options.JWT, user.verifyJWTToken, async function v(err) {
-            if (err) {
-                // Token is good but expiration date is over so just reset the token.
-                if (err.name === "TokenExpiredError") {
-                    const newJWTTKey = await createTokenKey(Buffer.alloc(16));
-                    const newJWT = await JWTPromise(
-                        `{data: ${user.mail}, exp: ${Math.floor(Date.now() + 60 * 8640 * 1000)}}`,
-                        newJWTTKey.toString("hex")
-                    );
-
-                    await userCollection.findOneAndUpdate(
-                        { _id: user._id },
-                        {
-                            $set: {
-                                token: newJWT,
-                                verifyJWTToken: newJWTTKey.toString("hex")
-                            }
-                        }
-                    );
-
-                    const dataToReturn = await userCollection.findOneAndUpdate(
-                        { _id: user._id },
-                        {
-                            $set: { "session.lastRequest": new Date() }
-                        },
-                        {
-                            projection: options && options.fields ? { ...options.fields } : { _id: 1 }
-                        }
-                    );
-
-                    if (options.returnBool) return true;
-                    return dataToReturn.value;
-                }
-
-                // Error token sent is not the same in bdd.
-                if (options.returnBool) return false;
-                return {
-                    code: 401
-                };
+          await userCollection.findOneAndUpdate(
+            { _id: user._id },
+            {
+              $set: {
+                token: newJWT,
+                verifyJWTToken: newJWTTKey.toString("hex")
+              }
             }
+          );
 
-            // Token are the same, session is good, update lastRequest and return data.
-            const dataToReturn = await userCollection.findOneAndUpdate(
-                { _id: user._id },
-                {
-                    $set: { "session.lastRequest": new Date() }
-                },
-                {
-                    projection: options && options.fields ? { ...options.fields } : { _id: 1 }
-                }
-            );
+          const dataToReturn = await userCollection.findOneAndUpdate(
+            { _id: user._id },
+            {
+              $set: { "session.lastRequest": new Date() }
+            },
+            {
+              projection: options && options.fields ? { ...options.fields } : { _id: 1 }
+            }
+          );
 
-            if (options.returnBool) return true;
-            return dataToReturn.value;
-        });
-    }
+          if (options.returnBool) return true;
+          return dataToReturn.value;
+        }
 
-    // Either everything is good, we can now update the lastRequest property
-    const dataToReturn = await userCollection.findOneAndUpdate(
+        // Error token sent is not the same in bdd.
+        if (options.returnBool) return false;
+        return {
+          code: 401
+        };
+      }
+
+      // Token are the same, session is good, update lastRequest and return data.
+      const dataToReturn = await userCollection.findOneAndUpdate(
         { _id: user._id },
         {
-            $set: { "session.lastRequest": new Date() }
+          $set: { "session.lastRequest": new Date() }
         },
         {
-            projection: options && options.fields ? { ...options.fields } : { _id: 1 }
+          projection: options && options.fields ? { ...options.fields } : { _id: 1 }
         }
-    );
+      );
 
-    if (options.returnBool) return true;
-    return dataToReturn.value;
+      if (options.returnBool) return true;
+      return dataToReturn.value;
+    });
+  }
+
+  // Either everything is good, we can now update the lastRequest property
+  const dataToReturn = await userCollection.findOneAndUpdate(
+    { _id: user._id },
+    {
+      $set: { "session.lastRequest": new Date() }
+    },
+    {
+      projection: options && options.fields ? { ...options.fields } : { _id: 1 }
+    }
+  );
+
+  if (options.returnBool) return true;
+  return dataToReturn.value;
 };
