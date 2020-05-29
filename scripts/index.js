@@ -25,11 +25,11 @@ inquirer
       choices: ["dev", "prod"]
     }
   ])
-  .then(function (answer) {
+  .then(function(answer) {
     const spinner = ora({
       text: chalk`{gray Start checking collections in ${
         answer.mode === "dev" ? "dev_bizzy" : "bizzy"
-        } database}`,
+      } database}`,
       spinner: {
         interval: 1000,
         frames: ["🙂", "🙃"]
@@ -40,7 +40,7 @@ inquirer
       // TODO: Must authenticate user to be able to execute command into prod database.
     }
 
-    MongoClient.connect(process.env.DB_URL, mongoOps).then(async function (client) {
+    MongoClient.connect(process.env.DB_URL, mongoOps).then(async function(client) {
       let dbName;
 
       if (answer.mode === "dev") {
@@ -71,7 +71,7 @@ inquirer
             chalk`{yellow Oupss, some schemas are not up to date, we're fixing that..}`
           );
 
-          const collectionsUpdate = Schemas.map(async function (c) {
+          const collectionsUpdate = Schemas.map(async function(c) {
             return client.db(dbName).command({
               collMod: c.name,
               ...models[c.name]
@@ -79,7 +79,7 @@ inquirer
           });
 
           const SchemasName = Schemas.map(l => l.name);
-          console.log(SchemasName)
+          console.log(SchemasName);
           await Promise.all(collectionsUpdate);
 
           console.log(chalk`
@@ -110,7 +110,7 @@ inquirer
               return true;
             }
           }
-        ])
+        ]);
 
         if (!answer3.injectData) {
           console.log(
@@ -123,7 +123,7 @@ inquirer
       }
 
       spinner.text = chalk`{gray Some collections are missing we're fixing that.}`;
-      const collectionsCreated = collectionsMissing.map(async function (c) {
+      const collectionsCreated = collectionsMissing.map(async function(c) {
         await client.db(dbName).createCollection(c.name, models[c.name]);
 
         if (c.indexOn) {
