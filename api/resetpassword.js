@@ -5,9 +5,12 @@ const parseBody = require("./_utils/parseBody");
 const parseQuery = require("./_utils/parseQuery");
 
 module.exports = function ResetPassword(req, res) {
+  const query = parseQuery(req.url);
+
   if (!["GET", "PUT"].includes(req.method)) {
     responseServer(res, 405, {
-      content: "POST, PUT"
+      content: "POST, PUT",
+      query
     });
   }
 
@@ -17,21 +20,24 @@ module.exports = function ResetPassword(req, res) {
 
     if (paramsLength === 0 || !params.get("token")) {
       responseServer(res, 422, {
-        content: "Missing parameter"
+        content: "Missing parameter",
+        query
       });
     }
 
     if (paramsLength > 1) {
       responseServer(res, 400, {
-        content: "Too many parameters"
+        content: "Too many parameters",
+        query
       });
     }
 
-    return GET(params).then(result => {
+    return GET(params, query).then(result => {
       responseServer(res, result.code, {
         serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
         content: result.content ? result.content : undefined,
-        modifyResponse: result.data ? { ...result.data } : undefined
+        modifyResponse: result.data ? { ...result.data } : undefined,
+        query
       });
     });
   }
@@ -39,7 +45,8 @@ module.exports = function ResetPassword(req, res) {
   if (req.method === "PUT") {
     if (!req.headers.authorization) {
       responseServer(res, 403, {
-        content: "Missing 'Authorization: <token>' header in your request."
+        content: "Missing 'Authorization: <token>' header in your request.",
+        query
       });
     }
 
@@ -49,7 +56,8 @@ module.exports = function ResetPassword(req, res) {
 
       if (req.headers.cookie ? q.length > 1 : q.length > 2) {
         responseServer(res, 400, {
-          content: "Too many parameters"
+          content: "Too many parameters",
+          query
         });
       }
 
@@ -66,12 +74,12 @@ module.exports = function ResetPassword(req, res) {
       PUTData.jwtToken = req.headers.authorization;
       if (req.headers.cookie) PUTData.cookie = req.headers.cookie;
 
-      return PUT(PUTData).then(result => {
+      return PUT(PUTData, query).then(result => {
         responseServer(res, result.code, {
           serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
           content: result.content ? result.content : undefined,
           modifyResponse: result.data ? { ...result.data } : undefined,
-          query: parseQuery(req.url)
+          query,
         });
       });
     });
