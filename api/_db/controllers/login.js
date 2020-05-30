@@ -16,28 +16,28 @@ const signJwtPromise = promisify(sign);
  */
 module.exports = async (data, devMode) => {
   const mongobdd = await mongo(devMode);
-  const bizzyUsers = mongobdd.db().collection("users");
+  const bizzyUsers = mongobdd.bdd.collection("users");
   const user = await bizzyUsers.findOne(
     { mail: data.mail },
     { projection: { _id: 1, password: 1, token: 1 } }
   );
 
   if (user === null) {
-    await mongobdd.close();
+    await mongobdd.client.close();
     return {
       code: 403
     };
   }
 
   if (await compare(data.pswd, user.password)) {
-    const sessionsCollection = mongobdd.db().collection("sessions");
+    const sessionsCollection = mongobdd.bdd.collection("sessions");
     const sessionExist = await sessionsCollection.findOne(
       { userId: user._id },
       { returnKey: true }
     );
 
     if (sessionExist) {
-      await mongobdd.close();
+      await mongobdd.client.close();
       return {
         code: 403,
         content: "User already connected"
@@ -54,7 +54,7 @@ module.exports = async (data, devMode) => {
         : new Date(Date.now() + 60 * 300 * 1000)
     });
 
-    await mongobdd.close();
+    await mongobdd.client.close();
     return {
       code: 200,
       serverHeader: {
@@ -77,7 +77,7 @@ module.exports = async (data, devMode) => {
     };
   }
 
-  await mongobdd.close();
+  await mongobdd.client.close();
   return {
     code: 401,
     content: "That email and password combination is incorrect."

@@ -14,10 +14,10 @@ const createToken = promisify(randomFill);
  */
 module.exports = async (body, devMode) => {
   const mongobdd = await mongo(devMode);
-  const bizzyUsers = mongobdd.db().collection("users");
+  const bizzyUsers = mongobdd.bdd.collection("users");
 
   if ((await bizzyUsers.findOne({ mail: body.mail })) === null) {
-    const sessionsCollection = mongobdd.db().collection("sessions");
+    const sessionsCollection = mongobdd.bdd.collection("sessions");
     const JWTToken = await createToken(Buffer.alloc(16));
     const userPassword = await hash(body.pswd, 10);
 
@@ -35,7 +35,7 @@ module.exports = async (body, devMode) => {
         : new Date(Date.now() + 60 * 300 * 1000)
     });
 
-    await mongobdd.close();
+    await mongobdd.client.close();
     return {
       code: 201,
       serverHeader: {
@@ -58,7 +58,7 @@ module.exports = async (body, devMode) => {
     };
   }
 
-  await mongobdd.close();
+  await mongobdd.client.close();
   return {
     code: 409
   };
