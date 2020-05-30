@@ -79,7 +79,7 @@ module.exports = function ResetPassword(req, res) {
           serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
           content: result.content ? result.content : undefined,
           modifyResponse: result.data ? { ...result.data } : undefined,
-          query,
+          query
         });
       });
     });
