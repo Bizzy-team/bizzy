@@ -9,8 +9,8 @@ const sessionValid = require("../../_utils/sessionValid");
 const createTokenKey = promisify(randomFill);
 const signJwtPromise = promisify(sign);
 
-export async function GET(params) {
-  const mongobdd = await mongo();
+export async function GET(params, devMode) {
+  const mongobdd = await mongo(devMode);
   const passwordForget = mongobdd.bdd.collection("passwordforget");
   const user = await passwordForget.findOne(
     { forgotPassword: params.get("token") },
@@ -40,8 +40,8 @@ export async function GET(params) {
   };
 }
 
-export async function PUT(data) {
-  const mongobdd = await mongo();
+export async function PUT(data, devMode) {
+  const mongobdd = await mongo(devMode);
   const passwordForgetCollection = mongobdd.db("bizzy").collection("passwordforget");
   const userCollection = mongobdd.db("bizzy").collection("users");
   const { newpswd, token, jwtToken, cookie } = data;
