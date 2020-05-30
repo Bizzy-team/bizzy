@@ -11,27 +11,27 @@ const signJwtPromise = promisify(sign);
 
 export async function GET(params) {
   const mongobdd = await mongo();
-  const passwordForget = mongobdd.db("bizzy").collection("passwordforget");
+  const passwordForget = mongobdd.bdd.collection("passwordforget");
   const user = await passwordForget.findOne(
     { forgotPassword: params.get("token") },
     { projection: { _id: 1 } }
   );
 
   if (user === null) {
-    await mongobdd.close();
+    await mongobdd.client.close();
     return {
       code: 401,
       content: "Token parameter is not valid, try resend a forgot password request."
     };
   }
 
-  const userCollection = mongobdd.db("bizzy").collection("users");
+  const userCollection = mongobdd.bdd.collection("users");
   const tokenUser = await userCollection.findOne(
     { _id: user._id },
     { projection: { token: 1 } }
   );
 
-  await mongobdd.close();
+  await mongobdd.client.close();
   return {
     code: 200,
     data: {
