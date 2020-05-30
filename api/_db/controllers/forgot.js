@@ -7,11 +7,11 @@ const createToken = promisify(randomFill);
 
 module.exports = async (data, devMode) => {
   const mongobdd = await mongo(devMode);
-  const bizzyUsers = mongobdd.db("bizzy").collection("users");
+  const bizzyUsers = mongobdd.bdd.collection("users");
   const user = await bizzyUsers.findOne({ mail: data.mail });
 
   if (user === null) {
-    await mongobdd.close();
+    await mongobdd.client.close();
     return {
       code: 403
     };
@@ -39,7 +39,7 @@ module.exports = async (data, devMode) => {
     .catch(() => false)
     .then(async configisGood => {
       if (!configisGood) {
-        await mongobdd.close();
+        await mongobdd.client.close();
         return {
           code: 502
         };
@@ -65,7 +65,7 @@ module.exports = async (data, devMode) => {
         .then(async function m(mailSend) {
           if (mailSend) {
             const passwordForget = await mongobdd
-              .db("bizzy")
+              .bdd
               .collection("passwordforget");
             await passwordForget.findOneAndUpdate(
               { _id: user._id },
@@ -81,14 +81,14 @@ module.exports = async (data, devMode) => {
               { upsert: true }
             );
 
-            await mongobdd.close();
+            await mongobdd.client.close();
             return {
               code: 200,
               content: `Mail send to ${data.mail}`
             };
           }
 
-          await mongobdd.close();
+          await mongobdd.client.close();
           return {
             code: 502
           };
