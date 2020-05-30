@@ -64,9 +64,7 @@ module.exports = async (data, devMode) => {
         })
         .then(async function m(mailSend) {
           if (mailSend) {
-            const passwordForget = await mongobdd
-              .bdd
-              .collection("passwordforget");
+            const passwordForget = await mongobdd.bdd.collection("passwordforget");
             await passwordForget.findOneAndUpdate(
               { _id: user._id },
               {
