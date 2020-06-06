@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "start:back": "now dev",
-        "mongo": "node ./scripts/index.js",
+        "bdd-environment": "node ./scripts/index.js",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
@@ -47,6 +47,7 @@
         "react-scripts": "3.4.0"
     },
     "dependencies": {
+        "@amaurymartiny/now-middleware": "^0.2.0",
         "@testing-library/jest-dom": "^4.2.4",
         "bcrypt": "^4.0.1",
         "dotenv": "^8.2.0",
