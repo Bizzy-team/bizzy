@@ -79,7 +79,6 @@ inquirer
           });
 
           const SchemasName = Schemas.map(l => l.name);
-          console.log(SchemasName);
           await Promise.all(collectionsUpdate);
 
           console.log(chalk`
@@ -127,9 +126,9 @@ inquirer
         await client.db(dbName).createCollection(c.name, models[c.name]);
 
         if (c.indexOn) {
-          await client.db(dbName).createIndex(c.name, c.indexOn, {
+          await client.db(dbName).createIndex(c.name, c.indexOn, c.TTL ? {
             expireAfterSeconds: 0
-          });
+          }: {});
         }
 
         return c.name;
