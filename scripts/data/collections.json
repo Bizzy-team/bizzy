@@ -4,13 +4,16 @@
     },
     {
         "name": "passwordforget",
-        "indexOn": "expireAt"
+        "indexOn": "expireAt",
+        "TTL": true
     },
     {
         "name": "sessions",
-        "indexOn": "expireAt"
+        "indexOn": "expireAt",
+        "TTL": true
     },
     {
-        "name": "access"
+        "name": "access",
+        "indexOn": "user"
     }
 ]
