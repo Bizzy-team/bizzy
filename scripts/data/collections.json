@@ -9,5 +9,8 @@
     {
         "name": "sessions",
         "indexOn": "expireAt"
+    },
+    {
+        "name": "access"
     }
 ]
