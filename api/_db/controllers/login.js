@@ -31,19 +31,6 @@ module.exports = async (data, devMode) => {
 
   if (await compare(data.pswd, user.password)) {
     const sessionsCollection = mongobdd.bdd.collection("sessions");
-    const sessionExist = await sessionsCollection.findOne(
-      { userId: user._id },
-      { returnKey: true }
-    );
-
-    if (sessionExist) {
-      await mongobdd.client.close();
-      return {
-        code: 403,
-        content: "User already connected"
-      };
-    }
-
     const key = await createToken(Buffer.alloc(16));
 
     const newSession = await sessionsCollection.insertOne({
