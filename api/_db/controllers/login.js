@@ -5,32 +5,29 @@ const { ObjectID } = require("mongodb");
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
-const mongo = require("../index");
-
 const createToken = promisify(randomFill);
 const signJwtPromise = promisify(sign);
 
 /**
  * Check if an user exist.
- * @param {Object} data An object of parsed parameters.
+ * @param {Object} mongoClient - An object with props to manipuate data on mangodb.
  */
-module.exports = async (data, devMode) => {
-  const mongobdd = await mongo(devMode);
-  const bizzyUsers = mongobdd.bdd.collection("users");
+module.exports = async (data, mongoClient) => {
+  const bizzyUsers = mongoClient.bdd.collection("users");
   const user = await bizzyUsers.findOne(
     { mail: data.mail },
     { projection: { _id: 1, password: 1, token: 1 } }
   );
 
   if (user === null) {
-    await mongobdd.client.close();
+    await mongoClient.client.close();
     return {
       code: 403
     };
   }
 
   if (await compare(data.pswd, user.password)) {
-    const sessionsCollection = mongobdd.bdd.collection("sessions");
+    const sessionsCollection = mongoClient.bdd.collection("sessions");
     const key = await createToken(Buffer.alloc(16));
 
     const newSession = await sessionsCollection.insertOne({
@@ -41,7 +38,7 @@ module.exports = async (data, devMode) => {
         : new Date(Date.now() + 60 * 300 * 1000)
     });
 
-    await mongobdd.client.close();
+    await mongoClient.client.close();
     return {
       code: 200,
       serverHeader: {
@@ -64,7 +61,7 @@ module.exports = async (data, devMode) => {
     };
   }
 
-  await mongobdd.client.close();
+  await mongoClient.client.close();
   return {
     code: 401,
     content: "That email and password combination is incorrect."
