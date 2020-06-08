@@ -33,7 +33,7 @@ module.exports = async (data, mongoClient) => {
     const newSession = await sessionsCollection.insertOne({
       userId: new ObjectID(user._id),
       key: key.toString("hex"),
-      expireAt: devMode
+      expireAt: mongoClient.dbName === process.env.DB_TEST_NAME
         ? new Date(Date.now() + 60 * 5 * 1000)
         : new Date(Date.now() + 60 * 300 * 1000)
     });
@@ -46,7 +46,7 @@ module.exports = async (data, mongoClient) => {
           key.toString("hex"),
           10
         )}; Expires=${new Date(Date.now() + 60 * 2880 * 1000)}; ${
-          devMode ? "" : "Secure;"
+          mongoClient.dbName === process.env.DB_TEST_NAME ? "" : "Secure;"
         } Path=/; HttpOnly`
       },
       data: {

@@ -1,4 +1,4 @@
-const {chain} = require("@amaurymartiny/now-middleware");
+const { chain } = require("@amaurymartiny/now-middleware");
 const { parse } = require("url");
 const checkApiKey = require("./middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
@@ -18,7 +18,7 @@ function ResetPassword(req, res) {
 
     if (paramsLength === 0 || !params.get("token")) {
       responseServer(res, 422, {
-        content: "Missing parameter",
+        content: "Missing parameter"
       });
     }
 
@@ -32,7 +32,7 @@ function ResetPassword(req, res) {
       responseServer(res, result.code, {
         serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
         content: result.content ? result.content : undefined,
-        modifyResponse: result.data ? { ...result.data } : undefined,
+        modifyResponse: result.data ? { ...result.data } : undefined
       });
     });
   }
@@ -76,6 +76,6 @@ function ResetPassword(req, res) {
       });
     });
   }
-};
+}
 
 module.exports = chain(checkApiKey)(ResetPassword);

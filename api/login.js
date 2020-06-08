@@ -1,4 +1,4 @@
-const {chain} = require("@amaurymartiny/now-middleware");
+const { chain } = require("@amaurymartiny/now-middleware");
 const checkApiKey = require("./middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
 const loginDB = require("./_db/controllers/login");
@@ -17,7 +17,7 @@ function Login(req, res) {
 
     if (q.length >= 3) {
       responseServer(res, 400, {
-        content: "Too many parameters",
+        content: "Too many parameters"
       });
     }
 
@@ -29,9 +29,9 @@ function Login(req, res) {
     responseServer(res, userData.code, {
       serverHeader: userData.serverHeader ? { ...userData.serverHeader } : {},
       content: userData.content ? userData.content : undefined,
-      modifyResponse: userData.data ? { ...userData.data } : undefined,
+      modifyResponse: userData.data ? { ...userData.data } : undefined
     });
   });
-};
+}
 
 module.exports = chain(checkApiKey)(Login);

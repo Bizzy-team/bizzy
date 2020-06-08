@@ -46,7 +46,7 @@ module.exports = async (data, mongoClient) => {
       const token = await createToken(Buffer.alloc(24));
       let url;
 
-      if (devMode) {
+      if (mongoClient.dbName === process.env.DB_TEST_NAME) {
         url = `https://localhost:3000/reset_pswd_form?token=${token.toString("hex")}`;
       } else {
         url = `https://bizzy.now.sh/reset_pswd_form?token=${token.toString("hex")}`;
