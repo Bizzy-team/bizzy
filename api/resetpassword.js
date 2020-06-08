@@ -1,16 +1,14 @@
+const {chain} = require("@amaurymartiny/now-middleware");
 const { parse } = require("url");
+const checkApiKey = require("./middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
 const { GET, PUT } = require("./_db/controllers/resetpassword");
 const parseBody = require("./_utils/parseBody");
-const parseQuery = require("./_utils/parseQuery");
 
-module.exports = function ResetPassword(req, res) {
-  const query = parseQuery(req.url);
-
+function ResetPassword(req, res) {
   if (!["GET", "PUT"].includes(req.method)) {
     responseServer(res, 405, {
-      content: "POST, PUT",
-      query
+      content: "POST, PUT"
     });
   }
 
@@ -21,23 +19,20 @@ module.exports = function ResetPassword(req, res) {
     if (paramsLength === 0 || !params.get("token")) {
       responseServer(res, 422, {
         content: "Missing parameter",
-        query
       });
     }
 
     if (paramsLength > 1) {
       responseServer(res, 400, {
-        content: "Too many parameters",
-        query
+        content: "Too many parameters"
       });
     }
 
-    return GET(params, query).then(result => {
+    return GET(params, req.mongoClient).then(result => {
       responseServer(res, result.code, {
         serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
         content: result.content ? result.content : undefined,
         modifyResponse: result.data ? { ...result.data } : undefined,
-        query
       });
     });
   }
@@ -45,8 +40,7 @@ module.exports = function ResetPassword(req, res) {
   if (req.method === "PUT") {
     if (!req.headers.authorization) {
       responseServer(res, 403, {
-        content: "Missing 'Authorization: <token>' header in your request.",
-        query
+        content: "Missing 'Authorization: <token>' header in your request."
       });
     }
 
@@ -56,8 +50,7 @@ module.exports = function ResetPassword(req, res) {
 
       if (req.headers.cookie ? q.length > 1 : q.length > 2) {
         responseServer(res, 400, {
-          content: "Too many parameters",
-          query
+          content: "Too many parameters"
         });
       }
 
@@ -74,14 +67,15 @@ module.exports = function ResetPassword(req, res) {
       PUTData.jwtToken = req.headers.authorization;
       if (req.headers.cookie) PUTData.cookie = req.headers.cookie;
 
-      return PUT(PUTData, query).then(result => {
+      return PUT(PUTData, req.mongoClient).then(result => {
         responseServer(res, result.code, {
           serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
           content: result.content ? result.content : undefined,
-          modifyResponse: result.data ? { ...result.data } : undefined,
-          query
+          modifyResponse: result.data ? { ...result.data } : undefined
         });
       });
     });
   }
 };
+
+module.exports = chain(checkApiKey)(ResetPassword);
