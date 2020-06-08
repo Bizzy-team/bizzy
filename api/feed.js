@@ -1,6 +1,9 @@
-const isConnected = require("./_utils/isConnected");
+const { chain } = require("@amaurymartiny/now-middleware");
+const checkApiKey = require("./middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
 
-module.exports = function Feed(req, res) {
-  isConnected(req.headers.authorization).then(l => responseServer(res, l.code));
-};
+function Feed(req, res) {
+  return responseServer(res, 200);
+}
+
+module.exports = chain(checkApiKey)(Feed);

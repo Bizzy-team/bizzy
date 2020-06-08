@@ -1,15 +1,13 @@
-const parseQuery = require("./_utils/parseQuery");
+const {chain} = require("@amaurymartiny/now-middleware");
+const checkApiKey = require("./middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
 const loginDB = require("./_db/controllers/login");
 const parseBody = require("./_utils/parseBody");
 
-module.exports = function Login(req, res) {
-  const parameters = parseQuery(req.url);
-
+function Login(req, res) {
   if (req.method !== "POST") {
     return responseServer(res, 405, {
-      content: "POST",
-      query: parameters
+      content: "POST"
     });
   }
 
@@ -20,22 +18,20 @@ module.exports = function Login(req, res) {
     if (q.length >= 3) {
       responseServer(res, 400, {
         content: "Too many parameters",
-        query: parameters
       });
     }
 
     if (!q.includes("mail") || !q.includes("pswd")) {
-      responseServer(res, 422, {
-        query: parameters
-      });
+      responseServer(res, 422);
     }
 
-    const userData = await loginDB(httpBody, parameters);
+    const userData = await loginDB(httpBody, req.mongoClient);
     responseServer(res, userData.code, {
       serverHeader: userData.serverHeader ? { ...userData.serverHeader } : {},
       content: userData.content ? userData.content : undefined,
       modifyResponse: userData.data ? { ...userData.data } : undefined,
-      query: parameters
     });
   });
 };
+
+module.exports = chain(checkApiKey)(Login);
