@@ -6,7 +6,8 @@ module.exports = async function(devMode) {
   if (client) {
     return {
       client,
-      bdd: client.db(devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME)
+      bdd: client.db(devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME),
+      dbName: devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME
     };
   }
 
@@ -18,7 +19,8 @@ module.exports = async function(devMode) {
     });
     return {
       client,
-      bdd: client.db(devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME)
+      bdd: client.db(devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME),
+      dbName: devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME
     };
   } catch (error) {
     throw error;
