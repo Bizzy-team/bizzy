@@ -15,7 +15,10 @@ module.exports = async function checkApiKey(req, res, next) {
   }
 
   const dataPayload = decode(req.headers["x-api-key"]);
-  if (!Object.prototype.hasOwnProperty.call(dataPayload, "admin") && !Object.prototype.hasOwnProperty.call(dataPayload, "user")) {
+  if (
+    !Object.prototype.hasOwnProperty.call(dataPayload, "admin") &&
+    !Object.prototype.hasOwnProperty.call(dataPayload, "user")
+  ) {
     return responseServer(res, 401);
   }
 

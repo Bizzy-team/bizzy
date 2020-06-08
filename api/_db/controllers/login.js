@@ -33,9 +33,10 @@ module.exports = async (data, mongoClient) => {
     const newSession = await sessionsCollection.insertOne({
       userId: new ObjectID(user._id),
       key: key.toString("hex"),
-      expireAt: mongoClient.dbName === process.env.DB_TEST_NAME
-        ? new Date(Date.now() + 60 * 5 * 1000)
-        : new Date(Date.now() + 60 * 300 * 1000)
+      expireAt:
+        mongoClient.dbName === process.env.DB_TEST_NAME
+          ? new Date(Date.now() + 60 * 5 * 1000)
+          : new Date(Date.now() + 60 * 300 * 1000)
     });
 
     await mongoClient.client.close();
