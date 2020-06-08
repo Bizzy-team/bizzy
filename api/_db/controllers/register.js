@@ -28,9 +28,10 @@ module.exports = async (body, mongoClient) => {
     const newSession = await sessionsCollection.insertOne({
       userId: new ObjectID(newUser.insertedId),
       key: JWTToken.toString("hex"),
-      expireAt: mongoClient.dbName === process.env.DB_TEST_NAME
-        ? new Date(Date.now() + 60 * 5 * 1000)
-        : new Date(Date.now() + 60 * 300 * 1000)
+      expireAt:
+        mongoClient.dbName === process.env.DB_TEST_NAME
+          ? new Date(Date.now() + 60 * 5 * 1000)
+          : new Date(Date.now() + 60 * 300 * 1000)
     });
 
     await mongoClient.client.close();
@@ -41,7 +42,7 @@ module.exports = async (body, mongoClient) => {
           JWTToken.toString("hex"),
           10
         )}; Expires=${new Date(Date.now() + 60 * 2880 * 1000)}; ${
-          devMode ? "" : "Secure;"
+          mongoClient.dbName === process.env.DB_TEST_NAME ? "" : "Secure;"
         } Path=/; HttpOnly`
       },
       data: {

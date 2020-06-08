@@ -1,5 +1,5 @@
+const { decode, verify } = require("jsonwebtoken");
 const mongo = require("../_db/index");
-const {decode, verify} = require("jsonwebtoken");
 const responseServer = require("../_utils/responseServer");
 
 /**
@@ -11,28 +11,31 @@ module.exports = async function checkApiKey(req, res, next) {
   }
 
   if (req.headers["x-api-key"].split(".").length !== 3) {
-      return responseServer(res, 400);
+    return responseServer(res, 400);
   }
 
   const dataPayload = decode(req.headers["x-api-key"]);
-  if (!dataPayload.hasOwnProperty("admin") && !dataPayload.hasOwnProperty("user")) {
-      return responseServer(res, 401);
+  if (!Object.prototype.hasOwnProperty.call(dataPayload, "admin") && !Object.prototype.hasOwnProperty.call(dataPayload, "user")) {
+    return responseServer(res, 401);
   }
 
-  const mongoClient = await mongo(dataPayload.admin ? false : true);
-  const k = await mongoClient.bdd.collection("access").findOne({user: dataPayload.user}, {
-      projection: {key: 1},
-      hint: {user: 1}
-  });
+  const mongoClient = await mongo(!dataPayload.admin);
+  const k = await mongoClient.bdd.collection("access").findOne(
+    { user: dataPayload.user },
+    {
+      projection: { key: 1 },
+      hint: { user: 1 }
+    }
+  );
 
   if (!k) {
-      return responseServer(res, 401);
+    return responseServer(res, 401);
   }
 
-  return verify(req.headers["x-api-key"], k.key, function (err) {
-      if (err) return responseServer(res, 401);
+  return verify(req.headers["x-api-key"], k.key, function(err) {
+    if (err) return responseServer(res, 401);
 
-      req.mongoClient = mongoClient;
-      return next();
+    req.mongoClient = mongoClient;
+    return next();
   });
 };

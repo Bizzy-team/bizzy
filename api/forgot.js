@@ -1,4 +1,4 @@
-const {chain} = require("@amaurymartiny/now-middleware");
+const { chain } = require("@amaurymartiny/now-middleware");
 
 const checkApiKey = require("./middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
@@ -30,10 +30,10 @@ function Forgot(req, res) {
       responseServer(res, result.code, {
         serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
         content: result.content ? result.content : undefined,
-        modifyResponse: result.data ? { ...result.data } : undefined,
+        modifyResponse: result.data ? { ...result.data } : undefined
       });
     });
   });
-};
+}
 
 module.exports = chain(checkApiKey)(Forgot);
