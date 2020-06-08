@@ -1,17 +1,15 @@
 const nodemailer = require("nodemailer");
 const { promisify } = require("util");
 const { randomFill } = require("crypto");
-const mongo = require("../index");
 
 const createToken = promisify(randomFill);
 
-module.exports = async (data, devMode) => {
-  const mongobdd = await mongo(devMode);
-  const bizzyUsers = mongobdd.bdd.collection("users");
+module.exports = async (data, mongoClient) => {
+  const bizzyUsers = mongoClient.bdd.collection("users");
   const user = await bizzyUsers.findOne({ mail: data.mail });
 
   if (user === null) {
-    await mongobdd.client.close();
+    await mongoClient.client.close();
     return {
       code: 403
     };
@@ -19,7 +17,7 @@ module.exports = async (data, devMode) => {
 
   let transporter = {};
 
-  if (devMode) {
+  if (mongoClient.dbName === process.env.DB_TEST_NAME) {
     transporter = {
       host: "smtp.mailtrap.io",
       port: 2525,
@@ -39,7 +37,7 @@ module.exports = async (data, devMode) => {
     .catch(() => false)
     .then(async configisGood => {
       if (!configisGood) {
-        await mongobdd.client.close();
+        await mongoClient.client.close();
         return {
           code: 502
         };
@@ -64,7 +62,7 @@ module.exports = async (data, devMode) => {
         })
         .then(async function m(mailSend) {
           if (mailSend) {
-            const passwordForget = await mongobdd.bdd.collection("passwordforget");
+            const passwordForget = await mongoClient.bdd.collection("passwordforget");
             await passwordForget.findOneAndUpdate(
               { _id: user._id },
               {
@@ -79,14 +77,14 @@ module.exports = async (data, devMode) => {
               { upsert: true }
             );
 
-            await mongobdd.client.close();
+            await mongoClient.client.close();
             return {
               code: 200,
               content: `Mail send to ${data.mail}`
             };
           }
 
-          await mongobdd.client.close();
+          await mongoClient.client.close();
           return {
             code: 502
           };
