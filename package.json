@@ -44,7 +44,8 @@
         "now": "^17.0.4",
         "ora": "^4.0.4",
         "prettier": "^1.19.1",
-        "react-scripts": "3.4.0"
+        "react-scripts": "3.4.0",
+        "table": "^5.4.6"
     },
     "dependencies": {
         "@amaurymartiny/now-middleware": "^0.2.0",
