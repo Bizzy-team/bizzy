@@ -3,35 +3,33 @@ const { promisify } = require("util");
 const { randomFill } = require("crypto");
 const { hash } = require("bcrypt");
 
-const mongo = require("../index");
 const sessionValid = require("../../_utils/sessionValid");
 
 const createTokenKey = promisify(randomFill);
 const signJwtPromise = promisify(sign);
 
-export async function GET(params) {
-  const mongobdd = await mongo();
-  const passwordForget = mongobdd.db("bizzy").collection("passwordforget");
+export async function GET(params, mongoClient) {
+  const passwordForget = mongoClient.bdd.collection("passwordforget");
   const user = await passwordForget.findOne(
     { forgotPassword: params.get("token") },
     { projection: { _id: 1 } }
   );
 
   if (user === null) {
-    await mongobdd.close();
+    await mongoClient.client.close();
     return {
       code: 401,
       content: "Token parameter is not valid, try resend a forgot password request."
     };
   }
 
-  const userCollection = mongobdd.db("bizzy").collection("users");
+  const userCollection = mongoClient.bdd.collection("users");
   const tokenUser = await userCollection.findOne(
     { _id: user._id },
     { projection: { token: 1 } }
   );
 
-  await mongobdd.close();
+  await mongoClient.client.close();
   return {
     code: 200,
     data: {
@@ -40,10 +38,9 @@ export async function GET(params) {
   };
 }
 
-export async function PUT(data) {
-  const mongobdd = await mongo();
-  const passwordForgetCollection = mongobdd.db("bizzy").collection("passwordforget");
-  const userCollection = mongobdd.db("bizzy").collection("users");
+export async function PUT(data, mongoClient) {
+  const passwordForgetCollection = mongoClient.db("bizzy").collection("passwordforget");
+  const userCollection = mongoClient.db("bizzy").collection("users");
   const { newpswd, token, jwtToken, cookie } = data;
   let user;
 
@@ -57,7 +54,7 @@ export async function PUT(data) {
     );
 
     if (user === null) {
-      await mongobdd.close();
+      await mongoClient.close();
       return {
         code: 401,
         content:
@@ -99,14 +96,14 @@ export async function PUT(data) {
         );
         await passwordForgetCollection.findOneAndDelete({ _id: userData._id });
 
-        await mongobdd.close();
+        await mongoClient.close();
         return {
           code: 200,
           content: `Password update for ${userData.mail}.`
         };
       }
 
-      await mongobdd.close();
+      await mongoClient.close();
       return {
         code: 401
       };
@@ -118,7 +115,7 @@ export async function PUT(data) {
     );
     await passwordForgetCollection.findOneAndDelete({ _id: userData._id });
 
-    await mongobdd.close();
+    await mongoClient.close();
     return {
       code: 201,
       content: `Password update for ${userData.mail}.`

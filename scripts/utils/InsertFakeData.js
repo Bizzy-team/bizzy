@@ -3,6 +3,7 @@ const ora = require("ora");
 const chalk = require("chalk");
 const Chance = require("chance");
 const {ObjectID} = require("mongodb");
+const {hashSync} = require("bcrypt");
 
 const models = require("../indexModel");
 
@@ -85,7 +86,10 @@ module.exports = function (col, mclient, entries = 5) {
                 }
 
                 if (props === "password" || props === "forgotPassword") {
-                    obj[props] = chance.hash({length: 15})
+                    const pswd = chance.string({length: 10, numeric: true, symbols: true});
+
+                    obj[props] = hashSync(pswd, 10);
+                    obj["pswd_not_hashed"] = pswd;
                 }
 
                 if (props === "username") {

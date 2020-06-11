@@ -1,23 +1,27 @@
-process.env.NODE_ENV === "development" && require("dotenv").config(); // eslint-disable-line global-require
 const { MongoClient } = require("mongodb");
 
-let db;
+let client;
 
 module.exports = async function(devMode) {
-  if (db) {
-    return db;
+  if (client && client.isConnected()) {
+    return {
+      client,
+      bdd: client.db(devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME),
+      dbName: devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME
+    };
   }
 
   // eslint-disable-next-line no-useless-catch
   try {
-    db = await MongoClient.connect(
-      devMode ? process.env.DB_URL_TEST : process.env.DB_URL,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      }
-    );
-    return db;
+    client = await MongoClient.connect(process.env.DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    return {
+      client,
+      bdd: client.db(devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME),
+      dbName: devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME
+    };
   } catch (error) {
     throw error;
   }

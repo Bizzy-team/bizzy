@@ -79,7 +79,6 @@ inquirer
           });
 
           const SchemasName = Schemas.map(l => l.name);
-          console.log(SchemasName);
           await Promise.all(collectionsUpdate);
 
           console.log(chalk`
@@ -124,12 +123,18 @@ inquirer
 
       spinner.text = chalk`{gray Some collections are missing we're fixing that.}`;
       const collectionsCreated = collectionsMissing.map(async function(c) {
-        await client.db(dbName).createCollection(c.name, models[c.name]);
+        client.db(dbName).createCollection(c.name, models[c.name]);
 
         if (c.indexOn) {
-          await client.db(dbName).createIndex(c.name, c.indexOn, {
-            expireAfterSeconds: 0
-          });
+          await client.db(dbName).createIndex(
+            c.name,
+            c.indexOn,
+            c.TTL
+              ? {
+                  expireAfterSeconds: 0
+                }
+              : {}
+          );
         }
 
         return c.name;
