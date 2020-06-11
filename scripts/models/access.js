@@ -6,7 +6,6 @@ module.exports = {
             properties: {
                 token: {
                     bsonType: "string",
-                    // pattern: /^[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)?$/,
                     description: "The secret api key user to authenticate him."
                 },
                 user: {
