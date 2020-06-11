@@ -3,7 +3,7 @@ const { MongoClient } = require("mongodb");
 let client;
 
 module.exports = async function(devMode) {
-  if (client) {
+  if (client && client.isConnected()) {
     return {
       client,
       bdd: client.db(devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME),
