@@ -4,6 +4,7 @@ const chalk = require("chalk");
 const Chance = require("chance");
 const {ObjectID} = require("mongodb");
 const {hashSync} = require("bcrypt");
+const {table} = require("table");
 
 const models = require("../indexModel");
 
@@ -39,30 +40,30 @@ module.exports = function (col, mclient, entries = 5) {
     const chance = new Chance();
 
     // Check if some collections already had documents.
-    const colWithData = col.map(async function (d) {
-        const data = await mclient.db(process.env.DB_TEST_NAME).collection(d).estimatedDocumentCount();
+    // const colWithData = col.map(async function (d) {
+    //     const data = await mclient.db(process.env.DB_TEST_NAME).collection(d).estimatedDocumentCount();
 
-        if (data > 0) {
-            return {
-                collection: d,
-                documents: data
-            }
-        }
+    //     if (data > 0) {
+    //         return {
+    //             collection: d,
+    //             documents: data
+    //         }
+    //     }
 
-        return d;
-    });
+    //     return d;
+    // });
 
-    Promise.all(colWithData).then(function (v) {
-        const vFilter = v.filter(y => typeof y === "object");
+    // Promise.all(colWithData).then(function (v) {
+    //     const vFilter = v.filter(y => typeof y === "object");
 
-        if (vFilter.length !== 0) {
-            spinner.stopAndPersist({
-              text: chalk`{green ${vFilter.length} collections already had data what would you like to do ?}`  
-            });
-        }
-        console.log(v);
-        process.exit(0);
-    })
+    //     if (vFilter.length !== 0) {
+    //         spinner.stopAndPersist({
+    //           text: chalk`{green ${vFilter.length} collections already had data what would you like to do ?}`  
+    //         });
+    //     }
+    //     console.log(v);
+    //     process.exit(0);
+    // })
 
     const fakeData = col.map(function (c) {
         const data = {
@@ -93,7 +94,7 @@ module.exports = function (col, mclient, entries = 5) {
                 }
 
                 if (props === "username") {
-                    obj[props] = chance.string({length: 5})
+                    obj[props] = chance.string({length: 5, symbols: false});
                 }
         
                 if (props === "expireAt") {
@@ -109,11 +110,37 @@ module.exports = function (col, mclient, entries = 5) {
     })
 
     const newData = fakeData.map(async function (doc) {
-        return await mclient.db(process.env.DB_TEST_NAME).collection(doc.collection).insertMany(doc.fakeData);
+        const i = await mclient.db(process.env.DB_TEST_NAME).collection(doc.collection).insertMany(doc.fakeData);
+
+        return {
+            res: i,
+            col: doc.collection
+        }
     })
 
-    Promise.all(newData).then(function () {
-        spinner.succeed(chalk`{green Fake data inserted :) well done.}`);
+    Promise.all(newData).then(function (v) {
+        spinner.succeed(chalk`{green Fake data inserted in ${v.length} collection${v.length !== 0 && 's'}:) well done.}`);
+
+        v.forEach(function (entry) {
+            console.log(chalk`{cyan Data inserted in ${entry.col} collection.}`);
+            let colTitle = Object.keys(entry.res.ops[0]);
+
+            const dataToLog = entry.res.ops.map((l, i) => {
+                const t = Object.values(l);
+                return t;
+            });
+            dataToLog.unshift(colTitle);
+
+            console.log(table(dataToLog, {
+                columns: {
+                    alignment: "center",
+                    wrapWord: true
+                },
+                getBorderCharacters: "honeywell"
+            }));
+            console.log(chalk`{gray ----------------------}`)
+        });
+
         mclient.close().then(process.exit(0));
     })
 }
