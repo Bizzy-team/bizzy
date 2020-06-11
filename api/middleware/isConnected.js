@@ -42,7 +42,7 @@ module.exports = async function(req, res, next) {
     // } catch (e) {
     //   e;
     // }
-
+    next();
     return {
       code: 200
     };
@@ -50,5 +50,4 @@ module.exports = async function(req, res, next) {
   return {
     code: 401
   };
-  next();
 };
