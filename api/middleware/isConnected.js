@@ -1,5 +1,5 @@
-const responseServer = require("../_utils/responseServer");
 const { decode } = require("jsonwebtoken");
+const responseServer = require("../_utils/responseServer");
 
 /**
  * Check is an user is connected or not, by checking if token passed in header is correct either checking if had cookie refreshToken and if it is correct.
@@ -15,7 +15,6 @@ module.exports = async function(req, res, next) {
   }
 
   const tokenValue = decode(token);
-  console.log(tokenValue);
 
   if (tokenValue) {
     const tokenAsArray = Object.keys(tokenValue.payload);
@@ -32,7 +31,6 @@ module.exports = async function(req, res, next) {
     const userSession = await sessionsCollection.findOne({ _id: tokenValue.iss });
 
     if (!userSession) {
-      if (ops.bool) return false;
       return {
         code: 401
       };
@@ -49,8 +47,8 @@ module.exports = async function(req, res, next) {
       code: 200
     };
   }
-  if (ops.bool) return false;
   return {
     code: 401
   };
+  next();
 };
