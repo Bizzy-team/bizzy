@@ -39,32 +39,6 @@ module.exports = function (col, mclient, entries = 5) {
     }).start();
     const chance = new Chance();
 
-    // Check if some collections already had documents.
-    // const colWithData = col.map(async function (d) {
-    //     const data = await mclient.db(process.env.DB_TEST_NAME).collection(d).estimatedDocumentCount();
-
-    //     if (data > 0) {
-    //         return {
-    //             collection: d,
-    //             documents: data
-    //         }
-    //     }
-
-    //     return d;
-    // });
-
-    // Promise.all(colWithData).then(function (v) {
-    //     const vFilter = v.filter(y => typeof y === "object");
-
-    //     if (vFilter.length !== 0) {
-    //         spinner.stopAndPersist({
-    //           text: chalk`{green ${vFilter.length} collections already had data what would you like to do ?}`  
-    //         });
-    //     }
-    //     console.log(v);
-    //     process.exit(0);
-    // })
-
     const fakeData = col.map(function (c) {
         const data = {
             collection: c,
