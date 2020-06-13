@@ -5,6 +5,7 @@ const inquirer = require("inquirer");
 const chalk = require("chalk");
 const { MongoClient } = require("mongodb");
 
+const deleteData = require("./utils/delete");
 const CheckCollectionsAndSchemas = require("./utils/check");
 const collections = require("./data/collections.json");
 const injectFakeData = require("./utils/InsertFakeData");
@@ -49,6 +50,7 @@ const injectFakeData = require("./utils/InsertFakeData");
     const client = await MongoClient.connect(process.env.DB_URL, mongoOps);
 
     if (answer.action === "delete") {
+      await deleteData(client, oraOps);
     }
 
     if (answer.action === "check") {
@@ -84,7 +86,7 @@ const injectFakeData = require("./utils/InsertFakeData");
           return true;
         },
         when(shouldInsert) {
-          if (!shouldInsert.injectData && shouldInsert.collections.length !== 0)
+          if (!shouldInsert.injectData)
             return false;
           return true;
         }
@@ -98,6 +100,12 @@ const injectFakeData = require("./utils/InsertFakeData");
       );
       process.exit(0);
     }
+    
+    if (r.collections.includes("access")) {
+      const accessIndex = r.collections.indexOf("access");
+
+      r.collections.splice(accessIndex, 1);
+    };
 
     return injectFakeData(r.collections, client, r.entries);
   }
