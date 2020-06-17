@@ -20,7 +20,6 @@ module.exports = async (data, mongoClient) => {
   );
 
   if (user === null) {
-    await mongoClient.client.close();
     return {
       code: 403
     };
@@ -39,7 +38,6 @@ module.exports = async (data, mongoClient) => {
           : new Date(Date.now() + 60 * 300 * 1000)
     });
 
-    await mongoClient.client.close();
     return {
       code: 200,
       serverHeader: {
@@ -62,7 +60,6 @@ module.exports = async (data, mongoClient) => {
     };
   }
 
-  await mongoClient.client.close();
   return {
     code: 401,
     content: "That email and password combination is incorrect."

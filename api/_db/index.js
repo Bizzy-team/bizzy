@@ -1,9 +1,9 @@
 const { MongoClient } = require("mongodb");
 
-let client;
+let client = null;
 
 module.exports = async function(devMode) {
-  if (client && client.isConnected()) {
+  if (client) {
     return {
       client,
       bdd: client.db(devMode ? process.env.DB_TEST_NAME : process.env.DB_PROD_NAME),

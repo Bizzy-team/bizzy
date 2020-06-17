@@ -34,7 +34,6 @@ module.exports = async (body, mongoClient) => {
           : new Date(Date.now() + 60 * 300 * 1000)
     });
 
-    await mongoClient.client.close();
     return {
       code: 201,
       serverHeader: {
@@ -57,7 +56,6 @@ module.exports = async (body, mongoClient) => {
     };
   }
 
-  await mongoClient.client.close();
   return {
     code: 409
   };

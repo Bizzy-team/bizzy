@@ -32,12 +32,10 @@ module.exports = async function checkApiKey(req, res, next) {
   );
 
   if (!k) {
-    await mongoClient.client.close();
     return responseServer(res, 401);
   }
 
   return verify(req.headers["x-api-key"], k.key, async function(err) {
-    await mongoClient.client.close();
     if (err) return responseServer(res, 401);
 
     req.mongoClient = mongoClient;
