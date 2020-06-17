@@ -9,7 +9,6 @@ module.exports = async (data, mongoClient) => {
   const user = await bizzyUsers.findOne({ mail: data.mail });
 
   if (user === null) {
-    await mongoClient.client.close();
     return {
       code: 403
     };

@@ -8,7 +8,7 @@ const models = require("../indexModel");
 
 /**
  * Check if collections and schemas are up to date with.
- * @param {Object} mongoClient - The mongo mongoClient instance return by the connect fn.
+ * @param {Object} mongoClient - The mongoClient instance return by the connect fn.
  * @param {Object} oraOps - The ora object options.
  */
 module.exports = async function CheckCollectionsAndSchemas(mongoClient, oraOps) {
