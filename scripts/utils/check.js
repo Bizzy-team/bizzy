@@ -8,15 +8,15 @@ const models = require("../indexModel");
 
 /**
  * Check if collections and schemas are up to date with.
- * @param {Object} mongomongoClient - The mongo mongoClient instance return by the connect fn.
+ * @param {Object} mongoClient - The mongo mongoClient instance return by the connect fn.
  * @param {Object} oraOps - The ora object options.
  */
-module.exports = async function CheckCollectionsAndSchemas(mongomongoClient, oraOps) {
+module.exports = async function CheckCollectionsAndSchemas(mongoClient, oraOps) {
   oraOps.text = chalk`{gray Start checking collections and schemas}`;
   const spinner = ora(oraOps).start();
 
   // 1. Fetch collections in Bdd.
-  const collectionsInBdd = await mongomongoClient
+  const collectionsInBdd = await mongoClient
     .db(process.env.DB_TEST_NAME)
     .listCollections()
     .toArray();
@@ -40,7 +40,7 @@ module.exports = async function CheckCollectionsAndSchemas(mongomongoClient, ora
       );
 
       const collectionsUpdate = Schemas.map(async function(c) {
-        return mongomongoClient.db(process.env.DB_TEST_NAME).command({
+        return mongoClient.db(process.env.DB_TEST_NAME).command({
           collMod: c.name,
           ...models[c.name]
         });
