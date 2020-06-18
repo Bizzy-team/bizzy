@@ -51,6 +51,7 @@
         "@amaurymartiny/now-middleware": "^0.2.0",
         "@testing-library/jest-dom": "^4.2.4",
         "bcrypt": "^4.0.1",
+        "cookie": "^0.4.1",
         "dotenv": "^8.2.0",
         "jsonwebtoken": "^8.5.1",
         "mongodb": "^3.5.8",
