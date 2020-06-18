@@ -47,10 +47,10 @@ module.exports = async function(req, res, next) {
           return;
         }
 
-        return responseServer(res, 401);
+        responseServer(res, 401);
+      } else {
+        next();
       }
-
-      return next();
     });
   }
 
