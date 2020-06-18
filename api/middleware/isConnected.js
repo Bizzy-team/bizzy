@@ -1,6 +1,6 @@
-const responseServer = require("../_utils/responseServer");
 const { decode, verify } = require("jsonwebtoken");
-const {ObjectID} = require("mongodb");
+const { ObjectID } = require("mongodb");
+const responseServer = require("../_utils/responseServer");
 
 /**
  * Check is an user is connected or not, by checking if token passed in header is correct either checking if had cookie refreshToken and if it is correct.
@@ -29,26 +29,28 @@ module.exports = async function(req, res, next) {
     }
 
     const sessionsCollection = req.mongoClient.bdd.collection("sessions");
-    const userSession = await sessionsCollection.findOne({ _id: new ObjectID(tokenValue.iss) }, {
-      projection: {"key": 1}
-    });
+    const userSession = await sessionsCollection.findOne(
+      { _id: new ObjectID(tokenValue.iss) },
+      {
+        projection: { key: 1 }
+      }
+    );
 
     if (!userSession) {
       return responseServer(res, 401);
     }
 
-    return verify(token, userSession.key, function (err) {
+    return verify(token, userSession.key, function(err) {
       if (err) {
         if (err.name === "TokenExpiredError") {
-          //TODO: Check the cookies.
-          console.log("TOKEN EXPIRED", req.header.cookie);
+          // TODO: Check the cookies.
           return;
         }
 
         return responseServer(res, 401);
-      };
+      }
 
-      next();
+      return next();
     });
   }
 

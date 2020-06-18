@@ -4,11 +4,10 @@ const { randomFill } = require("crypto");
 const { ObjectID } = require("mongodb");
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
-const {serialize} = require("cookie");
+const { serialize } = require("cookie");
 
 const createToken = promisify(randomFill);
 const signJwtPromise = promisify(sign);
-
 
 /**
  * Check if an user exist.
@@ -48,13 +47,17 @@ module.exports = async (data, mongoClient) => {
           httpOnly: true,
           maxAge: 3600,
           path: "/"
-        }),
+        })
       },
       data: {
         token: await signJwtPromise(
           `{
             "iss": "${newSession.insertedId}",
-            "exp": ${mongoClient.dbName === process.env.DB_TEST_NAME ? Math.floor(Date.now() + 60 * 5 * 1000) : Math.floor(Date.now() + 60 * 1440 * 1000)}}`,
+            "exp": ${
+              mongoClient.dbName === process.env.DB_TEST_NAME
+                ? Math.floor(Date.now() + 60 * 5 * 1000)
+                : Math.floor(Date.now() + 60 * 1440 * 1000)
+            }}`,
           key.toString("hex")
         )
       }
