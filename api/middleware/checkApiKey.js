@@ -35,7 +35,7 @@ module.exports = async function checkApiKey(req, res, next) {
     return responseServer(res, 401);
   }
 
-  return verify(req.headers["x-api-key"], k.key, async function(err) {
+  return verify(req.headers["x-api-key"], k.key, function(err) {
     if (err) return responseServer(res, 401);
 
     req.mongoClient = mongoClient;
