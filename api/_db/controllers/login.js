@@ -4,9 +4,11 @@ const { randomFill } = require("crypto");
 const { ObjectID } = require("mongodb");
 const { hash } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
+const {serialize} = require("cookie");
 
 const createToken = promisify(randomFill);
 const signJwtPromise = promisify(sign);
+
 
 /**
  * Check if an user exist.
@@ -34,26 +36,25 @@ module.exports = async (data, mongoClient) => {
       key: key.toString("hex"),
       expireAt:
         mongoClient.dbName === process.env.DB_TEST_NAME
-          ? new Date(Date.now() + 60 * 5 * 1000)
+          ? new Date(Date.now() + 60 * 10 * 1000)
           : new Date(Date.now() + 60 * 300 * 1000)
     });
 
+    const tokenRefresh = await hash(key.toString("hex"), 10);
     return {
       code: 200,
       serverHeader: {
-        "Set-Cookie": `tokenRefresh=${await hash(
-          key.toString("hex"),
-          10
-        )}; Expires=${new Date(Date.now() + 60 * 2880 * 1000)}; ${
-          mongoClient.dbName === process.env.DB_TEST_NAME ? "" : "Secure;"
-        } Path=/; HttpOnly`
+        "Set-Cookie": serialize("token", `"${tokenRefresh}"`, {
+          httpOnly: true,
+          maxAge: 3600,
+          path: "/"
+        }),
       },
       data: {
         token: await signJwtPromise(
           `{
-          "iss": ${newSession.insertedId}
-          "exp": ${Math.floor(Date.now() + 60 * 1440 * 1000)}
-        }`,
+            "iss": "${newSession.insertedId}",
+            "exp": ${mongoClient.dbName === process.env.DB_TEST_NAME ? Math.floor(Date.now() + 60 * 5 * 1000) : Math.floor(Date.now() + 60 * 1440 * 1000)}}`,
           key.toString("hex")
         )
       }
