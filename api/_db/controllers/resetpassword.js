@@ -3,23 +3,20 @@ const { promisify } = require("util");
 const { randomFill } = require("crypto");
 const { hash } = require("bcrypt");
 
-const sessionValid = require("../../_utils/sessionValid");
-
 const createTokenKey = promisify(randomFill);
 const signJwtPromise = promisify(sign);
 
 export async function GET(params, mongoClient) {
   const passwordForget = mongoClient.bdd.collection("passwordforget");
+  //TODO: Use aggregation to make only one request instead of one.
   const user = await passwordForget.findOne(
     { forgotPassword: params.get("token") },
     { projection: { _id: 1 } }
   );
 
   if (user === null) {
-    await mongoClient.client.close();
     return {
-      code: 401,
-      content: "Token parameter is not valid, try resend a forgot password request."
+      code: 401
     };
   }
 
@@ -29,7 +26,6 @@ export async function GET(params, mongoClient) {
     { projection: { token: 1 } }
   );
 
-  await mongoClient.client.close();
   return {
     code: 200,
     data: {
@@ -39,22 +35,21 @@ export async function GET(params, mongoClient) {
 }
 
 export async function PUT(data, mongoClient) {
-  const passwordForgetCollection = mongoClient.db("bizzy").collection("passwordforget");
-  const userCollection = mongoClient.db("bizzy").collection("users");
+  const passwordForgetCollection = mongoClient.bdd.collection("passwordforget");
+  const userCollection = mongoClient.bdd.collection("users");
   const { newpswd, token, jwtToken, cookie } = data;
   let user;
 
-  if (cookie) {
-    user = await sessionValid(cookie, { checkToken: false });
-    if (!user._id) return user;
-  } else {
-    user = await passwordForgetCollection.findOne(
-      { forgotPassword: token },
-      { projection: { _id: 1 } }
-    );
+  // if (cookie) {
+  //   user = await sessionValid(cookie, { checkToken: false });
+  //   if (!user._id) return user;
+  // } else {
+  //   user = await passwordForgetCollection.findOne(
+  //     { forgotPassword: token },
+  //     { projection: { _id: 1 } }
+  //   );
 
     if (user === null) {
-      await mongoClient.close();
       return {
         code: 401,
         content:
