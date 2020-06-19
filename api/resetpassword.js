@@ -17,15 +17,11 @@ function ResetPassword(req, res) {
     const paramsLength = Array.from(params).length;
 
     if (paramsLength === 0 || !params.get("token")) {
-      responseServer(res, 422, {
-        content: "Missing parameter"
-      });
+      responseServer(res, 422);
     }
 
     if (paramsLength > 1) {
-      responseServer(res, 400, {
-        content: "Too many parameters"
-      });
+      responseServer(res, 400);
     }
 
     return GET(params, req.mongoClient).then(result => {
