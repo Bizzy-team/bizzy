@@ -8,7 +8,7 @@ const signJwtPromise = promisify(sign);
 
 export async function GET(params, mongoClient) {
   const passwordForget = mongoClient.bdd.collection("passwordforget");
-  //TODO: Use aggregation to make only one request instead of one.
+  // TODO: Use aggregation to make only one request instead of one.
   const user = await passwordForget.findOne(
     { forgotPassword: params.get("token") },
     { projection: { _id: 1 } }
@@ -37,7 +37,7 @@ export async function GET(params, mongoClient) {
 export async function PUT(data, mongoClient) {
   const passwordForgetCollection = mongoClient.bdd.collection("passwordforget");
   const userCollection = mongoClient.bdd.collection("users");
-  const { newpswd, token, jwtToken, cookie } = data;
+  const { newpswd, jwtToken } = data;
   let user;
 
   // if (cookie) {
@@ -49,14 +49,14 @@ export async function PUT(data, mongoClient) {
   //     { projection: { _id: 1 } }
   //   );
 
-    if (user === null) {
-      return {
-        code: 401,
-        content:
-          "One parameter in the body is either expired or not correct please try to send a new forgot password request."
-      };
-    }
-  }
+  //   if (user === null) {
+  //     return {
+  //       code: 401,
+  //       content:
+  //         "One parameter in the body is either expired or not correct please try to send a new forgot password request."
+  //     };
+  //   }
+  // }
 
   const userData = await userCollection.findOne(
     { _id: user._id },
