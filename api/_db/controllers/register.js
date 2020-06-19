@@ -18,7 +18,7 @@ module.exports = async (body, mongoClient) => {
       username: body.username
     });
 
-    return await createSessionAndLog(mongoClient, newUser);
+    return createSessionAndLog(mongoClient, newUser);
   }
 
   return {

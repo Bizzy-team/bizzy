@@ -19,7 +19,7 @@ module.exports = async (data, mongoClient) => {
   }
 
   if (await compare(data.pswd, user.password)) {
-    return await createSessionAndLog(mongoClient, user);
+    return createSessionAndLog(mongoClient, user);
   }
 
   return {
