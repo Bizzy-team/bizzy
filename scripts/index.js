@@ -7,6 +7,7 @@ const { MongoClient } = require("mongodb");
 
 const deleteData = require("./utils/delete");
 const CheckCollectionsAndSchemas = require("./utils/check");
+const Ls = require("./utils/ls");
 const collections = require("./data/collections.json");
 const injectFakeData = require("./utils/InsertFakeData");
 
@@ -31,6 +32,10 @@ const injectFakeData = require("./utils/InsertFakeData");
         message: chalk`{cyan What do you want a do ?}`,
         choices: [
           {
+            name: "List collections datas.",
+            value: "ls"
+          },
+          {
             name: `Check collections and schemas.`,
             value: "check"
           },
@@ -43,6 +48,21 @@ const injectFakeData = require("./utils/InsertFakeData");
             value: "prod"
           }
         ]
+      },
+      {
+        type: "checkbox",
+        name: "col",
+        message: chalk`{cyan Which collections you'll like to see.}`,
+        choices () {
+          return collections.filter(c => c.name !== "access");
+        },
+        when (a) {
+          if (a.action === "ls") {
+            return true
+          }
+
+          return false;
+        }
       }
     ]);
 
@@ -55,6 +75,10 @@ const injectFakeData = require("./utils/InsertFakeData");
 
     if (answer.action === "check") {
       await CheckCollectionsAndSchemas(client, oraOps);
+    }
+
+    if (answer.action === "ls") {
+      await Ls(client, oraOps, answer.col);
     }
 
     const r = await inquirer.prompt([
