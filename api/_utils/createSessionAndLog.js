@@ -12,19 +12,36 @@ const jwtPromisify = promisify(sign);
  * Create an session user and return data.
  * @param {Object} mClient - The mongo client instance.
  * @param {Object} userData - The user data to insert in session collection.
+ * @param {Boolean} sessionUpdate - If this options is true we have to update a session and not creating one.s
  */
-module.exports = async function createSessionAndLog(mClient, userData) {
+module.exports = async function createSessionAndLog(mClient, userData, sessionUpdate = false) {
   const sessionCol = mClient.bdd.collection("sessions");
   const sessionKey = await createKey(Buffer.alloc(16));
+  let newSession;
 
-  const newSession = await sessionCol.insertOne({
-    userId: new ObjectID(userData._id),
-    key: sessionKey.toString("hex"),
-    expireAt:
-      mClient.dbName !== process.env.DB_TEST_NAME
-        ? new Date(Date.now() + 60 * 10 * 1000)
+  if (sessionUpdate) {
+    newSession = await sessionCol.findOneAndUpdate(
+      {
+        _id: new ObjectID(userData._id)
+      },
+      {
+        $set: {
+          expireAt: mClient.dbName === process.env.DB_TEST_NAME
+            ? new Date((Date.now() + 60) + (60 * 10000))
+            : new Date(Date.now() + 60 * 300 * 1000),
+          key: sessionKey.toString("hex")
+        }
+      }
+    );
+  } else {
+    newSession = await sessionCol.insertOne({
+      userId: new ObjectID(userData._id),
+      key: sessionKey.toString("hex"),
+      expireAt: mClient.dbName === process.env.DB_TEST_NAME
+        ? new Date((Date.now() + 60) + (60 * 10000))
         : new Date(Date.now() + 60 * 300 * 1000)
-  });
+    });
+  }
 
   const tokenRefresh = await hash(sessionKey.toString("hex"), 10);
   const cookieOps = {
@@ -38,16 +55,14 @@ module.exports = async function createSessionAndLog(mClient, userData) {
   }
 
   const token = await jwtPromisify(
-    `
     {
-        "iss": "${newSession.insertedId}",
-        "exp": ${
-          mClient.dbName === process.env.DB_TEST_NAME
-            ? Math.floor(Date.now() + 60 * 5 * 1000)
-            : Math.floor(Date.now() + 60 * 1440 * 1000)
-        }
-    }`,
-    sessionKey.toString("hex")
+      iss: sessionUpdate ? newSession._id : newSession.insertedId
+    },
+    sessionKey.toString("hex"),
+    {
+      expiresIn: mClient.dbName === process.env.DB_TEST_NAME ? "2m" : "5h",
+      noTimestamp: true
+    }
   );
 
   return {
