@@ -1,6 +1,7 @@
 require("dotenv").config();
 const chalk = require("chalk");
 const ora = require("ora");
+const {table} = require("table");
 
 /**
  * 
@@ -27,4 +28,41 @@ module.exports = async function Ls (mongoClient, oraOps, collections) {
         spinner.succeed(chalk`{green No data to display in this collections.}`);
         return;
     }
+
+    const m = colWithData.map(async function (a) {
+        const i = await mongoClient.db(process.env.DB_TEST_NAME).collection(a).find({}).toArray();
+
+        return {
+            data: i,
+            col: a
+        }
+    });
+
+    const v = await Promise.all(m);
+    spinner.succeed(chalk`{gray Find ${m.length} collection${v.length !== 0 && 's'} with data.}`);
+
+    v.forEach(function (d) {
+        console.log(chalk`{cyan ${d.col} collection.}`);
+        let colTitle = Object.keys(d.data[0]);
+
+        const dataToLog = d.data.map(function (data) {
+            return Object.values(data)
+        });
+
+        dataToLog.unshift(colTitle);
+
+        console.log(
+            table(
+                dataToLog,
+                {
+                    columns: {
+                        alignment: "center",
+                        wrapWord: true
+                    },
+                    getBorderCharacters: "honeywell"
+                },
+            )
+        );
+        console.log(chalk`{gray ------------------------}`);
+    });
 };
