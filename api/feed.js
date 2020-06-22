@@ -9,7 +9,7 @@ function Feed(req, res) {
       serverHeader: res.locals.serverHeader ? { ...res.locals.serverHeader } : {},
       content: res.locals.content ? res.locals.content : undefined,
       modifyResponse: res.locals.data ? { ...res.locals.data } : undefined
-    })
+    });
   }
 
   return responseServer(res, 200);

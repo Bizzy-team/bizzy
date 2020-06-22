@@ -14,7 +14,11 @@ const jwtPromisify = promisify(sign);
  * @param {Object} userData - The user data to insert in session collection.
  * @param {Boolean} sessionUpdate - If this options is true we have to update a session and not creating one.s
  */
-module.exports = async function createSessionAndLog(mClient, userData, sessionUpdate = false) {
+module.exports = async function createSessionAndLog(
+  mClient,
+  userData,
+  sessionUpdate = false
+) {
   const sessionCol = mClient.bdd.collection("sessions");
   const sessionKey = await createKey(Buffer.alloc(16));
   let newSession;
@@ -26,9 +30,10 @@ module.exports = async function createSessionAndLog(mClient, userData, sessionUp
       },
       {
         $set: {
-          expireAt: mClient.dbName === process.env.DB_TEST_NAME
-            ? new Date((Date.now() + 60) + (60 * 10000))
-            : new Date(Date.now() + 60 * 300 * 1000),
+          expireAt:
+            mClient.dbName === process.env.DB_TEST_NAME
+              ? new Date(Date.now() + 60 + 60 * 10000)
+              : new Date(Date.now() + 60 * 300 * 1000),
           key: sessionKey.toString("hex")
         }
       }
@@ -37,9 +42,10 @@ module.exports = async function createSessionAndLog(mClient, userData, sessionUp
     newSession = await sessionCol.insertOne({
       userId: new ObjectID(userData._id),
       key: sessionKey.toString("hex"),
-      expireAt: mClient.dbName === process.env.DB_TEST_NAME
-        ? new Date((Date.now() + 60) + (60 * 10000))
-        : new Date(Date.now() + 60 * 300 * 1000)
+      expireAt:
+        mClient.dbName === process.env.DB_TEST_NAME
+          ? new Date(Date.now() + 60 + 60 * 10000)
+          : new Date(Date.now() + 60 * 300 * 1000)
     });
   }
 
