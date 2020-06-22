@@ -1,6 +1,10 @@
 const { decode, verify } = require("jsonwebtoken");
 const { ObjectID } = require("mongodb");
+const {parse} = require("cookie");
+const {compare} = require("bcrypt");
+
 const responseServer = require("../_utils/responseServer");
+const createSessionAndLog = require("../_utils/createSessionAndLog");
 
 /**
  * Check is an user is connected or not, by checking if token passed in header is correct either checking if had cookie refreshToken and if it is correct.
@@ -40,15 +44,20 @@ module.exports = async function(req, res, next) {
       return responseServer(res, 401);
     }
 
-    return verify(token, userSession.key, function(err) {
+    return verify(token, userSession.key, async function(err) {
       if (err) {
         if (err.name === "TokenExpiredError") {
-          // TODO: Check the cookies.
-          return;
+          if (await compare(userSession.key, parse(req.headers.cookie).token)) {
+            res.locals = await createSessionAndLog(req.mongoClient, userSession, true);
+            next();
+          }
+
+          return responseServer(res, 401);
         }
 
-        responseServer(res, 401);
+        return responseServer(res, 401);
       } else {
+        res.locals = await createSessionAndLog(req.mongoClient, userSession, true);
         next();
       }
     });
