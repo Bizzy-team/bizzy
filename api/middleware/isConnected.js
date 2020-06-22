@@ -1,7 +1,7 @@
 const { decode, verify } = require("jsonwebtoken");
 const { ObjectID } = require("mongodb");
-const {parse} = require("cookie");
-const {compare} = require("bcrypt");
+const { parse } = require("cookie");
+const { compare } = require("bcrypt");
 
 const responseServer = require("../_utils/responseServer");
 const createSessionAndLog = require("../_utils/createSessionAndLog");
@@ -56,10 +56,9 @@ module.exports = async function(req, res, next) {
         }
 
         return responseServer(res, 401);
-      } else {
-        res.locals = await createSessionAndLog(req.mongoClient, userSession, true);
-        next();
       }
+      res.locals = await createSessionAndLog(req.mongoClient, userSession, true);
+      return next();
     });
   }
 
