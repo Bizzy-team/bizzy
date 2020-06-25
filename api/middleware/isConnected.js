@@ -57,7 +57,8 @@ module.exports = async function(req, res, next) {
 
         return responseServer(res, 401);
       }
-      res.locals = await createSessionAndLog(req.mongoClient, userSession, true);
+
+      res.locals = await createSessionAndLog(req.mongoClient, userSession, true, false);
       return next();
     });
   }
