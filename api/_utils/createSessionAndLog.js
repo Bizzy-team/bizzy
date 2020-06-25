@@ -32,7 +32,7 @@ module.exports = async function createSessionAndLog(
   if (sessionUpdate) {
     const propsToUpdate = {
       expireAt: sessionExpireAt
-    }
+    };
 
     if (updateToken) {
       propsToUpdate.key = sessionKey.toString("hex");
@@ -43,7 +43,7 @@ module.exports = async function createSessionAndLog(
         _id: new ObjectID(userData._id)
       },
       {
-        $set: {...propsToUpdate}
+        $set: { ...propsToUpdate }
       }
     );
   } else {
