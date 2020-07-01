@@ -75,6 +75,10 @@ module.exports = function (col, mclient, entries = 5) {
                     let mn = Math.floor(Math.random() * (10 - 5 + 1) + 5)
                     obj[props] = new Date(Date.now() + 60 * mn * 1000);
                 }
+
+                if (props === "ip") {
+                    obj[props] = [chance.ip(), chance.ipv6()]
+                }
             });
 
             data.fakeData.push(obj);
@@ -99,7 +103,7 @@ module.exports = function (col, mclient, entries = 5) {
             console.log(chalk`{cyan Data inserted in ${entry.col} collection.}`);
             let colTitle = Object.keys(entry.res.ops[0]);
 
-            const dataToLog = entry.res.ops.map((l, i) => {
+            const dataToLog = entry.res.ops.map((l) => {
                 const t = Object.values(l);
                 return t;
             });
