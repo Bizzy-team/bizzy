@@ -25,7 +25,7 @@ function Login(req, res) {
       responseServer(res, 422);
     }
 
-    const userData = await loginDB(httpBody, req.mongoClient);
+    const userData = await loginDB(httpBody, req);
     responseServer(res, userData.code, {
       serverHeader: userData.serverHeader ? { ...userData.serverHeader } : {},
       content: userData.content ? userData.content : undefined,
