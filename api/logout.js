@@ -6,9 +6,9 @@ const isConnected = require("./_middleware/isConnected");
 const responserServer = require("./_utils/responseServer");
 
 async function Logout(req, res) {
-  if (req.method !== "GET") {
+  if (req.method !== "DELETE") {
     return responserServer(res, 405, {
-      content: "GET"
+      content: "DELETE"
     });
   }
 
