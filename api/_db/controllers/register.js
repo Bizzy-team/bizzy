@@ -1,6 +1,6 @@
 const { hash } = require("bcrypt");
-
 const createSessionAndLog = require("../../_utils/createSessionAndLog");
+
 /**
  * Create a new user
  * @param {Object} body Data send by the request
