@@ -1,6 +1,6 @@
 const { chain } = require("@amaurymartiny/now-middleware");
 
-const checkApiKey = require("./middleware/checkApiKey");
+const checkApiKey = require("./_middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
 const parseBody = require("./_utils/parseBody");
 const forgotDb = require("./_db/controllers/forgot");
