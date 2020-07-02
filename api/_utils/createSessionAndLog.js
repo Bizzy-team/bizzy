@@ -82,7 +82,7 @@ module.exports = async function createSessionAndLog(
         "Set-Cookie": serialize("token", tokenRefresh, cookieOps)
       },
       forClient: {
-        token,
+        token
       },
       dataHidden: {
         session: newSession.value
