@@ -63,11 +63,11 @@ module.exports = async function createSessionAndLog(
     };
     const token = await jwtPromisify(
       {
-        iss: sessionUpdate ? newSession._id : newSession.insertedId
+        iss: sessionUpdate ? newSession.value._id : newSession.insertedId
       },
       sessionKey.toString("hex"),
       {
-        expiresIn: mClient.dbName === process.env.DB_TEST_NAME ? "7m" : "5h",
+        expiresIn: mClient.dbName === process.env.DB_TEST_NAME ? "2m" : "5h",
         noTimestamp: true
       }
     );
@@ -88,9 +88,6 @@ module.exports = async function createSessionAndLog(
   }
 
   return {
-    code: 200,
-    data: {
-      message: "C'est cool"
-    }
+    code: 200
   };
 };
