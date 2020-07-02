@@ -1,6 +1,6 @@
 const { chain } = require("@amaurymartiny/now-middleware");
-const checkApiKey = require("./middleware/checkApiKey");
-const isConnected = require("./middleware/isConnected");
+const checkApiKey = require("./_middleware/checkApiKey");
+const isConnected = require("./_middleware/isConnected");
 const responseServer = require("./_utils/responseServer");
 
 function Feed(req, res) {

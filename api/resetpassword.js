@@ -1,6 +1,6 @@
 const { chain } = require("@amaurymartiny/now-middleware");
 const { parse } = require("url");
-const checkApiKey = require("./middleware/checkApiKey");
+const checkApiKey = require("./_middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
 const { GET, PUT } = require("./_db/controllers/resetpassword");
 const parseBody = require("./_utils/parseBody");
