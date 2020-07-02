@@ -67,7 +67,7 @@ module.exports = async function createSessionAndLog(
       },
       sessionKey.toString("hex"),
       {
-        expiresIn: mClient.dbName === process.env.DB_TEST_NAME ? "2m" : "5h",
+        expiresIn: mClient.dbName === process.env.DB_TEST_NAME ? "5m" : "5h",
         noTimestamp: true
       }
     );
