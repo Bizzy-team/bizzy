@@ -27,9 +27,9 @@ function Login(req, res) {
 
     const userData = await loginDB(httpBody, req);
     responseServer(res, userData.code, {
-      serverHeader: userData.serverHeader ? { ...userData.serverHeader } : {},
+      serverHeader: userData.header ? { ...userData.header } : {},
       content: userData.content ? userData.content : undefined,
-      modifyResponse: userData.data ? { ...userData.data } : undefined
+      modifyResponse: userData.forClient ? { ...userData.forClient } : undefined
     });
   });
 }
