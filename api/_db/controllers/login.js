@@ -1,5 +1,5 @@
 const { compare } = require("bcrypt");
-const {ObjectID} = require("mongodb");
+const { ObjectID } = require("mongodb");
 const createSessionAndLog = require("../../_utils/createSessionAndLog");
 
 /**
@@ -11,7 +11,7 @@ module.exports = async (data, req) => {
   const bizzyUsers = req.mongoClient.bdd.collection("users");
   const user = await bizzyUsers.findOne(
     { mail: data.mail },
-    { projection: {password: 1} }
+    { projection: { password: 1 } }
   );
 
   if (user === null) {
@@ -22,10 +22,12 @@ module.exports = async (data, req) => {
 
   if (await compare(data.pswd, user.password)) {
     const sessionCollection = req.mongoClient.bdd.collection("sessions");
-    const userSession = await sessionCollection.find({userId: new ObjectID(user._id)}).toArray();
+    const userSession = await sessionCollection
+      .find({ userId: new ObjectID(user._id) })
+      .toArray();
 
     if (userSession.length > 1) {
-      //TODO: Send mail to said than another session is creating.
+      // TODO: Send mail to said than another session is creating.
     }
 
     return createSessionAndLog(req.mongoClient, user);
