@@ -11,8 +11,11 @@ h1 {
   line-height: 3;
   font-family: "CeraPro";
   font-size: 2.3em;
-  /* src: url("../utlis/CeraPro/CeraPro-Bold.ttf"); */
 }
+span {
+  color: ${props => props.theme.colorBtn};
+}
+
 .startPage--about--title--img, .startPage--about--afterwork--img, .startPage--about--position--img, .startPage--about--msg--img  {
   display: flex;
   justify-content: center;
@@ -35,7 +38,9 @@ h1 {
 .startPage--about--msg--about {
   margin-bottom: 10%;
   img {
-    width: 35%;
+    width: 28%;
+    margin-right: 10px;
+    padding-bottom: 4px;
   }
   button {
     margin: 0 5px;
