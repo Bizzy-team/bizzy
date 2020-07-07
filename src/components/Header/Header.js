@@ -6,9 +6,17 @@ function Header(props) {
   return (
     <HeaderStyled>
       <img src={logo} alt="logo" className="logo--app"></img>
-      {/* <div className="header--options"> */}
+      <div className="menu">
         {props.option}
-      {/* </div> */}
+        {props.showMenu && (
+          <div className="menu--options">
+            <ul>
+              <li>connexion</li>
+              <li>inscription</li>
+            </ul>
+          </div>
+        )}
+      </div>
     </HeaderStyled>
   );
 }
