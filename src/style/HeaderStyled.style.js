@@ -1,62 +1,51 @@
 import styled from "styled-components";
 
 const HeaderStyled = styled.header`
-  text-align: left;
-  margin-left: 10px;
-  margin-bottom: 20%;
-  div {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 5px 5px 0px rgba(247, 246, 247, 1);
+  background-color: ${props => props.theme.colorPrincipal};
+  padding: 10px 5px;
+  position: fixed;
+  width: 100%;
+
+  .logo--app {
+    width: 8%;
+    margin-left: 2%;
+  }
+
+  .menu--burger {
+    width: 3%;
+    height: 3%;
+  }
+
+  .menu--options {
     display: flex;
-    flex-direction: row;
+    p {
+      margin-right: 5px;
+    }
+  }
+
+  /* .header--options {
+    margin-right: 3%;
     img {
-      width: 20%;
-      height: 20%;
+      width: 4%;
+      height: 4%;
     }
-    .buttons--sign {
-      margin-left: 28%;
-      margin-top: 5%;
-      div {
-        font-family: "Roboto";
-        padding-left: 10px;
-        padding-top: 10px;
-        button {
-          background: none;
-          border: none;
-          color: ${props => props.theme.colorSecondary};
-          &:focus {
-            outline: none;
-            border-bottom: solid 1px ${props => props.theme.color};
-          }
-        }
-      }
+  } */
+
+  @media only screen and (max-width: 876px) {
+    .logo--app {
+      width: 28%;
+      height: 10%;
+      margin-top: 7px;
+      margin-left: 8px;
     }
-  }
 
-  /* Iphone SE: 320x568 */
-  @media screen and (width: 320px) {
-    margin-bottom: 10%;
-  }
-
-  /* Ipad: 768x1024 */
-  @media screen and (width: 768px) {
-    margin-bottom: 10%;
-    div {
-      position: relative;
-      .buttons--sign {
-        position: absolute;
-        right: 8%;
-      }
-    }
-  }
-
-  /* Ipad Pro: 1024x1356 */
-  @media screen and (width: 1024px) {
-    margin-bottom: 10%;
-    div {
-      position: relative;
-      .buttons--sign {
-        position: absolute;
-        right: 6%;
-      }
+    .menu--burger {
+      width: 7%;
+      margin-top: 19px;
+      margin-right: 8px;
     }
   }
 `;
