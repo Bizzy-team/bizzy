@@ -9,31 +9,46 @@ import imgPosition from "../../img/img_position.png";
 import imgMsg from "../../img/img_msg.png";
 
 function StartPage() {
-  console.log(navigator.userAgent.includes("Mobile"));
+  const [data, setData] = React.useState({
+    showMenu: false
+  })
+
+
+  function displayMenu() {
+    console.log("cc");
+    const newState = {...data};
+
+    newState.showMenu = !newState.showMenu;
+    setData(newState);
+  }
+
+  console.log(data);
   
+
   return (
     <>
     {
       (navigator.userAgent.includes("Mobile")) ?
-      <Header option={<img src={menuBurger} className="menu--burger"></img>}></Header> :
-      <Header
-        option={
-          <>
-          <div className="menu--options">
-            <p>connexion</p>
-            <p>inscription</p>
-          </div>
-          </>
-      }>
-      </Header>
+        <Header option={<img src={menuBurger} className="menu--burger" onClick={() => displayMenu()} ></img>} showMenu={data.showMenu}></Header> :
+        <Header
+          option={
+            <>
+            <div className="menu--options">
+              <p>connexion</p>
+              <p>inscription</p>
+            </div>
+            </>
+        }>
+        </Header>
     }
+    
       <StartPageStyled as="section" className="startPage--about">
         <section className="startPage--about--title">
           <div className="startPage--about--title--img">
             <img src={imgTitle} alt="img--title"></img>
           </div>
           <div className="startPage--about--title--about">
-            <h1>Welcome on <span>Bizzy</span> !</h1>
+            <h1>Welcome on <span className="bizzy--name">Bizzy !</span></h1>
             <p>Bizzy ? Mais quelle est donc cette application ?</p>
           </div>
         </section>
@@ -42,7 +57,7 @@ function StartPage() {
             <img src={imgAfterwork} alt="img--afterwork"></img>
           </div>
           <div className="startPage--about--afterwork--about">
-            <h1>Réseau Afterwork !</h1>
+            <h1>Réseau <span>Afterwork !</span></h1>
             <p>
               C’est très facile: c’est une application permettant d’égager vos soirées d’afterwork, de les
               rendre décontractées mais aussi d’agrandir votre réseau social/professionnel en se
@@ -55,7 +70,7 @@ function StartPage() {
             <img src={imgPosition} alt="img--position"></img>
           </div>
           <div className="startPage--about--position--about">
-            <h1>Autour de vous !</h1>
+            <h1>Autour de <span>vous !</span></h1>
             <p>
               Trouvez des afterworks autour de vous en utilisant Bizzy!
               Choissisez une proposition dans votre
@@ -71,7 +86,7 @@ function StartPage() {
             <img src={imgMsg} alt="img--msg"></img>
           </div>
           <div className="startPage--about--msg--about">
-            <h1>Rejoignez <img src={logoBizzy} alt="startPage--about--msg--logo"></img> !</h1>
+            <h1>Rejoignez <img src={logoBizzy} alt="startPage--about--msg--logo"></img><span>!</span></h1>
             <p>
               Et pour faciliter tout cela, il y a un tchat mis à disposition pour convenir de tous les détails !
               Il est débloqué une fois que la personne qui a crée la carte a accepté votre demande.
