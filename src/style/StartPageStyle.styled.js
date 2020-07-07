@@ -10,6 +10,7 @@ img {
 h1 {
   line-height: 3;
   font-family: "CeraPro";
+  font-size: 2.3em;
   /* src: url("../utlis/CeraPro/CeraPro-Bold.ttf"); */
 }
 .startPage--about--title--img, .startPage--about--afterwork--img, .startPage--about--position--img, .startPage--about--msg--img  {
