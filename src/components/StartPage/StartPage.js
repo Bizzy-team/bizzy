@@ -7,23 +7,19 @@ import imgTitle from "../../img/img_title.png";
 import imgAfterwork from "../../img/img_afterwork.png";
 import imgPosition from "../../img/img_position.png";
 import imgMsg from "../../img/img_msg.png";
+import Scroll from "../../img/scroll.svg";
 
 function StartPage() {
   const [data, setData] = React.useState({
     showMenu: false
   })
 
-
   function displayMenu() {
-    console.log("cc");
     const newState = {...data};
 
     newState.showMenu = !newState.showMenu;
     setData(newState);
   }
-
-  console.log(data);
-  
 
   return (
     <>
@@ -33,15 +29,15 @@ function StartPage() {
         <Header
           option={
             <>
-            <div className="menu--options">
-              <p>connexion</p>
-              <p>inscription</p>
-            </div>
+              <div className="menu--options--desktop">
+                <p className="menu--options--desktop--support">Support</p>
+                <p className="menu--options--desktop--connexion">Connexion</p>
+                <p className="menu--options--desktop--inscription">Inscription</p>
+              </div>
             </>
         }>
         </Header>
     }
-    
       <StartPageStyled as="section" className="startPage--about">
         <section className="startPage--about--title">
           <div className="startPage--about--title--img">
@@ -50,6 +46,9 @@ function StartPage() {
           <div className="startPage--about--title--about">
             <h1>Welcome on <span className="bizzy--name">Bizzy !</span></h1>
             <p>Bizzy ? Mais quelle est donc cette application ?</p>
+            <div className="startPage--about--title--scroll">
+              <img src={Scroll} alt="img--scroll"></img>
+            </div>
           </div>
         </section>
         <section className="startPage--about--afterwork">
@@ -63,6 +62,9 @@ function StartPage() {
               rendre décontractées mais aussi d’agrandir votre réseau social/professionnel en se
               basant sur votre mood : aller manger, faire du sport, boire un verre, aller au cinéma etc… !
             </p>
+            <div className="startPage--about--afterwork--scroll">
+              <img src={Scroll} alt="img--scroll"></img>
+            </div>
           </div>
         </section>
         <section className="startPage--about--position">
@@ -79,6 +81,9 @@ function StartPage() {
               Pour faciliter le repérage des lieux,
               une carte sera aussi à votre disposition.
             </p>
+            <div className="startPage--about--position--scroll">
+              <img src={Scroll} alt="img--scroll"></img>
+            </div>
           </div>
         </section>
         <section className="startPage--about--msg">
@@ -86,7 +91,7 @@ function StartPage() {
             <img src={imgMsg} alt="img--msg"></img>
           </div>
           <div className="startPage--about--msg--about">
-            <h1>Rejoignez <img src={logoBizzy} alt="startPage--about--msg--logo"></img><span>!</span></h1>
+            <h1>Rejoignez <img src={logoBizzy} alt="logo--about--msg" className="startPage--about--msg--logo"></img><span> !</span></h1>
             <p>
               Et pour faciliter tout cela, il y a un tchat mis à disposition pour convenir de tous les détails !
               Il est débloqué une fois que la personne qui a crée la carte a accepté votre demande.
@@ -98,7 +103,6 @@ function StartPage() {
             </div>
           </div>
         </section>
-
       </StartPageStyled>
     </>
   )
