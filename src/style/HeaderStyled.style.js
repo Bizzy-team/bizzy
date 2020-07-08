@@ -3,7 +3,7 @@ import styled from "styled-components";
 const HeaderStyled = styled.header`
   display: flex;
   justify-content: space-between;
-  box-shadow: 0px 5px 5px 0px rgba(247, 246, 247, 1);
+  box-shadow: 0px 5px 5px 5px rgba(247, 246, 247, 1);
   background-color: ${props => props.theme.colorPrincipal};
   padding: 10px 5px;
   position: fixed;
@@ -58,13 +58,16 @@ const HeaderStyled = styled.header`
           list-style: none;
         }
         position: absolute;
-        right: 10px;
+        right: 0;
         top: 49px;
         background-color: ${props => props.theme.colorPrincipal};
-        height: 13vh;
         border-radius: 10px;
-        padding-right: 14px;
-        padding-top: 8px;
+        width: 30vw;
+        text-align: center;
+        padding-top: 16px;
+        padding-left: 22px;
+        line-height: 0.6;
+        height: 10vh;
       }
     }
   }
