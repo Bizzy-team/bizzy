@@ -14,6 +14,31 @@ const HeaderStyled = styled.header`
     margin-left: 2%;
   }
 
+  .desktop--menu {
+    display: flex;
+    font-family: "Nunito";
+    margin-right: 10%;
+    position: absolute;
+    top: 19px;
+    left: 77%;
+    p {
+      padding-right: 10%;
+      padding-top: 5px;
+    }
+    .menu--options--desktop--connexion {
+      color: ${props => props.theme.colorText};
+      font-family: "CeraPro Bold";
+    }
+    .menu--options--desktop--inscription {
+      color: ${props => props.theme.colorBtn};
+      font-family: "CeraPro Bold";
+    }
+  }
+
+  .mobile--menu {
+    display: none;
+  }
+
   .menu {
     font-family: "Nunito";
     margin-right: 10%;
@@ -39,24 +64,16 @@ const HeaderStyled = styled.header`
   }
 
   @media only screen and (max-width: 876px) {
-    .logo--app {
-      width: 28%;
-      height: 10%;
-      margin-top: 7px;
-      margin-left: 8px;
-    }
-
-    .menu {
+    .mobile--menu {
+      display: block;
       position: relative;
       font-family: "Nunito";
+      margin-right: 22px;
       .menu--burger {
         height: 41%;
         margin-top: 20px;
       }
       .menu--options {
-        ul {
-          list-style: none;
-        }
         position: absolute;
         right: 0;
         top: 49px;
@@ -69,6 +86,17 @@ const HeaderStyled = styled.header`
         line-height: 0.6;
         height: 10vh;
       }
+    }
+
+    .desktop--menu {
+      display: none;
+    }
+
+    .logo--app {
+      width: 28%;
+      height: 10%;
+      margin-top: 7px;
+      margin-left: 8px;
     }
   }
 `;
