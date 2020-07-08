@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../Header/Header";
 import StartPageStyled from "../../style/StartPageStyle.styled";
 import logoBizzy from "../../img/bizzy.png";
-import menuBurger from "../../img/menu_burger.png";
+import menuBurger from "../../img/menu_burger.svg";
 import imgTitle from "../../img/img_title.png";
 import imgAfterwork from "../../img/img_afterwork.png";
 import imgPosition from "../../img/img_position.png";
