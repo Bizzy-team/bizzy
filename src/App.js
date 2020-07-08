@@ -3,7 +3,6 @@ import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { Route, BrowserRouter, Link } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import "./utlis/CeraPro/stylesheet.css";
 import ErrorMessageTokenStyled from "./style/ErrorMessageTokenStyled.style";
 import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
 import Feed from "./components/Feed/Feed";
