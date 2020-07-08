@@ -14,25 +14,29 @@ const HeaderStyled = styled.header`
     margin-left: 2%;
   }
 
-  .menu--burger {
-    width: 3%;
-    height: 3%;
-  }
-
-  .menu--options {
-    display: flex;
-    p {
-      margin-right: 5px;
+  .menu {
+    font-family: "Nunito";
+    margin-right: 10%;
+    position: relative;
+    .menu--options--desktop {
+      display: flex;
+      position: absolute;
+      top: 9px;
+      right: -127px;
+      p {
+        padding-right: 10%;
+        padding-top: 5px;
+      }
+      .menu--options--desktop--connexion {
+        color: ${props => props.theme.colorText};
+        font-family: "CeraPro Bold";
+      }
+      .menu--options--desktop--inscription {
+        color: ${props => props.theme.colorBtn};
+        font-family: "CeraPro Bold";
+      }
     }
   }
-
-  /* .header--options {
-    margin-right: 3%;
-    img {
-      width: 4%;
-      height: 4%;
-    }
-  } */
 
   @media only screen and (max-width: 876px) {
     .logo--app {
@@ -42,10 +46,26 @@ const HeaderStyled = styled.header`
       margin-left: 8px;
     }
 
-    .menu--burger {
-      width: 7%;
-      margin-top: 19px;
-      margin-right: 8px;
+    .menu {
+      position: relative;
+      font-family: "Nunito";
+      .menu--burger {
+        height: 41%;
+        margin-top: 20px;
+      }
+      .menu--options {
+        ul {
+          list-style: none;
+        }
+        position: absolute;
+        right: 10px;
+        top: 49px;
+        background-color: ${props => props.theme.colorPrincipal};
+        height: 13vh;
+        border-radius: 10px;
+        padding-right: 14px;
+        padding-top: 8px;
+      }
     }
   }
 `;
