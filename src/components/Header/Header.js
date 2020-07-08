@@ -11,8 +11,8 @@ function Header(props) {
         {props.showMenu && (
           <div className="menu--options">
             <ul>
-              <li>connexion</li>
-              <li>inscription</li>
+              <li>Connexion</li>
+              <li>Inscription</li>
             </ul>
           </div>
         )}
