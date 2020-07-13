@@ -6,32 +6,25 @@ import imgTitle from "../../img/img_title.png";
 import imgAfterwork from "../../img/img_afterwork.png";
 import imgPosition from "../../img/img_position.png";
 import imgMsg from "../../img/img_msg.png";
-import Scroll from "../../img/scroll.svg";
 
 function StartPage() {
   return (
     <>
       <Header></Header>
-      <StartPageStyled as="section" className="startPage--about">
-        <section className="startPage--about--title">
-          <div className="startPage--about--title--img">
-            <img src={imgTitle} alt="img--title"></img>
-          </div>
-          <div className="startPage--about--title--about">
+      <StartPageStyled as="main" className="startPage--about">
+        <section>
+          <div className="section--content">
             <h1>
-              Welcome on <span className="bizzy--name">Bizzy !</span>
+              Welcome on <span>Bizzy !</span>
             </h1>
             <p>Bizzy ? Mais quelle est donc cette application ?</p>
-            <div className="startPage--about--title--scroll">
-              <img src={Scroll} alt="img--scroll"></img>
-            </div>
+          </div>
+          <div className="section--img">
+            <img src={imgTitle} alt="img--title"></img>
           </div>
         </section>
-        <section className="startPage--about--afterwork">
-          <div className="startPage--about--afterwork--img">
-            <img src={imgAfterwork} alt="img--afterwork"></img>
-          </div>
-          <div className="startPage--about--afterwork--about">
+        <section>
+          <div className="section--content">
             <h1>
               Réseau <span>Afterwork !</span>
             </h1>
@@ -41,16 +34,13 @@ function StartPage() {
               social/professionnel en se basant sur votre mood : aller manger, faire du
               sport, boire un verre, aller au cinéma etc… !
             </p>
-            <div className="startPage--about--afterwork--scroll">
-              <img src={Scroll} alt="img--scroll"></img>
-            </div>
+          </div>
+          <div className="section--img">
+            <img src={imgAfterwork} alt="img--afterwork"></img>
           </div>
         </section>
-        <section className="startPage--about--position">
-          <div className="startPage--about--position--img">
-            <img src={imgPosition} alt="img--position"></img>
-          </div>
-          <div className="startPage--about--position--about">
+        <section >
+          <div className="section--content">
             <h1>
               Autour de <span>vous !</span>
             </h1>
@@ -59,16 +49,13 @@ function StartPage() {
               proposition dans votre feed de cartes, en fonction du mood. Pour faciliter
               le repérage des lieux, une carte sera aussi à votre disposition.
             </p>
-            <div className="startPage--about--position--scroll">
-              <img src={Scroll} alt="img--scroll"></img>
-            </div>
+          </div>
+          <div className="section--img">
+            <img src={imgPosition} alt="img--position"></img>
           </div>
         </section>
-        <section className="startPage--about--msg">
-          <div className="startPage--about--msg--img">
-            <img src={imgMsg} alt="img--msg"></img>
-          </div>
-          <div className="startPage--about--msg--about">
+        <section>
+          <div className="section--content">
             <h1>
               Rejoignez{" "}
               <img
@@ -87,10 +74,13 @@ function StartPage() {
                 😉
               </span>
             </p>
-            <div className="startPage--about--msg--about--btn">
+            <div className="section--btn">
               <button className="btn--connexion">Connexion</button>
               <button className="btn--inscription">Inscription</button>
             </div>
+          </div>
+          <div className="section--img">
+            <img src={imgMsg} alt="img--msg"></img>
           </div>
         </section>
       </StartPageStyled>
