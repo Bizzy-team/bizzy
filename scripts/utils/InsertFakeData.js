@@ -56,10 +56,10 @@ module.exports = function (col, mclient, entries = 5) {
                         obj[props] = chance.last();
                         break;
                     case "cards":
-                        const cardsNumber = Math.floor(Math.random * 10);
+                        const cardsNumber = Math.floor(Math.random() * 10);
                         const cardsArray = [];
 
-                        for (let index = cardsNumber; index < cardsNumber; index++) {
+                        for (let index = 0; index < cardsNumber; index++) {
                             cardsArray.push(new ObjectID().generate().toString("hex"))
                         }
                         obj[props] = [...cardsArray];
@@ -127,7 +127,11 @@ module.exports = function (col, mclient, entries = 5) {
             dataToLog.unshift(colTitle);
 
             console.log(table(dataToLog, {
-                getBorderCharacters: "honeywell"
+                getBorderCharacters: "honeywell",
+                columnDefault: {
+                    width: 18,
+                    wrapWord: true
+                }
             }));
             console.log(chalk`{gray ----------------------}`)
         });
