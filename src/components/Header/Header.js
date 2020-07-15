@@ -17,9 +17,11 @@ function Header() {
 
   return (
     <HeaderStyled>
-      <img src={logo} alt="logo" className="logo--app"></img>
+      <div className="mobile--logo">
+        <img src={logo} alt="logo" className="logo--app"></img>
+      </div>
       <div className="mobile--menu">
-        <img src={menuBurger} className="menu--burger" onClick={() => displayMenu()} />
+          <img src={menuBurger} className="menu--burger" onClick={() => displayMenu()} />
         {data.showMenu && (
           <div className="menu--options">
             <p>Connexion</p>
