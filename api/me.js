@@ -16,6 +16,10 @@ async function Me(req, res) {
     await meController.GET(req, res);
   }
 
+  if (req.method === "POST") {
+    await meController.POST(req);
+  }
+
   return responseServer(res, res.locals.code, {
     serverHeader: res.locals.header ? { ...res.locals.header } : undefined,
     modifyResponse: res.locals.forClient ? { ...res.locals.forClient } : undefined
