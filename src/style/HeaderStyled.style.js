@@ -63,6 +63,9 @@ const HeaderStyled = styled.header`
   }
 
   @media only screen and (min-width: 482px) {
+    .mobile--logo {
+      width: 18%;
+    }
     .mobile--menu {
       .menu--options {
         width: 25vw;
@@ -71,6 +74,9 @@ const HeaderStyled = styled.header`
   }
 
   @media only screen and (min-width: 584px) {
+    .mobile--logo {
+      width: 15%;
+    }
     .mobile--menu {
       .menu--options {
         width: 21vw;
@@ -79,6 +85,9 @@ const HeaderStyled = styled.header`
   }
 
   @media only screen and (min-width: 682px) {
+    .mobile--logo {
+      width: 12%;
+    }
     .mobile--menu {
       .menu--options {
         width: 18vw;
@@ -87,6 +96,9 @@ const HeaderStyled = styled.header`
   }
 
   @media only screen and (min-width: 774px) {
+    .mobile--logo {
+      width: 10%;
+    }
     .mobile--menu {
       .menu--options {
         width: 16vw;
@@ -145,15 +157,23 @@ const HeaderStyled = styled.header`
   }
 
   @media only screen and (min-width: 1000px) {
+    .mobile--logo {
+      width: 8%;
+    }
+
     .desktop--menu {
-      left: 74%;
+      left: 70%;
+      top: 15px;
     }
   }
 
   @media only screen and (min-width: 1400px) {
+    .mobile--logo {
+      width: 6%;
+    }
     .desktop--menu {
       left: 78%;
-      top: 21px;
+      top: 13px;
     }
   }
 `;
