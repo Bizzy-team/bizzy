@@ -26,7 +26,8 @@ async function GET(req, res) {
     res.locals.forClient = { ...user };
   }
 }
-// async function POST(req) {}
+
+async function POST(req) {}
 
 exports.GET = GET;
-// exports.POST = POST;
+exports.POST = POST;
