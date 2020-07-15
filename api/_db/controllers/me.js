@@ -28,7 +28,8 @@ async function GET(req, res) {
 }
 
 async function POST() {
-  localStorage;
+  const l = "h";
+  return l;
 }
 
 exports.GET = GET;
