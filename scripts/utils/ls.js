@@ -55,12 +55,12 @@ module.exports = async function Ls (mongoClient, oraOps, collections) {
             table(
                 dataToLog,
                 {
-                    columns: {
-                        alignment: "center",
+                    getBorderCharacters: "honeywell",
+                    columnDefault: {
+                        width: 18,
                         wrapWord: true
-                    },
-                    getBorderCharacters: "honeywell"
-                },
+                    }
+                }
             )
         );
         console.log(chalk`{gray ------------------------}`);
