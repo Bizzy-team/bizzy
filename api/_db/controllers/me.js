@@ -27,7 +27,9 @@ async function GET(req, res) {
   }
 }
 
-async function POST(req) {}
+async function POST() {
+  localStorage;
+}
 
 exports.GET = GET;
 exports.POST = POST;
