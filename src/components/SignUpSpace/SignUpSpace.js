@@ -25,6 +25,7 @@ function SignUpSpace() {
         type: "text",
         inputId: "inputFirstName",
         inputRef: inputFirstName,
+        inputLabel: "inputLabelFirstName",
         inputPlaceholder: "Prénom",
         inputRequired: true
       },
@@ -32,6 +33,7 @@ function SignUpSpace() {
         type: "text",
         inputId: "inputLasttName",
         inputRef: inputLastName,
+        inputLabel: "inputLabelLastName",
         inputPlaceholder: "Nom",
         inputRequired: true
       },
@@ -39,6 +41,7 @@ function SignUpSpace() {
         type: "mail",
         inputId: "inputMail",
         inputRef: inputMail,
+        inputLabel: "inputLabelMail",
         inputPlaceholder: "Mail",
         inputRequired: true
       },
@@ -46,6 +49,7 @@ function SignUpSpace() {
         type: "password",
         inputId: "inputPswd",
         inputRef: inputPswd,
+        inputLabel: "inputLabelPswd",
         inputPlaceholder: "Mot de passe",
         inputRequired: true
       },
@@ -53,6 +57,7 @@ function SignUpSpace() {
         type: "password",
         inputId: "inputCheckPswd",
         inputRef: inputCheckPswd,
+        inputLabel: "inputLabelCheckPswd",
         inputPlaceholder: "Confirmer mot de passe",
         inputRequired: true
       },
@@ -154,6 +159,7 @@ function SignUpSpace() {
                   type={input.type}
                   inputId= {input.inputId}
                   inputRef={input.inputRef}
+                  inputLabel= {input.inputLabel}
                   inputPlaceholder={input.inputPlaceholder}
                   inputRequired={input.inputRequired}
                   key={index}
