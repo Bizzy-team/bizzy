@@ -1,9 +1,10 @@
+const { chain } = require("@amaurymartiny/now-middleware");
+const checkApiKey = require("./_middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
-const loginDB = require("./_db/models/login");
+const loginDB = require("./_db/controllers/login");
 const parseBody = require("./_utils/parseBody");
-const parseQuery = require("./_utils/parseQuery");
 
-module.exports = function Login(req, res) {
+function Login(req, res) {
   if (req.method !== "POST") {
     return responseServer(res, 405, {
       content: "POST"
@@ -11,7 +12,7 @@ module.exports = function Login(req, res) {
   }
 
   parseBody(req, res);
-  return req.on("bodyParsed", httpBody => {
+  return req.on("bodyParsed", async httpBody => {
     const q = Object.keys(httpBody);
 
     if (q.length >= 3) {
@@ -24,13 +25,13 @@ module.exports = function Login(req, res) {
       responseServer(res, 422);
     }
 
-    return loginDB(httpBody).then(userData => {
-      responseServer(res, userData.code, {
-        serverHeader: userData.serverHeader ? { ...userData.serverHeader } : {},
-        content: userData.content ? userData.content : undefined,
-        modifyResponse: userData.data ? { ...userData.data } : undefined,
-        query: parseQuery(req.url)
-      });
+    const userData = await loginDB(httpBody, req);
+    responseServer(res, userData.code, {
+      serverHeader: userData.header ? { ...userData.header } : {},
+      content: userData.content ? userData.content : undefined,
+      modifyResponse: userData.forClient ? { ...userData.forClient } : undefined
     });
   });
-};
+}
+
+module.exports = chain(checkApiKey)(Login);

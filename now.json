@@ -3,10 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "env": {
-      "NODEJS_HELPERS": "0",
-      "DB_URL": "@mongo",
-      "MAILUSER": "@mailuserdev",
-      "MAILMDP": "@mailmdpdev"
+      "NODEJS_HELPERS": "0"
   },
   "rewrites": [
       {
