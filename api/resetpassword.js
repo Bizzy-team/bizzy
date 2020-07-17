@@ -1,10 +1,11 @@
+const { chain } = require("@amaurymartiny/now-middleware");
 const { parse } = require("url");
+const checkApiKey = require("./_middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
-const { GET, PUT } = require("./_db/models/resetpassword");
+const { GET, PUT } = require("./_db/controllers/resetpassword");
 const parseBody = require("./_utils/parseBody");
-const parseQuery = require("./_utils/parseQuery");
 
-module.exports = function ResetPassword(req, res) {
+function ResetPassword(req, res) {
   if (!["GET", "PUT"].includes(req.method)) {
     responseServer(res, 405, {
       content: "POST, PUT"
@@ -16,18 +17,14 @@ module.exports = function ResetPassword(req, res) {
     const paramsLength = Array.from(params).length;
 
     if (paramsLength === 0 || !params.get("token")) {
-      responseServer(res, 422, {
-        content: "Missing parameter"
-      });
+      responseServer(res, 422);
     }
 
     if (paramsLength > 1) {
-      responseServer(res, 400, {
-        content: "Too many parameters"
-      });
+      responseServer(res, 400);
     }
 
-    return GET(params).then(result => {
+    return GET(params, req.mongoClient).then(result => {
       responseServer(res, result.code, {
         serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
         content: result.content ? result.content : undefined,
@@ -66,14 +63,15 @@ module.exports = function ResetPassword(req, res) {
       PUTData.jwtToken = req.headers.authorization;
       if (req.headers.cookie) PUTData.cookie = req.headers.cookie;
 
-      return PUT(PUTData).then(result => {
+      return PUT(PUTData, req.mongoClient).then(result => {
         responseServer(res, result.code, {
           serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
           content: result.content ? result.content : undefined,
-          modifyResponse: result.data ? { ...result.data } : undefined,
-          query: parseQuery(req.url)
+          modifyResponse: result.data ? { ...result.data } : undefined
         });
       });
     });
   }
-};
+}
+
+module.exports = chain(checkApiKey)(ResetPassword);
