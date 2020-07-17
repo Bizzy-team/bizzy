@@ -23,11 +23,11 @@ function register(req, res) {
     }
 
     if (
-        !q.includes("nom") || 
-        !q.includes("prenom") || 
-        !q.includes("mail") ||
-        !q.includes("pswd")
-      ) {
+      !q.includes("nom") ||
+      !q.includes("prenom") ||
+      !q.includes("mail") ||
+      !q.includes("pswd")
+    ) {
       responseServer(res, 422);
     }
 

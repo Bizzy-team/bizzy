@@ -19,14 +19,14 @@ module.exports = async (body, mongoClient) => {
       description: "",
       cards: [],
       mail: body.mail,
-      password: userPassword,
-    }
+      password: userPassword
+    };
 
     if (mongoClient.dbName === process.env.DB_TEST_NAME) {
       userToInsert.pswd_not_hashed = body.pswd;
     }
 
-    const newUser = await bizzyUsers.insertOne({...userToInsert});
+    const newUser = await bizzyUsers.insertOne({ ...userToInsert });
 
     return createSessionAndLog(mongoClient, newUser);
   }
