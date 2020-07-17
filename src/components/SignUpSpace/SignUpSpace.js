@@ -20,7 +20,7 @@ function SignUpSpace() {
     loader: false,
     error: false,
     errorMessage: "",
-    inputData: [
+    inputDataName: [
       {
         type: "text",
         inputId: "inputFirstName",
@@ -36,7 +36,9 @@ function SignUpSpace() {
         inputLabel: "inputLabelLastName",
         inputPlaceholder: "Nom",
         inputRequired: true
-      },
+      }
+    ],
+    inputDataAccount: [
       {
         type: "mail",
         inputId: "inputMail",
@@ -60,8 +62,7 @@ function SignUpSpace() {
         inputLabel: "inputLabelCheckPswd",
         inputPlaceholder: "Confirmer mot de passe",
         inputRequired: true
-      },
-
+      }
     ]
   });
   const [redirect, setRedirect] = React.useState(false);
@@ -152,8 +153,26 @@ function SignUpSpace() {
             <img src={GeometryImg} alt="img--inscription"></img>
             <h2>Inscription</h2>
           </div>
+          <div className="input--data--name">
+            {
+              data.inputDataName.map((input, index) => {
+                return (
+                  <InputsForm
+                  type={input.type}
+                  inputId= {input.inputId}
+                  inputRef={input.inputRef}
+                  inputLabel= {input.inputLabel}
+                  inputPlaceholder={input.inputPlaceholder}
+                  inputRequired={input.inputRequired}
+                  key={index}
+                  >
+                  </InputsForm>
+                  )
+                })
+              }
+            </div>
           {
-            data.inputData.map((input, index) => {
+            data.inputDataAccount.map((input, index) => {
               return (
                 <InputsForm
                   type={input.type}
@@ -168,6 +187,19 @@ function SignUpSpace() {
                 )
             })
           }
+          <div className="form--inscription--conditions">
+            <input type="checkbox"></input>
+            <p>
+              J'accepte <a href="/">les termes et conditions</a> et <a href="/">la politique de confidentialité</a>.
+            </p>
+          </div>
+          <div className="form--inscription--btn">
+            <button>Inscription</button>
+          </div>
+          <div className="form--inscription--link">
+            <p>J'ai déjà un compte</p>
+            <p><a href="/">Connexion</a></p>
+          </div>
         </div>
       </SignUpSpaceStyled>
       {/* {data.error && (
