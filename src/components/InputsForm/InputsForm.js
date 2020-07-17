@@ -10,7 +10,7 @@ function InputsForm(props) {
           required={props.inputRequired}
         >
         </input>
-        <span className={`placeholder--for--${props.inputPlaceholder}`}>
+        <span className={`placeholder--for--${props.inputLabel}`}>
           {props.inputPlaceholder}
         </span>
       {/* <div className={`space--${props.fieldName}`}>
