@@ -67,6 +67,9 @@ module.exports = function (col, mclient, entries = 5) {
                     case "city":
                         obj[props] = chance.city();
                         break;
+                    case "job":
+                        obj[props] = chance.profession({rank: true});
+                        break;
                     case "description":
                         obj[props] = chance.paragraph({sentences: 1});
                         break;
