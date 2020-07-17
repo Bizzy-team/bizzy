@@ -2,8 +2,18 @@ import React from "react";
 import InputFormStyled from "../../style/InputFormStyled.style";
 function InputsForm(props) {
   return (
-    <InputFormStyled>
-      <div className={`space--${props.fieldName}`}>
+    <InputFormStyled as="div">
+        <input
+          type={props.type}
+          id={props.inputId}
+          ref={props.inputRef}
+          required={props.inputRequired}
+        >
+        </input>
+        <span className={`placeholder--for--${props.inputPlaceholder}`}>
+          {props.inputPlaceholder}
+        </span>
+      {/* <div className={`space--${props.fieldName}`}>
         <input
           type={`${props.type}`}
           id={`input--${props.fieldName}`}
@@ -13,7 +23,7 @@ function InputsForm(props) {
         <span className={`placeholder--for--${props.placeholderInput}`}>
           {props.placeholderInput}
         </span>
-      </div>
+      </div> */}
     </InputFormStyled>
   );
 }
