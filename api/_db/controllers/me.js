@@ -1,11 +1,32 @@
 const { ObjectID } = require("mongodb");
+const {intersection} = require("lodash");
 
 /**
  * Retrieve data on a specific user.
- * @param {*} req - The nodeJs HttpIncomingMessage object.
- * @param {*} res - The nodeJs HttpResponseMessage object.
+ * @param {Object} req - The nodeJs HttpIncomingMessage object.
+ * @param {Object} res - The nodeJs HttpResponseMessage object.
+ * @param {Array} params - An array of fields to return in the query.
  */
-async function GET(req, res) {
+async function GET(req, res, params) {
+  const userFields = ["name", "surname", "city", "job", "description", "mail", "cards"];
+  let fieldsToReturn = {};
+
+  userFields.forEach(function (l) {
+    fieldsToReturn[l] = 1;
+  });
+  fieldsToReturn._id = 0;
+
+  if (Array.isArray(params)) {
+    if (intersection(params, userFields).length !== 0) {
+      fieldsToReturn = {
+        _id: 0
+      };
+      intersection(params, userFields).forEach(i => {
+        fieldsToReturn[i] = 1
+      })
+    }
+  }
+
   const usersCol = req.mongoClient.bdd.collection("users");
 
   const user = await usersCol.findOne({
@@ -14,6 +35,9 @@ async function GET(req, res) {
         ? res.locals.session.userId
         : res.locals.dataHidden.session.userId
     )
+  },
+  {
+    projection: {...fieldsToReturn}
   });
 
   if (res.locals.forClient) {
