@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import GlobalContainer from "../utlis/GlobalContainer";
 
-const InputsForm = styled.div`
+const InputsForm = styled(GlobalContainer)`
   color: ${props => props.theme.colorSecondary};
-  div {
+  /* div { */
     display: flex;
     flex-direction: column;
     margin-bottom: 10%;
@@ -36,8 +37,8 @@ const InputsForm = styled.div`
         opacity: 1;
       }
 
-      &:focus ~ .placeholder--for--Username,
-      &:not(:focus):valid ~ .placeholder--for--Username {
+      &:focus ~ .placeholder--for--Prénom,
+      &:not(:focus):valid ~ .placeholder--for--Prénom {
         top: -10px;
         left: 4%;
       }
@@ -57,7 +58,7 @@ const InputsForm = styled.div`
       transition: 0.2s ease all;
       background-color: ${props => props.theme.backgroundColor};
     }
-  }
+  /* } */
 `;
 
 export default InputsForm;
