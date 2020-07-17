@@ -10,7 +10,7 @@ import imgMsg from "../../img/img_msg.png";
 function StartPage() {
   return (
     <>
-      <Header></Header>
+      <Header/>
       <StartPageStyled as="main" className="startPage--about">
         <section>
           <div className="section--content">

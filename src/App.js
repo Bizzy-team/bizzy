@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { Route, BrowserRouter, Link } from "react-router-dom";
@@ -9,11 +8,9 @@ import Feed from "./components/Feed/Feed";
 import UserProfile from "./components/UserProfile/UserProfile";
 import ShareYourMood from "./components/YourMood/ShareYourMood";
 import variables from "./variables";
-// import Home from "./components/Home/Home";
 import ResetPswd from "./components/ResetPswd/ResetPswd";
 import ForgotPasswordConfirm from "./components/ForgotPasswordForm/ForgotPasswordConfirm";
 import NotAvailable from "./components/NotAvailable/NotAvailable";
-import SignUpSpace from "./components/SignUpSpace/SignUpSpace";
 import StartPage from "./components/StartPage/StartPage";
 
 function App() {
@@ -24,14 +21,6 @@ function App() {
   #root {
     overflow-x: hidden;
   };
-
-  /* @font-face {
-    font-family: "CeraPro";
-    src: local('CeraPro'), url(./utlis/CeraPro/CeraPro-Bold.ttf) format('truetype');
-    /* src: url("./utlis/FontsFree-Net-cor2.ttf") format("truetype"); */
-    /* src: url("./utlis/CeraPro/CeraPro-Bold.ttf") format('truetype'); */
-    /* src: url("./utlis/CeraPro/CeraPro-Bold.ttf") format("truetype"); */
-    /* src: url("./utlis/CeraPro/CeraPro-Bold.woff"); */
   `;
 
   function ErrorMessage({ errorTitle, errorContent, redirectLink, errorAdvice }) {
@@ -76,13 +65,8 @@ function App() {
       <BrowserRouter>
         <ThemeProvider theme={{ ...variables }}>
           <GlobalStyle></GlobalStyle>
-          {/* {!navigator.userAgent.includes("Mobile") ? (
-            <NotAvailable content="Bizzy is only available on smartphone."></NotAvailable>
-          ) : ( */}
             <>
-              {/* <Route exact path="/" render={() => unavailableToken(Home)}></Route> */}
               <Route exact path="/" render={() => unavailableToken(StartPage)}></Route>
-              <Route exact path="/inscription" component={SignUpSpace}></Route>
               <Route
                 exact
                 path="/forgot_password_form"
