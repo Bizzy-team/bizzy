@@ -25,7 +25,8 @@ const SignUpSpaceStyled = styled(GlobalContainer)`
       button {
         background-color: ${props => props.theme.colorBtn};
         color: ${props => props.theme.colorPrincipal};
-        padding: 6px 24px;
+        padding: 10px 24px;
+        border: none;
         border-radius: 10px;
         width: 100%;
         font-size: 0.9em;
