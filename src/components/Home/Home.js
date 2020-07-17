@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "../Header/Header";
 import LogginSpace from "../LogginSpace/LogginSpace";
-import SigninSpace from "../SigninSpace/SigninSpace";
+import SigninSpace from "../SignUpSpace/SignUpSpace";
 
 function Home() {
   const [data, setData] = useState({
