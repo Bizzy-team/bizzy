@@ -1,5 +1,5 @@
 const { chain } = require("@amaurymartiny/now-middleware");
-const {parse} = require("url")
+const { parse } = require("url");
 
 const checkApiKey = require("./_middleware/checkApiKey");
 const isConnected = require("./_middleware/isConnected");
