@@ -26,7 +26,7 @@ module.exports = async function createSessionAndLog(
   const sessionExpireAt =
     mClient.dbName === process.env.DB_TEST_NAME
       ? new Date(Date.now() + 60 + 60 * 10000)
-      : new Date(Date.now() + 60 * 300 * 1000);
+      : new Date(Date.now() + 60 + 60 * 300000);
   let newSession;
 
   if (sessionUpdate) {
@@ -67,7 +67,7 @@ module.exports = async function createSessionAndLog(
       },
       sessionKey.toString("hex"),
       {
-        expiresIn: mClient.dbName === process.env.DB_TEST_NAME ? "5m" : "5h",
+        expiresIn: mClient.dbName === process.env.DB_TEST_NAME ? "5m" : "1h",
         noTimestamp: true
       }
     );
