@@ -1,4 +1,5 @@
 const { chain } = require("@amaurymartiny/now-middleware");
+const {parse} = require("url")
 
 const checkApiKey = require("./_middleware/checkApiKey");
 const isConnected = require("./_middleware/isConnected");
@@ -12,8 +13,14 @@ async function Me(req, res) {
     });
   }
 
+  let params = new URLSearchParams(parse(req.url).search).get("fields");
+
+  if (params) {
+    params = params.split(",");
+  }
+
   if (req.method === "GET") {
-    await meController.GET(req, res);
+    await meController.GET(req, res, params);
   }
 
   if (req.method === "POST") {
