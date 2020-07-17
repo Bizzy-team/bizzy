@@ -1,9 +1,11 @@
+const { chain } = require("@amaurymartiny/now-middleware");
+
+const checkApiKey = require("./_middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
 const parseBody = require("./_utils/parseBody");
-const forgotDb = require("./_db/models/forgot");
-const parseQuery = require("./_utils/parseQuery");
+const forgotDb = require("./_db/controllers/forgot");
 
-module.exports = function Forgot(req, res) {
+function Forgot(req, res) {
   if (req.method !== "POST") {
     return responseServer(res, 405, {
       content: "POST"
@@ -24,13 +26,14 @@ module.exports = function Forgot(req, res) {
       responseServer(res, 422);
     }
 
-    return forgotDb(httpBody, parseQuery(req.url)).then(result => {
+    return forgotDb(httpBody, req.mongoClient).then(result => {
       responseServer(res, result.code, {
         serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
         content: result.content ? result.content : undefined,
-        modifyResponse: result.data ? { ...result.data } : undefined,
-        query: parseQuery(req.url)
+        modifyResponse: result.data ? { ...result.data } : undefined
       });
     });
   });
-};
+}
+
+module.exports = chain(checkApiKey)(Forgot);

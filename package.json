@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "start:back": "now dev",
+        "bdd-environment": "node ./scripts/index.js",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
@@ -29,27 +30,35 @@
     "devDependencies": {
         "@testing-library/react": "^9.3.2",
         "@testing-library/user-event": "^7.1.2",
-        "ava": "^3.0.0",
+        "ava": "^3.8.2",
+        "chalk": "^4.0.0",
+        "chance": "^1.1.6",
         "eslint": "^6.8.0",
         "eslint-config-airbnb-base": "^14.0.0",
         "eslint-config-prettier": "^6.9.0",
         "eslint-plugin-prettier": "^3.1.2",
         "eslint-watch": "^6.0.1",
         "husky": "^4.2.3",
+        "inquirer": "^7.1.0",
+        "lodash": "^4.17.15",
         "now": "^17.0.4",
+        "ora": "^4.0.4",
         "prettier": "^1.19.1",
-        "react-scripts": "3.4.0"
+        "react-scripts": "3.4.0",
+        "table": "^5.4.6"
     },
     "dependencies": {
+        "@amaurymartiny/now-middleware": "^0.2.0",
         "@testing-library/jest-dom": "^4.2.4",
         "bcrypt": "^4.0.1",
+        "cookie": "^0.4.1",
         "dotenv": "^8.2.0",
         "jsonwebtoken": "^8.5.1",
-        "mongodb": "^3.5.5",
-        "nodemailer": "^6.4.6",
+        "mongodb": "^3.5.8",
+        "nodemailer": "^6.4.8",
         "react": "^16.13.0",
         "react-dom": "^16.13.0",
-        "react-router-dom": "^5.1.2",
-        "styled-components": "^5.0.1"
+        "react-router-dom": "^5.2.0",
+        "styled-components": "^5.1.1"
     }
 }

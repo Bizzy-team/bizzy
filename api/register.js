@@ -1,9 +1,11 @@
+const { chain } = require("@amaurymartiny/now-middleware");
+
+const checkApiKey = require("./_middleware/checkApiKey");
 const responseServer = require("./_utils/responseServer");
 const parseBody = require("./_utils/parseBody");
-const registerDb = require("./_db/models/register");
-const parseQuery = require("./_utils/parseQuery");
+const registerDb = require("./_db/controllers/register");
 
-module.exports = function register(req, res) {
+function register(req, res) {
   if (req.method !== "POST") {
     responseServer(res, 405, {
       content: "POST"
@@ -34,13 +36,14 @@ module.exports = function register(req, res) {
       });
     }
 
-    return registerDb(httpBody).then(result => {
+    return registerDb(httpBody, req.mongoClient).then(result => {
       responseServer(res, result.code, {
         serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
         content: result.content ? result.content : undefined,
-        modifyResponse: result.data ? { ...result.data } : undefined,
-        query: parseQuery(req.url)
+        modifyResponse: result.data ? { ...result.data } : undefined
       });
     });
   });
-};
+}
+
+module.exports = chain(checkApiKey)(register);
