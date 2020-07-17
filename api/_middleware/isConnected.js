@@ -64,7 +64,7 @@ module.exports = async function(req, res, next) {
         if (err.name === "TokenExpiredError") {
           if (await compare(userSession.key, parse(req.headers.cookie).token)) {
             res.locals = await createSessionAndLog(req.mongoClient, userSession, true);
-            next();
+            return next();
           }
 
           return responseServer(res, 401, {
