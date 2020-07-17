@@ -16,20 +16,26 @@ function register(req, res) {
   return req.on("bodyParsed", httpBody => {
     const q = Object.keys(httpBody);
 
-    if (q.length >= 4) {
+    if (q.length >= 5) {
       responseServer(res, 400, {
         content: "Too many parameters."
       });
     }
 
-    if (!q.includes("mail") || !q.includes("pswd") || !q.includes("username")) {
+    if (
+        !q.includes("nom") || 
+        !q.includes("prenom") || 
+        !q.includes("mail") ||
+        !q.includes("pswd")
+      ) {
       responseServer(res, 422);
     }
 
     if (
+      typeof httpBody.nom !== "string" ||
+      typeof httpBody.prenom !== "string" ||
       typeof httpBody.mail !== "string" ||
-      typeof httpBody.pswd !== "string" ||
-      typeof httpBody.username !== "string"
+      typeof httpBody.pswd !== "string"
     ) {
       responseServer(res, 400, {
         content: "Data must be string."
@@ -38,9 +44,8 @@ function register(req, res) {
 
     return registerDb(httpBody, req.mongoClient).then(result => {
       responseServer(res, result.code, {
-        serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
-        content: result.content ? result.content : undefined,
-        modifyResponse: result.data ? { ...result.data } : undefined
+        serverHeader: result.header ? { ...result.header } : {},
+        modifyResponse: result.forClient ? { ...result.forClient } : undefined
       });
     });
   });

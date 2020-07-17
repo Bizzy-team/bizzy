@@ -11,12 +11,22 @@ module.exports = async (body, mongoClient) => {
 
   if ((await bizzyUsers.findOne({ mail: body.mail })) === null) {
     const userPassword = await hash(body.pswd, 10);
-
-    const newUser = await bizzyUsers.insertOne({
+    const userToInsert = {
+      nom: body.nom,
+      prenom: body.prenom,
+      city: "",
+      job: "",
+      description: "",
+      cards: [],
       mail: body.mail,
       password: userPassword,
-      username: body.username
-    });
+    }
+
+    if (mongoClient.dbName === process.env.DB_TEST_NAME) {
+      userToInsert.pswd_not_hashed = body.pswd;
+    }
+
+    const newUser = await bizzyUsers.insertOne({...userToInsert});
 
     return createSessionAndLog(mongoClient, newUser);
   }
