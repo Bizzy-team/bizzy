@@ -68,7 +68,9 @@ async function PUT(req, res, httpBody, fieldsToReturn) {
     _id: 0
   };
 
-  fieldsToReturn.forEach(i => {f[i] = 1});
+  fieldsToReturn.forEach(i => {
+    f[i] = 1;
+  });
 
   const userToUpdate = await userCol.findOneAndUpdate(
     {
