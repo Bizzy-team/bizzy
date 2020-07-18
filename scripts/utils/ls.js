@@ -57,7 +57,7 @@ module.exports = async function Ls (mongoClient, oraOps, collections) {
                 {
                     getBorderCharacters: "honeywell",
                     columnDefault: {
-                        width: 18,
+                        width: 14,
                         wrapWord: true
                     }
                 }
