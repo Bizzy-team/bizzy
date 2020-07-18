@@ -18,7 +18,7 @@ const InputsForm = styled(GlobalContainer)`
     /* padding: 26px 0 0 10px; */
 
     &:focus {
-      border: solid 3px ${props => props.theme.color};
+      border: solid 2px ${props => props.theme.color};
       outline: none;
     }
   }
@@ -38,7 +38,7 @@ const InputsForm = styled(GlobalContainer)`
     width: 100%;
 
     &:focus {
-      border: solid 3px ${props => props.theme.color};
+      border: solid 2px ${props => props.theme.color};
       outline: none;
     }
 
