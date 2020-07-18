@@ -6,6 +6,7 @@
  * @param {Object} [data.modifyResponse = {}] - An object who overrides if present the response.
  * @param {Object} [data.serverHeader = {}] - An object of header properties to add on some request.
  * @param {String} [data.content = ""] - A string to send to the user, if nothing is defined a default message will be send
+ * @param {String} [data.token = ""] - A new JWT token to send when JWT is reset.
  */
 module.exports = (response, code, data = {}) => {
   let error;
@@ -94,6 +95,10 @@ module.exports = (response, code, data = {}) => {
 
   if (data.modifyResponse) {
     httpCode[code] = { ...data.modifyResponse };
+  }
+
+  if (data.token) {
+    httpCode[code].token = data.token;
   }
 
   if (code === 204) {
