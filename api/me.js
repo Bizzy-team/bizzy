@@ -18,7 +18,7 @@ async function Me(req, res) {
 
   if (req.method === "GET") {
     let params = new URLSearchParams(parse(req.url).search).get("fields");
-  
+
     if (params) {
       params = params.split(",");
     }
@@ -33,27 +33,34 @@ async function Me(req, res) {
 
   if (req.method === "PUT") {
     parseBody(req, res);
-    return req.on("bodyParsed", async function (httpBody) {
+    return req.on("bodyParsed", async function(httpBody) {
       const q = Object.keys(httpBody);
-      const i = intersection(q, ["name", "surname", "city", "job", "description", "mail"]);
+      const i = intersection(q, [
+        "name",
+        "surname",
+        "city",
+        "job",
+        "description",
+        "mail"
+      ]);
 
       if (q.length > 6) {
         return responseServer(res, 400, {
-          token: res.locals.forClient ? res.locals.forClient.token : undefined,
+          token: res.locals.forClient ? res.locals.forClient.token : undefined
         });
       }
 
       if (i.length === 0) {
         return responseServer(res, 422, {
-          token: res.locals.forClient ? res.locals.forClient.token : undefined,
+          token: res.locals.forClient ? res.locals.forClient.token : undefined
         });
       }
 
       const d = await meController.PUT(req, res, httpBody, i);
 
       return responseServer(res, d.code, {
-        serverHeader: d.header ? {...d.header} : undefined,
-        modifyResponse: d.client ? {...d.client} : undefined
+        serverHeader: d.header ? { ...d.header } : undefined,
+        modifyResponse: d.client ? { ...d.client } : undefined
       });
     });
   }
