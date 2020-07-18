@@ -30,7 +30,12 @@ module.exports = async (data, req) => {
       // TODO: Send mail to said than another session is creating.
     }
 
-    return createSessionAndLog(req.mongoClient, user);
+    const d = await createSessionAndLog(req.mongoClient, user);
+    return {
+      code: 200,
+      header: d.header,
+      forClient: d.forClient
+    }
   }
 
   return {
