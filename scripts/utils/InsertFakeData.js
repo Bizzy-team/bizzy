@@ -132,7 +132,7 @@ module.exports = function (col, mclient, entries = 5) {
             console.log(table(dataToLog, {
                 getBorderCharacters: "honeywell",
                 columnDefault: {
-                    width: 18,
+                    width: 14,
                     wrapWord: true
                 }
             }));
