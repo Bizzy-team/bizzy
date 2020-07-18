@@ -8,6 +8,7 @@ const responserServer = require("./_utils/responseServer");
 async function Logout(req, res) {
   if (req.method !== "DELETE") {
     return responserServer(res, 405, {
+      token: res.locals.forClient ? res.locals.forClient.token : undefined,
       content: "DELETE"
     });
   }
