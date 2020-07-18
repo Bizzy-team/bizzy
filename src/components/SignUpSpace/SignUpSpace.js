@@ -8,6 +8,7 @@ import FetchFunction from "../../utlis/FetchFunction";
 import Header from "../Header/Header";
 import SignUpSpaceStyled from "../../style/SignUpSpaceStyled.style";
 import GeometryImg from "../../img/geometry_desktop.svg";
+import WarningIcon from "../../img/warning.svg";
 import InputsForm from "../InputsForm/InputsForm";
 
 function SignUpSpace() {
@@ -67,79 +68,97 @@ function SignUpSpace() {
   });
   const [redirect, setRedirect] = React.useState(false);
 
-  // function checkUserSub() {
-  //   if (
-  //     inputMail.current.value === "" ||
-  //     (pswd.current.value === "" && checkPswd.current.value === "")
-  //   ) {
-  //     return setData({
-  //       ...data,
-  //       error: true,
-  //       errorMessage: "Empty fields."
-  //     });
-  //   }
+  
+  function checkUserSub() {
+    console.log(inputFirstName);
+    console.log(inputLastName);
+    console.log(inputMail);
+    console.log(inputPswd);
+    console.log(inputCheckPswd);
+    if (
+      inputFirstName.current.value === "" &&
+      inputLastName.current.value === "" &&
+      inputMail.current.value === "" &&
+      (inputPswd.current.value === "" && inputCheckPswd.current.value === "")
+    ) {
+      return setData({
+        ...data,
+        error: true,
+        errorMessage: "Empty fields."
+      });
+    }
 
-  //   if (inputMail.current.value !== "" && pswd.current.value !== "") {
-  //     if (inputUsername.current.value === "") {
-  //       return setData({
-  //         ...data,
-  //         error: true,
-  //         errorMessage: "Enter a username"
-  //       });
-  //     }
+    if (inputMail.current.value !== "" && inputPswd.current.value !== "") {
+      console.log(inputMail);
 
-  //     if (
-  //       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-  //         inputMail.current.value
-  //       ) === false
-  //     ) {
-  //       return setData({
-  //         ...data,
-  //         error: true,
-  //         errorMessage: "Wrong format email."
-  //       });
-  //     }
+      if (inputFirstName.current.value === "") {
+        return setData({
+          ...data,
+          error: true,
+          errorMessage: "Enter a firstName"
+        });
+      }
 
-  //     if (pswd.current.value.length < 6) {
-  //       return setData({
-  //         ...data,
-  //         error: true,
-  //         errorMessage: "Wrong password length."
-  //       });
-  //     }
+      if (inputLastName.current.value === "") {
+        return setData({
+          ...data,
+          error: true,
+          errorMessage: "Enter a last name"
+        });
+      }
 
-  //     if (pswd.current.value !== checkPswd.current.value) {
-  //       return setData({
-  //         ...data,
-  //         error: true,
-  //         errorMessage: "Confirm Password incorrect."
-  //       });
-  //     }
+      if (
+        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          inputMail.current.value
+        ) === false
+      ) {
+        return setData({
+          ...data,
+          error: true,
+          errorMessage: "Wrong format email."
+        });
+      }
 
-  //     setData({
-  //       loader: true
-  //     });
+      if (inputPswd.current.value.length < 6) {
+        return setData({
+          ...data,
+          error: true,
+          errorMessage: "Wrong password length."
+        });
+      }
 
-  //     return FetchFunction("/register", "POST", {
-  //       credentials: 'include',
-  //       body: {
-  //         mail: inputMail.current.value,
-  //         pswd: pswd.current.value,
-  //         username: inputUsername.current.value
-  //       }
-  //     })
-  //     .then(dataParsed => {
-  //       sessionStorage.setItem("UserToken", dataParsed.token);
-  //       return setRedirect(true);
-  //     })
-  //     .catch(error => {
-  //       setData({
-  //         error: true,
-  //         errorMessage: error.message
-  //       })
-  //     })
-  //   }
-  // }
+      if (inputPswd.current.value !== inputCheckPswd.current.value) {
+        return setData({
+          ...data,
+          error: true,
+          errorMessage: "Confirm Password incorrect."
+        });
+      }
+
+      setData({
+        loader: true
+      });
+
+      // return FetchFunction("/register", "POST", {
+      //   credentials: 'include',
+      //   body: {
+      //     mail: inputMail.current.value,
+      //     pswd: pswd.current.value,
+      //     username: inputUsername.current.value
+      //   }
+      // })
+      // .then(dataParsed => {
+      //   sessionStorage.setItem("UserToken", dataParsed.token);
+      //   return setRedirect(true);
+      // })
+      // .catch(error => {
+      //   setData({
+      //     error: true,
+      //     errorMessage: error.message
+      //   })
+      // })
+    }
+  }
 
   // if (redirect) return <Redirect to="/feed"></Redirect>;
 
@@ -187,6 +206,12 @@ function SignUpSpace() {
                 )
             })
           }
+          {data.error && (
+            <div className="form--error p-2 ml-2">
+              <p className="form--error--message">{data.errorMessage}</p>
+              <p><img src={WarningIcon}></img></p>
+            </div>
+          )}
           <div className="form--inscription--conditions">
             <input type="checkbox"></input>
             <p>
@@ -194,7 +219,7 @@ function SignUpSpace() {
             </p>
           </div>
           <div className="form--inscription--btn">
-            <button>Inscription</button>
+            <button onClick={checkUserSub}>Inscription</button>
           </div>
           <div className="form--inscription--link">
             <p>J'ai déjà un compte</p>
@@ -202,12 +227,7 @@ function SignUpSpace() {
           </div>
         </div>
       </SignUpSpaceStyled>
-      {/* {data.error && (
-        <div className="form-group bg-danger rounded p-2 ml-2">
-          <p className="text-light">{data.errorMessage}</p>
-        </div>
-      )}
-      <LogginSpaceStyled className="sign--up--space">
+     {/* <LogginSpaceStyled className="sign--up--space">
         <h1>Welcome,</h1>
         <InputsForm
           type="text"
