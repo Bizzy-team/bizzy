@@ -35,7 +35,7 @@ module.exports = async (data, req) => {
       code: 200,
       header: d.header,
       forClient: d.forClient
-    }
+    };
   }
 
   return {

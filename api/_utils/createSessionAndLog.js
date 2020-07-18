@@ -80,7 +80,8 @@ module.exports = async function createSessionAndLog(
       header: {
         "Set-Cookie": serialize("token", tokenRefresh, cookieOps)
       },
-      forClient: { // Will be added to the response.
+      forClient: {
+        // Will be added to the response.
         token
       },
       session: newSession.value // Only accessible in API

@@ -42,18 +42,17 @@ async function GET(req, res, params) {
   if (res.locals.forClient) {
     return {
       code: 200,
-      header: res.locals.header ? {...res.locals.header} : undefined,
+      header: res.locals.header ? { ...res.locals.header } : undefined,
       client: {
         ...res.locals.forClient,
         ...user
       }
-    }
-  } else {
-    return {
-      code: 200,
-      client: {...user}
-    }
+    };
   }
+  return {
+    code: 200,
+    client: { ...user }
+  };
 }
 
 /**
@@ -69,18 +68,18 @@ async function PUT(req, res, httpBody, fieldsToReturn) {
     _id: 0
   };
 
-  fieldsToReturn.forEach(i => f[i] = 1);
+  fieldsToReturn.forEach(i => {f[i] = 1});
 
   const userToUpdate = await userCol.findOneAndUpdate(
     {
       _id: new ObjectID(res.locals.session.userId)
     },
     {
-      $set: {...httpBody}
+      $set: { ...httpBody }
     },
     {
       returnOriginal: false,
-      projection: {...f}
+      projection: { ...f }
     }
   );
 
@@ -90,18 +89,18 @@ async function PUT(req, res, httpBody, fieldsToReturn) {
       client: {
         ...userToUpdate.value
       }
-    }
+    };
 
     if (res.locals.forClient) {
       dataToReturn.header = res.locals.header;
       dataToReturn.client = {
         ...res.locals.forClient,
         ...userToUpdate.value
-      }
+      };
     }
 
     return dataToReturn;
-  };
+  }
 }
 
 exports.GET = GET;
