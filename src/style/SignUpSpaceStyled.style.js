@@ -21,6 +21,12 @@ const SignUpSpaceStyled = styled(GlobalContainer)`
         font-family: "CeraPro Bold";
       }
     }
+    .form--error {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      color: red;
+    }
     .form--inscription--btn {
       button {
         background-color: ${props => props.theme.colorBtn};
@@ -54,6 +60,12 @@ const SignUpSpaceStyled = styled(GlobalContainer)`
       display: flex;
       width: 100%;
       margin-top: 10%;
+    }
+    .form--error {
+      /* display: flex;
+      justify-content: space-between;
+      align-items: flex-end; */
+      font-size: .8em;
     }
     .form--inscription--conditions {
       display: flex;
