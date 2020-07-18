@@ -1,22 +1,38 @@
 import React from "react";
 import logo from "../../img/bizzy.png";
 import HeaderStyled from "../../style/HeaderStyled.style";
+import menuBurger from "../../img/menu_burger.svg";
 
-function Header(props) {
+function Header() {
+  const [data, setData] = React.useState({
+    showMenu: false
+  });
+
+  function displayMenu() {
+    const newState = { ...data };
+
+    newState.showMenu = !newState.showMenu;
+    setData(newState);
+  }
+
   return (
-    <HeaderStyled as="header">
-      <div>
-        <img src={logo} alt="logo"></img>
-        <div className="buttons--sign">
-          <div className="buttons--sign--in">
-            <button onClick={props.switchPage}>Sign in</button>
+    <HeaderStyled>
+      <div className="mobile--logo">
+        <img src={logo} alt="logo" className="logo--app"></img>
+      </div>
+      <div className="mobile--menu">
+          <img src={menuBurger} className="menu--burger" onClick={() => displayMenu()} />
+        {data.showMenu && (
+          <div className="menu--options">
+            <p>Connexion</p>
+            <p>Inscription</p>
           </div>
-          <div className="buttons--sign--up">
-            <button id="sign--up--btn" onClick={props.switchPage}>
-              Sign up
-            </button>
-          </div>
-        </div>
+        )}
+      </div>
+      <div className="desktop--menu">
+        <p className="menu--options--desktop--support">Support</p>
+        <p className="menu--options--desktop--connexion">Connexion</p>
+        <p className="menu--options--desktop--inscription">Inscription</p>
       </div>
     </HeaderStyled>
   );
