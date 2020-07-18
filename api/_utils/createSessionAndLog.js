@@ -25,8 +25,8 @@ module.exports = async function createSessionAndLog(
   const sessionKey = await createKey(Buffer.alloc(16));
   const sessionExpireAt =
     mClient.dbName === process.env.DB_TEST_NAME
-      ? new Date(Date.now() + 60 + 60 * 10000)
-      : new Date(Date.now() + 60 + 60 * 300000);
+      ? new Date(Date.now() + 60 + 60 * 10000) // Dev mode session expire in 10mn.
+      : new Date(Date.now() + 60 + 60 * 300000); // Prod mode session expire in 5h.
   let newSession;
 
   if (sessionUpdate) {
@@ -77,21 +77,17 @@ module.exports = async function createSessionAndLog(
     }
 
     return {
-      code: 200,
       header: {
         "Set-Cookie": serialize("token", tokenRefresh, cookieOps)
       },
-      forClient: {
+      forClient: { // Will be added to the response.
         token
       },
-      dataHidden: {
-        session: newSession.value
-      }
+      session: newSession.value // Only accessible in API
     };
   }
 
   return {
-    code: 200,
     session: newSession.value
   };
 };
