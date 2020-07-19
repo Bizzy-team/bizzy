@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
 const HeaderStyled = styled.header`
-  box-shadow: 0px 5px 5px 5px rgba(247, 246, 247, 1);
+  /* box-shadow: 0px 5px 5px 5px rgba(247, 246, 247, 1); */
+  transition: box-shadow .3s cubic-bezier(.35,0,.65,1) 0s!important;
+  transition: background-color .3s cubic-bezier(.35,0,.65,1) 0s!important;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 1px 2px !important;
   background-color: ${props => props.theme.colorPrincipal};
   position: fixed;
   font-family: "Nunito";
+  height: 14%;
 
   @media only screen and (min-width: 300px) {
     width: 100%;
@@ -115,9 +119,6 @@ const HeaderStyled = styled.header`
   }
 
   @media only screen and (min-width: 1000px) {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 5px;
     width: 100%;
 
     .mobile--logo {
@@ -133,21 +134,10 @@ const HeaderStyled = styled.header`
     .desktop--menu {
       display: flex;
       font-family: "Nunito";
-      margin-right: 10%;
-      position: absolute;
-      top: 19px;
-      left: 71%;
+      margin-right: 5%;
       p {
         padding-right: 10%;
-        padding-top: 5px;
-      }
-      .menu--options--desktop--connexion {
-        color: ${props => props.theme.colorText};
-        font-family: "CeraPro Bold";
-      }
-      .menu--options--desktop--inscription {
-        color: ${props => props.theme.colorBtn};
-        font-family: "CeraPro Bold";
+        margin: 0;
       }
     }
 
@@ -160,20 +150,11 @@ const HeaderStyled = styled.header`
     .mobile--logo {
       width: 8%;
     }
-
-    .desktop--menu {
-      left: 70%;
-      top: 15px;
-    }
   }
 
   @media only screen and (min-width: 1400px) {
     .mobile--logo {
       width: 6%;
-    }
-    .desktop--menu {
-      left: 78%;
-      top: 13px;
     }
   }
 `;
