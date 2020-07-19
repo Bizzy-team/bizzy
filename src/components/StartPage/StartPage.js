@@ -8,6 +8,23 @@ import imgPosition from "../../img/img_position.png";
 import imgMsg from "../../img/img_msg.png";
 
 function StartPage() {
+  React.useEffect(() => {
+    window.addEventListener('scroll', t);
+  }, [])
+
+  function t() {
+    if (window.scrollY) {
+      // alert("go kebab");
+      console.log("cc");
+
+      // Top en haut: add nothing
+        // detect scroll
+      // Dès scroll: add background & box shadow
+    }
+  }
+
+
+
   return (
     <>
       <Header/>
