@@ -12,15 +12,16 @@ import WarningIcon from "../../img/warning.svg";
 import InputsForm from "../InputsForm/InputsForm";
 
 function SignUpSpace() {
-  const inputFirstName = React.createRef(null);
-  const inputLastName = React.createRef(null);
-  const inputMail = React.createRef(null);
-  const inputPswd = React.createRef(null);
-  const inputCheckPswd = React.createRef(null);
+  const inputFirstName = React.useRef(null);
+  const inputLastName = React.useRef(null);
+  const inputMail = React.useRef(null);
+  const inputPswd = React.useRef(null);
+  const inputCheckPswd = React.useRef(null);
   const [data, setData] = useState({
     loader: false,
     error: false,
     errorMessage: "",
+    errorElements: [],
     inputDataName: [
       {
         type: "text",
@@ -69,23 +70,24 @@ function SignUpSpace() {
   const [redirect, setRedirect] = React.useState(false);
 
   
-  function checkUserSub() {
+  function checkUserSub(e) {
+    e.preventDefault();
+
     console.log(inputFirstName);
     console.log(inputLastName);
     console.log(inputMail);
     console.log(inputPswd);
     console.log(inputCheckPswd);
     if (
-      inputFirstName.current.value === "" &&
-      inputLastName.current.value === "" &&
-      inputMail.current.value === "" &&
-      (inputPswd.current.value === "" && inputCheckPswd.current.value === "")
+      inputFirstName.current.value === "" ||
+      inputLastName.current.value === "" ||
+      inputMail.current.value === "" ||
+      (inputPswd.current.value === "" || inputCheckPswd.current.value === "")
     ) {
       return setData({
         ...data,
-        error: true,
-        errorMessage: "Empty fields."
-      });
+        errorElements: data.inputDataName.concat(data.inputDataAccount).filter(input => input.inputRef.current.value === "" && input.inputId)
+      })
     }
 
     if (inputMail.current.value !== "" && inputPswd.current.value !== "") {
@@ -164,9 +166,14 @@ function SignUpSpace() {
 
   return (
     <React.Fragment>
+      {/* 
+        - Header
+        - Section pour icon + title.
+        - Main avec form inside.
+      */}
       <Header></Header>
       {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />}
-      <SignUpSpaceStyled as="section">
+      <SignUpSpaceStyled as="form">
         <div className="form--inscription">
           <div className="form--inscription--title">
             <img src={GeometryImg} alt="img--inscription"></img>
