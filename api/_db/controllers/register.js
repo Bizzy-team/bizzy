@@ -28,7 +28,12 @@ module.exports = async (body, mongoClient) => {
 
     const newUser = await bizzyUsers.insertOne({ ...userToInsert });
 
-    return createSessionAndLog(mongoClient, newUser);
+    const d = await createSessionAndLog(mongoClient, newUser);
+    return {
+      code: 200,
+      header: d.header,
+      forClient: d.forClient
+    };
   }
 
   return {
