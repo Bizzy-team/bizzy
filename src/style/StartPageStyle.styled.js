@@ -135,8 +135,12 @@ const StartPageStyled = styled(GlobalContainer)`
       .section--content {
         width: 50%;
         text-align: left;
+        h1 {
+         font-size: 2.8em;
+       }
         p {
           padding-right: 25%;
+          font-size: 1em;
         }
         img {
           width: 16%;
