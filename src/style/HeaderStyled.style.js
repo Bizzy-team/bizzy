@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 const HeaderStyled = styled.header`
-  /* box-shadow: 0px 5px 5px 5px rgba(247, 246, 247, 1); */
-  transition: box-shadow .3s cubic-bezier(.35,0,.65,1) 0s!important;
-  transition: background-color .3s cubic-bezier(.35,0,.65,1) 0s!important;
-  box-shadow: rgba(0, 0, 0, 0.18) 0px 1px 2px !important;
   background-color: ${props => props.theme.colorPrincipal};
   position: fixed;
   font-family: "Nunito";
