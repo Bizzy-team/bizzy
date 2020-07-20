@@ -9,21 +9,18 @@ import imgMsg from "../../img/img_msg.png";
 
 function StartPage() {
   React.useEffect(() => {
-    window.addEventListener('scroll', t);
+    window.addEventListener('scroll', headerStyle);
   }, [])
 
-  function t() {
-    if (window.scrollY) {
-      // alert("go kebab");
-      console.log("cc");
-
-      // Top en haut: add nothing
-        // detect scroll
-      // Dès scroll: add background & box shadow
+  function headerStyle() {
+    if (window.scrollY === 0) {
+      document.querySelector('header').style.boxShadow = "none";
+      document.querySelector('header').style.transition = "background-color .3s cubic-bezier(.35,0,.65,1) 0s";
+    } else {
+      document.querySelector('header').style.boxShadow = "0px 1px 2px rgba(0, 0, 0, 0.18)";
+      document.querySelector('header').style.transition = "box-shadow .3s cubic-bezier(.35,0,.65,1) 0s";
     }
   }
-
-
 
   return (
     <>
