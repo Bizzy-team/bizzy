@@ -25,7 +25,7 @@ const SignUpSpaceStyled = styled(GlobalContainer)`
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      color: red;
+      color: #DD080B;
     }
     .form--inscription--btn {
       button {
