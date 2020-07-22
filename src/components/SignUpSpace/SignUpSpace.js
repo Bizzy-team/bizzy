@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 // import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 import LoaderSvg from "../../img/loader.svg";
-// import InputsForm from "../InputsForm/InputsForm";
 import FetchFunction from "../../utlis/FetchFunction";
 import Header from "../Header/Header";
 import SignUpSpaceStyled from "../../style/SignUpSpaceStyled.style";
@@ -25,14 +24,33 @@ function SignUpSpace() {
       errorMessage: "",
       errorIdInput: ""
     },
-    isBlurActivated: false
+    aboutInput: {
+      isBlurActivated: false,
+      focusInputId: []
+    }
   });
-  const [redirect, setRedirect] = React.useState(false);
+  // const [redirect, setRedirect] = React.useState(false);
 
   function checkUserSub(e) {
     e.preventDefault();
 
     console.log(e.type);
+
+    if (e.type === "change") {
+      if (!data.aboutInput.isBlurActivated) {
+        return;
+      }
+    }
+
+    // if (e.type === "blur") {
+    //   if (data.error.active === true) {
+    //     const newState = {...data};
+
+    //     newState.aboutInput.focusInputId.push(e.target.id);
+
+    //     return setData(newState);
+    //   }
+    // }
 
     if (e.target.value === "") {
       return setData({
@@ -47,6 +65,10 @@ function SignUpSpace() {
     }
 
     if (e.target.id === "inputMail") {
+      const newState = {...data};
+
+      newState.aboutInput.focusInputId.push(e.target.id);
+
       if (
         /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
           e.target.value
@@ -59,13 +81,25 @@ function SignUpSpace() {
             errorMessage: "Format mail incorrect",
             errorIdInput: "inputMail"
           },
-          isBlurActivated: true
+          aboutInput: {
+            isBlurActivated: true,
+            focusInputId: data.aboutInput.focusInputId
+          }
         });
       }
     }
 
+    // Si blur sur un input, push dans l'arr focusInputId
+    // Pour chaque input id donner accès au onChange
+    // 
+
+
     if (e.target.id === "inputPswd") {
       if (e.target.value.length < 6) {
+        const newState = {...data};
+
+        newState.aboutInput.focusInputId.push(e.target.id);
+
         return setData({
           ...data,
           error: {
@@ -73,7 +107,10 @@ function SignUpSpace() {
             errorMessage: "Longueur du mot de passe insuffisante",
             errorIdInput: "inputPswd"
           },
-          isBlurActivated: true
+          aboutInput: {
+            isBlurActivated: true,
+            focusInputId: data.aboutInput.focusInputId
+          }
         });
       }
 
@@ -117,12 +154,7 @@ function SignUpSpace() {
     }
 
 
-    if (e.type === "blur") {
-      return setData({
-        ...data,
-        isBlurActivated: false
-      })
-    }
+    
 
     return setData({
       ...data,
@@ -131,7 +163,10 @@ function SignUpSpace() {
         errorMessage: "",
         errorIdInput: ""
       },
-      isBlurActivated: false
+      aboutInput: {
+        isBlurActivated: false,
+        focusInputId: []
+      }
     });
 
     // if (inputMail.current.value !== "" && inputPswd.current.value !== "") {
@@ -214,7 +249,7 @@ function SignUpSpace() {
               inputRef={inputFirstName}
               inputPlaceholder="Prénom"
               inputCheckError={checkUserSub}
-              inputCheckValue={data.isBlurActivated ? checkUserSub: undefined}
+              inputCheckValue={checkUserSub}
               error={data.error}
             ></InputsForm>
             <InputsForm
@@ -223,7 +258,7 @@ function SignUpSpace() {
               inputRef={inputLastName}
               inputPlaceholder="Nom"
               inputCheckError={checkUserSub}
-              inputCheckValue={data.isBlurActivated ? checkUserSub: undefined}
+              inputCheckValue={checkUserSub}
               error={data.error}
             ></InputsForm>
           </div>
@@ -233,7 +268,7 @@ function SignUpSpace() {
             inputRef={inputMail}
             inputPlaceholder="Mail"
             inputCheckError={checkUserSub}
-            inputCheckValue={data.isBlurActivated ? checkUserSub: undefined}
+            inputCheckValue={checkUserSub}
             error={data.error}
           ></InputsForm>
           <InputsForm
@@ -241,7 +276,7 @@ function SignUpSpace() {
             inputId="inputPswd"
             inputRef={inputPswd}
             inputPlaceholder="Mot de passe"
-            inputCheckValue={data.isBlurActivated ? checkUserSub: undefined}
+            inputCheckValue={checkUserSub}
             inputCheckError={checkUserSub}
             error={data.error}
           ></InputsForm>
@@ -250,7 +285,7 @@ function SignUpSpace() {
             inputId="inputCheckPswd"
             inputRef={inputCheckPswd}
             inputPlaceholder="Confirmer mot de passe"
-            inputCheckValue={data.isBlurActivated ? checkUserSub: undefined}
+            inputCheckValue={checkUserSub}
             inputCheckError={checkUserSub}
             error={data.error}
           ></InputsForm>
