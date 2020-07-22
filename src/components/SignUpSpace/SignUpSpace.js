@@ -23,24 +23,16 @@ function SignUpSpace() {
     error: {
       active: false,
       errorMessage: "",
-      errorIdInput: "",
-    }
+      errorIdInput: ""
+    },
+    isBlurActivated: false
   });
   const [redirect, setRedirect] = React.useState(false);
 
   function checkUserSub(e) {
     e.preventDefault();
 
-    if (
-      (inputFirstName.current.value !== "" &&
-        inputLastName.current.value !== "" &&
-        inputMail.current.value !== "" &&
-        inputPswd.current.value !== "" &&
-        inputCheckPswd.current.value !== "")
-    ) {
-      // Check pas d'error
-    }
-
+    console.log(e.type);
 
     if (e.target.value === "") {
       return setData({
@@ -49,21 +41,87 @@ function SignUpSpace() {
           active: true,
           errorMessage: "Empty field",
           errorIdInput: e.target.id
-        }
-      })
+        },
+        isBlurActivated: true
+      });
     }
 
     if (e.target.id === "inputMail") {
-      if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(e.target.value) === false ) {
+      if (
+        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          e.target.value
+        ) === false
+      ) {
         return setData({
           ...data,
           error: {
             active: true,
-            errorMessage: "Wrong format email",
+            errorMessage: "Format mail incorrect",
             errorIdInput: "inputMail"
-          }
-        })
+          },
+          isBlurActivated: true
+        });
       }
+    }
+
+    if (e.target.id === "inputPswd") {
+      if (e.target.value.length < 6) {
+        return setData({
+          ...data,
+          error: {
+            active: true,
+            errorMessage: "Longueur du mot de passe insuffisante",
+            errorIdInput: "inputPswd"
+          },
+          isBlurActivated: true
+        });
+      }
+
+      if (e.target.value !== inputCheckPswd.current.value) {
+        return setData({
+          ...data,
+          error: {
+            active: true,
+            errorMessage: "Mot de passe ne correspond pas à la confirmation",
+            errorIdInput: "inputPswd"
+          },
+          isBlurActivated: true
+        });
+      }
+    }
+
+    if (e.target.id === "inputCheckPswd") {
+      if (e.target.value.length < 6) {
+        return setData({
+          ...data,
+          error: {
+            active: true,
+            errorMessage: "Longueur du mot de passe insuffisante",
+            errorIdInput: "inputCheckPswd"
+          },
+          isBlurActivated: true
+        });
+      }
+
+      if (e.target.value !== inputPswd.current.value) {
+        return setData({
+          ...data,
+          error: {
+            active: true,
+            errorMessage: "Confirmation du mot de passe incorrecte",
+            errorIdInput: "inputCheckPswd"
+          },
+          isBlurActivated: true
+        });
+      }
+    }
+
+
+    if (e.type === "blur") {
+      return setData({
+        ...data,
+        isBlurActivated: false
+      })
     }
 
     return setData({
@@ -72,18 +130,9 @@ function SignUpSpace() {
         active: false,
         errorMessage: "",
         errorIdInput: ""
-      }
-    })
-
-    // Check if mail pas empty / Check si le format du mail est good
-    // Check si la length du pswd est good
-
-    // Checker si error
-    // Si error: checker  l'array où ils sont
-    // Update object
-    // Render: les news arrays
-
-
+      },
+      isBlurActivated: false
+    });
 
     // if (inputMail.current.value !== "" && inputPswd.current.value !== "") {
     //   if (inputFirstName.current.value === "") {
@@ -165,6 +214,7 @@ function SignUpSpace() {
               inputRef={inputFirstName}
               inputPlaceholder="Prénom"
               inputCheckError={checkUserSub}
+              inputCheckValue={data.isBlurActivated ? checkUserSub: undefined}
               error={data.error}
             ></InputsForm>
             <InputsForm
@@ -173,6 +223,7 @@ function SignUpSpace() {
               inputRef={inputLastName}
               inputPlaceholder="Nom"
               inputCheckError={checkUserSub}
+              inputCheckValue={data.isBlurActivated ? checkUserSub: undefined}
               error={data.error}
             ></InputsForm>
           </div>
@@ -182,6 +233,7 @@ function SignUpSpace() {
             inputRef={inputMail}
             inputPlaceholder="Mail"
             inputCheckError={checkUserSub}
+            inputCheckValue={data.isBlurActivated ? checkUserSub: undefined}
             error={data.error}
           ></InputsForm>
           <InputsForm
@@ -189,6 +241,7 @@ function SignUpSpace() {
             inputId="inputPswd"
             inputRef={inputPswd}
             inputPlaceholder="Mot de passe"
+            inputCheckValue={data.isBlurActivated ? checkUserSub: undefined}
             inputCheckError={checkUserSub}
             error={data.error}
           ></InputsForm>
@@ -197,6 +250,7 @@ function SignUpSpace() {
             inputId="inputCheckPswd"
             inputRef={inputCheckPswd}
             inputPlaceholder="Confirmer mot de passe"
+            inputCheckValue={data.isBlurActivated ? checkUserSub: undefined}
             inputCheckError={checkUserSub}
             error={data.error}
           ></InputsForm>
@@ -208,7 +262,7 @@ function SignUpSpace() {
             </p>
           </div>
           <div className="form--inscription--btn">
-            <input type="submit" disabled={data.btnDisabled} value="Submit"></input>
+            <input type="submit" disabled={data.btnDisabled} value="Inscription"></input>
             {/* <button onClick={checkUserSub}>Inscription</button> */}
           </div>
           <div className="form--inscription--link">
