@@ -44,13 +44,16 @@ module.exports = async (data, mongoClient) => {
       }
 
       const token = await createToken(Buffer.alloc(24));
-      let url = mongoClient.dbName === process.env.DB_TEST_NAME ? `https://localhost:3000/reset_pswd_form?token=${token.toString("hex")}` : `https://bizzy.now.sh/reset_pswd_form?token=${token.toString("hex")}`;
+      const url =
+        mongoClient.dbName === process.env.DB_TEST_NAME
+          ? `https://localhost:3000/reset_pswd_form?token=${token.toString("hex")}`
+          : `https://bizzy.now.sh/reset_pswd_form?token=${token.toString("hex")}`;
 
       const templateMail = await handleStreamMail("forgot", url);
 
       if (templateMail.code) {
-        return templateMail
-      };
+        return templateMail;
+      }
 
       return mail
         .sendMail({
