@@ -9,6 +9,7 @@ function InputsForm(props) {
           id={props.inputId}
           ref={props.inputRef}
           onBlur={props.inputCheckError}
+          onChange={props.inputCheckValue}
           required
         >
         </input>
