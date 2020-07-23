@@ -12,7 +12,7 @@ const InputsForm = styled(GlobalContainer)`
     /* ${props => props.marginLeft && `margin-left: ${props.marginLeft}`}; */
     font-family: ${props => props.theme.fontFamilyText};
     font-weight: 200;
-    ${props => props.error.active && props.error.errorIdInput === props.inputId ? 'color: #DD080B;' : `color: ${props.theme.colorBtn};`}
+    ${props => props.isError ? 'color: #DD080B;' : `color: ${props.theme.colorBtn};`}
     border: none;
     border-bottom: solid 1px ${props => props.theme.color};
     /* padding: 26px 0 0 10px; */
