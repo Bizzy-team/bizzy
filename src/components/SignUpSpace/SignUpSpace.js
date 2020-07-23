@@ -11,213 +11,75 @@ import WarningIcon from "../../img/warning.svg";
 import InputsForm from "../InputsForm/InputsForm";
 
 function SignUpSpace() {
-  const inputFirstName = React.useRef(null);
-  const inputLastName = React.useRef(null);
-  const inputMail = React.useRef(null);
   const inputPswd = React.useRef(null);
-  const inputCheckPswd = React.useRef(null);
   const [data, setData] = useState({
     loader: false,
     btnDisabled: true,
-    error: {
-      active: false,
-      errorMessage: "",
-      errorIdInput: ""
-    },
-    aboutInput: {
-      isBlurActivated: false,
-      focusInputId: []
-    }
+    error: {}
   });
   // const [redirect, setRedirect] = React.useState(false);
+
+  React.useEffect(() => {
+    const arrInputId = ["inputFirstName", "inputLastName", "inputMail", "inputPswd", "inputCheckPswd"];
+    const newState = {...data};
+    const obj = {
+      error: false,
+      message: "",
+      accessToChange: false
+    }
+
+    arrInputId.forEach(element => newState.error[element] = {...obj});
+
+    return setData(newState);
+  }, [])
 
   function checkUserSub(e) {
     e.preventDefault();
 
-    console.log(e.type);
+    const newState = {...data};
+    const inputIdTarget = e.target.id;
 
     if (e.type === "change") {
-      if (!data.aboutInput.isBlurActivated) {
+      if (!newState.error[inputIdTarget].accessToChange) {
         return;
       }
     }
 
-    // if (e.type === "blur") {
-    //   if (data.error.active === true) {
-    //     const newState = {...data};
+    if (e.target.value === "") return;
 
-    //     newState.aboutInput.focusInputId.push(e.target.id);
-
-    //     return setData(newState);
-    //   }
-    // }
-
-    if (e.target.value === "") {
-      return setData({
-        ...data,
-        error: {
-          active: true,
-          errorMessage: "Empty field",
-          errorIdInput: e.target.id
-        },
-        isBlurActivated: true
-      });
+    if (inputIdTarget === "inputMail") {
+      if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(e.target.value) === false) return updateState(inputIdTarget, "Format mail incorrect");
     }
 
-    if (e.target.id === "inputMail") {
-      const newState = {...data};
-
-      newState.aboutInput.focusInputId.push(e.target.id);
-
-      if (
-        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-          e.target.value
-        ) === false
-      ) {
-        return setData({
-          ...data,
-          error: {
-            active: true,
-            errorMessage: "Format mail incorrect",
-            errorIdInput: "inputMail"
-          },
-          aboutInput: {
-            isBlurActivated: true,
-            focusInputId: data.aboutInput.focusInputId
-          }
-        });
-      }
+    if (inputIdTarget === "inputPswd") {
+      if (e.target.value.length < 6) return updateState(inputIdTarget, "Le mot de passe doit faire 6 charactères");
     }
 
-    // Si blur sur un input, push dans l'arr focusInputId
-    // Pour chaque input id donner accès au onChange
-    // 
-
-
-    if (e.target.id === "inputPswd") {
-      if (e.target.value.length < 6) {
-        const newState = {...data};
-
-        newState.aboutInput.focusInputId.push(e.target.id);
-
-        return setData({
-          ...data,
-          error: {
-            active: true,
-            errorMessage: "Longueur du mot de passe insuffisante",
-            errorIdInput: "inputPswd"
-          },
-          aboutInput: {
-            isBlurActivated: true,
-            focusInputId: data.aboutInput.focusInputId
-          }
-        });
-      }
-
-      if (e.target.value !== inputCheckPswd.current.value) {
-        return setData({
-          ...data,
-          error: {
-            active: true,
-            errorMessage: "Mot de passe ne correspond pas à la confirmation",
-            errorIdInput: "inputPswd"
-          },
-          isBlurActivated: true
-        });
-      }
+    if (inputIdTarget === "inputCheckPswd") {
+      if (e.target.value!== inputPswd.current.value) return updateState(inputIdTarget, "La confirmation est incorrecte");
     }
 
-    if (e.target.id === "inputCheckPswd") {
-      if (e.target.value.length < 6) {
-        return setData({
-          ...data,
-          error: {
-            active: true,
-            errorMessage: "Longueur du mot de passe insuffisante",
-            errorIdInput: "inputCheckPswd"
-          },
-          isBlurActivated: true
-        });
-      }
-
-      if (e.target.value !== inputPswd.current.value) {
-        return setData({
-          ...data,
-          error: {
-            active: true,
-            errorMessage: "Confirmation du mot de passe incorrecte",
-            errorIdInput: "inputCheckPswd"
-          },
-          isBlurActivated: true
-        });
-      }
+    if (!newState.error[inputIdTarget].accessToChange) {
+      newState.error[inputIdTarget].accessToChange = true;
     }
 
+    newState.error[inputIdTarget].error = false;
+    newState.error[inputIdTarget].message = "";
 
-    
+    return setData(newState);
+  }
 
-    return setData({
-      ...data,
-      error: {
-        active: false,
-        errorMessage: "",
-        errorIdInput: ""
-      },
-      aboutInput: {
-        isBlurActivated: false,
-        focusInputId: []
-      }
-    });
+  function updateState(inputId, errorMessage) {
+    const newState = {...data};
 
-    // if (inputMail.current.value !== "" && inputPswd.current.value !== "") {
-    //   if (inputFirstName.current.value === "") {
-    //     return setData({
-    //       ...data,
-    //       error: true,
-    //       errorMessage: "Enter a firstName"
-    //     });
-    //   }
+    newState.error[inputId].error = true;
+    newState.error[inputId].message = errorMessage;
 
-    //   if (inputLastName.current.value === "") {
-    //     return setData({
-    //       ...data,
-    //       error: true,
-    //       errorMessage: "Enter a last name"
-    //     });
-    //   }
+    if (!newState.error[inputId].accessToChange) {
+      newState.error[inputId].accessToChange = true;
+    }
 
-    //   if (
-    //     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-    //       inputMail.current.value
-    //     ) === false
-    //   ) {
-    //     return setData({
-    //       ...data,
-    //       error: true,
-    //       errorMessage: "Wrong format email."
-    //     });
-    //   }
-
-    //   if (inputPswd.current.value.length < 6) {
-    //     return setData({
-    //       ...data,
-    //       error: true,
-    //       errorMessage: "Wrong password length."
-    //     });
-    //   }
-
-    //   if (inputPswd.current.value !== inputCheckPswd.current.value) {
-    //     return setData({
-    //       ...data,
-    //       error: true,
-    //       errorMessage: "Confirm Password incorrect."
-    //     });
-    //   }
-
-    //   setData({
-    //     loader: true
-    //   });
-    // }
+    return setData(newState);
   }
 
   // if (redirect) return <Redirect to="/feed"></Redirect>;
@@ -246,48 +108,39 @@ function SignUpSpace() {
             <InputsForm
               type="text"
               inputId="inputFirstName"
-              inputRef={inputFirstName}
               inputPlaceholder="Prénom"
               inputCheckError={checkUserSub}
-              inputCheckValue={checkUserSub}
-              error={data.error}
+              isError={data.error.inputFirstName ? data.error.inputFirstName : ""}
             ></InputsForm>
             <InputsForm
               type="text"
               inputId="inputLastName"
-              inputRef={inputLastName}
               inputPlaceholder="Nom"
               inputCheckError={checkUserSub}
-              inputCheckValue={checkUserSub}
-              error={data.error}
+              isError={data.error.inputLastName ? data.error.inputLastName : ""}
             ></InputsForm>
           </div>
           <InputsForm
             type="text"
             inputId="inputMail"
-            inputRef={inputMail}
             inputPlaceholder="Mail"
             inputCheckError={checkUserSub}
-            inputCheckValue={checkUserSub}
-            error={data.error}
+            isError={data.error.inputMail ? data.error.inputMail : ""}
           ></InputsForm>
           <InputsForm
             type="password"
             inputId="inputPswd"
             inputRef={inputPswd}
             inputPlaceholder="Mot de passe"
-            inputCheckValue={checkUserSub}
             inputCheckError={checkUserSub}
-            error={data.error}
+            isError={data.error.inputPswd ? data.error.inputPswd : ""}
           ></InputsForm>
           <InputsForm
             type="password"
             inputId="inputCheckPswd"
-            inputRef={inputCheckPswd}
             inputPlaceholder="Confirmer mot de passe"
-            inputCheckValue={checkUserSub}
             inputCheckError={checkUserSub}
-            error={data.error}
+            isError={data.error.inputCheckPswd ? data.error.inputCheckPswd : ""}
           ></InputsForm>
           <div className="form--inscription--conditions">
             <input type="checkbox"></input>
@@ -308,41 +161,6 @@ function SignUpSpace() {
           </div>
         </div>
       </SignUpSpaceStyled>
-      {/* <LogginSpaceStyled className="sign--up--space">
-        <h1>Welcome,</h1>
-        <InputsForm
-          type="text"
-          fieldName="username"
-          placeholderInput="Username"
-          inputRef={inputUsername}
-        />
-        <InputsForm
-          type="mail"
-          fieldName="mail"
-          placeholderInput="Email"
-          inputRef={inputMail}
-        />
-        <InputsForm
-          type="password"
-          fieldName="password"
-          placeholderInput="Password"
-          inputRef={pswd}
-          minLength="6"
-        />
-        <InputsForm
-          type="password"
-          fieldName="confirm--password"
-          placeholderInput="Confirm Password"
-          inputRef={checkPswd}
-          minLength="6"
-        />
-        <p>
-          <small className="text-muted">6 characters minimum.</small>
-        </p>
-        <div className="loggin--space--sign--btn">
-          <button onClick={() => checkUserSub()}>Sign in</button>
-        </div>
-      </LogginSpaceStyled> */}
     </React.Fragment>
   );
 }
