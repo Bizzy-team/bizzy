@@ -11,7 +11,11 @@ import WarningIcon from "../../img/warning.svg";
 import InputsForm from "../InputsForm/InputsForm";
 
 function SignUpSpace() {
-  const inputPswd = React.useRef(null);
+  const refInputFirstName = React.useRef(null);
+  const refInputLastName = React.useRef(null);
+  const refInputMail = React.useRef(null);
+  const refInputPswd = React.useRef(null);
+  const refInputCheckPswd = React.useRef(null);
   const [data, setData] = useState({
     loader: false,
     btnDisabled: true,
@@ -39,6 +43,10 @@ function SignUpSpace() {
     const newState = {...data};
     const inputIdTarget = e.target.id;
 
+    // Checker si les inputs ne sont pas vides
+    // Checker si la props `error` est bien false
+    // Passer le btn en enabled
+
     if (e.type === "change") {
       if (!newState.error[inputIdTarget].accessToChange) {
         return;
@@ -56,7 +64,7 @@ function SignUpSpace() {
     }
 
     if (inputIdTarget === "inputCheckPswd") {
-      if (e.target.value!== inputPswd.current.value) return updateState(inputIdTarget, "La confirmation est incorrecte");
+      if (e.target.value!== refInputPswd.current.value) return updateState(inputIdTarget, "La confirmation est incorrecte");
     }
 
     if (!newState.error[inputIdTarget].accessToChange) {
@@ -108,6 +116,7 @@ function SignUpSpace() {
             <InputsForm
               type="text"
               inputId="inputFirstName"
+              inputRef={refInputFirstName}
               inputPlaceholder="Prénom"
               inputCheckError={checkUserSub}
               isError={data.error.inputFirstName ? data.error.inputFirstName : ""}
@@ -115,6 +124,7 @@ function SignUpSpace() {
             <InputsForm
               type="text"
               inputId="inputLastName"
+              inputRef={refInputLastName}
               inputPlaceholder="Nom"
               inputCheckError={checkUserSub}
               isError={data.error.inputLastName ? data.error.inputLastName : ""}
@@ -123,6 +133,7 @@ function SignUpSpace() {
           <InputsForm
             type="text"
             inputId="inputMail"
+            inputRef={refInputMail}
             inputPlaceholder="Mail"
             inputCheckError={checkUserSub}
             isError={data.error.inputMail ? data.error.inputMail : ""}
@@ -130,7 +141,7 @@ function SignUpSpace() {
           <InputsForm
             type="password"
             inputId="inputPswd"
-            inputRef={inputPswd}
+            inputRef={refInputPswd}
             inputPlaceholder="Mot de passe"
             inputCheckError={checkUserSub}
             isError={data.error.inputPswd ? data.error.inputPswd : ""}
@@ -138,6 +149,7 @@ function SignUpSpace() {
           <InputsForm
             type="password"
             inputId="inputCheckPswd"
+            inputRef={refInputCheckPswd}
             inputPlaceholder="Confirmer mot de passe"
             inputCheckError={checkUserSub}
             isError={data.error.inputCheckPswd ? data.error.inputCheckPswd : ""}
