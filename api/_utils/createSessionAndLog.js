@@ -11,13 +11,13 @@ const jwtPromisify = promisify(sign);
 /**
  * Create an session user and return data.
  * @param {Object} mClient - The mongo client instance.
- * @param {Object} userData - The user data to insert in session collection.
+ * @param {Object} userId - The user data to insert in session collection.
  * @param {Boolean} sessionUpdate - If this options is true we have to update a session and not creating one.
  * @param {Boolean} updateToken - If true the server should update and return a nex JWT.
  */
 module.exports = async function createSessionAndLog(
   mClient,
-  userData,
+  userId,
   sessionUpdate = false,
   updateToken = true
 ) {
@@ -40,7 +40,7 @@ module.exports = async function createSessionAndLog(
 
     newSession = await sessionCol.findOneAndUpdate(
       {
-        _id: new ObjectID(userData._id)
+        _id: new ObjectID(userId._id)
       },
       {
         $set: { ...propsToUpdate }
@@ -48,7 +48,7 @@ module.exports = async function createSessionAndLog(
     );
   } else {
     newSession = await sessionCol.insertOne({
-      userId: new ObjectID(userData._id),
+      userId: new ObjectID(userId._id),
       key: sessionKey.toString("hex"),
       expireAt: sessionExpireAt
     });
