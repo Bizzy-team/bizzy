@@ -47,7 +47,7 @@ module.exports = (response, code, data = {}) => {
       message: data.content ? data.content : "Ok"
     },
     201: {
-      message: data.content ? data.content : "Created"
+      message: data.content ? data.content : "Data created or updated successfully"
     },
     400: {
       error: true,
