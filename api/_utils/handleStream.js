@@ -25,7 +25,7 @@ module.exports = function handleStreamMail(fileName, dataToInsert) {
           }
 
           data = data.replace("{{}}", dataToInsert);
-          cb(null, data);
+          return cb(null, data);
         }
       });
 
