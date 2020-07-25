@@ -19,9 +19,9 @@ module.exports = function handleStreamMail(fileName, dataToInsert) {
           let data = chunk.toString();
 
           if (!data.includes("{{}}")) {
-            cb(
-              new Error(`{{}} characters is not in the ${dataToInsert} template`, false)
-            );
+            return {
+              code: 500
+            }
           }
 
           data = data.replace("{{}}", dataToInsert);
