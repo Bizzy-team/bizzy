@@ -26,7 +26,7 @@ function Login(req, res) {
     }
 
     const userData = await loginDB(httpBody, req);
-    responseServer(res, userData.code, {
+    return responseServer(res, userData.code, {
       serverHeader: userData.header ? { ...userData.header } : {},
       content: userData.content ? userData.content : undefined,
       modifyResponse: userData.forClient ? { ...userData.forClient } : undefined

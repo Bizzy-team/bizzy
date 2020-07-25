@@ -21,7 +21,7 @@ module.exports = function handleStreamMail(fileName, dataToInsert) {
           if (!data.includes("{{}}")) {
             return {
               code: 500
-            }
+            };
           }
 
           data = data.replace("{{}}", dataToInsert);

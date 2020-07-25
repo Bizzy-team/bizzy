@@ -15,16 +15,16 @@ function ResetPassword(req, res) {
     });
   }
 
-  // This props is ceated in the detectMethod middleware. 
+  // This props is ceated in the detectMethod middleware.
   // who check if the user try to access this route with params while he's connected.
   if (res.locals.tokenParams) {
     const params = new URLSearchParams(parse(req.url).query);
     const paramsLength = Array.from(params).length;
-  
+
     if (paramsLength === 0 || !params.get("token")) {
       return responseServer(res, 422);
     }
-  
+
     if (paramsLength > 1) {
       return responseServer(res, 400);
     }
@@ -37,12 +37,17 @@ function ResetPassword(req, res) {
     if (q.length > 1) {
       return responseServer(res, 400);
     }
-    
+
     if (!q.includes("pswd")) {
       return responseServer(res, 422);
     }
 
-    const l = await resetPasswordController(req, res, res.locals.tokenParams, dataParsed.pswd);
+    const l = await resetPasswordController(
+      req,
+      res,
+      res.locals.tokenParams,
+      dataParsed.pswd
+    );
     return responseServer(res, l.code, {
       token: res.locals.forClient ? res.locals.forClient.token : undefined,
       serverHeader: res.locals.header ? res.locals.header : undefined,
