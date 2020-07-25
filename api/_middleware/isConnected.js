@@ -10,6 +10,10 @@ const createSessionAndLog = require("../_utils/createSessionAndLog");
  * Check is an user is connected or not, by checking if token passed in header is correct either checking if had cookie refreshToken and if it is correct.
  */
 module.exports = async function(req, res, next) {
+  if (res.locals !== undefined && res.locals.tokenParams) { // Only used for /resetpassword route
+    return next();
+  }
+
   if (typeof req.headers.authorization !== "string" || !req.headers.authorization) {
     return responseServer(res, 400);
   }
