@@ -16,13 +16,13 @@ function Login(req, res) {
     const q = Object.keys(httpBody);
 
     if (q.length >= 3) {
-      responseServer(res, 400, {
+      return responseServer(res, 400, {
         content: "Too many parameters"
       });
     }
 
     if (!q.includes("mail") || !q.includes("pswd")) {
-      responseServer(res, 422);
+      return responseServer(res, 422);
     }
 
     const userData = await loginDB(httpBody, req);
