@@ -1,77 +1,54 @@
 const { chain } = require("@amaurymartiny/now-middleware");
 const { parse } = require("url");
 const checkApiKey = require("./_middleware/checkApiKey");
+const detectMethod = require("./_middleware/detectMethod");
+const isConnected = require("./_middleware/isConnected");
 const responseServer = require("./_utils/responseServer");
-const { GET, PUT } = require("./_db/controllers/resetpassword");
 const parseBody = require("./_utils/parseBody");
+const resetPasswordController = require("./_db/controllers/resetpassword");
 
 function ResetPassword(req, res) {
-  if (!["GET", "PUT"].includes(req.method)) {
+  if (req.method !== "PUT") {
     responseServer(res, 405, {
-      content: "POST, PUT"
+      content: "PUT",
+      token: res.locals.forClient.token ? res.locals.forClient.token : undefined
     });
   }
 
-  if (req.method === "GET") {
+  // This props is ceated in the detectMethod middleware. 
+  // who check if the user try to access this route with params while he's connected.
+  if (res.locals.tokenParams) {
     const params = new URLSearchParams(parse(req.url).query);
     const paramsLength = Array.from(params).length;
-
+  
     if (paramsLength === 0 || !params.get("token")) {
-      responseServer(res, 422);
+      return responseServer(res, 422);
     }
-
+  
     if (paramsLength > 1) {
-      responseServer(res, 400);
+      return responseServer(res, 400);
     }
-
-    return GET(params, req.mongoClient).then(result => {
-      responseServer(res, result.code, {
-        serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
-        content: result.content ? result.content : undefined,
-        modifyResponse: result.data ? { ...result.data } : undefined
-      });
-    });
   }
 
-  if (req.method === "PUT") {
-    if (!req.headers.authorization) {
-      responseServer(res, 403, {
-        content: "Missing 'Authorization: <token>' header in your request."
-      });
+  parseBody(req, res);
+  return req.on("bodyParsed", async function bp(dataParsed) {
+    const q = Object.keys(dataParsed);
+
+    if (q.length > 1) {
+      return responseServer(res, 400);
+    }
+    
+    if (!q.includes("pswd")) {
+      return responseServer(res, 422);
     }
 
-    parseBody(req, res);
-    return req.on("bodyParsed", function bp(dataParsed) {
-      const q = Object.keys(dataParsed);
-
-      if (req.headers.cookie ? q.length > 1 : q.length > 2) {
-        responseServer(res, 400, {
-          content: "Too many parameters"
-        });
-      }
-
-      if (
-        req.headers.cookie
-          ? !q.includes("newpswd")
-          : !q.includes("newpswd") || !q.includes("token")
-      ) {
-        responseServer(res, 422);
-      }
-
-      const PUTData = { ...dataParsed };
-
-      PUTData.jwtToken = req.headers.authorization;
-      if (req.headers.cookie) PUTData.cookie = req.headers.cookie;
-
-      return PUT(PUTData, req.mongoClient).then(result => {
-        responseServer(res, result.code, {
-          serverHeader: result.serverHeader ? { ...result.serverHeader } : {},
-          content: result.content ? result.content : undefined,
-          modifyResponse: result.data ? { ...result.data } : undefined
-        });
-      });
+    const l = await resetPasswordController(req, res, res.locals.tokenParams, dataParsed.pswd);
+    return responseServer(res, l.code, {
+      token: res.locals.forClient ? res.locals.forClient.token : undefined,
+      serverHeader: res.locals.header ? res.locals.header : undefined,
+      modifyResponse: l.client ? l.client : undefined
     });
-  }
+  });
 }
 
-module.exports = chain(checkApiKey)(ResetPassword);
+module.exports = chain(checkApiKey, detectMethod, isConnected)(ResetPassword);
