@@ -43,15 +43,19 @@ function SignUpSpace() {
     const newState = {...data};
     const inputIdTarget = e.target.id;
 
-     
-
     if (e.type === "change") {
       if (!newState.error[inputIdTarget].accessToChange) {
         return;
       }
     }
 
-    if (e.target.value === "") return;
+    if (e.target.value === "") {
+      if (newState.error[inputIdTarget].accessToChange) {
+        return updateState(inputIdTarget, "Field empty");
+      }
+
+      return;
+    };
 
     if (inputIdTarget === "inputMail") {
       if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(e.target.value) === false) return updateState(inputIdTarget, "Format mail incorrect");
@@ -61,15 +65,6 @@ function SignUpSpace() {
       if (e.target.value.length < 5) return updateState(inputIdTarget, "Le mot de passe doit faire 6 charactères");
     }
 
-
-
-    // if (inputIdTarget === "inputFirstName") {
-    //   if (e.target.value.length < 5) return updateState(inputIdTarget, "Le mot de passe doit faire 6 charactères");
-    // }
-    // if (inputIdTarget === "inputLastName") {
-    //   if (e.target.value.length < 5) return updateState(inputIdTarget, "Le mot de passe doit faire 6 charactères");
-    // }
-
     if (inputIdTarget === "inputCheckPswd") {
       if (e.target.value !== refInputPswd.current.value) return updateState(inputIdTarget, "La confirmation est incorrecte");
     }
@@ -78,30 +73,22 @@ function SignUpSpace() {
       newState.error[inputIdTarget].accessToChange = true;
     }
 
-    // Checker si les inputs ne sont pas vides
-    if (
-      refInputFirstName.current.value !== "" && refInputLastName.current.value !== "" && refInputMail.current.value !== "" &&
-      refInputPswd.current.value !== "" && refInputCheckPswd.current.value !== "") {
-        // Checker si la props `error` est bien false
-        console.log(Object.values(newState.error).every(el => el.error));
-
-        Object.values(newState.error).every(el => {
-          console.log(el.error);
-          if (el.error === false) {
-            console.log("y'a pas que du false maggle");
-            newState.btnDisabled = false;
-          }
-        })
-
-        // Si all inputs are good, ça enabled le btn MAIS quand je blur du dernier input (donc checkPswd)
-        // - Si j'ai une error sur un input, le btn est bien disabled MAIS si je veux le onChange ça ne update pas le state
-
-        // Passer le btn en enable
-      return setData(newState);
-    }
-
     newState.error[inputIdTarget].error = false;
     newState.error[inputIdTarget].message = "";
+
+    if (
+      refInputFirstName.current.value !== "" &&
+      refInputLastName.current.value !== "" &&
+      refInputMail.current.value !== "" &&
+      refInputPswd.current.value !== "" &&
+      refInputCheckPswd.current.value !== ""
+    ) {
+      const btnEnabled = Object.values(newState.error).every(el => !el.error);
+
+      if (btnEnabled) {
+        newState.btnDisabled = false;
+      }
+    }
 
     return setData(newState);
   }
@@ -114,6 +101,10 @@ function SignUpSpace() {
 
     if (!newState.error[inputId].accessToChange) {
       newState.error[inputId].accessToChange = true;
+    }
+
+    if (!newState.btnDisabled) {
+      newState.btnDisabled = true;
     }
 
     return setData(newState);
