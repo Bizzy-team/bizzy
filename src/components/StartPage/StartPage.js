@@ -14,12 +14,13 @@ function StartPage() {
 
   function headerStyle() {
     if (window.scrollY === 0) {
-      document.querySelector('header').style.boxShadow = "none";
-      document.querySelector('header').style.transition = "background-color .3s cubic-bezier(.35,0,.65,1) 0s";
-    } else {
-      document.querySelector('header').style.boxShadow = "0px 1px 2px rgba(0, 0, 0, 0.18)";
-      document.querySelector('header').style.transition = "box-shadow .3s cubic-bezier(.35,0,.65,1) 0s";
+      document.querySelector("header").removeAttribute("style");
+      return;
     }
+
+    if (document.querySelector('header').hasAttribute("style")) { return; };
+
+    document.querySelector('header').style= "box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18); transition: box-shadow .3s cubic-bezier(.35,0,.65,1) 0s";
   }
 
   return (
