@@ -63,6 +63,12 @@ function SignUpSpace() {
 
     if (inputIdTarget === "inputPswd") {
       if (e.target.value.length < 5) return updateState(inputIdTarget, "Le mot de passe doit faire 6 charactères");
+
+      if (refInputCheckPswd.current.value !== "") {
+        if (refInputPswd.current.value !== refInputCheckPswd.current.value) {
+          return updateState(refInputCheckPswd.current.id, "La confirmation est incorrecte");
+        }
+      }
     }
 
     if (inputIdTarget === "inputCheckPswd") {
