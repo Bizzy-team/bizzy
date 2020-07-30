@@ -7,7 +7,6 @@ import FetchFunction from "../../utlis/FetchFunction";
 import Header from "../Header/Header";
 import SignUpSpaceStyled from "../../style/SignUpSpaceStyled.style";
 import GeometryImg from "../../img/geometry_desktop.svg";
-import WarningIcon from "../../img/warning.svg";
 import InputsForm from "../InputsForm/InputsForm";
 
 function SignUpSpace() {
