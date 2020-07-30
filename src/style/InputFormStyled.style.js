@@ -13,10 +13,11 @@ const InputsForm = styled(GlobalContainer)`
     /* ${props => props.marginLeft && `margin-left: ${props.marginLeft}`}; */
     font-family: ${props => props.theme.fontFamilyText};
     font-weight: 200;
-    ${props => props.isError ? 'color: #DD080B;' : `color: ${props.theme.colorBtn};`}
+    ${props => props.isError ? `color: ${props => props.theme.colorRed};` : `color: ${props.theme.colorBtn};`}
     border: none;
     border-bottom: solid 1px ${props => props.theme.color};
-    color: ${props => props.theme.colorLola};
+    color: ${props => props.theme.colorText};
+    border-color: ${props => props.theme.colorLola};
     /* padding: 26px 0 0 10px; */
 
     &:focus {
@@ -37,7 +38,7 @@ const InputsForm = styled(GlobalContainer)`
     display: flex;
     justify-content: space-between;
     font-size: .9em;
-    color: #DD080B;
+    color: ${props => props.theme.colorRed};;
     margin-top: 16px;
 
     img {
