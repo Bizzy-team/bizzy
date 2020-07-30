@@ -1,5 +1,6 @@
 import React from "react";
 import InputFormStyled from "../../style/InputFormStyled.style";
+import WarningIcon from "../../img/warning.svg";
 
 function InputsForm(props) {
   return (
@@ -18,8 +19,9 @@ function InputsForm(props) {
         </span>
         {
           props.isError.error && (
-            <div>
+            <div className="error--message">
               <small>{props.isError.message}</small>
+              <img src={WarningIcon}></img>
             </div>
           )
         }
