@@ -28,7 +28,7 @@ const SignUpSpaceStyled = styled(GlobalContainer)`
       color: #DD080B;
     }
     .form--inscription--btn {
-      button {
+      input {
         background-color: ${props => props.theme.colorBtn};
         color: ${props => props.theme.colorPrincipal};
         padding: 10px 24px;
