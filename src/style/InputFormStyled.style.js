@@ -4,8 +4,9 @@ import GlobalContainer from "../utlis/GlobalContainer";
 const InputsForm = styled(GlobalContainer)`
   padding: 0;
   margin: 0;
-  color: ${props => props.theme.colorSecondary};
+  color: ${props => props.theme.colorLola};
   display: flex;
+  flex-direction: column;
   margin-bottom: 10%;
   position: relative;
   input {
@@ -15,6 +16,7 @@ const InputsForm = styled(GlobalContainer)`
     ${props => props.isError ? 'color: #DD080B;' : `color: ${props.theme.colorBtn};`}
     border: none;
     border-bottom: solid 1px ${props => props.theme.color};
+    color: ${props => props.theme.colorLola};
     /* padding: 26px 0 0 10px; */
 
     &:focus {
@@ -31,15 +33,28 @@ const InputsForm = styled(GlobalContainer)`
     color: grey;
   }
 
+  .error--message {
+    display: flex;
+    justify-content: space-between;
+    font-size: .9em;
+    color: #DD080B;
+    margin-top: 16px;
+
+    img {
+      width: 18px;
+    }
+  }
+
 @media screen and (min-width: 300px) {
   input {
     padding: 6px 0 0 10px;
     margin-right: 12px;
-    width: 100%;
+    width: 97%;
 
     &:focus {
       border: solid 2px ${props => props.theme.color};
       outline: none;
+      border-color: ${props => props.theme.colorBtn};
     }
 
     &:focus ~ span,
@@ -61,6 +76,7 @@ const InputsForm = styled(GlobalContainer)`
     span {
       font-size: 0.8em;
       left: 20px;
+      opacity: 0.3;
     }
 }
 `;
