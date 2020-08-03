@@ -15,6 +15,7 @@ function SignUpSpace() {
   const refInputMail = React.useRef(null);
   const refInputPswd = React.useRef(null);
   const refInputCheckPswd = React.useRef(null);
+  const refInputConditions = React.useRef(null);
   const [data, setData] = useState({
     loader: false,
     btnDisabled: true,
@@ -42,17 +43,16 @@ function SignUpSpace() {
     const newState = {...data};
     const inputIdTarget = e.target.id;
 
-    if (e.type === "change") {
+    if (e.type === "change" && !inputIdTarget === "input--conditions") {
       if (!newState.error[inputIdTarget].accessToChange) {
         return;
       }
     }
 
-    if (e.target.value === "") {
+    if (e.target.value === "" && !inputIdTarget === "input--conditions") {
       if (newState.error[inputIdTarget].accessToChange) {
         return updateState(inputIdTarget, "Field empty");
       }
-
       return;
     };
 
@@ -74,12 +74,14 @@ function SignUpSpace() {
       if (e.target.value !== refInputPswd.current.value) return updateState(inputIdTarget, "La confirmation est incorrecte");
     }
 
-    if (!newState.error[inputIdTarget].accessToChange) {
-      newState.error[inputIdTarget].accessToChange = true;
-    }
+    // if (!inputIdTarget === "input--conditions") {
+      if (!newState.error[inputIdTarget].accessToChange) {
+        newState.error[inputIdTarget].accessToChange = true;
+      }
 
-    newState.error[inputIdTarget].error = false;
-    newState.error[inputIdTarget].message = "";
+      newState.error[inputIdTarget].error = false;
+      newState.error[inputIdTarget].message = "";
+    // }
 
     if (
       refInputFirstName.current.value !== "" &&
@@ -90,13 +92,16 @@ function SignUpSpace() {
     ) {
       const btnEnabled = Object.values(newState.error).every(el => !el.error);
 
-      if (btnEnabled) {
+      console.log(refInputConditions.current.checked);
+      if (btnEnabled && refInputConditions.current.checked) {
         newState.btnDisabled = false;
       }
     }
 
     return setData(newState);
   }
+
+  // console.log(document.querySelector('.input--conditions').checked);
 
   function updateState(inputId, errorMessage) {
     const newState = {...data};
@@ -131,7 +136,7 @@ function SignUpSpace() {
           style={{ backgroundColor: `${props => props.theme.backgroundColor}` }}
         />
       )}
-      <SignUpSpaceStyled as="form">
+      <SignUpSpaceStyled as="form" btnDisabled={data.btnDisabled}>
         <div className="form--inscription">
           <div className="form--inscription--title">
             <img src={GeometryImg} alt="img--inscription"></img>
@@ -180,7 +185,7 @@ function SignUpSpace() {
             isError={data.error.inputCheckPswd ? data.error.inputCheckPswd : ""}
           ></InputsForm>
           <div className="form--inscription--conditions">
-            <input type="checkbox"></input>
+            <input type="checkbox" ref={refInputConditions} id="input--conditions" onChange={checkUserSub}></input>
             <p>
               J'accepte <a href="/">les termes et conditions</a> et{" "}
               <a href="/">la politique de confidentialité</a>.
@@ -188,7 +193,6 @@ function SignUpSpace() {
           </div>
           <div className="form--inscription--btn">
             <input type="submit" disabled={data.btnDisabled} value="Inscription"></input>
-            {/* <button onClick={checkUserSub}>Inscription</button> */}
           </div>
           <div className="form--inscription--link">
             <p>J'ai déjà un compte</p>
