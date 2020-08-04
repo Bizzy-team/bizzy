@@ -8,6 +8,7 @@ import Header from "../Header/Header";
 import SignUpSpaceStyled from "../../style/SignUpSpaceStyled.style";
 import GeometryImg from "../../img/geometry_desktop.svg";
 import InputsForm from "../InputsForm/InputsForm";
+import bcImg from "../../img/bc_desktop.svg";
 
 function SignUpSpace() {
   const refInputFirstName = React.useRef(null);
@@ -33,6 +34,10 @@ function SignUpSpace() {
     }
 
     arrInputId.forEach(element => newState.error[element] = {...obj});
+
+    if (!navigator.userAgent.includes("Mobile")) {
+      document.querySelector("body").style = `background-image: url(${bcImg})`;
+    }
 
     return setData(newState);
   }, [])
