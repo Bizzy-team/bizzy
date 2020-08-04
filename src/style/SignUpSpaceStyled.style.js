@@ -188,6 +188,65 @@ const SignUpSpaceStyled = styled(GlobalContainer)`
       }
     }
   }
+
+  @media screen and (min-width: 1000px) {
+    width: 38vw;
+    height: 87vh;
+    margin-top: 7%;
+    box-shadow: 0px 5px 5px 5px rgba(247,246,247,1);
+    border-radius: 20px;
+    border: solid 3px rgba(247,246,247,1);
+    border-bottom-width: 8px;
+    .form--inscription {
+      padding: 50px 40px;
+      border-radius: 20px;
+    }
+    .form--inscription--title {
+      width: 11%;
+      h2 {
+        margin-left: 53px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1119px) {
+    width: 31vw;
+    height: 82vh;
+    .form--inscription--title {
+      width: 10%;
+      h2 {
+        margin-left: 45px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1207px) {
+    height: 85vh;
+    .form--inscription--title {
+      h2 {
+        margin-left: 51px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1300px) {
+    height: 87vh;
+    margin-top: 6%;
+    .form--inscription--title {
+      h2 {
+        margin-left: 60px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    height: 87vh;
+    .form--inscription--title {
+      h2 {
+        margin-left: 81px;
+      }
+    }
+  }
 `;
 
 export default SignUpSpaceStyled;
