@@ -49,14 +49,14 @@ function SignUpSpace() {
     const inputIdTarget = e.target.id;
 
     // if (e.type === "change" && !inputIdTarget === "input--conditions") {
-    if (e.type === "change" && !refInputConditions.current.checked) {
+    if (e.type === "change" && inputIdTarget !== "input--conditions") {
       if (!newState.error[inputIdTarget].accessToChange) {
         return;
       }
     }
 
     // if (e.target.value === "" && !inputIdTarget === "input--conditions") {
-    if (e.target.value === "" && !refInputConditions.current.checked) {
+    if (e.target.value === "" && inputIdTarget !== "input--conditions") {
       if (newState.error[inputIdTarget].accessToChange) {
         return updateState(inputIdTarget, "Field empty");
       }
@@ -82,7 +82,7 @@ function SignUpSpace() {
     }
 
     // if (!inputIdTarget === "input--conditions") {
-    if (!refInputConditions.current.checked) {
+    if (inputIdTarget !== "input--conditions") {
       if (!newState.error[inputIdTarget].accessToChange) {
         newState.error[inputIdTarget].accessToChange = true;
       }
@@ -99,9 +99,10 @@ function SignUpSpace() {
     ) {
       const btnEnabled = Object.values(newState.error).every(el => !el.error);
 
-      console.log(refInputConditions.current.checked);
       if (btnEnabled && refInputConditions.current.checked) {
         newState.btnDisabled = false;
+      } else {
+        newState.btnDisabled = true;
       }
     }
 
