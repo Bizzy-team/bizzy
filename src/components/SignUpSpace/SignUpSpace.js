@@ -20,7 +20,9 @@ function SignUpSpace() {
   const [data, setData] = useState({
     loader: false,
     btnDisabled: true,
-    error: {}
+    error: {},
+    errorApi: false,
+    errorMessage: ""
   });
   // const [redirect, setRedirect] = React.useState(false);
 
@@ -123,6 +125,30 @@ function SignUpSpace() {
     return setData(newState);
   }
 
+  function fetchUserData(e) {
+    e.preventDefault();
+
+    return FetchFunction("/register", "POST", {
+      // credentials: 'include',
+      body: {
+        prenom: refInputFirstName.current.value,
+        nom: refInputLastName.current.value,
+        mail: refInputMail.current.value,
+        pswd: refInputPswd.current.value,
+      }
+    })
+    .then(dataParsed => {
+      console.log(dataParsed);
+      // return setRedirect(true);
+    })
+    .catch(error => {
+      setData({
+        errorApi: true,
+        errorMessage: error.message
+      })
+    })
+  }
+
   // if (redirect) return <Redirect to="/feed"></Redirect>;
 
   return (
@@ -139,7 +165,7 @@ function SignUpSpace() {
           style={{ backgroundColor: `${props => props.theme.backgroundColor}` }}
         />
       )}
-      <SignUpSpaceStyled as="form" btnDisabled={data.btnDisabled}>
+      <SignUpSpaceStyled as="form" btnDisabled={data.btnDisabled} onSubmit={fetchUserData}>
         <div className="form--inscription">
           <div className="form--inscription--title">
             <img src={GeometryImg} alt="img--inscription"></img>
