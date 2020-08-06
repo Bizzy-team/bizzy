@@ -48,14 +48,12 @@ function SignUpSpace() {
     const newState = {...data};
     const inputIdTarget = e.target.id;
 
-    // if (e.type === "change" && !inputIdTarget === "input--conditions") {
     if (e.type === "change" && inputIdTarget !== "input--conditions") {
       if (!newState.error[inputIdTarget].accessToChange) {
         return;
       }
-    }
+    };
 
-    // if (e.target.value === "" && !inputIdTarget === "input--conditions") {
     if (e.target.value === "" && inputIdTarget !== "input--conditions") {
       if (newState.error[inputIdTarget].accessToChange) {
         return updateState(inputIdTarget, "Field empty");
@@ -65,7 +63,7 @@ function SignUpSpace() {
 
     if (inputIdTarget === "inputMail") {
       if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(e.target.value) === false) return updateState(inputIdTarget, "Format mail incorrect");
-    }
+    };
 
     if (inputIdTarget === "inputPswd") {
       if (e.target.value.length < 5) return updateState(inputIdTarget, "Le mot de passe doit faire 6 charactères");
@@ -75,20 +73,19 @@ function SignUpSpace() {
           return updateState(refInputCheckPswd.current.id, "La confirmation est incorrecte");
         }
       }
-    }
+    };
 
     if (inputIdTarget === "inputCheckPswd") {
       if (e.target.value !== refInputPswd.current.value) return updateState(inputIdTarget, "La confirmation est incorrecte");
-    }
+    };
 
-    // if (!inputIdTarget === "input--conditions") {
     if (inputIdTarget !== "input--conditions") {
       if (!newState.error[inputIdTarget].accessToChange) {
         newState.error[inputIdTarget].accessToChange = true;
       }
       newState.error[inputIdTarget].error = false;
       newState.error[inputIdTarget].message = "";
-    }
+    };
 
     if (
       refInputFirstName.current.value !== "" &&
@@ -104,12 +101,10 @@ function SignUpSpace() {
       } else {
         newState.btnDisabled = true;
       }
-    }
+    };
 
     return setData(newState);
   }
-
-  // console.log(document.querySelector('.input--conditions').checked);
 
   function updateState(inputId, errorMessage) {
     const newState = {...data};
