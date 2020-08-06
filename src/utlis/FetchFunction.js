@@ -2,9 +2,9 @@ function FetchData(path, method, data = {}) {
   let apiurl;
 
   if (process.env.NODE_ENV === "development") {
-    apiurl = `https://bizzy.now.sh/api${path}?mode=dev`
+    apiurl = `https://dev-api-bizzy.vercel.app/api${path}`
   } else {
-    apiurl = "https://bizzy.now.sh/api"
+    apiurl = "https://api-bizzy.vercel.app/api"
   }
 
   if (!path) {
@@ -24,6 +24,9 @@ function FetchData(path, method, data = {}) {
   }
 
   return fetch(`${apiurl}`, {
+    header: {
+      "x-api-key": process.env.REACT_APP_SECRET_TOKEN_API
+    },
     method: method,
     body: data.body && JSON.stringify(data.body)
   })
