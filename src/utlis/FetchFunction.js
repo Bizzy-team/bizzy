@@ -24,7 +24,7 @@ function FetchData(path, method, data = {}) {
   }
 
   return fetch(`${apiurl}`, {
-    header: {
+    headers: {
       "x-api-key": process.env.REACT_APP_SECRET_TOKEN_API
     },
     method: method,
