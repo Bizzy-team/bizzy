@@ -162,6 +162,43 @@ const ConfirmMailStyled = styled(GlobalContainer)`
       }
     }
   }
+
+  @media screen and (min-width: 762px) {
+    margin-top: 25%;
+    main {
+      .mail--content {
+        .mail--content--buttons {
+          width: 68vw;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-top: 25%;
+    .title--mail {
+      margin-left: 29%;
+    }
+    main {
+      margin-left: 4%;
+      .mail--content {
+        .mail--content--buttons {
+          width: 68vw;
+          margin: 7% auto 6%;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 832px) {
+    margin-top: 22%;
+    .title--mail {
+      margin-left: 28%;
+    }
+    main {
+      margin-left: 3%;
+    }
+  }
 `;
 
 export default ConfirmMailStyled;
