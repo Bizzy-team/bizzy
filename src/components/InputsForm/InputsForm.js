@@ -1,19 +1,30 @@
 import React from "react";
 import InputFormStyled from "../../style/InputFormStyled.style";
+import WarningIcon from "../../img/warning.svg";
+
 function InputsForm(props) {
   return (
-    <InputFormStyled>
-      <div className={`space--${props.fieldName}`}>
+    <InputFormStyled as="div" isError={props.isError.error}>
         <input
-          type={`${props.type}`}
-          id={`input--${props.fieldName}`}
+          type={props.type}
+          id={props.inputId}
           ref={props.inputRef}
+          onBlur={props.inputCheckError}
+          onChange={props.inputCheckError}
           required
-        ></input>
-        <span className={`placeholder--for--${props.placeholderInput}`}>
-          {props.placeholderInput}
+        >
+        </input>
+        <span>
+          {props.inputPlaceholder}
         </span>
-      </div>
+        {
+          props.isError.error && (
+            <div className="error--message">
+              <small>{props.isError.message}</small>
+              <img src={WarningIcon}></img>
+            </div>
+          )
+        }
     </InputFormStyled>
   );
 }

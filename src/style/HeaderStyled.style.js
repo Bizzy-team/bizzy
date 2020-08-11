@@ -40,7 +40,7 @@ const HeaderStyled = styled.header`
         padding-top: 16px;
         padding-left: 22px;
         line-height: 0.6;
-        height: 10vh;
+        height: 13vh;
       }
     }
 

@@ -12,6 +12,7 @@ import ResetPswd from "./components/ResetPswd/ResetPswd";
 import ForgotPasswordConfirm from "./components/ForgotPasswordForm/ForgotPasswordConfirm";
 import NotAvailable from "./components/NotAvailable/NotAvailable";
 import StartPage from "./components/StartPage/StartPage";
+import ConfirmMail from "./components/ConfirmMail/ConfirmMail";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -67,6 +68,8 @@ function App() {
           <GlobalStyle></GlobalStyle>
             <>
               <Route exact path="/" render={() => unavailableToken(StartPage)}></Route>
+              <Route exact path="/inscription" component={SignUpSpace}></Route>
+              <Route exact path="/confirm_mail" component={ConfirmMail}></Route>
               <Route
                 exact
                 path="/forgot_password_form"

@@ -26,6 +26,7 @@ function Header() {
           <div className="menu--options">
             <p>Connexion</p>
             <p>Inscription</p>
+            <p>Support</p>
           </div>
         )}
       </div>
