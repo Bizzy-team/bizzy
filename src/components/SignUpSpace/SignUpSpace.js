@@ -37,7 +37,7 @@ function SignUpSpace() {
 
     arrInputId.forEach(element => newState.error[element] = {...obj});
 
-    if (!navigator.userAgent.includes("Mobile")) {
+    if (window.matchMedia('screen and (min-width: 1000px)').matches) {
       document.querySelector("body").style = `background-image: url(${bcImg})`;
     }
 
