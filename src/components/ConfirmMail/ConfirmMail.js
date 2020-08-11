@@ -2,8 +2,15 @@ import React from "react";
 import Header from "../Header/Header";
 import GeometryImg from "../../img/geometry_desktop.svg";
 import ConfirmMailStyled from "../../style/ConfirmMailStyled.style";
+import bcImg from "../../img/bc_desktop.svg";
 
 function ConfirmMail() {
+  React.useEffect(() => {
+    if (!navigator.userAgent.includes("Mobile")) {
+      document.querySelector("body").style = `background-image: url(${bcImg})`;
+    }
+  }, [])
+
   return (
     <React.Fragment>
       <Header></Header>
