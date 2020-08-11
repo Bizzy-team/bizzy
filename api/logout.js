@@ -1,38 +1,21 @@
-const responserServer = require("./_utils/responseServer");
-const sessionValid = require("./_utils/sessionValid");
+const { chain } = require("@amaurymartiny/now-middleware");
+const { ObjectID } = require("mongodb");
 
-module.exports = function Logout(req, res) {
+const checkApiKey = require("./_middleware/checkApiKey");
+const isConnected = require("./_middleware/isConnected");
+const responserServer = require("./_utils/responseServer");
+
+async function Logout(req, res) {
   if (req.method !== "DELETE") {
-    responserServer(res, 405, {
+    return responserServer(res, 405, {
       content: "DELETE"
     });
   }
 
-  if (!req.headers.cookie || !req.headers.authorization) {
-    responserServer(res, 401, {
-      content: "Missing cookie or Authorization header"
-    });
-  }
+  const sessionsCol = req.mongoClient.bdd.collection("sessions");
 
-  return sessionValid(req.headers.cookie, {
-    JWT: req.headers.authorization,
-    checkToken: true
-  }).then(async userIsValid => {
-    if (!userIsValid._id)
-      responserServer(res, 401, {
-        content: userIsValid.content ? userIsValid.content : undefined
-      });
+  await sessionsCol.findOneAndDelete({ _id: new ObjectID(res.locals.session._id) });
+  return responserServer(res, 204);
+}
 
-    // TODO: fix mongo error Topology was closed
-    // const mongoBdd = await mongo.connect();
-    // const userCollection = mongoBdd.db("bizzy").collection("users");
-
-    // await userCollection.findOneAndUpdate(
-    //   { _id: userIsValid._id },
-    //   { $unset: { session: "" } }
-    // );
-    // await mongoBdd.close();
-
-    // responserServer(res, 204);
-  });
-};
+module.exports = chain(checkApiKey, isConnected)(Logout);

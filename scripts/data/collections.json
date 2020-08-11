@@ -1,0 +1,19 @@
+[
+    {
+        "name": "users"
+    },
+    {
+        "name": "passwordforget",
+        "indexOn": "expireAt",
+        "TTL": true
+    },
+    {
+        "name": "sessions",
+        "indexOn": "expireAt",
+        "TTL": true
+    },
+    {
+        "name": "access",
+        "indexOn": "user"
+    }
+]
