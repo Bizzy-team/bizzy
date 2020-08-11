@@ -1,86 +1,108 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+// import { Link, Redirect } from "react-router-dom";
 import ForgotPasswordFormStyled from "../../style/ForgotPasswordFormStyled.style";
-import { ReactSVG } from "react-svg";
-import LoaderSvg from "../../img/loader.svg";
+// import { ReactSVG } from "react-svg";
+// import LoaderSvg from "../../img/loader.svg";
+import Header from "../Header/Header";
 import InputsForm from "../InputsForm/InputsForm";
-import FetchFunction from "../../utlis/FetchFunction";
+import GeometryImg from "../../img/geometry_desktop.svg";
+import bcImg from "../../img/bc_desktop.svg";
+// import FetchFunction from "../../utlis/FetchFunction";
 
 function ForgotPasswordForm() {
-  const inputMail = React.createRef(null);
+  const inputMail = React.useRef(null);
   const [data, setData] = React.useState({
     loader: false,
-    error: false,
-    errorMessage: ""
-  });
-  const [redirect, setRedirect] = React.useState(false);
-
-  function checkMail() {
-    if (inputMail.current.value === "") {
-      return setData({
-        ...data,
-        error: true,
-        errorMessage: "Please, enter an email."
-      });
-    }
-
-    if (inputMail.current.value !== "") {
-      if (
-        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-          inputMail.current.value
-        ) === false
-      ) {
-        return setData({
-          ...data,
-          error: true,
-          errorMessage: "Wrong format email."
-        });
+    error: {
+      inputMail: {
+        error: false,
+        errorMessage: '',
+        accessToChange: false
       }
-      setData({
-        loader: true
-      });
-
-      return FetchFunction("/forgot", "POST", {
-        body: {
-          mail: inputMail.current.value
-        }
-      })
-      .then(dataParsed => {
-        return setRedirect(true);
-      })
-      .catch(error => {
-        setData({
-          error: true,
-          errorMessage: error.message
-        })
-      })
     }
-  }
+  });
+  // const [redirect, setRedirect] = React.useState(false);
 
-  if (redirect) return <Redirect to="/forgot_password_confirmation"></Redirect>;
+  React.useEffect(() => {
+    if (window.matchMedia('screen and (min-width: 1000px)').matches) {
+      document.querySelector("body").style = `background-image: url(${bcImg})`;
+    }
+  }, [])
+
+
+  // function checkMail() {
+  //   if (inputMail.current.value === "") {
+  //     return setData({
+  //       ...data,
+  //       error: true,
+  //       errorMessage: "Please, enter an email."
+  //     });
+  //   }
+
+  //   if (inputMail.current.value !== "") {
+  //     if (
+  //       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+  //         inputMail.current.value
+  //       ) === false
+  //     ) {
+  //       return setData({
+  //         ...data,
+  //         error: true,
+  //         errorMessage: "Wrong format email."
+  //       });
+  //     }
+  //     setData({
+  //       loader: true
+  //     });
+
+  //     return FetchFunction("/forgot", "POST", {
+  //       body: {
+  //         mail: inputMail.current.value
+  //       }
+  //     })
+  //     .then(dataParsed => {
+  //       return setRedirect(true);
+  //     })
+  //     .catch(error => {
+  //       setData({
+  //         error: true,
+  //         errorMessage: error.message
+  //       })
+  //     })
+  //   }
+  // }
+
+  // if (redirect) return <Redirect to="/forgot_password_confirmation"></Redirect>;
 
   return (
-    <ForgotPasswordFormStyled>
-      <h1>Forgot password</h1>
-      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />}
-      {data.error && (
-        <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
-          <p className="text-light">{data.errorMessage}</p>
+    <>
+      <Header/>
+      <ForgotPasswordFormStyled as="form">
+        <div className="form--forgot--pswd--title">
+          <div className="form--forgot--pswd--img">
+            <img src={GeometryImg} alt="img--forgot--pswd"></img>
+          </div>
+            <h2> Mot de passe oublié :(</h2>
         </div>
-      )}
-      <p>Enter your email below to receive your password reset instructions.</p>
-      <InputsForm
-        spaceName="forgotPswd"
-        type="mail"
-        fieldName="mail"
-        placeholderInput="Email"
-        inputRef={inputMail}
-      />
-      <button onClick={() => checkMail()}>Send password</button>
-      <div className="link--to--home">
-        <Link to="/">I remember the password</Link>
-      </div>
-    </ForgotPasswordFormStyled>
+        {/* {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />} */}
+        <InputsForm
+          type="mail"
+          id="forgotPswd"
+          inputRef={inputMail}
+          inputPlaceholder="Mail"
+          isError={data.error.inputMail ? data.error.inputMail : ""}
+          />
+          <div className="form--forgot--pswd--btn">
+            <input type="submit" value="Réinitialiser"></input>
+          </div>
+        <div className="form--forgot--link">
+          <p>Retour à la page de</p>
+          <p>
+            <a href="/">Connexion</a>
+          </p>
+        </div>
+      </ForgotPasswordFormStyled>
+    </>
   );
 }
 
