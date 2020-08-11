@@ -13,6 +13,7 @@ import ForgotPasswordConfirm from "./components/ForgotPasswordForm/ForgotPasswor
 import NotAvailable from "./components/NotAvailable/NotAvailable";
 import StartPage from "./components/StartPage/StartPage";
 import ConfirmMail from "./components/ConfirmMail/ConfirmMail";
+import SignUpSpace from "./components/SignUpSpace/SignUpSpace";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
