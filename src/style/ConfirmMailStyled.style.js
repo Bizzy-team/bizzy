@@ -25,7 +25,7 @@ const ConfirmMailStyled = styled(GlobalContainer)`
         display: flex;
         button {
           padding: 10px 24px;
-          border-radius: 20px;
+          border-radius: 15px;
           background-color: ${props => props.theme.colorPrincipal};
           border-color: ${props => props.theme.colorBtn};
           font-weight: 900;
@@ -131,7 +131,6 @@ const ConfirmMailStyled = styled(GlobalContainer)`
     margin-top: 30%;
     text-align: center;
     .title--mail {
-      /* justify-content: center; */
       margin-left: 21%;
       .title--mail--img {
         margin-right: 5%;
@@ -197,6 +196,53 @@ const ConfirmMailStyled = styled(GlobalContainer)`
     }
     main {
       margin-left: 3%;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    display: flex;
+    justify-content: center;
+    width: 76vw;
+    height: 63vh;
+    margin-top: 12%;
+    box-shadow: 0px 5px 5px 5px rgba(247,246,247,1);
+    border-radius: 20px;
+    border: solid 3px rgba(247,246,247,1);
+    border-bottom-width: 8px;
+    background-color: ${props => props.theme.colorPrincipal};
+  }
+
+  @media screen and (min-width: 1132px) {
+    .title--mail {
+      margin-left: 31%;
+    }
+  }
+
+  @media screen and (min-width: 1252px) {
+    .title--mail {
+      margin-left: 33%;
+      margin-top: 3%;
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    width: 44vw;
+    height: 46vh;
+    margin-top: 15%;
+    .title--mail {
+      margin-left: 26%;
+    }
+    main {
+      .mail--content {
+        .mail--content--buttons {
+          margin-left: 12%;
+          width: 34vw;
+          button {
+            width: 15vw;
+            margin-right: 28px;
+          }
+        }
+      }
     }
   }
 `;
