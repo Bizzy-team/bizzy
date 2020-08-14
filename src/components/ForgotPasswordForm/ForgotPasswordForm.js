@@ -13,10 +13,11 @@ function ForgotPasswordForm() {
   const inputMail = React.useRef(null);
   const [data, setData] = React.useState({
     loader: false,
+    btnDisabled: true,
     error: {
       inputMail: {
         error: false,
-        errorMessage: '',
+        message: '',
         accessToChange: false
       }
     }
@@ -28,6 +29,69 @@ function ForgotPasswordForm() {
       document.querySelector("body").style = `background-image: url(${bcImg})`;
     }
   }, [])
+
+  function checkUserMail(e) {
+    e.preventDefault();
+
+    const newState = {...data};
+
+    if (e.type === "change") {
+      if (!newState.error.inputMail.accessToChange) {
+        return;
+      }
+    }
+
+
+    if (e.target.value === "") {
+      if (newState.error.inputMail.accessToChange) {
+        newState.error.inputMail.error = true;
+        newState.error.inputMail.message = "Le champ est vide.";
+
+        if (!newState.error.inputMail.accessToChange) {
+          newState.error.inputMail.accessToChange = true;
+        }
+
+        if (!newState.btnDisabled) {
+          newState.btnDisabled = true;
+        }
+
+        return setData(newState);
+      }
+    }
+
+    if (e.target.id === "forgotPswd") {
+      if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(e.target.value) === false) {
+
+        newState.error.inputMail.error = true;
+        newState.error.inputMail.message = "Format de mail incorrect.";
+
+        console.log(!newState.error.inputMail.accessToChange);
+
+        if (!newState.error.inputMail.accessToChange) {
+          newState.error.inputMail.accessToChange = true;
+        }
+
+        if (!newState.btnDisabled) {
+          newState.btnDisabled = true;
+        }
+
+        return setData(newState);
+      }
+    };
+
+    if (inputMail.current.value !== "") {
+      if (!newState.error.inputMail.error) {
+        newState.btnDisabled = false;
+      } else {
+        newState.btnDisabled = true;
+      }
+    };
+
+    newState.error.inputMail.error = false;
+    newState.error.inputMail.message = "";
+
+    return setData(newState);
+  }
 
 
   // function checkMail() {
@@ -77,7 +141,7 @@ function ForgotPasswordForm() {
   return (
     <>
       <Header/>
-      <ForgotPasswordFormStyled as="form">
+      <ForgotPasswordFormStyled as="form" btnDisabled={data.btnDisabled}>
         <div className="form--forgot--pswd--title">
           <div className="form--forgot--pswd--img">
             <img src={GeometryImg} alt="img--forgot--pswd"></img>
@@ -87,13 +151,14 @@ function ForgotPasswordForm() {
         {/* {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />} */}
         <InputsForm
           type="mail"
-          id="forgotPswd"
+          inputId="forgotPswd"
           inputRef={inputMail}
           inputPlaceholder="Mail"
+          inputCheckError={checkUserMail}
           isError={data.error.inputMail ? data.error.inputMail : ""}
           />
           <div className="form--forgot--pswd--btn">
-            <input type="submit" value="Réinitialiser"></input>
+            <input type="submit" disabled={data.btnDisabled} value="Réinitialiser"></input>
           </div>
         <div className="form--forgot--link">
           <p>Retour à la page de</p>
