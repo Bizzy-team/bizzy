@@ -145,7 +145,7 @@ function SignUpSpace() {
     e.preventDefault();
 
     return FetchFunction("/register", "POST", {
-      // credentials: 'include',
+      credentials: 'include',
       body: {
         prenom: refInputFirstName.current.value,
         nom: refInputLastName.current.value,
