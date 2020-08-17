@@ -92,7 +92,7 @@ const injectFakeData = require("./utils/InsertFakeData");
         name: "collections",
         message: chalk`{gray In which collections you'll like to add fake data ?}`,
         choices() {
-          return collections.map(l => l.name)
+          return collections.filter(l => l.name !== "access")
         },
         when(shouldInsert) {
           if (!shouldInsert.injectData)
@@ -125,12 +125,6 @@ const injectFakeData = require("./utils/InsertFakeData");
       process.exit(0);
     }
     
-    if (r.collections.includes("access")) {
-      const accessIndex = r.collections.indexOf("access");
-
-      r.collections.splice(accessIndex, 1);
-    };
-
     return injectFakeData(r.collections, client, r.entries);
   }
   

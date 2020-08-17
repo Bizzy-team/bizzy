@@ -2,7 +2,7 @@ require("dotenv").config();
 const ora = require("ora");
 const chalk = require("chalk");
 const Chance = require("chance");
-const {ObjectID} = require("mongodb");
+const {ObjectID, ObjectId} = require("mongodb");
 const {hashSync} = require("bcrypt");
 const {table} = require("table");
 
@@ -48,32 +48,56 @@ module.exports = function (col, mclient, entries = 5) {
         for (let index = 0; index < entries; index++) {
             const obj = {};
             models[c].validator["$jsonSchema"].required.forEach(function (props) {
-                if (props === "userId") {
-                    obj[props] = new ObjectID().generate().toString("hex");
-                }
+                switch (props) {
+                    case "name":
+                        obj[props] = chance.name();
+                        break;
+                    case "surname":
+                        obj[props] = chance.last();
+                        break;
+                    case "cards":
+                        const cardsNumber = Math.floor(Math.random() * 10);
+                        const cardsArray = [];
+
+                        for (let index = 0; index < cardsNumber; index++) {
+                            cardsArray.push(new ObjectID().generate().toString("hex"))
+                        }
+                        obj[props] = [...cardsArray];
+                        break;
+                    case "city":
+                        obj[props] = chance.city();
+                        break;
+                    case "job":
+                        obj[props] = chance.profession({rank: true});
+                        break;
+                    case "description":
+                        obj[props] = chance.paragraph({sentences: 1});
+                        break;
+                    case "userId":
+                        obj[props] = new ObjectID().generate().toString("hex");
+                        break;
+                    case "key":
+                        obj[props] = chance.string({length: 15});
+                        break;
+                    case "mail":
+                        obj[props] = chance.email()
+                        break;
+                    case "password":
+                    case "forgotPassword":
+                        const pswd = chance.string({length: 10, numeric: true, symbols: true});
         
-                if (props === "key") {
-                    obj[props] = chance.string({length: 15});
-                }
-
-                if (props === "mail") {
-                    obj[props] = chance.email()
-                }
-
-                if (props === "password" || props === "forgotPassword") {
-                    const pswd = chance.string({length: 10, numeric: true, symbols: true});
-
-                    obj[props] = hashSync(pswd, 10);
-                    obj["pswd_not_hashed"] = pswd;
-                }
-
-                if (props === "username") {
-                    obj[props] = chance.string({length: 5, symbols: false});
-                }
-        
-                if (props === "expireAt") {
-                    let mn = Math.floor(Math.random() * (10 - 5 + 1) + 5)
-                    obj[props] = new Date(Date.now() + 60 * mn * 1000);
+                        obj[props] = hashSync(pswd, 10);
+                        obj["pswd_not_hashed"] = pswd;
+                        break;
+                    case "username":
+                        obj[props] = chance.string({length: 5, symbols: false});
+                        break;
+                    case "expireAt":
+                        let mn = Math.floor(Math.random() * (10 - 5 + 1) + 5)
+                        obj[props] = new Date(Date.now() + 60 * mn * 1000);
+                        break;
+                    default:
+                        break;
                 }
             });
 
@@ -106,11 +130,11 @@ module.exports = function (col, mclient, entries = 5) {
             dataToLog.unshift(colTitle);
 
             console.log(table(dataToLog, {
-                columns: {
-                    alignment: "center",
+                getBorderCharacters: "honeywell",
+                columnDefault: {
+                    width: 14,
                     wrapWord: true
-                },
-                getBorderCharacters: "honeywell"
+                }
             }));
             console.log(chalk`{gray ----------------------}`)
         });

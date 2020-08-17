@@ -2,8 +2,24 @@ module.exports = {
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: ["mail", "password", "username"],
+      required: ["name", "surname", "city", "job", "description", "mail", "password", "cards"],
       properties: {
+        name: {
+          bsonType: "string"
+        },
+        surname: {
+          bsonType: "string"
+        },
+        city: {
+          bsonType: "string"
+        },
+        job: {
+          bsonType: "string"
+        },
+        description: {
+          bsonType: "string",
+          maxLength: 300
+        },
         mail: {
           bsonType: "string",
           pattern: "/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/",
@@ -14,9 +30,12 @@ module.exports = {
           minLength: 6,
           description: "User password hashed"
         },
-        username: {
-          bsonType: "string",
-          description: "User username"
+        cards: {
+          bsonType: "array",
+          uniqueItems: true,
+          items: {
+            bsonType: "objectId"
+          }
         }
       }
     }
