@@ -10,7 +10,7 @@ import ShareYourMood from "./components/YourMood/ShareYourMood";
 import variables from "./variables";
 import ResetPswd from "./components/ResetPswd/ResetPswd";
 import ForgotPasswordConfirm from "./components/ForgotPasswordForm/ForgotPasswordConfirm";
-import NotAvailable from "./components/NotAvailable/NotAvailable";
+// import NotAvailable from "./components/NotAvailable/NotAvailable";
 import StartPage from "./components/StartPage/StartPage";
 import ConfirmMail from "./components/ConfirmMail/ConfirmMail";
 import SignUpSpace from "./components/SignUpSpace/SignUpSpace";

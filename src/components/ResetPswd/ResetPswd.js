@@ -65,7 +65,7 @@ function ResetPswd() {
           responseToken: dataParsed.token
         });
       });
-  }, []);
+  }, []); // eslint-disable-line
 
   function checkNewPswd() {
     if (pswd.current.value === "" && checkPswd.current.value === "") {

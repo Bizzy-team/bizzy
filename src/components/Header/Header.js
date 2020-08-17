@@ -21,7 +21,7 @@ function Header() {
         <img src={logo} alt="logo" className="logo--app"></img>
       </div>
       <div className="mobile--menu">
-        <img src={menuBurger} className="menu--burger" onClick={() => displayMenu()} />
+        <img src={menuBurger} alt="burger--icon" className="menu--burger" onClick={() => displayMenu()} />
         {data.showMenu && (
           <div className="menu--options">
             <p>Connexion</p>

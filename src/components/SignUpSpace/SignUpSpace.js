@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 // import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 import LoaderSvg from "../../img/loader.svg";
@@ -48,7 +48,7 @@ function SignUpSpace() {
     }
 
     return setData(newState);
-  }, []);
+  }, []); //eslint-disable-line
 
   function checkUserSub(e) {
     e.preventDefault();

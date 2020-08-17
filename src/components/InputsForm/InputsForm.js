@@ -17,7 +17,7 @@ function InputsForm(props) {
       {props.isError.error && (
         <div className="error--message">
           <small>{props.isError.message}</small>
-          <img src={WarningIcon}></img>
+          <img src={WarningIcon} alt="warning--icon"></img>
         </div>
       )}
     </InputFormStyled>

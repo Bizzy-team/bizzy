@@ -35,7 +35,7 @@ function ConfirmMail() {
           <div className="link--connection">
             <p>
               Aller sur la page de <br />
-              <a href="">Connexion</a>
+              <a href="/">Connexion</a>
             </p>
           </div>
         </main>
