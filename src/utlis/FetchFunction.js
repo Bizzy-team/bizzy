@@ -2,9 +2,9 @@ function FetchData(path, method, data = {}) {
   let apiurl;
 
   if (process.env.NODE_ENV === "development") {
-    apiurl = `https://dev-api-bizzy.vercel.app/api${path}`;
+    apiurl = `https://dev.bizzy.studio/api${path}`;
   } else {
-    apiurl = "https://api-bizzy.vercel.app/api";
+    apiurl = `https://api.bizzy.studio/api/${path}`;
   }
 
   if (!path) {
