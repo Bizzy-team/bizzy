@@ -8,7 +8,7 @@ export const FeedStyle = styled.section`
     margin-bottom: 20px;
     color: black;
     width: 90%;
-    background: white;
+    background: ${props => props.theme.colorSecondary};
     border-radius: 7%;
     height: 33vh;
     .card--header {
@@ -45,7 +45,7 @@ export const FeedStyle = styled.section`
         text-align: center;
         margin-right: 20px;
         p {
-          color: white;
+          color: ${props => props.theme.colorSecondary};
           width: 50px;
           height: 30px;
           text-align: center;
@@ -61,14 +61,14 @@ export const FeedStyle = styled.section`
 `;
 
 export const FooterStyle = styled.footer`
-  background-color: white;
+  background-color: ${props => props.theme.colorSecondary};
   border-top: solid 1px ${props => props.theme.color};
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   height: 8%;
-  color: white;
+  color: ${props => props.theme.colorSecondary};
   text-align: center;
   div {
     display: flex;

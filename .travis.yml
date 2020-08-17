@@ -12,6 +12,7 @@ cache: npm
 branches:
   only:
   - master
+  - dev
 
 before_install:
   - npm i -g npm@latest
@@ -21,7 +22,6 @@ install:
 
 script:
 - npm run build
-- npm run lint
 - npm run style
 
 notifications:

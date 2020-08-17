@@ -1,3 +1,4 @@
 *.png
 *.json
-*.html
+.DS_Store
+*.svg
