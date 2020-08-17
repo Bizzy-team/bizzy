@@ -41,7 +41,6 @@ function ForgotPasswordForm() {
       }
     }
 
-
     if (e.target.value === "") {
       if (newState.error.inputMail.accessToChange) {
         newState.error.inputMail.error = true;
@@ -64,8 +63,6 @@ function ForgotPasswordForm() {
 
         newState.error.inputMail.error = true;
         newState.error.inputMail.message = "Format de mail incorrect.";
-
-        console.log(!newState.error.inputMail.accessToChange);
 
         if (!newState.error.inputMail.accessToChange) {
           newState.error.inputMail.accessToChange = true;
