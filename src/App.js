@@ -14,6 +14,7 @@ import ForgotPasswordConfirm from "./components/ForgotPasswordForm/ForgotPasswor
 import StartPage from "./components/StartPage/StartPage";
 import ConfirmMail from "./components/ConfirmMail/ConfirmMail";
 import SignUpSpace from "./components/SignUpSpace/SignUpSpace";
+import Support from "./components/Support/Support";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -71,6 +72,7 @@ function App() {
             <Route exact path="/" render={() => unavailableToken(StartPage)}></Route>
             <Route exact path="/inscription" component={SignUpSpace}></Route>
             <Route exact path="/confirm_mail" component={ConfirmMail}></Route>
+            <Route exact path="/support" component={Support}></Route>
             <Route
               exact
               path="/forgot_password_form"
