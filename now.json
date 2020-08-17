@@ -2,10 +2,13 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
+  "routes": [
       {
-          "source": "/(.*)",
-          "destination": "/index.html"
+          "handle": "filessystem"
+      },
+      {
+        "src": "/.*",
+        "test": "/index.html"
       }
   ]
 }
