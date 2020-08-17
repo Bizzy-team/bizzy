@@ -20,12 +20,7 @@ function Support() {
   });
 
   React.useEffect(() => {
-    const arrInputId = [
-      "inputFirstName",
-      "inputLastName",
-      "inputMail",
-      "inputMessage"
-    ];
+    const arrInputId = ["inputFirstName", "inputLastName", "inputMail", "inputMessage"];
     const newState = { ...data };
     const obj = {
       error: false,
@@ -42,7 +37,7 @@ function Support() {
     return setData(newState);
   }, []); //eslint-disable-line
 
-  return(
+  return (
     <>
       <Header />
       {/* <SupportStyled as="form" btnDisabled={data.btnDisabled}> */}
@@ -61,7 +56,7 @@ function Support() {
             inputPlaceholder="Prénom"
             // inputCheckError={checkUserMail}
             isError={data.error.inputFirstName ? data.error.inputFirstName : ""}
-            />
+          />
           <InputsForm
             type="text"
             inputId="inputLastName"
@@ -69,8 +64,8 @@ function Support() {
             inputPlaceholder="Nom"
             // inputCheckError={checkUserMail}
             isError={data.error.inputLastName ? data.error.inputLastName : ""}
-            />
-          </div>
+          />
+        </div>
         <InputsForm
           type="mail"
           inputId="inputMail"
@@ -93,7 +88,7 @@ function Support() {
         </div>
       </SupportStyled>
     </>
-  )
+  );
 }
 
 export default Support;
