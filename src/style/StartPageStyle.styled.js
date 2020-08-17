@@ -41,32 +41,32 @@ const StartPageStyled = styled(GlobalContainer)`
   }
 
   @media only screen and (min-width: 300px) {
-   section {
-     flex-direction: column-reverse;
-     justify-content: center;
-     .section--content {
+    section {
+      flex-direction: column-reverse;
+      justify-content: center;
+      .section--content {
         margin-top: 8%;
         text-align: center;
-       h1 {
-         font-size: 1.8em;
-       }
-       p {
-         font-size: .8em;
-       }
-       img {
-         width: 27%;
-       }
-     }
-     .section--img {
-       width: 80%;
-     }
-     .section--btn {
-       button {
-        margin: 0 5px;
-        padding: 6px 24px;
-       }
-     }
-   }
+        h1 {
+          font-size: 1.8em;
+        }
+        p {
+          font-size: 0.8em;
+        }
+        img {
+          width: 27%;
+        }
+      }
+      .section--img {
+        width: 80%;
+      }
+      .section--btn {
+        button {
+          margin: 0 5px;
+          padding: 6px 24px;
+        }
+      }
+    }
   }
 
   @media only screen and (min-width: 376px) {
@@ -136,8 +136,8 @@ const StartPageStyled = styled(GlobalContainer)`
         width: 50%;
         text-align: left;
         h1 {
-         font-size: 2.8em;
-       }
+          font-size: 2.8em;
+        }
         p {
           padding-right: 25%;
           font-size: 1em;

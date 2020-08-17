@@ -9,7 +9,7 @@ function ConfirmMail() {
     if (!navigator.userAgent.includes("Mobile")) {
       document.querySelector("body").style = `background-image: url(${bcImg})`;
     }
-  }, [])
+  }, []);
 
   return (
     <React.Fragment>
@@ -24,7 +24,7 @@ function ConfirmMail() {
         <main>
           <div className="mail--content">
             <p>
-              On vous envoyé un message à adresse@gmail.com. <br/>
+              On vous envoyé un message à adresse@gmail.com. <br />
               Merci de confirmer cette adresse pour finaliser votre inscription.
             </p>
             <div className="mail--content--buttons">
@@ -34,14 +34,14 @@ function ConfirmMail() {
           </div>
           <div className="link--connection">
             <p>
-              Aller sur la page de <br/>
+              Aller sur la page de <br />
               <a href="">Connexion</a>
             </p>
           </div>
         </main>
       </ConfirmMailStyled>
     </React.Fragment>
-  )
-};
+  );
+}
 
 export default ConfirmMail;

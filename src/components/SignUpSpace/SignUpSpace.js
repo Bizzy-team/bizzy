@@ -27,59 +27,75 @@ function SignUpSpace() {
   // const [redirect, setRedirect] = React.useState(false);
 
   React.useEffect(() => {
-    const arrInputId = ["inputFirstName", "inputLastName", "inputMail", "inputPswd", "inputCheckPswd"];
-    const newState = {...data};
+    const arrInputId = [
+      "inputFirstName",
+      "inputLastName",
+      "inputMail",
+      "inputPswd",
+      "inputCheckPswd"
+    ];
+    const newState = { ...data };
     const obj = {
       error: false,
       message: "",
       accessToChange: false
-    }
+    };
 
-    arrInputId.forEach(element => newState.error[element] = {...obj});
+    arrInputId.forEach(element => (newState.error[element] = { ...obj }));
 
-    if (window.matchMedia('screen and (min-width: 1000px)').matches) {
+    if (window.matchMedia("screen and (min-width: 1000px)").matches) {
       document.querySelector("body").style = `background-image: url(${bcImg})`;
     }
 
     return setData(newState);
-  }, [])
+  }, []);
 
   function checkUserSub(e) {
     e.preventDefault();
 
-    const newState = {...data};
+    const newState = { ...data };
     const inputIdTarget = e.target.id;
 
     if (e.type === "change" && inputIdTarget !== "input--conditions") {
       if (!newState.error[inputIdTarget].accessToChange) {
         return;
       }
-    };
+    }
 
     if (e.target.value === "" && inputIdTarget !== "input--conditions") {
       if (newState.error[inputIdTarget].accessToChange) {
         return updateState(inputIdTarget, "Field empty");
       }
       return;
-    };
+    }
 
     if (inputIdTarget === "inputMail") {
-      if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(e.target.value) === false) return updateState(inputIdTarget, "Format mail incorrect");
-    };
+      if (
+        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          e.target.value
+        ) === false
+      )
+        return updateState(inputIdTarget, "Format mail incorrect");
+    }
 
     if (inputIdTarget === "inputPswd") {
-      if (e.target.value.length < 5) return updateState(inputIdTarget, "Le mot de passe doit faire 6 charactères");
+      if (e.target.value.length < 5)
+        return updateState(inputIdTarget, "Le mot de passe doit faire 6 charactères");
 
       if (refInputCheckPswd.current.value !== "") {
         if (refInputPswd.current.value !== refInputCheckPswd.current.value) {
-          return updateState(refInputCheckPswd.current.id, "La confirmation est incorrecte");
+          return updateState(
+            refInputCheckPswd.current.id,
+            "La confirmation est incorrecte"
+          );
         }
       }
-    };
+    }
 
     if (inputIdTarget === "inputCheckPswd") {
-      if (e.target.value !== refInputPswd.current.value) return updateState(inputIdTarget, "La confirmation est incorrecte");
-    };
+      if (e.target.value !== refInputPswd.current.value)
+        return updateState(inputIdTarget, "La confirmation est incorrecte");
+    }
 
     if (inputIdTarget !== "input--conditions") {
       if (!newState.error[inputIdTarget].accessToChange) {
@@ -87,7 +103,7 @@ function SignUpSpace() {
       }
       newState.error[inputIdTarget].error = false;
       newState.error[inputIdTarget].message = "";
-    };
+    }
 
     if (
       refInputFirstName.current.value !== "" &&
@@ -103,13 +119,13 @@ function SignUpSpace() {
       } else {
         newState.btnDisabled = true;
       }
-    };
+    }
 
     return setData(newState);
   }
 
   function updateState(inputId, errorMessage) {
-    const newState = {...data};
+    const newState = { ...data };
 
     newState.error[inputId].error = true;
     newState.error[inputId].message = errorMessage;
@@ -134,19 +150,19 @@ function SignUpSpace() {
         prenom: refInputFirstName.current.value,
         nom: refInputLastName.current.value,
         mail: refInputMail.current.value,
-        pswd: refInputPswd.current.value,
+        pswd: refInputPswd.current.value
       }
     })
-    .then(dataParsed => {
-      console.log(dataParsed);
-      // return setRedirect(true);
-    })
-    .catch(error => {
-      setData({
-        errorApi: true,
-        errorMessage: error.message
+      .then(dataParsed => {
+        console.log(dataParsed);
+        // return setRedirect(true);
       })
-    })
+      .catch(error => {
+        setData({
+          errorApi: true,
+          errorMessage: error.message
+        });
+      });
   }
 
   // if (redirect) return <Redirect to="/feed"></Redirect>;
@@ -165,7 +181,11 @@ function SignUpSpace() {
           style={{ backgroundColor: `${props => props.theme.backgroundColor}` }}
         />
       )}
-      <SignUpSpaceStyled as="form" btnDisabled={data.btnDisabled} onSubmit={fetchUserData}>
+      <SignUpSpaceStyled
+        as="form"
+        btnDisabled={data.btnDisabled}
+        onSubmit={fetchUserData}
+      >
         <div className="form--inscription">
           <div className="form--inscription--title">
             <img src={GeometryImg} alt="img--inscription"></img>
@@ -214,7 +234,12 @@ function SignUpSpace() {
             isError={data.error.inputCheckPswd ? data.error.inputCheckPswd : ""}
           ></InputsForm>
           <div className="form--inscription--conditions">
-            <input type="checkbox" ref={refInputConditions} id="input--conditions" onChange={checkUserSub}></input>
+            <input
+              type="checkbox"
+              ref={refInputConditions}
+              id="input--conditions"
+              onChange={checkUserSub}
+            ></input>
             <p>
               J'accepte <a href="/">les termes et conditions</a> et{" "}
               <a href="/">la politique de confidentialité</a>.

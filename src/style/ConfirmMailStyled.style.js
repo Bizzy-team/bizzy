@@ -205,9 +205,9 @@ const ConfirmMailStyled = styled(GlobalContainer)`
     width: 76vw;
     height: 63vh;
     margin-top: 12%;
-    box-shadow: 0px 5px 5px 5px rgba(247,246,247,1);
+    box-shadow: 0px 5px 5px 5px rgba(247, 246, 247, 1);
     border-radius: 20px;
-    border: solid 3px rgba(247,246,247,1);
+    border: solid 3px rgba(247, 246, 247, 1);
     border-bottom-width: 8px;
     background-color: ${props => props.theme.colorPrincipal};
   }

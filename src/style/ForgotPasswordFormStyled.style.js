@@ -2,15 +2,14 @@ import styled from "styled-components";
 import GlobalContainer from "../utlis/GlobalContainer";
 
 const ForgotPasswordFormStyled = styled(GlobalContainer)`
-font-family: ${props => props.theme.fontFamilyText};
-margin-top: 60%;
+  font-family: ${props => props.theme.fontFamilyText};
+  margin-top: 60%;
   .form--forgot--pswd--title {
     display: flex;
     img {
       width: 100%;
       height: auto;
       object-fit: contain;
-
     }
     h2 {
       color: black;
@@ -26,7 +25,7 @@ margin-top: 60%;
       border-radius: 10px;
       width: 100%;
       font-size: 0.9em;
-      opacity: ${props => props.btnDisabled ? 0.5 : 1};
+      opacity: ${props => (props.btnDisabled ? 0.5 : 1)};
       margin-bottom: 15%;
     }
   }
@@ -128,9 +127,9 @@ margin-top: 60%;
     width: 38vw;
     height: 59vh;
     margin-top: 14%;
-    box-shadow: 0px 5px 5px 5px rgba(247,246,247,1);
+    box-shadow: 0px 5px 5px 5px rgba(247, 246, 247, 1);
     border-radius: 20px;
-    border: solid 3px rgba(247,246,247,1);
+    border: solid 3px rgba(247, 246, 247, 1);
     border-bottom-width: 8px;
     background-color: ${props => props.theme.colorPrincipal};
     .form--forgot--pswd--title {
@@ -154,7 +153,7 @@ margin-top: 60%;
 
   @media screen and (min-width: 1277px) {
     height: 70vh;
-    margin-top: 10%
+    margin-top: 10%;
   }
 
   @media screen and (min-width: 1349px) {

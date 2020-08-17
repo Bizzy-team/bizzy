@@ -2,9 +2,6 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "env": {
-      "NODEJS_HELPERS": "0"
-  },
   "rewrites": [
       {
           "source": "/(.*)",

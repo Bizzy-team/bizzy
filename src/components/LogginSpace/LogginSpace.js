@@ -54,32 +54,36 @@ function LogginSpace() {
       });
     }
     return FetchFunction("/login", "POST", {
-      credentials: 'include',
+      credentials: "include",
       body: {
         mail: inputMail.current.value,
         pswd: inputPswd.current.value
       }
     })
-    .then(dataParsed => {
-      sessionStorage.setItem("UserToken", dataParsed.token);
-      return setRedirect(true);
-    })
-    .catch(error => {
-      setData({
-        error: true,
-        errorMessage: error.message
+      .then(dataParsed => {
+        sessionStorage.setItem("UserToken", dataParsed.token);
+        return setRedirect(true);
       })
-    })
+      .catch(error => {
+        setData({
+          error: true,
+          errorMessage: error.message
+        });
+      });
   }
 
   console.log(data.errorMessageMail);
-  
 
   if (redirect) return <Redirect to="/feed"></Redirect>;
 
   return (
     <React.Fragment>
-      {data.loader && <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />}
+      {data.loader && (
+        <ReactSVG
+          src={LoaderSvg}
+          style={{ backgroundColor: `${props => props.theme.backgroundColor}` }}
+        />
+      )}
       {/* {data.error && (
         <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
           <p className="text-light">{data.errorMessage}</p>
@@ -94,11 +98,11 @@ function LogginSpace() {
           placeholderInput="Email"
           inputRef={inputMail}
         />
-         {data.errorMail && (
-            <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
-              <p className="text-light">{data.errorMessageMail}</p>
-            </div>
-          )}
+        {data.errorMail && (
+          <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
+            <p className="text-light">{data.errorMessageMail}</p>
+          </div>
+        )}
         <InputsForm
           spaceName="loggin"
           type="password"
@@ -107,10 +111,10 @@ function LogginSpace() {
           inputRef={inputPswd}
         />
         {data.error && (
-            <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
-              <p className="text-light">{data.errorMessage}</p>
-            </div>
-          )}
+          <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
+            <p className="text-light">{data.errorMessage}</p>
+          </div>
+        )}
         <p>
           <small className="text-muted">6 characters minimum.</small>
         </p>

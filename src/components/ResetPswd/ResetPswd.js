@@ -40,7 +40,7 @@ function ResetPswd() {
         setData({
           ...data,
           loader: true
-        })
+        });
         if (dataParsed === undefined) {
           return setData({
             ...data,
@@ -63,9 +63,9 @@ function ResetPswd() {
           ...data,
           loader: true,
           responseToken: dataParsed.token
-        })
+        });
       });
-  }, [])
+  }, []);
 
   function checkNewPswd() {
     if (pswd.current.value === "" && checkPswd.current.value === "") {
@@ -95,44 +95,41 @@ function ResetPswd() {
 
       return FetchFunction("/resetpassword", "PUT", {
         headers: {
-          "Authorization": data.responseToken
+          Authorization: data.responseToken
         },
         body: {
-          "newpswd": pswd.current.value,
-          "token": data.urlToken
+          newpswd: pswd.current.value,
+          token: data.urlToken
         }
       })
-      .then(dataParsed => {
-        if (!dataParsed.error) {
+        .then(dataParsed => {
+          if (!dataParsed.error) {
+            return setData({
+              ...data,
+              submitLoader: true,
+              successResetModal: true,
+              errorMessage: dataParsed.message
+            });
+          }
           return setData({
             ...data,
-            submitLoader: true,
-            successResetModal: true,
-            errorMessage: dataParsed.message
-          })
-        }
-        return setData({
-          ...data,
-          submitLoader: true
+            submitLoader: true
+          });
         })
-      })
-      .catch(error => {
-        setData({
-          error: true,
-          errorMessage: error.message
-        })
-      })
+        .catch(error => {
+          setData({
+            error: true,
+            errorMessage: error.message
+          });
+        });
     }
   }
 
-  if (!data.loader) return <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />;
+  if (!data.loader)
+    return <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />;
   if (!data.responseToken) return <ResetPswdError></ResetPswdError>;
-  if (data.successResetModal) return (
-    <ResetSuccessModal
-      updateMessage={data.errorMessage}
-    >
-    </ResetSuccessModal>
-  )
+  if (data.successResetModal)
+    return <ResetSuccessModal updateMessage={data.errorMessage}></ResetSuccessModal>;
 
   return (
     <section>
@@ -148,10 +145,9 @@ function ResetPswd() {
             <p className="text-light">{data.errorMessage}</p>
           </div>
         )}
-        {
-          data.submitLoader && (
-            <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />
-          )}
+        {data.submitLoader && (
+          <ReactSVG src={LoaderSvg} style={{ backgroundColor: "#F9FAFA" }} />
+        )}
         <div className="resetPswd">
           <div className="resetPswd--title">
             <h1>Reset Password</h1>
@@ -160,7 +156,10 @@ function ResetPswd() {
             <p>Enter a new password for your account.</p>
           </div>
           {data.loader && (
-            <ReactSVG src={LoaderSvg} style={{ backgroundColor: `${props => props.theme.backgroundColor}` }} />
+            <ReactSVG
+              src={LoaderSvg}
+              style={{ backgroundColor: `${props => props.theme.backgroundColor}` }}
+            />
           )}
           <InputFormStyled>
             <InputsForm
@@ -181,7 +180,7 @@ function ResetPswd() {
           <p>
             <small className="text-muted" style={{ fontSize: "0.5em" }}>
               6 characters minimum.
-              </small>
+            </small>
           </p>
           <div className="reset--space--sign--btn">
             <button onClick={() => checkNewPswd()}>Reset password</button>

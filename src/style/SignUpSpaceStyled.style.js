@@ -39,7 +39,7 @@ const SignUpSpaceStyled = styled(GlobalContainer)`
         border-radius: 10px;
         width: 100%;
         font-size: 0.9em;
-        opacity: ${props => props.btnDisabled ? 0.5 : 1};
+        opacity: ${props => (props.btnDisabled ? 0.5 : 1)};
       }
     }
     .form--inscription--link {
@@ -69,7 +69,7 @@ const SignUpSpaceStyled = styled(GlobalContainer)`
       /* display: flex;
       justify-content: space-between;
       align-items: flex-end; */
-      font-size: .8em;
+      font-size: 0.8em;
     }
     .form--inscription--conditions {
       display: flex;
@@ -193,9 +193,9 @@ const SignUpSpaceStyled = styled(GlobalContainer)`
     width: 38vw;
     height: 87vh;
     margin-top: 7%;
-    box-shadow: 0px 5px 5px 5px rgba(247,246,247,1);
+    box-shadow: 0px 5px 5px 5px rgba(247, 246, 247, 1);
     border-radius: 20px;
-    border: solid 3px rgba(247,246,247,1);
+    border: solid 3px rgba(247, 246, 247, 1);
     border-bottom-width: 8px;
     .form--inscription {
       padding: 50px 40px;

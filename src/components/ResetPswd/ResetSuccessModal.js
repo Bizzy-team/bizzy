@@ -17,18 +17,17 @@ function ResetSuccessModal(props) {
     return () => clearTimeout(timer);
   }, []);
 
-  if (data.redirectSuccess) return <Redirect to="/"></Redirect>
+  if (data.redirectSuccess) return <Redirect to="/"></Redirect>;
 
   return ReactDOM.createPortal(
     <ModalStyled className="modal--logout">
       <div className="modal-content">
         <div className="modal-header">
-          <h3>
-            {props.updateMessage}
-          </h3>
+          <h3>{props.updateMessage}</h3>
         </div>
         <div className="modal-body">
-          You will be redirected in 5s, to the log in page and if not, click on the button.
+          You will be redirected in 5s, to the log in page and if not, click on the
+          button.
         </div>
         <div className="modal-footer">
           <Link to="/" className="btn btn-primary btn-block">

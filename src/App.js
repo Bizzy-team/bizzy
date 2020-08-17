@@ -67,33 +67,33 @@ function App() {
       <BrowserRouter>
         <ThemeProvider theme={{ ...variables }}>
           <GlobalStyle></GlobalStyle>
-            <>
-              <Route exact path="/" render={() => unavailableToken(StartPage)}></Route>
-              <Route exact path="/inscription" component={SignUpSpace}></Route>
-              <Route exact path="/confirm_mail" component={ConfirmMail}></Route>
-              <Route
-                exact
-                path="/forgot_password_form"
-                render={() => unavailableToken(ForgotPasswordForm)}
-              ></Route>
-              <Route
-                exact
-                path="/forgot_password_confirmation"
-                render={() => unavailableToken(ForgotPasswordConfirm)}
-              ></Route>
-              <Route exact path="/reset_pswd_form" component={ResetPswd} />
-              <Route exact path="/feed" render={() => availableToken(Feed)} />
-              <Route
-                exact
-                path="/user_profile"
-                render={() => availableToken(UserProfile)}
-              />
-              <Route
-                exact
-                path="/createYourCard/:icon"
-                render={routeProps => availableToken(ShareYourMood, routeProps)}
-              />
-            </>
+          <>
+            <Route exact path="/" render={() => unavailableToken(StartPage)}></Route>
+            <Route exact path="/inscription" component={SignUpSpace}></Route>
+            <Route exact path="/confirm_mail" component={ConfirmMail}></Route>
+            <Route
+              exact
+              path="/forgot_password_form"
+              render={() => unavailableToken(ForgotPasswordForm)}
+            ></Route>
+            <Route
+              exact
+              path="/forgot_password_confirmation"
+              render={() => unavailableToken(ForgotPasswordConfirm)}
+            ></Route>
+            <Route exact path="/reset_pswd_form" component={ResetPswd} />
+            <Route exact path="/feed" render={() => availableToken(Feed)} />
+            <Route
+              exact
+              path="/user_profile"
+              render={() => availableToken(UserProfile)}
+            />
+            <Route
+              exact
+              path="/createYourCard/:icon"
+              render={routeProps => availableToken(ShareYourMood, routeProps)}
+            />
+          </>
         </ThemeProvider>
       </BrowserRouter>
     </React.Fragment>
