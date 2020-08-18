@@ -4,6 +4,8 @@ import GeometryImg from "../../img/geometry_desktop.svg";
 import Header from "../Header/Header";
 import InputsForm from "../InputsForm/InputsForm";
 import bcImg from "../../img/bc_desktop.svg";
+import WarningIcon from "../../img/warning.svg";
+
 
 function Support() {
   const refInputFirstName = React.useRef(null);
@@ -16,7 +18,8 @@ function Support() {
     btnDisabled: true,
     error: {},
     errorApi: false,
-    errorMessage: ""
+    errorMessage: "",
+    errorDesc: false
   });
 
   React.useEffect(() => {
@@ -37,11 +40,97 @@ function Support() {
     return setData(newState);
   }, []); //eslint-disable-line
 
+  function checkUserInfos(e) {
+    e.preventDefault();
+
+    const newState = { ...data };
+    const inputTargetId = e.target.id;
+
+    if (e.type === "change") {
+      if (!newState.error[inputTargetId].accessToChange) {
+        return;
+      }
+    }
+
+    console.log(inputTargetId);
+    console.log(e.target.value);
+
+    if (e.target.value === "") {
+      if (!newState.error[inputTargetId].accessToChange) {
+        newState.error[inputTargetId].error = true;
+        newState.error[inputTargetId].message = "Le champ est vide.";
+
+        if (!newState.error[inputTargetId].accessToChange) {
+          newState.error[inputTargetId].accessToChange = true;
+        }
+
+        if (!newState.btnDisabled) {
+          newState.btnDisabled = true;
+        }
+
+        return setData(newState);
+      }
+    }
+
+    if (inputTargetId === "inputMail") {
+      if (
+        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          e.target.value
+        ) === false
+      ) {
+        newState.error[inputTargetId].error = true;
+        newState.error[inputTargetId].message = "Format de mail incorrect.";
+
+        if (!newState.error[inputTargetId].accessToChange) {
+          newState.error[inputTargetId].accessToChange = true;
+        }
+
+        if (!newState.btnDisabled) {
+          newState.btnDisabled = true;
+        }
+
+        return setData(newState);
+      }
+    }
+
+    debugger;
+    if (inputTargetId === "inputMessage") {
+      if (e.target.value === "") {
+        newState.errorDesc = true;
+        newState.error[inputTargetId].error = true;
+        newState.error[inputTargetId].message = "Le message est vide.";
+
+        if (!newState.error[inputTargetId].accessToChange) {
+          newState.error[inputTargetId].accessToChange = true;
+        }
+
+        if (!newState.btnDisabled) {
+          newState.btnDisabled = true;
+        }
+
+        return setData(newState);
+      }
+    }
+
+    if (refInputMail.current.value !== "") {
+      if (!newState.error[inputTargetId].error) {
+        newState.btnDisabled = false;
+      } else {
+        newState.btnDisabled = true;
+      }
+    }
+
+    newState.error[inputTargetId].error = false;
+    newState.error[inputTargetId].message = "";
+
+    return setData(newState);
+  }
+
   return (
     <>
       <Header />
-      {/* <SupportStyled as="form" btnDisabled={data.btnDisabled}> */}
-      <SupportStyled as="form">
+      <SupportStyled as="form" btnDisabled={data.btnDisabled}>
+      {/* <SupportStyled as="form"> */}
         <div className="form--support--title">
           <div className="form--support--img">
             <img src={GeometryImg} alt="img--icon--support"></img>
@@ -54,7 +143,7 @@ function Support() {
             inputId="inputFirstName"
             inputRef={refInputFirstName}
             inputPlaceholder="Prénom"
-            // inputCheckError={checkUserMail}
+            inputCheckError={checkUserInfos}
             isError={data.error.inputFirstName ? data.error.inputFirstName : ""}
           />
           <InputsForm
@@ -62,7 +151,7 @@ function Support() {
             inputId="inputLastName"
             inputRef={refInputLastName}
             inputPlaceholder="Nom"
-            // inputCheckError={checkUserMail}
+            inputCheckError={checkUserInfos}
             isError={data.error.inputLastName ? data.error.inputLastName : ""}
           />
         </div>
@@ -72,7 +161,7 @@ function Support() {
             inputId="inputMail"
             inputRef={refInputMail}
             inputPlaceholder="Mail"
-            // inputCheckError={checkUserMail}
+            inputCheckError={checkUserInfos}
             isError={data.error.inputMail ? data.error.inputMail : ""}
           />
         </div>
@@ -82,11 +171,19 @@ function Support() {
             rows="6"
             cols="34"
             placeholder="Décrivez votre demande."
+            onBlur={checkUserInfos}
           ></textarea>
+          {data.errorDesc ? (
+            <div className="error--message">
+              <small>{data.error.inputMessage.message}</small>
+              <img src={WarningIcon} alt="warning--icon"></img>
+            </div>
+          ) : ""
+        }
         </div>
         <div className="form--support--btn">
-          {/* <input type="submit" disabled={data.btnDisabled} value="Envoyer"></input> */}
-          <input type="submit" value="Envoyer"></input>
+          <input type="submit" disabled={data.btnDisabled} value="Envoyer"></input>
+          {/* <input type="submit" value="Envoyer"></input> */}
         </div>
       </SupportStyled>
     </>
