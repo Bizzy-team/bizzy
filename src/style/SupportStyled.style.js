@@ -19,6 +19,23 @@ const SupportStyled = styled(GlobalContainer)`
   .form--support--identity {
     display: flex;
   }
+  #inputMessage {
+    font-family: ${props => props.theme.fontFamilyText};
+    font-weight: 200;
+    border: none;
+    border-bottom: solid 1px ${props => props.theme.color};
+    border-color: ${props =>
+      props.isError ? props.theme.colorRed : props.theme.colorLola};
+    opacity: 0.3;
+    font-size: 0.8em;
+    width: 100%;
+
+    &:focus {
+      border: solid 2px ${props => props.theme.colorBtn};
+      outline: none;
+      opacity: 1;
+    }
+  }
   .form--support--btn {
     input {
       background-color: ${props => props.theme.colorBtn};
@@ -135,6 +152,14 @@ const SupportStyled = styled(GlobalContainer)`
       .form--support--img {
         margin-right: 20px;
         width: 10%;
+      }
+    }
+    .form--support--identity {
+      div {
+        margin-right: 10px;
+        input {
+          width: 100%;
+        }
       }
     }
   }
