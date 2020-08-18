@@ -18,8 +18,7 @@ function Support() {
     btnDisabled: true,
     error: {},
     errorApi: false,
-    errorMessage: "",
-    errorDesc: false
+    errorMessage: ""
   });
 
   React.useEffect(() => {
@@ -52,24 +51,11 @@ function Support() {
       }
     }
 
-    console.log(inputTargetId);
-    console.log(e.target.value);
-
     if (e.target.value === "") {
-      if (!newState.error[inputTargetId].accessToChange) {
-        newState.error[inputTargetId].error = true;
-        newState.error[inputTargetId].message = "Le champ est vide.";
-
-        if (!newState.error[inputTargetId].accessToChange) {
-          newState.error[inputTargetId].accessToChange = true;
-        }
-
-        if (!newState.btnDisabled) {
-          newState.btnDisabled = true;
-        }
-
-        return setData(newState);
+      if (newState.error[inputTargetId].accessToChange) {
+        return updateState(inputTargetId, "Field empty");
       }
+      return;
     }
 
     if (inputTargetId === "inputMail") {
@@ -77,51 +63,33 @@ function Support() {
         /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
           e.target.value
         ) === false
-      ) {
-        newState.error[inputTargetId].error = true;
-        newState.error[inputTargetId].message = "Format de mail incorrect.";
-
-        if (!newState.error[inputTargetId].accessToChange) {
-          newState.error[inputTargetId].accessToChange = true;
-        }
-
-        if (!newState.btnDisabled) {
-          newState.btnDisabled = true;
-        }
-
-        return setData(newState);
-      }
+      )
+        return updateState(inputTargetId, "Format mail incorrect");
     }
 
-    debugger;
-    if (inputTargetId === "inputMessage") {
-      if (e.target.value === "") {
-        newState.errorDesc = true;
-        newState.error[inputTargetId].error = true;
-        newState.error[inputTargetId].message = "Le message est vide.";
-
-        if (!newState.error[inputTargetId].accessToChange) {
-          newState.error[inputTargetId].accessToChange = true;
-        }
-
-        if (!newState.btnDisabled) {
-          newState.btnDisabled = true;
-        }
-
-        return setData(newState);
-      }
-    }
-
-    if (refInputMail.current.value !== "") {
-      if (!newState.error[inputTargetId].error) {
-        newState.btnDisabled = false;
-      } else {
-        newState.btnDisabled = true;
-      }
+    if (!newState.error[inputTargetId].accessToChange) {
+      newState.error[inputTargetId].accessToChange = true;
     }
 
     newState.error[inputTargetId].error = false;
     newState.error[inputTargetId].message = "";
+
+    return setData(newState);
+  }
+
+  function updateState(inputId, errorMessage) {
+    const newState = { ...data };
+
+    newState.error[inputId].error = true;
+    newState.error[inputId].message = errorMessage;
+
+    if (!newState.error[inputId].accessToChange) {
+      newState.error[inputId].accessToChange = true;
+    }
+
+    if (!newState.btnDisabled) {
+      newState.btnDisabled = true;
+    }
 
     return setData(newState);
   }
@@ -173,12 +141,12 @@ function Support() {
             placeholder="Décrivez votre demande."
             onBlur={checkUserInfos}
           ></textarea>
-          {data.errorDesc ? (
+          {data.error.inputMessage && data.error.inputMessage.error && (
             <div className="error--message">
               <small>{data.error.inputMessage.message}</small>
               <img src={WarningIcon} alt="warning--icon"></img>
             </div>
-          ) : ""
+          )
         }
         </div>
         <div className="form--support--btn">
