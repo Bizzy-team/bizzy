@@ -6,7 +6,6 @@ import InputsForm from "../InputsForm/InputsForm";
 import bcImg from "../../img/bc_desktop.svg";
 import WarningIcon from "../../img/warning.svg";
 
-
 function Support() {
   const refInputFirstName = React.useRef(null);
   const refInputLastName = React.useRef(null);
@@ -98,7 +97,7 @@ function Support() {
     <>
       <Header />
       <SupportStyled as="form" btnDisabled={data.btnDisabled}>
-      {/* <SupportStyled as="form"> */}
+        {/* <SupportStyled as="form"> */}
         <div className="form--support--title">
           <div className="form--support--img">
             <img src={GeometryImg} alt="img--icon--support"></img>
@@ -146,8 +145,7 @@ function Support() {
               <small>{data.error.inputMessage.message}</small>
               <img src={WarningIcon} alt="warning--icon"></img>
             </div>
-          )
-        }
+          )}
         </div>
         <div className="form--support--btn">
           <input type="submit" disabled={data.btnDisabled} value="Envoyer"></input>
