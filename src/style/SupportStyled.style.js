@@ -185,8 +185,8 @@ const SupportStyled = styled(GlobalContainer)`
   }
 
   @media screen and (min-width: 1400px) {
-    height: 57vh;
-    margin-top: 13%;
+    height: 75vh;
+    margin-top: 11%;
   }
 `;
 
