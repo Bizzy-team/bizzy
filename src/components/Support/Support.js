@@ -66,22 +66,24 @@ function Support() {
             isError={data.error.inputLastName ? data.error.inputLastName : ""}
           />
         </div>
-        <InputsForm
-          type="mail"
-          inputId="inputMail"
-          inputRef={refInputMail}
-          inputPlaceholder="Mail"
-          // inputCheckError={checkUserMail}
-          isError={data.error.inputMail ? data.error.inputMail : ""}
-        />
-        <InputsForm
-          type="text"
-          inputId="inputMessage"
-          inputRef={refInputMessage}
-          inputPlaceholder="Message"
-          // inputCheckError={checkUserMail}
-          isError={data.error.inputMessage ? data.error.inputMessage : ""}
-        />
+        <div className="form--support--mail">
+          <InputsForm
+            type="mail"
+            inputId="inputMail"
+            inputRef={refInputMail}
+            inputPlaceholder="Mail"
+            // inputCheckError={checkUserMail}
+            isError={data.error.inputMail ? data.error.inputMail : ""}
+          />
+        </div>
+        <div className="form--support--message">
+          <textarea
+            id="inputMessage"
+            rows="6"
+            cols="34"
+            placeholder="Décrivez votre demande."
+          ></textarea>
+        </div>
         <div className="form--support--btn">
           {/* <input type="submit" disabled={data.btnDisabled} value="Envoyer"></input> */}
           <input type="submit" value="Envoyer"></input>
