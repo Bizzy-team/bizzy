@@ -73,6 +73,21 @@ function Support() {
     newState.error[inputTargetId].error = false;
     newState.error[inputTargetId].message = "";
 
+    if (
+      refInputFirstName.current.value !== "" &&
+      refInputLastName.current.value !== "" &&
+      refInputMail.current.value !== "" &&
+      refInputMessage.current.value !== ""
+    ) {
+      const btnEnabled = Object.values(newState.error).every(el => !el.error);
+
+      if (btnEnabled) {
+        newState.btnDisabled = false;
+      } else {
+        newState.btnDisabled = true;
+      }
+    };
+
     return setData(newState);
   }
 
@@ -97,7 +112,6 @@ function Support() {
     <>
       <Header />
       <SupportStyled as="form" btnDisabled={data.btnDisabled}>
-        {/* <SupportStyled as="form"> */}
         <div className="form--support--title">
           <div className="form--support--img">
             <img src={GeometryImg} alt="img--icon--support"></img>
@@ -138,7 +152,9 @@ function Support() {
             rows="6"
             cols="34"
             placeholder="Décrivez votre demande."
+            ref={refInputMessage}
             onBlur={checkUserInfos}
+            onChange={checkUserInfos}
           ></textarea>
           {data.error.inputMessage && data.error.inputMessage.error && (
             <div className="error--message">
@@ -149,7 +165,6 @@ function Support() {
         </div>
         <div className="form--support--btn">
           <input type="submit" disabled={data.btnDisabled} value="Envoyer"></input>
-          {/* <input type="submit" value="Envoyer"></input> */}
         </div>
       </SupportStyled>
     </>
