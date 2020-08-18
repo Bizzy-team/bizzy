@@ -20,7 +20,8 @@ const InputsForm = styled(GlobalContainer)`
     border: none;
     border-bottom: solid 1px ${props => props.theme.color};
     color: ${props => props.theme.colorText};
-    border-color: ${props => props.theme.colorLola};
+    border-color: ${props =>
+      props.isError ? props.theme.colorRed : props.theme.colorLola};
     /* padding: 26px 0 0 10px; */
 
     &:focus {
