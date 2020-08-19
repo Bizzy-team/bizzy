@@ -89,15 +89,14 @@ function LogginSpace() {
     //   });
   }
 
-
   if (redirect) return <Redirect to="/feed"></Redirect>;
 
   return (
     <React.Fragment>
-      <Header/>
+      <Header />
       <main>
         <LogginSpaceStyled as="form">
-        <div className="form--connexion">
+          <div className="form--connexion">
             <div className="form--connexion--title">
               <img src={GeometryImg} alt="img--connexion"></img>
               <h2>Connexion</h2>
@@ -119,16 +118,20 @@ function LogginSpace() {
                 // inputCheckError={checkUserSub}
                 isError={data.error.inputPswd ? data.error.inputPswd : ""}
               ></InputsForm>
-            <div className="form--connexion--btn">
-              <input type="submit" disabled={data.btnDisabled} value="Connexion"></input>
+              <div className="form--connexion--btn">
+                <input
+                  type="submit"
+                  disabled={data.btnDisabled}
+                  value="Connexion"
+                ></input>
+              </div>
+              <div className="form--connexion--link">
+                <p>J'ai déjà un compte</p>
+                <p>
+                  <a href="/">Connexion</a>
+                </p>
+              </div>
             </div>
-            <div className="form--connexion--link">
-              <p>J'ai déjà un compte</p>
-              <p>
-                <a href="/">Connexion</a>
-              </p>
-            </div>
-          </div>
           </div>
         </LogginSpaceStyled>
       </main>
