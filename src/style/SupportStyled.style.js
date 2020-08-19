@@ -53,8 +53,8 @@ const SupportStyled = styled(GlobalContainer)`
   .error--message {
     display: flex;
     justify-content: space-between;
-    font-size: .9em;
-    color: ${props => props.theme.colorRed};;
+    font-size: 0.9em;
+    color: ${props => props.theme.colorRed};
     margin-bottom: 16px;
     img {
       width: 18px;

@@ -169,7 +169,6 @@ function Support() {
           </div>
         </SupportStyled>
       </main>
-
     </>
   );
 }
