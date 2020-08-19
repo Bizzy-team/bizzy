@@ -86,7 +86,7 @@ function Support() {
       } else {
         newState.btnDisabled = true;
       }
-    };
+    }
 
     return setData(newState);
   }
@@ -111,62 +111,65 @@ function Support() {
   return (
     <>
       <Header />
-      <SupportStyled as="form" btnDisabled={data.btnDisabled}>
-        <div className="form--support--title">
-          <div className="form--support--img">
-            <img src={GeometryImg} alt="img--icon--support"></img>
-          </div>
-          <h2>Contactez-nous !</h2>
-        </div>
-        <div className="form--support--identity">
-          <InputsForm
-            type="text"
-            inputId="inputFirstName"
-            inputRef={refInputFirstName}
-            inputPlaceholder="Prénom"
-            inputCheckError={checkUserInfos}
-            isError={data.error.inputFirstName ? data.error.inputFirstName : ""}
-          />
-          <InputsForm
-            type="text"
-            inputId="inputLastName"
-            inputRef={refInputLastName}
-            inputPlaceholder="Nom"
-            inputCheckError={checkUserInfos}
-            isError={data.error.inputLastName ? data.error.inputLastName : ""}
-          />
-        </div>
-        <div className="form--support--mail">
-          <InputsForm
-            type="mail"
-            inputId="inputMail"
-            inputRef={refInputMail}
-            inputPlaceholder="Mail"
-            inputCheckError={checkUserInfos}
-            isError={data.error.inputMail ? data.error.inputMail : ""}
-          />
-        </div>
-        <div className="form--support--message">
-          <textarea
-            id="inputMessage"
-            rows="6"
-            cols="34"
-            placeholder="Décrivez votre demande."
-            ref={refInputMessage}
-            onBlur={checkUserInfos}
-            onChange={checkUserInfos}
-          ></textarea>
-          {data.error.inputMessage && data.error.inputMessage.error && (
-            <div className="error--message">
-              <small>{data.error.inputMessage.message}</small>
-              <img src={WarningIcon} alt="warning--icon"></img>
+      <main>
+        <SupportStyled as="form" btnDisabled={data.btnDisabled}>
+          <div className="form--support--title">
+            <div className="form--support--img">
+              <img src={GeometryImg} alt="img--icon--support"></img>
             </div>
-          )}
-        </div>
-        <div className="form--support--btn">
-          <input type="submit" disabled={data.btnDisabled} value="Envoyer"></input>
-        </div>
-      </SupportStyled>
+            <h2>Contactez-nous !</h2>
+          </div>
+          <div className="form--support--identity">
+            <InputsForm
+              type="text"
+              inputId="inputFirstName"
+              inputRef={refInputFirstName}
+              inputPlaceholder="Prénom"
+              inputCheckError={checkUserInfos}
+              isError={data.error.inputFirstName ? data.error.inputFirstName : ""}
+            />
+            <InputsForm
+              type="text"
+              inputId="inputLastName"
+              inputRef={refInputLastName}
+              inputPlaceholder="Nom"
+              inputCheckError={checkUserInfos}
+              isError={data.error.inputLastName ? data.error.inputLastName : ""}
+            />
+          </div>
+          <div className="form--support--mail">
+            <InputsForm
+              type="mail"
+              inputId="inputMail"
+              inputRef={refInputMail}
+              inputPlaceholder="Mail"
+              inputCheckError={checkUserInfos}
+              isError={data.error.inputMail ? data.error.inputMail : ""}
+            />
+          </div>
+          <div className="form--support--message">
+            <textarea
+              id="inputMessage"
+              rows="6"
+              cols="34"
+              placeholder="Décrivez votre demande."
+              ref={refInputMessage}
+              onBlur={checkUserInfos}
+              onChange={checkUserInfos}
+            ></textarea>
+            {data.error.inputMessage && data.error.inputMessage.error && (
+              <div className="error--message">
+                <small>{data.error.inputMessage.message}</small>
+                <img src={WarningIcon} alt="warning--icon"></img>
+              </div>
+            )}
+          </div>
+          <div className="form--support--btn">
+            <input type="submit" disabled={data.btnDisabled} value="Envoyer"></input>
+          </div>
+        </SupportStyled>
+      </main>
+
     </>
   );
 }
