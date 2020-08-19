@@ -13,10 +13,6 @@ const InputsForm = styled(GlobalContainer)`
     /* ${props => props.marginLeft && `margin-left: ${props.marginLeft}`}; */
     font-family: ${props => props.theme.fontFamilyText};
     font-weight: 200;
-    ${props =>
-      props.isError
-        ? `color: ${props => props.theme.colorRed};`
-        : `color: ${props.theme.colorBtn};`}
     border: none;
     border-bottom: solid 1px ${props => props.theme.color};
     color: ${props => props.theme.colorText};
