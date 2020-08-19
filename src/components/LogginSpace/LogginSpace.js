@@ -1,23 +1,40 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
-import { ReactSVG } from "react-svg";
-import LoaderSvg from "../../img/loader.svg";
+// import { ReactSVG } from "react-svg";
+// import LoaderSvg from "../../img/loader.svg";
 import InputsForm from "../InputsForm/InputsForm";
-import FetchFunction from "../../utlis/FetchFunction";
+// import FetchFunction from "../../utlis/FetchFunction";
+import Header from "../Header/Header";
+import GeometryImg from "../../img/geometry_desktop.svg";
+import bcImg from "../../img/bc_desktop.svg";
 
 function LogginSpace() {
   const inputMail = React.createRef(null);
   const inputPswd = React.createRef(null);
   const [data, setData] = React.useState({
     loader: false,
-    error: false,
-    errorMail: false,
-    errorMessage: "",
-    errorMessageMail: "",
-    errorMessagePassword: ""
+    error: {}
   });
   const [redirect, setRedirect] = React.useState(false);
+
+  React.useEffect(() => {
+    const arrInputId = ["inputMail", "inputPswd"];
+    const newState = { ...data };
+    const obj = {
+      error: false,
+      message: "",
+      accessToChange: false
+    };
+
+    arrInputId.forEach(element => (newState.error[element] = { ...obj }));
+
+    if (window.matchMedia("screen and (min-width: 1000px)").matches) {
+      document.querySelector("body").style = `background-image: url(${bcImg})`;
+    }
+
+    return setData(newState);
+  }, []); //eslint-disable-line
 
   function userAuth() {
     if (inputMail.current.value === "" || inputPswd.current.value === "") {
@@ -53,83 +70,68 @@ function LogginSpace() {
         loader: true
       });
     }
-    return FetchFunction("/login", "POST", {
-      credentials: "include",
-      body: {
-        mail: inputMail.current.value,
-        pswd: inputPswd.current.value
-      }
-    })
-      .then(dataParsed => {
-        sessionStorage.setItem("UserToken", dataParsed.token);
-        return setRedirect(true);
-      })
-      .catch(error => {
-        setData({
-          error: true,
-          errorMessage: error.message
-        });
-      });
+    // return FetchFunction("/login", "POST", {
+    //   credentials: "include",
+    //   body: {
+    //     mail: inputMail.current.value,
+    //     pswd: inputPswd.current.value
+    //   }
+    // })
+    //   .then(dataParsed => {
+    //     sessionStorage.setItem("UserToken", dataParsed.token);
+    //     return setRedirect(true);
+    //   })
+    //   .catch(error => {
+    //     setData({
+    //       error: true,
+    //       errorMessage: error.message
+    //     });
+    //   });
   }
 
-  console.log(data.errorMessageMail);
 
   if (redirect) return <Redirect to="/feed"></Redirect>;
 
   return (
     <React.Fragment>
-      {data.loader && (
-        <ReactSVG
-          src={LoaderSvg}
-          style={{ backgroundColor: `${props => props.theme.backgroundColor}` }}
-        />
-      )}
-      {/* {data.error && (
-        <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
-          <p className="text-light">{data.errorMessage}</p>
-        </div>
-      )} */}
-      <LogginSpaceStyled className="loggin--space">
-        <h1>Welcome back.</h1>
-        <InputsForm
-          spaceName="loggin"
-          type="mail"
-          fieldName="mail"
-          placeholderInput="Email"
-          inputRef={inputMail}
-        />
-        {data.errorMail && (
-          <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
-            <p className="text-light">{data.errorMessageMail}</p>
+      <Header/>
+      <main>
+        <LogginSpaceStyled as="form">
+        <div className="form--connexion">
+            <div className="form--connexion--title">
+              <img src={GeometryImg} alt="img--connexion"></img>
+              <h2>Connexion</h2>
+            </div>
+            <div className="input--data--name">
+              <InputsForm
+                type="text"
+                inputId="inputMail"
+                inputRef={inputMail}
+                inputPlaceholder="Mail"
+                // inputCheckError={checkUserSub}
+                isError={data.error.inputMail ? data.error.inputMail : ""}
+              ></InputsForm>
+              <InputsForm
+                type="password"
+                inputId="inputPswd"
+                inputRef={inputPswd}
+                inputPlaceholder="Mot de passe"
+                // inputCheckError={checkUserSub}
+                isError={data.error.inputPswd ? data.error.inputPswd : ""}
+              ></InputsForm>
+            <div className="form--connexion--btn">
+              <input type="submit" disabled={data.btnDisabled} value="Connexion"></input>
+            </div>
+            <div className="form--connexion--link">
+              <p>J'ai déjà un compte</p>
+              <p>
+                <a href="/">Connexion</a>
+              </p>
+            </div>
           </div>
-        )}
-        <InputsForm
-          spaceName="loggin"
-          type="password"
-          fieldName="password"
-          placeholderInput="Password"
-          inputRef={inputPswd}
-        />
-        {data.error && (
-          <div className="form-group bg-danger rounded p-2 ml-1" style={{ width: "90%" }}>
-            <p className="text-light">{data.errorMessage}</p>
           </div>
-        )}
-        <p>
-          <small className="text-muted">6 characters minimum.</small>
-        </p>
-        <div className="forgot--password">
-          <p>
-            <Link to="/forgot_password_form">
-              {" "}
-              <strong>Forgot password ?</strong>
-            </Link>
-          </p>
-        </div>
-        <div className="loggin--space--btn">
-          <button onClick={() => userAuth()}>Log in</button>
-        </div>
-      </LogginSpaceStyled>
+        </LogginSpaceStyled>
+      </main>
     </React.Fragment>
   );
 }
