@@ -60,7 +60,6 @@ const SupportStyled = styled(GlobalContainer)`
       width: 18px;
     }
   }
-
   @media screen and (min-width: 300px) {
     .form--support--title {
       margin-bottom: 15%;
@@ -168,6 +167,7 @@ const SupportStyled = styled(GlobalContainer)`
     .form--support--title {
       justify-content: center;
       margin-bottom: 8%;
+  }
       .form--support--img {
         margin-right: 38px;
         width: 6%;
