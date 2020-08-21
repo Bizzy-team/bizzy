@@ -14,9 +14,10 @@ function LogginSpace() {
   const inputPswd = React.createRef(null);
   const [data, setData] = React.useState({
     loader: false,
+    btnDisabled: true,
     error: {}
   });
-  const [redirect, setRedirect] = React.useState(false);
+  // const [redirect, setRedirect] = React.useState(false);
 
   React.useEffect(() => {
     const arrInputId = ["inputMail", "inputPswd"];
@@ -36,66 +37,83 @@ function LogginSpace() {
     return setData(newState);
   }, []); //eslint-disable-line
 
-  function userAuth() {
-    if (inputMail.current.value === "" || inputPswd.current.value === "") {
-      return setData({
-        ...data,
-        error: true,
-        errorMessage: "Empty fields."
-      });
+  function userAuth(e) {
+    e.preventDefault();
+
+    const newState = { ...data };
+    const inputTargetId = e.target.id;
+
+    if (e.type === "change") {
+      if (!newState.error[inputTargetId].accessToChange) {
+        return;
+      }
     }
 
-    if (inputMail.current.value !== "" && inputPswd.current.value !== "") {
+    if (e.target.value === "") {
+      if (newState.error[inputTargetId].accessToChange) {
+        return updateState(inputTargetId, "Field empty");
+      }
+      return;
+    }
+
+    if (inputTargetId === "inputMail") {
       if (
         /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-          inputMail.current.value
+          e.target.value
         ) === false
-      ) {
-        return setData({
-          ...data,
-          errorMail: true,
-          // error: true,
-          errorMessageMail: "Wrong format email."
-          // errorMessage: "Wrong format email."
-        });
-      }
-      if (inputPswd.current.value.length < 6) {
-        return setData({
-          ...data,
-          error: true,
-          errorMessage: "Wrong password length."
-        });
-      }
-      setData({
-        loader: true
-      });
+      )
+        return updateState(inputTargetId, "Format mail incorrect");
     }
-    // return FetchFunction("/login", "POST", {
-    //   credentials: "include",
-    //   body: {
-    //     mail: inputMail.current.value,
-    //     pswd: inputPswd.current.value
-    //   }
-    // })
-    //   .then(dataParsed => {
-    //     sessionStorage.setItem("UserToken", dataParsed.token);
-    //     return setRedirect(true);
-    //   })
-    //   .catch(error => {
-    //     setData({
-    //       error: true,
-    //       errorMessage: error.message
-    //     });
-    //   });
+
+    if (inputTargetId === "inputPswd") {
+      if (e.target.value.length < 5)
+        return updateState(inputTargetId, "Le mot de passe doit faire 6 charactères");
+    }
+
+    if (!newState.error[inputTargetId].accessToChange) {
+      newState.error[inputTargetId].accessToChange = true;
+    }
+
+    newState.error[inputTargetId].error = false;
+    newState.error[inputTargetId].message = "";
+
+    if (inputMail.current.value !== "" && inputPswd.current.value !== "") {
+      const btnEnabled = Object.values(newState.error).every(el => !el.error);
+
+      if (btnEnabled) {
+        newState.btnDisabled = false;
+      } else {
+        newState.btnDisabled = true;
+      }
+    }
+
+    return setData(newState);
   }
 
-  if (redirect) return <Redirect to="/feed"></Redirect>;
+  function updateState(inputId, errorMessage) {
+    const newState = { ...data };
+
+    newState.error[inputId].error = true;
+    newState.error[inputId].message = errorMessage;
+
+    if (!newState.error[inputId].accessToChange) {
+      newState.error[inputId].accessToChange = true;
+    }
+
+    if (!newState.btnDisabled) {
+      newState.btnDisabled = true;
+    }
+
+    return setData(newState);
+  }
+
+  // if (redirect) return <Redirect to="/feed"></Redirect>;
 
   return (
     <React.Fragment>
       <Header />
       <main>
-        <LogginSpaceStyled as="form">
+        <LogginSpaceStyled as="form" btnDisabled={data.btnDisabled}>
           <div className="form--connexion">
             <div className="form--connexion--title">
               <img src={GeometryImg} alt="img--connexion"></img>
@@ -107,7 +125,7 @@ function LogginSpace() {
                 inputId="inputMail"
                 inputRef={inputMail}
                 inputPlaceholder="Mail"
-                // inputCheckError={checkUserSub}
+                inputCheckError={userAuth}
                 isError={data.error.inputMail ? data.error.inputMail : ""}
               ></InputsForm>
               <InputsForm
@@ -115,7 +133,7 @@ function LogginSpace() {
                 inputId="inputPswd"
                 inputRef={inputPswd}
                 inputPlaceholder="Mot de passe"
-                // inputCheckError={checkUserSub}
+                inputCheckError={userAuth}
                 isError={data.error.inputPswd ? data.error.inputPswd : ""}
               ></InputsForm>
               <div className="form--connexion--reset--pswd">
