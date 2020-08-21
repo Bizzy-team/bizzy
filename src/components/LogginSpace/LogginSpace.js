@@ -118,6 +118,11 @@ function LogginSpace() {
                 // inputCheckError={checkUserSub}
                 isError={data.error.inputPswd ? data.error.inputPswd : ""}
               ></InputsForm>
+              <div className="form--connexion--reset--pswd">
+                <p>
+                  J'ai oublié mon mot de passe. <a href="/">Réinitialiser</a>
+                </p>
+              </div>
               <div className="form--connexion--btn">
                 <input
                   type="submit"
@@ -126,9 +131,9 @@ function LogginSpace() {
                 ></input>
               </div>
               <div className="form--connexion--link">
-                <p>J'ai déjà un compte</p>
+                <p>Je n'ai pas de compte</p>
                 <p>
-                  <a href="/">Connexion</a>
+                  <a href="/">S'inscrire</a>
                 </p>
               </div>
             </div>
