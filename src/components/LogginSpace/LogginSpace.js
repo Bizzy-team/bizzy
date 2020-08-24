@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 // import { ReactSVG } from "react-svg";
 // import LoaderSvg from "../../img/loader.svg";
@@ -66,7 +66,7 @@ function LogginSpace() {
     }
 
     if (inputTargetId === "inputPswd") {
-      if (e.target.value.length < 5)
+      if (e.target.value.length < 6)
         return updateState(inputTargetId, "Le mot de passe doit faire 6 charactères");
     }
 
@@ -138,7 +138,7 @@ function LogginSpace() {
               ></InputsForm>
               <div className="form--connexion--reset--pswd">
                 <p>
-                  J'ai oublié mon mot de passe. <a href="/">Réinitialiser</a>
+                  J'ai oublié mon mot de passe. <Link to={"/forgot_password_form"}>Réinitialiser</Link>
                 </p>
               </div>
               <div className="form--connexion--btn">
@@ -151,7 +151,9 @@ function LogginSpace() {
               <div className="form--connexion--link">
                 <p>Je n'ai pas de compte</p>
                 <p>
-                  <a href="/">S'inscrire</a>
+                  <Link to={"/inscription"}>
+                    S'inscrire
+                  </Link>
                 </p>
               </div>
             </div>
