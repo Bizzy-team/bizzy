@@ -138,7 +138,8 @@ function LogginSpace() {
               ></InputsForm>
               <div className="form--connexion--reset--pswd">
                 <p>
-                  J'ai oublié mon mot de passe. <Link to={"/forgot_password_form"}>Réinitialiser</Link>
+                  J'ai oublié mon mot de passe.{" "}
+                  <Link to={"/forgot_password_form"}>Réinitialiser</Link>
                 </p>
               </div>
               <div className="form--connexion--btn">
@@ -151,9 +152,7 @@ function LogginSpace() {
               <div className="form--connexion--link">
                 <p>Je n'ai pas de compte</p>
                 <p>
-                  <Link to={"/inscription"}>
-                    S'inscrire
-                  </Link>
+                  <Link to={"/inscription"}>S'inscrire</Link>
                 </p>
               </div>
             </div>
