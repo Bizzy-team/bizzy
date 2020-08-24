@@ -79,7 +79,7 @@ function SignUpSpace() {
     }
 
     if (inputIdTarget === "inputPswd") {
-      if (e.target.value.length < 5)
+      if (e.target.value.length < 6)
         return updateState(inputIdTarget, "Le mot de passe doit faire 6 charactères");
 
       if (refInputCheckPswd.current.value !== "") {
