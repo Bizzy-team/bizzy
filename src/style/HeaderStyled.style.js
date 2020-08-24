@@ -41,11 +41,23 @@ const HeaderStyled = styled.header`
         padding-left: 22px;
         line-height: 0.6;
         height: 13vh;
+        p {
+          a {
+            color: ${props => props.theme.colorText};
+            text-decoration: none;
+          }
+        }
       }
     }
 
     .desktop--menu {
       display: none;
+      p {
+        a {
+          color: ${props => props.theme.colorText};
+          text-decoration: none;
+        }
+      }
     }
   }
 
