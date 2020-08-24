@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../../img/bizzy.png";
 import HeaderStyled from "../../style/HeaderStyled.style";
 import menuBurger from "../../img/menu_burger.svg";
@@ -29,16 +30,28 @@ function Header() {
         />
         {data.showMenu && (
           <div className="menu--options">
-            <p>Connexion</p>
-            <p>Inscription</p>
-            <p>Support</p>
+            <p>
+              <Link to={"/connexion"}>Connexion</Link>
+            </p>
+            <p>
+              <Link to={"/inscription"}>Inscription</Link>
+            </p>
+            <p>
+              <Link to={"/support"}>Support</Link>
+            </p>
           </div>
         )}
       </div>
       <div className="desktop--menu">
-        <p className="menu--options--desktop--support">Support</p>
-        <p className="menu--options--desktop--connexion">Connexion</p>
-        <p className="menu--options--desktop--inscription">Inscription</p>
+        <p className="menu--options--desktop--support">
+          <Link to={"/support"}>Support</Link>
+        </p>
+        <p className="menu--options--desktop--connexion">
+          <Link to={"/connexion"}>Connexion</Link>
+        </p>
+        <p className="menu--options--desktop--inscription">
+          <Link to={"/inscription"}>Inscription</Link>
+        </p>
       </div>
     </HeaderStyled>
   );
