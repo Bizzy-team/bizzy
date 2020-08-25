@@ -61,7 +61,7 @@ function UserProfile() {
           </div>
           <div className="profile--user--data--form">
             <div className="input--data--name">
-            <InputsForm
+              <InputsForm
                 type="text"
                 inputId="inputFirstName"
                 // inputRef={inputFirstName}
@@ -79,43 +79,43 @@ function UserProfile() {
               ></InputsForm>
             </div>
             <InputsForm
-                type="mail"
-                inputId="inputMail"
-                // inputRef={inputMail}
-                inputPlaceholder="adresse@gmail.com"
-                // inputCheckError={userAuth}
-                isError={data.error.inputMail ? data.error.inputMail : ""}
-              ></InputsForm>
-              <InputsForm
-                type="text"
-                inputId="inputJob"
-                // inputRef={inputJob}
-                inputPlaceholder="Votre poste"
-                // inputCheckError={userAuth}
-                isError={data.error.inputJob ? data.error.inputJob : ""}
-              ></InputsForm>
-              <InputsForm
-                type="text"
-                inputId="inputCity"
-                // inputRef={inputCity}
-                inputPlaceholder="Votre ville"
-                // inputCheckError={userAuth}
-                isError={data.error.inputCity ? data.error.inputCity : ""}
-              ></InputsForm>
-              <div className="profile--user--about">
-                <textarea
-                  id="inputMessage"
-                  rows="6"
-                  cols="34"
-                  placeholder="Ajoutez une description à votre profil :)."
-                  // ref={refInputMessage}
-                  // onBlur={checkUserInfos}
-                  // onChange={checkUserInfos}
-                ></textarea>
-              </div>
-              <div className="profile--user--btn">
-                <input type="button" value="Modifier vos données"></input>
-              </div>
+              type="mail"
+              inputId="inputMail"
+              // inputRef={inputMail}
+              inputPlaceholder="adresse@gmail.com"
+              // inputCheckError={userAuth}
+              isError={data.error.inputMail ? data.error.inputMail : ""}
+            ></InputsForm>
+            <InputsForm
+              type="text"
+              inputId="inputJob"
+              // inputRef={inputJob}
+              inputPlaceholder="Votre poste"
+              // inputCheckError={userAuth}
+              isError={data.error.inputJob ? data.error.inputJob : ""}
+            ></InputsForm>
+            <InputsForm
+              type="text"
+              inputId="inputCity"
+              // inputRef={inputCity}
+              inputPlaceholder="Votre ville"
+              // inputCheckError={userAuth}
+              isError={data.error.inputCity ? data.error.inputCity : ""}
+            ></InputsForm>
+            <div className="profile--user--about">
+              <textarea
+                id="inputMessage"
+                rows="6"
+                cols="34"
+                placeholder="Ajoutez une description à votre profil :)."
+                // ref={refInputMessage}
+                // onBlur={checkUserInfos}
+                // onChange={checkUserInfos}
+              ></textarea>
+            </div>
+            <div className="profile--user--btn">
+              <input type="button" value="Modifier vos données"></input>
+            </div>
           </div>
         </section>
         <section className="profile--security">
@@ -139,11 +139,10 @@ function UserProfile() {
             </div>
           </div>
           <div className="user--cards">
+            <p>Vous n'avez jamais posté quelque chose ici.</p>
             <p>
-              Vous n'avez jamais posté quelque chose ici.
-            </p>
-            <p>
-              N'hésitez pas à proposer des activités à la communauté Bizzy, créez votre première card !
+              N'hésitez pas à proposer des activités à la communauté Bizzy, créez votre
+              première card !
             </p>
             <div className="user--cards--btn">
               <input type="button" value="New Card"></input>
