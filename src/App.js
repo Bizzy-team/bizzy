@@ -87,11 +87,7 @@ function App() {
             ></Route>
             <Route exact path="/reset_pswd_form" component={ResetPswd} />
             <Route exact path="/feed" render={() => availableToken(Feed)} />
-            <Route
-              exact
-              path="/user_profile"
-              render={() => availableToken(UserProfile)}
-            />
+            <Route exact path="/user_profile" component={UserProfile} />
             <Route
               exact
               path="/createYourCard/:icon"
