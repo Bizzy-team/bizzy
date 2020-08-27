@@ -347,6 +347,39 @@ const UserProfileStyled = styled(GlobalContainer)`
       }
     }
   }
+
+  @media screen and (min-width: 1200px) {
+    .profile--user--data {
+      height: 126vh;
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    .profile--user--data {
+      height: 90vh;
+    }
+    .profile--about--account {
+      .profile--security,
+      .profile--user--cards {
+        .profile--security--title,
+        .profile--user--cards--title {
+          h2 {
+            font-size: 1.6em;
+          }
+        }
+      }
+      .profile--security {
+        .profile--security--buttons {
+          padding: 40px;
+        }
+      }
+      .profile--user--cards {
+        .user--cards {
+          height: 28vh;
+        }
+      }
+    }
+  }
 `;
 
 export default UserProfileStyled;
