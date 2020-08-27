@@ -113,6 +113,14 @@ const UserProfileStyled = styled(GlobalContainer)`
         font-size: 1.3em;
         font-family: "CeraPro Bold";
       }
+      .profile--user--cards--img {
+        .icon--arrow--right, .icon--arrow--left {
+          display: none;
+        }
+      }
+      .line {
+        display: none;
+      }
     }
     .user--cards {
       text-align: center;
@@ -232,9 +240,12 @@ const UserProfileStyled = styled(GlobalContainer)`
   }
 
   @media screen and (min-width: 722px) {
-    .profile--security, .profile--user--cards {
-      .profile--security--title, .profile--user--cards--title {
-        .profile--security--img, .profile--user--cards--img {
+    .profile--security,
+    .profile--user--cards {
+      .profile--security--title,
+      .profile--user--cards--title {
+        .profile--security--img,
+        .profile--user--cards--img {
           img {
             width: 6vw;
           }
@@ -248,7 +259,7 @@ const UserProfileStyled = styled(GlobalContainer)`
     margin-top: 12%;
     .profile--user--data {
       width: 71vw;
-      height: 114vh;
+      height: 116vh;
       margin-top: 0;
       margin-right: 6%;
       box-shadow: 0px 5px 5px 5px rgba(247, 246, 247, 1);
@@ -273,7 +284,7 @@ const UserProfileStyled = styled(GlobalContainer)`
       .profile--security {
         .profile--security--title {
           h2 {
-            font-size: 1.6em;
+            font-size: 1.3em;
           }
           img {
             width: 4vw;
@@ -290,6 +301,47 @@ const UserProfileStyled = styled(GlobalContainer)`
           border: solid 3px rgba(247, 246, 247, 1);
           border-bottom-width: 8px;
         }
+      }
+    }
+    .profile--user--cards {
+      position: relative;
+      .profile--user--cards--title {
+        h2 {
+          font-size: 1.3em;
+        }
+        .profile--user--cards--img {
+          display: flex;
+          .icon--cards {
+            display: none;
+          }
+          .icon--arrow--right, .icon--arrow--left {
+            display: block;
+            width: 2vw;
+          }
+          .icon--arrow--left {
+            transform: rotate(180deg);
+            margin-right: 10px;
+          }
+        }
+      }
+      .line {
+        display: block;
+        border-left: 1px solid ${props => props.theme.colorLola};
+        position: absolute;
+        right: 106%;
+        height: 183px;
+        box-shadow: 0px 5px 5px 1px rgba(247, 246, 247, .7);
+      }
+      .user--cards {
+        width: 39vw;
+        height: 32vh;
+        margin-top: 0;
+        margin-right: 6%;
+        padding: 20px;
+        box-shadow: 0px 5px 5px 5px rgba(247, 246, 247, 1);
+        border-radius: 20px;
+        border: solid 3px rgba(247, 246, 247, 1);
+        border-bottom-width: 8px;
       }
     }
   }
