@@ -137,7 +137,11 @@ function UserProfile() {
             <div className="profile--user--cards--title">
               <h2>Vos dernières annonces</h2>
               <div className="profile--user--cards--img">
-                <img src={IconSectionCards} alt="icon--section--cards" className="icon--cards"></img>
+                <img
+                  src={IconSectionCards}
+                  alt="icon--section--cards"
+                  className="icon--cards"
+                ></img>
                 <img src={Arrow} alt="icon--arrow" className="icon--arrow--left"></img>
                 <img src={Arrow} alt="icon--arrow" className="icon--arrow--right"></img>
               </div>

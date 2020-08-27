@@ -114,7 +114,8 @@ const UserProfileStyled = styled(GlobalContainer)`
         font-family: "CeraPro Bold";
       }
       .profile--user--cards--img {
-        .icon--arrow--right, .icon--arrow--left {
+        .icon--arrow--right,
+        .icon--arrow--left {
           display: none;
         }
       }
@@ -314,7 +315,8 @@ const UserProfileStyled = styled(GlobalContainer)`
           .icon--cards {
             display: none;
           }
-          .icon--arrow--right, .icon--arrow--left {
+          .icon--arrow--right,
+          .icon--arrow--left {
             display: block;
             width: 2vw;
           }
@@ -330,7 +332,7 @@ const UserProfileStyled = styled(GlobalContainer)`
         position: absolute;
         right: 106%;
         height: 183px;
-        box-shadow: 0px 5px 5px 1px rgba(247, 246, 247, .7);
+        box-shadow: 0px 5px 5px 1px rgba(247, 246, 247, 0.7);
       }
       .user--cards {
         width: 39vw;
