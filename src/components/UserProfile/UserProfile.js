@@ -7,6 +7,7 @@ import bcImg from "../../img/bc_desktop.svg";
 import IconSettings from "../../img/settings_mobile.svg";
 import IconSectionCards from "../../img/icon_cards.svg";
 import IconAdd from "../../img/icon_add.svg";
+import Arrow from "../../img/arrow.svg";
 
 // import Footer from "../Footer/Footer";
 
@@ -136,9 +137,12 @@ function UserProfile() {
             <div className="profile--user--cards--title">
               <h2>Vos dernières annonces</h2>
               <div className="profile--user--cards--img">
-                <img src={IconSectionCards} alt="icon--section--cards"></img>
+                <img src={IconSectionCards} alt="icon--section--cards" className="icon--cards"></img>
+                <img src={Arrow} alt="icon--arrow" className="icon--arrow--left"></img>
+                <img src={Arrow} alt="icon--arrow" className="icon--arrow--right"></img>
               </div>
             </div>
+            <div className="line"></div>
             <div className="user--cards">
               <p>Vous n'avez jamais posté quelque chose ici.</p>
               <p>
