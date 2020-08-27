@@ -33,9 +33,9 @@ function UserProfile() {
 
     arrInputId.forEach(element => (newState.error[element] = { ...obj }));
 
-    if (window.matchMedia("screen and (min-width: 1000px)").matches) {
-      document.querySelector("body").style = `background-image: url(${bcImg})`;
-    }
+    // if (window.matchMedia("screen and (min-width: 1000px)").matches) {
+    //   document.querySelector("body").style = `background-image: url(${bcImg})`;
+    // }
 
     return setData(newState);
   }, []); //eslint-disable-line
@@ -118,40 +118,42 @@ function UserProfile() {
             </div>
           </div>
         </section>
-        <section className="profile--security">
-          <div className="profile--security--title">
-            <h2>Connexion et sécurité</h2>
-            <div className="profile--security--img">
-              <img src={IconSettings} alt="settings--icon"></img>
-            </div>
-          </div>
-          <div className="profile--security--buttons">
-            <input type="button" value="Changer mon mot de passe"></input>
-            <input type="button" value="Supprimer mon profil"></input>
-          </div>
-        </section>
-        {/* Si les cards sont vides */}
-        <section className="profile--user--cards">
-          <div className="profile--user--cards--title">
-            <h2>Vos dernières annonces</h2>
-            <div className="profile--user--cards--img">
-              <img src={IconSectionCards} alt="icon--section--cards"></img>
-            </div>
-          </div>
-          <div className="user--cards">
-            <p>Vous n'avez jamais posté quelque chose ici.</p>
-            <p>
-              N'hésitez pas à proposer des activités à la communauté Bizzy, créez votre
-              première card !
-            </p>
-            <div className="user--cards--btn">
-              <input type="button" value="New Card"></input>
-              <div>
-                <img src={IconAdd} alt="add--card"></img>
+        <div className="profile--about--account">
+          <section className="profile--security">
+            <div className="profile--security--title">
+              <h2>Connexion et sécurité</h2>
+              <div className="profile--security--img">
+                <img src={IconSettings} alt="settings--icon"></img>
               </div>
             </div>
-          </div>
-        </section>
+            <div className="profile--security--buttons">
+              <input type="button" value="Changer mon mot de passe"></input>
+              <input type="button" value="Supprimer mon profil"></input>
+            </div>
+          </section>
+          {/* Si les cards sont vides */}
+          <section className="profile--user--cards">
+            <div className="profile--user--cards--title">
+              <h2>Vos dernières annonces</h2>
+              <div className="profile--user--cards--img">
+                <img src={IconSectionCards} alt="icon--section--cards"></img>
+              </div>
+            </div>
+            <div className="user--cards">
+              <p>Vous n'avez jamais posté quelque chose ici.</p>
+              <p>
+                N'hésitez pas à proposer des activités à la communauté Bizzy, créez votre
+                première card !
+              </p>
+              <div className="user--cards--btn">
+                <input type="button" value="New Card"></input>
+                <div>
+                  <img src={IconAdd} alt="add--card"></img>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </UserProfileStyled>
       {/* <Footer /> */}
     </>
