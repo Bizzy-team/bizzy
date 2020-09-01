@@ -29,9 +29,14 @@ const UserProfileStyled = styled(GlobalContainer)`
     .profile--user--data--form {
       span {
         opacity: 1;
+        color: ${props =>
+          props.isDisabled && props.theme.colorText
+        }
       }
       input {
-        border-color: rgba(0, 0, 0, 0.31);
+        border-color: ${props =>
+          props.isDisabled ? "rgba(0, 0, 0, 0.31)" : props.theme.colorSecondary
+        }
       }
       .input--data--name {
         display: flex;
@@ -259,10 +264,9 @@ const UserProfileStyled = styled(GlobalContainer)`
     display: flex;
     margin-top: 12%;
     .profile--user--data {
-      width: 71vw;
-      height: 116vh;
+      width: 42vw;
       margin-top: 0;
-      margin-right: 6%;
+      margin-right: 13%;
       box-shadow: 0px 5px 5px 5px rgba(247, 246, 247, 1);
       border-radius: 20px;
       border: solid 3px rgba(247, 246, 247, 1);
@@ -355,8 +359,10 @@ const UserProfileStyled = styled(GlobalContainer)`
   }
 
   @media screen and (min-width: 1400px) {
+    margin-top: 9%;
     .profile--user--data {
-      height: 90vh;
+      width: 28vw;
+      height: 83vh;
     }
     .profile--about--account {
       .profile--security,
