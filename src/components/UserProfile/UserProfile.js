@@ -14,7 +14,8 @@ import Arrow from "../../img/arrow.svg";
 function UserProfile() {
   const [data, setData] = React.useState({
     btnDisabled: true,
-    error: {}
+    error: {},
+    isDisabled: true
   });
 
   React.useEffect(() => {
@@ -34,12 +35,21 @@ function UserProfile() {
 
     arrInputId.forEach(element => (newState.error[element] = { ...obj }));
 
-    // if (window.matchMedia("screen and (min-width: 1000px)").matches) {
-    //   document.querySelector("body").style = `background-image: url(${bcImg})`;
-    // }
-
     return setData(newState);
   }, []); //eslint-disable-line
+
+  function editData() {
+    const newState = {...data};
+
+    if (data.isDisabled) {
+      newState.isDisabled = false;
+      return setData(newState);
+    }
+
+    newState.isDisabled = true;
+
+    return setData(newState);
+  }
 
   // function addInput(e) {
   //   if (e.keyCode === 13) {
@@ -50,7 +60,7 @@ function UserProfile() {
   return (
     <>
       <Header />
-      <UserProfileStyled as="main">
+      <UserProfileStyled as="main" isDisabled={data.isDisabled}>
         <section className="profile--user--data">
           <div className="profile--user--data--title">
             <div className="profile--user--data--img">
@@ -68,6 +78,7 @@ function UserProfile() {
                 // inputRef={inputFirstName}
                 inputPlaceholder="Katrine"
                 // inputCheckError={userAuth}
+                isDisabled={data.isDisabled}
                 isError={data.error.inputFirstName ? data.error.inputFirstName : ""}
               ></InputsForm>
               <InputsForm
@@ -76,6 +87,7 @@ function UserProfile() {
                 // inputRef={inputLastName}
                 inputPlaceholder="Moreau"
                 // inputCheckError={userAuth}
+                isDisabled={data.isDisabled}
                 isError={data.error.inputLastName ? data.error.inputLastName : ""}
               ></InputsForm>
             </div>
@@ -85,6 +97,7 @@ function UserProfile() {
               // inputRef={inputMail}
               inputPlaceholder="adresse@gmail.com"
               // inputCheckError={userAuth}
+              isDisabled={data.isDisabled}
               isError={data.error.inputMail ? data.error.inputMail : ""}
             ></InputsForm>
             <InputsForm
@@ -93,6 +106,7 @@ function UserProfile() {
               // inputRef={inputJob}
               inputPlaceholder="Votre poste"
               // inputCheckError={userAuth}
+              isDisabled={data.isDisabled}
               isError={data.error.inputJob ? data.error.inputJob : ""}
             ></InputsForm>
             <InputsForm
@@ -101,6 +115,7 @@ function UserProfile() {
               // inputRef={inputCity}
               inputPlaceholder="Votre ville"
               // inputCheckError={userAuth}
+              isDisabled={data.isDisabled}
               isError={data.error.inputCity ? data.error.inputCity : ""}
             ></InputsForm>
             <div className="profile--user--about">
@@ -109,13 +124,14 @@ function UserProfile() {
                 rows="6"
                 cols="34"
                 placeholder="Ajoutez une description à votre profil :)."
+                disabled={data.isDisabled}
                 // ref={refInputMessage}
                 // onBlur={checkUserInfos}
                 // onChange={checkUserInfos}
               ></textarea>
             </div>
             <div className="profile--user--btn">
-              <input type="button" value="Modifier vos données"></input>
+              <input type="button" value="Modifier vos données" onClick={editData}></input>
             </div>
           </div>
         </section>
