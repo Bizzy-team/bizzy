@@ -18,6 +18,7 @@ const InputsForm = styled(GlobalContainer)`
     color: ${props => props.theme.colorText};
     border-color: ${props =>
       props.isError ? props.theme.colorRed : props.theme.colorLola};
+    background-color: ${props => props.theme.colorPrincipal};
     /* padding: 26px 0 0 10px; */
 
     &:focus {
