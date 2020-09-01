@@ -29,14 +29,11 @@ const UserProfileStyled = styled(GlobalContainer)`
     .profile--user--data--form {
       span {
         opacity: 1;
-        color: ${props =>
-          props.isDisabled && props.theme.colorText
-        }
+        color: ${props => props.isDisabled && props.theme.colorText};
       }
       input {
         border-color: ${props =>
-          props.isDisabled ? "rgba(0, 0, 0, 0.31)" : props.theme.colorSecondary
-        }
+          props.isDisabled ? "rgba(0, 0, 0, 0.31)" : props.theme.colorSecondary};
       }
       .input--data--name {
         display: flex;

@@ -39,7 +39,7 @@ function UserProfile() {
   }, []); //eslint-disable-line
 
   function editData() {
-    const newState = {...data};
+    const newState = { ...data };
 
     if (data.isDisabled) {
       newState.isDisabled = false;
@@ -131,7 +131,11 @@ function UserProfile() {
               ></textarea>
             </div>
             <div className="profile--user--btn">
-              <input type="button" value="Modifier vos données" onClick={editData}></input>
+              <input
+                type="button"
+                value="Modifier vos données"
+                onClick={editData}
+              ></input>
             </div>
           </div>
         </section>
