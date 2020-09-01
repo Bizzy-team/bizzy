@@ -9,6 +9,7 @@ function InputsForm(props) {
         type={props.type}
         id={props.inputId}
         ref={props.inputRef}
+        disabled={props.isDisabled}
         onBlur={props.inputCheckError}
         onChange={props.inputCheckError}
         required
