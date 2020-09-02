@@ -273,7 +273,10 @@ const UserProfileStyled = styled(GlobalContainer)`
   @media screen and (min-width: 1000px) {
     display: flex;
     margin-top: 12%;
+    align-items: center;
+    justify-content: space-between;
     .profile--user--data {
+      padding-top: 20px;
       width: 42vw;
       margin-top: 0;
       margin-right: 13%;
@@ -283,7 +286,7 @@ const UserProfileStyled = styled(GlobalContainer)`
       border-bottom-width: 8px;
       .profile--user--data--title {
         margin-bottom: 30px;
-        padding-top: 20px;
+        /* padding-top: 20px; */
         .profile--user--data--img {
           width: 10%;
         }
@@ -293,6 +296,16 @@ const UserProfileStyled = styled(GlobalContainer)`
       }
       .profile--user--about {
         padding: 10px;
+        textarea {
+          height: 75px;
+        }
+      }
+      .profile--user--data--form {
+        .profile--user--btn {
+          input {
+            margin-bottom: 3%;
+          }
+        }
       }
     }
     .profile--about--account {
