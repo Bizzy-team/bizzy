@@ -76,17 +76,13 @@ const UserProfileStyled = styled(GlobalContainer)`
           margin-bottom: 15%;
         }
         .profile--user--btn--edit {
-          display: ${props =>
-            props.isDisabled ? "block" : "none"
-          };
+          display: ${props => (props.isDisabled ? "block" : "none")};
         }
         .profile--user--btn--confirm {
           display: flex;
           padding: 0 8px;
           .profile--user--btn--save, .profile--user--btn--cancel {
-            display: ${props =>
-              props.isDisabled ? "none" : "block"
-            };
+            display: ${props => (props.isDisabled ? "none" : "block")};
             width: 50%;
             margin-right: 10px;
           }

@@ -47,12 +47,12 @@ function UserProfile() {
   }
 
   function confirmEdit() {
-    const newState = {...data};
+    const newState = { ...data };
 
     newState.isDisabled = true;
     // Fetch POST data if changed
 
-    return setData(newState)
+    return setData(newState);
   }
 
   // function addInput(e) {
@@ -147,13 +147,13 @@ function UserProfile() {
                   value="Sauvegarder"
                   className="profile--user--btn--save"
                   onClick={confirmEdit}
-                  ></input>
+                ></input>
                 <input
                   type="button"
                   value="Annuler"
                   className="profile--user--btn--cancel"
                   onClick={confirmEdit}
-                  ></input>
+                ></input>
               </div>
             </div>
           </div>
