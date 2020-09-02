@@ -1,6 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
-import { Route, BrowserRouter, Link } from "react-router-dom";
+import { Route, BrowserRouter, Link, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import ErrorMessageTokenStyled from "./style/ErrorMessageTokenStyled.style";
 import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
@@ -65,11 +65,10 @@ function App() {
   }
 
   return (
-    <React.Fragment>
       <BrowserRouter>
         <ThemeProvider theme={{ ...variables }}>
           <GlobalStyle></GlobalStyle>
-          <>
+          <Switch>
             <Route exact path="/" render={() => unavailableToken(StartPage)}></Route>
             <Route exact path="/inscription" component={SignUpSpace}></Route>
             <Route exact path="/connexion" component={LogginSpace}></Route>
@@ -87,16 +86,15 @@ function App() {
             ></Route>
             <Route exact path="/reset_pswd_form" component={ResetPswd} />
             <Route exact path="/feed" render={() => availableToken(Feed)} />
-            <Route exact path="/user_profile" component={UserProfile} />
-            <Route
+            <Route strict path="/:name" component={UserProfile} />
+          </Switch>
+            {/* <Route
               exact
               path="/createYourCard/:icon"
               render={routeProps => availableToken(ShareYourMood, routeProps)}
-            />
-          </>
+            /> */}
         </ThemeProvider>
       </BrowserRouter>
-    </React.Fragment>
   );
 }
 
