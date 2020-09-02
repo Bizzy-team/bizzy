@@ -41,14 +41,18 @@ function UserProfile() {
   function editData() {
     const newState = { ...data };
 
-    if (data.isDisabled) {
-      newState.isDisabled = false;
-      return setData(newState);
-    }
-
-    newState.isDisabled = true;
+    newState.isDisabled = false;
 
     return setData(newState);
+  }
+
+  function confirmEdit() {
+    const newState = {...data};
+
+    newState.isDisabled = true;
+    // Fetch POST data if changed
+
+    return setData(newState)
   }
 
   // function addInput(e) {
@@ -134,8 +138,23 @@ function UserProfile() {
               <input
                 type="button"
                 value="Modifier vos données"
+                className="profile--user--btn--edit"
                 onClick={editData}
               ></input>
+              <div className="profile--user--btn--confirm">
+                <input
+                  type="button"
+                  value="Sauvegarder"
+                  className="profile--user--btn--save"
+                  onClick={confirmEdit}
+                  ></input>
+                <input
+                  type="button"
+                  value="Annuler"
+                  className="profile--user--btn--cancel"
+                  onClick={confirmEdit}
+                  ></input>
+              </div>
             </div>
           </div>
         </section>
