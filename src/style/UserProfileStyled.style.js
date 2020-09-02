@@ -29,7 +29,8 @@ const UserProfileStyled = styled(GlobalContainer)`
     .profile--user--data--form {
       span {
         opacity: 1;
-        color: ${props => props.isDisabled && props.theme.colorText};
+        /* color: ${props => props.isDisabled && props.theme.colorText}; */
+        color: ${props => props.theme.colorText};
       }
       input {
         border-color: ${props =>
@@ -73,6 +74,22 @@ const UserProfileStyled = styled(GlobalContainer)`
           width: 100%;
           font-size: 0.9em;
           margin-bottom: 15%;
+        }
+        .profile--user--btn--edit {
+          display: ${props =>
+            props.isDisabled ? "block" : "none"
+          };
+        }
+        .profile--user--btn--confirm {
+          display: flex;
+          padding: 0 8px;
+          .profile--user--btn--save, .profile--user--btn--cancel {
+            display: ${props =>
+              props.isDisabled ? "none" : "block"
+            };
+            width: 50%;
+            margin-right: 10px;
+          }
         }
       }
     }
