@@ -12,6 +12,13 @@ import Arrow from "../../img/arrow.svg";
 // import Footer from "../Footer/Footer";
 
 function UserProfile() {
+  const inputFirstName = React.useRef(null);
+  const inputLastName = React.useRef(null);
+  const inputMail = React.useRef(null);
+  const inputJob = React.useRef(null);
+  const inputCity = React.useRef(null);
+  const refInputMessage = React.useRef(null);
+
   const [data, setData] = React.useState({
     btnDisabled: true,
     error: {},
@@ -24,7 +31,8 @@ function UserProfile() {
       "inputLastName",
       "inputMail",
       "inputJob",
-      "inputCity"
+      "inputCity",
+      "inputMessage"
     ];
     const newState = { ...data };
     const obj = {
@@ -55,6 +63,76 @@ function UserProfile() {
     return setData(newState);
   }
 
+  function checkUserData(e) {
+    e.preventDefault();
+
+    const newState = { ...data };
+    const inputIdTarget = e.target.id;
+
+    if (e.type === "change") {
+      if (!newState.error[inputIdTarget].accessToChange) {
+        return;
+      }
+    }
+
+    if (e.target.value === "") {
+      if (newState.error[inputIdTarget].accessToChange) {
+        return updateState(inputIdTarget, "Champs vide.");
+      }
+      return;
+    }
+
+    if (inputIdTarget === "inputMail") {
+      if (
+        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          e.target.value
+        ) === false
+      )
+        return updateState(inputIdTarget, "Format mail incorrect");
+    }
+
+    if (!newState.error[inputIdTarget].accessToChange) {
+      newState.error[inputIdTarget].accessToChange = true;
+    }
+    newState.error[inputIdTarget].error = false;
+    newState.error[inputIdTarget].message = "";
+
+    if (
+      inputFirstName.current.value !== "" ||
+      inputLastName.current.value !== "" ||
+      inputMail.current.value !== "" ||
+      inputJob.current.value !== "" ||
+      inputCity.current.value !== ""
+    ) {
+      const btnEnabled = Object.values(newState.error).every(el => !el.error);
+
+      if (btnEnabled) {
+        newState.btnDisabled = false;
+      } else {
+        newState.btnDisabled = true;
+      }
+    }
+
+    return setData(newState);
+  }
+
+  function updateState(inputId, errorMessage) {
+    const newState = { ...data };
+
+    newState.error[inputId].error = true;
+    newState.error[inputId].message = errorMessage;
+
+    if (!newState.error[inputId].accessToChange) {
+      newState.error[inputId].accessToChange = true;
+    }
+
+    if (!newState.btnDisabled) {
+      newState.btnDisabled = true;
+    }
+
+    return setData(newState);
+  }
+
   // function addInput(e) {
   //   if (e.keyCode === 13) {
   //     document.activeElement.blur();
@@ -64,7 +142,11 @@ function UserProfile() {
   return (
     <>
       <Header />
-      <UserProfileStyled as="main" isDisabled={data.isDisabled}>
+      <UserProfileStyled
+        as="main"
+        isDisabled={data.isDisabled}
+        btnDisabled={data.btnDisabled}
+      >
         <section className="profile--user--data">
           <div className="profile--user--data--title">
             <div className="profile--user--data--img">
@@ -79,18 +161,18 @@ function UserProfile() {
               <InputsForm
                 type="text"
                 inputId="inputFirstName"
-                // inputRef={inputFirstName}
+                inputRef={inputFirstName}
                 inputPlaceholder="Katrine"
-                // inputCheckError={userAuth}
+                inputCheckError={checkUserData}
                 isDisabled={data.isDisabled}
                 isError={data.error.inputFirstName ? data.error.inputFirstName : ""}
               ></InputsForm>
               <InputsForm
                 type="text"
                 inputId="inputLastName"
-                // inputRef={inputLastName}
+                inputRef={inputLastName}
                 inputPlaceholder="Moreau"
-                // inputCheckError={userAuth}
+                inputCheckError={checkUserData}
                 isDisabled={data.isDisabled}
                 isError={data.error.inputLastName ? data.error.inputLastName : ""}
               ></InputsForm>
@@ -98,27 +180,27 @@ function UserProfile() {
             <InputsForm
               type="mail"
               inputId="inputMail"
-              // inputRef={inputMail}
+              inputRef={inputMail}
               inputPlaceholder="adresse@gmail.com"
-              // inputCheckError={userAuth}
+              inputCheckError={checkUserData}
               isDisabled={data.isDisabled}
               isError={data.error.inputMail ? data.error.inputMail : ""}
             ></InputsForm>
             <InputsForm
               type="text"
               inputId="inputJob"
-              // inputRef={inputJob}
+              inputRef={inputJob}
               inputPlaceholder="Votre poste"
-              // inputCheckError={userAuth}
+              inputCheckError={checkUserData}
               isDisabled={data.isDisabled}
               isError={data.error.inputJob ? data.error.inputJob : ""}
             ></InputsForm>
             <InputsForm
               type="text"
               inputId="inputCity"
-              // inputRef={inputCity}
+              inputRef={inputCity}
               inputPlaceholder="Votre ville"
-              // inputCheckError={userAuth}
+              inputCheckError={checkUserData}
               isDisabled={data.isDisabled}
               isError={data.error.inputCity ? data.error.inputCity : ""}
             ></InputsForm>
@@ -129,9 +211,9 @@ function UserProfile() {
                 cols="34"
                 placeholder="Ajoutez une description à votre profil :)."
                 disabled={data.isDisabled}
-                // ref={refInputMessage}
-                // onBlur={checkUserInfos}
-                // onChange={checkUserInfos}
+                ref={refInputMessage}
+                onBlur={checkUserData}
+                onChange={checkUserData}
               ></textarea>
             </div>
             <div className="profile--user--btn">
@@ -145,6 +227,7 @@ function UserProfile() {
                 <input
                   type="button"
                   value="Sauvegarder"
+                  disabled={data.btnDisabled}
                   className="profile--user--btn--save"
                   onClick={confirmEdit}
                 ></input>
