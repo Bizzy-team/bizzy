@@ -286,7 +286,6 @@ const UserProfileStyled = styled(GlobalContainer)`
       border-bottom-width: 8px;
       .profile--user--data--title {
         margin-bottom: 30px;
-        /* padding-top: 20px; */
         .profile--user--data--img {
           width: 10%;
         }
@@ -376,16 +375,17 @@ const UserProfileStyled = styled(GlobalContainer)`
   }
 
   @media screen and (min-width: 1200px) {
+    margin-top: 9%;
     .profile--user--data {
-      height: 126vh;
+      padding-top: 4px;
     }
   }
 
   @media screen and (min-width: 1400px) {
-    margin-top: 9%;
+    margin-top: 12%;
     .profile--user--data {
       width: 28vw;
-      height: 83vh;
+      padding-top: 20px;
     }
     .profile--about--account {
       .profile--security,
