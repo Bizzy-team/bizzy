@@ -86,7 +86,13 @@ const UserProfileStyled = styled(GlobalContainer)`
             width: 50%;
             margin-right: 10px;
           }
+          .profile--user--btn--save {
+            opacity: ${props => (props.btnDisabled ? 0.5 : 1)};
+          }
         }
+      }
+      .error--message {
+        padding: 0 7px;
       }
     }
   }
@@ -111,7 +117,6 @@ const UserProfileStyled = styled(GlobalContainer)`
         border-radius: 10px;
         width: 100%;
         font-size: 0.9em;
-        opacity: ${props => (props.btnDisabled ? 0.5 : 1)};
         margin-bottom: 5%;
       }
     }
@@ -152,7 +157,6 @@ const UserProfileStyled = styled(GlobalContainer)`
         border-radius: 10px;
         width: 100%;
         font-size: 0.9em;
-        opacity: ${props => (props.btnDisabled ? 0.5 : 1)};
         margin-bottom: 15%;
       }
       div {
