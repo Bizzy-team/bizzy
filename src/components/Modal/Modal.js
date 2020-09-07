@@ -16,11 +16,7 @@ function Modal() {
   });
 
   React.useEffect(() => {
-    const arrInputId = [
-      "inputOldPswd",
-      "inputNewPswd",
-      "inputCheckPswd"
-    ];
+    const arrInputId = ["inputOldPswd", "inputNewPswd", "inputCheckPswd"];
     const newState = { ...data };
     const obj = {
       error: false,
@@ -35,56 +31,58 @@ function Modal() {
 
   return (
     <ModalStyled as="section">
-      <div className="pswd--title">
-        <div className="pswd--icon">
-          <img src={GeometryImg} alt="icon--title"></img>
+      <div className="pswd--reset--content">
+        <div className="pswd--title">
+          <div className="pswd--icon">
+            <img src={GeometryImg} alt="icon--title"></img>
+          </div>
+          <h2>Changer le mot de passe</h2>
+          <img src={CloseArrow} alt="icon--close" className="close--arrow"></img>
         </div>
-        <h2>Changer le mot de passe</h2>
-        <img src={CloseArrow} alt="icon--close" className="close--arrow"></img>
-      </div>
-      <div>
-        <InputsForm
-          type="password"
-          inputId="inputOldPswd"
-          inputRef={inputOldPswd}
-          inputPlaceholder="Votre ancien mot de passe"
-          // inputCheckError={checkUserData}
-          isError={data.error.inputOldPswd ? data.error.inputOldPswd : ""}
-        ></InputsForm>
-        <InputsForm
-          type="password"
-          inputId="inputNewPswd"
-          inputRef={inputNewPswd}
-          inputPlaceholder="Votre nouveau mot de passe"
-          // inputCheckError={checkUserData}
-          isError={data.error.inputNewPswd ? data.error.inputNewPswd : ""}
-        ></InputsForm>
-        <InputsForm
-          type="password"
-          inputId="inputCheckPswd"
-          inputRef={inputCheckPswd}
-          inputPlaceholder="Votre ancien mot de passe"
-          // inputCheckError={checkUserData}
-          isError={data.error.inputCheckPswd ? data.error.inputCheckPswd : ""}
-        ></InputsForm>
-      </div>
-      <div className="buttons--actions">
-      <input
-        type="button"
-        value="Changer"
-        disabled={data.btnDisabled}
-        className="btn--change"
-        // onClick={confirmEdit}
-      ></input>
-      <input
-        type="button"
-        value="Annuler"
-        className="btn--cancel"
-        // onClick={confirmEdit}
-      ></input>
+        <div className="modal--inputs">
+          <InputsForm
+            type="password"
+            inputId="inputOldPswd"
+            inputRef={inputOldPswd}
+            inputPlaceholder="Votre ancien mot de passe"
+            // inputCheckError={checkUserData}
+            isError={data.error.inputOldPswd ? data.error.inputOldPswd : ""}
+          ></InputsForm>
+          <InputsForm
+            type="password"
+            inputId="inputNewPswd"
+            inputRef={inputNewPswd}
+            inputPlaceholder="Votre nouveau mot de passe"
+            // inputCheckError={checkUserData}
+            isError={data.error.inputNewPswd ? data.error.inputNewPswd : ""}
+          ></InputsForm>
+          <InputsForm
+            type="password"
+            inputId="inputCheckPswd"
+            inputRef={inputCheckPswd}
+            inputPlaceholder="Votre ancien mot de passe"
+            // inputCheckError={checkUserData}
+            isError={data.error.inputCheckPswd ? data.error.inputCheckPswd : ""}
+          ></InputsForm>
+        </div>
+        <div className="buttons--actions">
+          <input
+            type="button"
+            value="Changer"
+            disabled={data.btnDisabled}
+            className="btn--change"
+            // onClick={confirmEdit}
+          ></input>
+          <input
+            type="button"
+            value="Annuler"
+            className="btn--cancel"
+            // onClick={confirmEdit}
+          ></input>
+        </div>
       </div>
     </ModalStyled>
-  )
+  );
 }
 
 export default Modal;
