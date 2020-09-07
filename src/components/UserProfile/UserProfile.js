@@ -8,6 +8,7 @@ import IconSettings from "../../img/settings_mobile.svg";
 import IconSectionCards from "../../img/icon_cards.svg";
 import IconAdd from "../../img/icon_add.svg";
 import Arrow from "../../img/arrow.svg";
+import Modal from "../Modal/Modal";
 
 // import Footer from "../Footer/Footer";
 
@@ -22,7 +23,8 @@ function UserProfile() {
   const [data, setData] = React.useState({
     btnDisabled: true,
     error: {},
-    isDisabled: true
+    isDisabled: true,
+    showModal: false
   });
 
   React.useEffect(() => {
@@ -133,6 +135,16 @@ function UserProfile() {
     return setData(newState);
   }
 
+  function isModal() {
+    const newState = {...data};
+
+    newState.showModal = true;
+
+    document.querySelector("body").style.position = "fixed";
+
+    return setData(newState);
+  }
+
   // function addInput(e) {
   //   if (e.keyCode === 13) {
   //     document.activeElement.blur();
@@ -146,7 +158,10 @@ function UserProfile() {
         as="main"
         isDisabled={data.isDisabled}
         btnDisabled={data.btnDisabled}
-      >
+        >
+        {
+          data.showModal && <Modal></Modal>
+        }
         <section className="profile--user--data">
           <div className="profile--user--data--title">
             <div className="profile--user--data--img">
@@ -250,7 +265,7 @@ function UserProfile() {
               </div>
             </div>
             <div className="profile--security--buttons">
-              <input type="button" value="Changer mon mot de passe"></input>
+              <input type="button" value="Changer mon mot de passe" onClick={isModal}></input>
               <input type="button" value="Supprimer mon profil"></input>
             </div>
           </section>
