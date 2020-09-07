@@ -136,11 +136,13 @@ function UserProfile() {
   }
 
   function isModal() {
-    const newState = {...data};
+    const newState = { ...data };
 
     newState.showModal = true;
 
-    document.querySelector("body").style.position = "fixed";
+    if (window.matchMedia("screen and (max-width: 1000px)").matches) {
+      document.querySelector("body").style.position = "fixed";
+    }
 
     return setData(newState);
   }
@@ -158,10 +160,8 @@ function UserProfile() {
         as="main"
         isDisabled={data.isDisabled}
         btnDisabled={data.btnDisabled}
-        >
-        {
-          data.showModal && <Modal></Modal>
-        }
+      >
+        {data.showModal && <Modal></Modal>}
         <section className="profile--user--data">
           <div className="profile--user--data--title">
             <div className="profile--user--data--img">
@@ -265,7 +265,11 @@ function UserProfile() {
               </div>
             </div>
             <div className="profile--security--buttons">
-              <input type="button" value="Changer mon mot de passe" onClick={isModal}></input>
+              <input
+                type="button"
+                value="Changer mon mot de passe"
+                onClick={isModal}
+              ></input>
               <input type="button" value="Supprimer mon profil"></input>
             </div>
           </section>
