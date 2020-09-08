@@ -14,7 +14,7 @@ function Modal(props) {
     btnDisabled: true,
     error: {},
     isDisabled: true,
-    confirmModal : false
+    confirmModal: false
   });
 
   React.useEffect(() => {
@@ -50,16 +50,17 @@ function Modal(props) {
       return;
     }
 
-    if (inputIdTarget === "inputOldPswd" || inputIdTarget === "inputNewPswd" || inputIdTarget === "inputCheckPswd") {
+    if (
+      inputIdTarget === "inputOldPswd" ||
+      inputIdTarget === "inputNewPswd" ||
+      inputIdTarget === "inputCheckPswd"
+    ) {
       if (e.target.value.length < 6)
         return updateState(inputIdTarget, "Le mot de passe doit faire 6 charactères");
 
       if (inputCheckPswd.current.value !== "") {
         if (inputNewPswd.current.value !== inputCheckPswd.current.value) {
-          return updateState(
-            inputCheckPswd.current.id,
-            "La confirmation est incorrecte"
-          );
+          return updateState(inputCheckPswd.current.id, "La confirmation est incorrecte");
         }
       }
     }
@@ -110,7 +111,7 @@ function Modal(props) {
   }
 
   function changePswd() {
-    const newState = {...data};
+    const newState = { ...data };
 
     document.querySelector(".modal--reset--pswd").style.display = "none";
 
@@ -121,64 +122,64 @@ function Modal(props) {
 
   return (
     <>
-    {data.confirmModal && <ModalMessage closeModal={props.closeModal}></ModalMessage>}
-    <ModalStyled btnDisabled={data.btnDisabled} className="modal--reset--pswd">
-      <div className="pswd--reset--content">
-        <div className="pswd--title">
-          <div className="pswd--icon">
-            <img src={GeometryImg} alt="icon--title"></img>
+      {data.confirmModal && <ModalMessage closeModal={props.closeModal}></ModalMessage>}
+      <ModalStyled btnDisabled={data.btnDisabled} className="modal--reset--pswd">
+        <div className="pswd--reset--content">
+          <div className="pswd--title">
+            <div className="pswd--icon">
+              <img src={GeometryImg} alt="icon--title"></img>
+            </div>
+            <h2>Changer le mot de passe</h2>
+            <img
+              src={CloseArrow}
+              alt="icon--close"
+              className="close--arrow"
+              onClick={props.closeModal}
+            ></img>
           </div>
-          <h2>Changer le mot de passe</h2>
-          <img
-            src={CloseArrow}
-            alt="icon--close"
-            className="close--arrow"
-            onClick={props.closeModal}
-          ></img>
+          <div className="modal--inputs">
+            <InputsForm
+              type="password"
+              inputId="inputOldPswd"
+              inputRef={inputOldPswd}
+              inputPlaceholder="Votre ancien mot de passe"
+              inputCheckError={checkNewPswd}
+              isError={data.error.inputOldPswd ? data.error.inputOldPswd : ""}
+            ></InputsForm>
+            <InputsForm
+              type="password"
+              inputId="inputNewPswd"
+              inputRef={inputNewPswd}
+              inputPlaceholder="Votre nouveau mot de passe"
+              inputCheckError={checkNewPswd}
+              isError={data.error.inputNewPswd ? data.error.inputNewPswd : ""}
+            ></InputsForm>
+            <InputsForm
+              type="password"
+              inputId="inputCheckPswd"
+              inputRef={inputCheckPswd}
+              inputPlaceholder="Votre ancien mot de passe"
+              inputCheckError={checkNewPswd}
+              isError={data.error.inputCheckPswd ? data.error.inputCheckPswd : ""}
+            ></InputsForm>
+          </div>
+          <div className="buttons--actions">
+            <input
+              type="button"
+              value="Changer"
+              disabled={data.btnDisabled}
+              className="btn--change"
+              onClick={changePswd}
+            ></input>
+            <input
+              type="button"
+              value="Annuler"
+              className="btn--cancel"
+              onClick={props.closeModal}
+            ></input>
+          </div>
         </div>
-        <div className="modal--inputs">
-          <InputsForm
-            type="password"
-            inputId="inputOldPswd"
-            inputRef={inputOldPswd}
-            inputPlaceholder="Votre ancien mot de passe"
-            inputCheckError={checkNewPswd}
-            isError={data.error.inputOldPswd ? data.error.inputOldPswd : ""}
-          ></InputsForm>
-          <InputsForm
-            type="password"
-            inputId="inputNewPswd"
-            inputRef={inputNewPswd}
-            inputPlaceholder="Votre nouveau mot de passe"
-            inputCheckError={checkNewPswd}
-            isError={data.error.inputNewPswd ? data.error.inputNewPswd : ""}
-          ></InputsForm>
-          <InputsForm
-            type="password"
-            inputId="inputCheckPswd"
-            inputRef={inputCheckPswd}
-            inputPlaceholder="Votre ancien mot de passe"
-            inputCheckError={checkNewPswd}
-            isError={data.error.inputCheckPswd ? data.error.inputCheckPswd : ""}
-          ></InputsForm>
-        </div>
-        <div className="buttons--actions">
-          <input
-            type="button"
-            value="Changer"
-            disabled={data.btnDisabled}
-            className="btn--change"
-            onClick={changePswd}
-          ></input>
-          <input
-            type="button"
-            value="Annuler"
-            className="btn--cancel"
-            onClick={props.closeModal}
-          ></input>
-        </div>
-      </div>
-    </ModalStyled>
+      </ModalStyled>
     </>
   );
 }
