@@ -11,7 +11,7 @@ function ModalMessage(props) {
           <div className="modal--icon">
             <img src={GeometryImg} alt="modal--title"></img>
           </div>
-          <h2>Changer le mot de passe</h2>
+          <h2>{props.modalTitle}</h2>
           <img
             src={CloseArrow}
             alt="icon--close"
@@ -21,14 +21,13 @@ function ModalMessage(props) {
         </div>
         <div className="modal--message">
           <p>
-            Votre mot de passe a été changé ! Un mail vous a été envoyé à
-            adresse@gmail.com contenant votre nouveau mot de passe.
+            {props.modalMessage}
           </p>
         </div>
         <div className="modal--btn">
           <input
             type="button"
-            value="Ok"
+            value={props.modalBtnValue}
             className="btn--ok"
             onClick={props.closeModal}
           ></input>
