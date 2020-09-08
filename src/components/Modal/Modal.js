@@ -4,7 +4,7 @@ import CloseArrow from "../../img/croix.svg";
 import InputsForm from "../InputsForm/InputsForm";
 import ModalStyled from "../../style/ModalStyled.style";
 
-function Modal() {
+function Modal(props) {
   const inputOldPswd = React.useRef(null);
   const inputNewPswd = React.useRef(null);
   const inputCheckPswd = React.useRef(null);
@@ -30,14 +30,19 @@ function Modal() {
   }, []); //eslint-disable-line
 
   return (
-    <ModalStyled as="section">
+    <ModalStyled>
       <div className="pswd--reset--content">
         <div className="pswd--title">
           <div className="pswd--icon">
             <img src={GeometryImg} alt="icon--title"></img>
           </div>
           <h2>Changer le mot de passe</h2>
-          <img src={CloseArrow} alt="icon--close" className="close--arrow"></img>
+          <img
+            src={CloseArrow}
+            alt="icon--close"
+            className="close--arrow"
+            onClick={props.closeModal}
+          ></img>
         </div>
         <div className="modal--inputs">
           <InputsForm
@@ -77,7 +82,7 @@ function Modal() {
             type="button"
             value="Annuler"
             className="btn--cancel"
-            // onClick={confirmEdit}
+            onClick={props.closeModal}
           ></input>
         </div>
       </div>
