@@ -47,6 +47,7 @@ const ModalStyled = styled.section`
       font-size: 0.9em;
       margin-bottom: 15%;
       margin-right: 9px;
+      opacity: ${props => (props.btnDisabled ? 0.5 : 1)};
     }
     .btn--cancel {
       background-color: ${props => props.theme.colorPrincipal};
