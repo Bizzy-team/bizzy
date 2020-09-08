@@ -135,14 +135,18 @@ function UserProfile() {
     return setData(newState);
   }
 
-  function isModal() {
+  function isModal(e) {
     const newState = { ...data };
 
-    newState.showModal = true;
-
-    if (window.matchMedia("screen and (max-width: 1000px)").matches) {
+    if (e.target.id === "btn--change--pswd") {
+      newState.showModal = true;
       document.querySelector("body").style.position = "fixed";
+
+      return setData(newState);
     }
+
+    newState.showModal = false;
+    document.querySelector("body").style.position = "relative";
 
     return setData(newState);
   }
@@ -161,7 +165,7 @@ function UserProfile() {
         isDisabled={data.isDisabled}
         btnDisabled={data.btnDisabled}
       >
-        {data.showModal && <Modal></Modal>}
+        {data.showModal && <Modal closeModal={isModal}></Modal>}
         <section className="profile--user--data">
           <div className="profile--user--data--title">
             <div className="profile--user--data--img">
@@ -268,6 +272,7 @@ function UserProfile() {
               <input
                 type="button"
                 value="Changer mon mot de passe"
+                id="btn--change--pswd"
                 onClick={isModal}
               ></input>
               <input type="button" value="Supprimer mon profil"></input>
