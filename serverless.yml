@@ -1,0 +1,165 @@
+# Welcome to serverless. Read the docs
+# https://serverless.com/framework/docs/
+
+# Serverless.yml is the configuration the CLI
+# uses to deploy your code to your provider of choice
+
+# The `service` block is the name of the service
+service: bizzy
+
+frameworkVersion: '1'
+
+plugins:
+  - '@silvermine/serverless-plugin-cloudfront-lambda-edge'
+  - serverless-s3-remover
+  - serverless-s3-sync
+
+custom:
+  defaultRegion: us-east-1
+  defaultStage: dev
+  region: ${opt:region, self:custom.defaultRegion}
+  stage: ${opt:stage, self:custom.defaultStage}
+  objectPrefix: '${self:service}-${self:custom.stage}'
+  # The domain name to be used
+  # defaultdomainName: ${self:service}-${self:custom.stage}.com
+  # defaultdomainName: dev-bizzy.com
+  # domainName: ${opt:domain, self:custom.defaultdomainName}
+  domainName: dev-bizzy.com
+  bucketName: ${self:custom.domainName}
+  remover:
+     buckets:
+       - ${self:custom.bucketName}
+       - ${self:custom.bucketName}-accesslogs
+  s3Sync:
+    - bucketName: ${self:custom.bucketName}
+      localDir: build
+
+# The `provider` block defines where your service will be deployed
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${self:custom.stage}
+  region: ${self:custom.region}
+  profile: bizzy_deploy_app
+
+package:
+   exclude:
+      - 'node_modules/**'
+      - 'build/**'
+      - 'public/**'
+
+functions:
+   LambdaBasicAuth:
+      name: '${self:custom.objectPrefix}-origin-request'
+      handler: lambda_basicauth/main.handler
+      memorySize: 128
+      timeout: 1
+      lambdaAtEdge:
+         distribution: 'CloudFrontDistribution'
+         eventType: 'viewer-request'
+
+# functions:
+#   basic_auth:
+#     handler: lambda_basicauth/main.handler
+
+resources:
+  Resources:
+        BucketAccessLogs:
+          Type: 'AWS::S3::Bucket'
+          Properties:
+            BucketName: ${self:custom.bucketName}-accesslogs
+            AccessControl: LogDeliveryWrite
+        BizzyApp:
+          Type: 'AWS::S3::Bucket'
+          Properties:
+            BucketName: ${self:custom.bucketName}
+            WebsiteConfiguration:
+              ErrorDocument: "error.html"
+              IndexDocument: "index.html"
+            LoggingConfiguration:
+              DestinationBucketName: 
+                Ref: BucketAccessLogs
+        S3AccessPolicy:
+            Type: AWS::S3::BucketPolicy
+            DependsOn:
+              - BizzyApp
+              - CloudFrontOriginAccessIdentity
+            Properties:
+              Bucket:
+                Ref: BizzyApp
+              PolicyDocument:
+                Statement:
+                  - Sid: PublicReadGetObject
+                    Effect: Allow
+                    Principal: '*'
+                    # Principal:
+                    #   AWS:
+                    #     Fn::Join:
+                    #       - ' '
+                    #       - 
+                    #         - 'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity'
+                    #         - Ref: CloudFrontOriginAccessIdentity
+                    Action:
+                      - s3:GetObject
+                    Resource:
+                      - Fn::Join: [
+                          '', [
+                            'arn:aws:s3:::',
+                            {
+                              'Ref': 'BizzyApp'
+                            },
+                            '/*'
+                          ]
+                        ]
+        CloudFrontOriginAccessIdentity:
+              Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+              Properties:
+                CloudFrontOriginAccessIdentityConfig:
+                  Comment: "BizzyApp CloudFrontOrigin"
+        CloudFrontDistribution:
+              Type: 'AWS::CloudFront::Distribution'
+              DependsOn:
+                - BizzyApp
+                # - HostedZone
+                # - SSLCertificate
+                - CloudFrontOriginAccessIdentity
+              Properties:
+                DistributionConfig:
+                  # Aliases:
+                  #   - '${opt:domain}'
+                  #   - 'www.${opt:domain}'
+                  Origins:
+                    - DomainName: ${self:custom.bucketName}.s3.amazonaws.com
+                    # DomainName: '#{BizzyApp.DomainName}'
+                      OriginPath: ''
+                      Id: S3BucketOrigin
+                      S3OriginConfig:
+                        OriginAccessIdentity:
+                          Fn::Join:
+                            - ''
+                            - 
+                              - 'origin-access-identity/cloudfront/'
+                              - Ref: CloudFrontOriginAccessIdentity
+                  Comment: 'CloudFront origin for ${self:custom.bucketName}'
+                  DefaultCacheBehavior:
+                    AllowedMethods:
+                      - GET
+                      - HEAD
+                      - OPTIONS
+                    TargetOriginId: S3BucketOrigin
+                    Compress: true
+                    ForwardedValues:
+                      QueryString: 'false'
+                      Cookies:
+                        Forward: none
+                    ViewerProtocolPolicy: redirect-to-https
+                    # LambdaFunctionAssociations: 
+                    #   - EventType: 'viewer-request'
+                    #     IncludeBody: false
+                    #     LambdaFunctionARN: "arn:aws:lambda:eu-west-1:431852575624:function:bizzy-dev-basic_auth:1"
+                  DefaultRootObject: index.html
+                  Enabled: 'true'
+                  HttpVersion: 'http2'
+                  PriceClass: 'PriceClass_100'
+                  ViewerCertificate:
+                      CloudFrontDefaultCertificate: true

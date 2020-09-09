@@ -1,49 +1,52 @@
 {
-    "name": "bizzy",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "bdd-environment": "node ./scripts/index.js",
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "style": "prettier -c './src/**/*'",
-        "style:fix": "prettier --c --write './src/**/*'"
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "devDependencies": {
-        "@testing-library/react": "^9.3.2",
-        "@testing-library/user-event": "^7.1.2",
-        "ava": "^3.8.2",
-        "chalk": "^4.0.0",
-        "chance": "^1.1.6",
-        "husky": "^4.2.3",
-        "inquirer": "^7.1.0",
-        "lodash": "^4.17.15",
-        "ora": "^4.0.4",
-        "prettier": "^1.19.1",
-        "react-scripts": "3.4.0",
-        "table": "^5.4.6"
-    },
-    "dependencies": {
-        "@testing-library/jest-dom": "^4.2.4",
-        "dotenv": "^8.2.0",
-        "react": "^16.13.0",
-        "react-dom": "^16.13.0",
-        "react-router-dom": "^5.1.2",
-        "react-svg": "^11.0.28",
-        "styled-components": "^5.0.1"
-    }
+  "name": "bizzy",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "bdd-environment": "node ./scripts/index.js",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "style": "prettier -c './src/**/*'",
+    "style:fix": "prettier --c --write './src/**/*'"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@silvermine/serverless-plugin-cloudfront-lambda-edge": "2.1.1",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "ava": "^3.8.2",
+    "chalk": "^4.0.0",
+    "chance": "^1.1.6",
+    "husky": "^4.2.3",
+    "inquirer": "^7.1.0",
+    "lodash": "^4.17.15",
+    "ora": "^4.0.4",
+    "prettier": "^1.19.1",
+    "react-scripts": "3.4.0",
+    "serverless-s3-remover": "^0.6.0",
+    "serverless-s3-sync": "^1.14.4",
+    "table": "^5.4.6"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "dotenv": "^8.2.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
+    "react-svg": "^11.0.28",
+    "styled-components": "^5.0.1"
+  }
 }
