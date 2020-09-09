@@ -9,7 +9,7 @@ import IconSectionCards from "../../img/icon_cards.svg";
 import IconAdd from "../../img/icon_add.svg";
 import Arrow from "../../img/arrow.svg";
 import Modal from "../Modal/ModalResetPswd";
-import ModalMessage from "../Modal/ModalMessage";
+import ModalDeleteProfile from "../Modal/ModalDeleteProfile";
 
 // import Footer from "../Footer/Footer";
 
@@ -26,7 +26,7 @@ function UserProfile() {
     error: {},
     isDisabled: true,
     showModal: false,
-    isModalDeleteProfile: false,
+    isModalDeleteProfile: false
     // isBtnCancel: false
   });
 
@@ -157,7 +157,7 @@ function UserProfile() {
     }
 
     newState.showModal = false;
-    // newState.isModalDeleteProfile = false;
+    newState.isModalDeleteProfile = false;
     document.querySelector("body").style.overflow = "auto";
 
     return setData(newState);
@@ -178,16 +178,7 @@ function UserProfile() {
         btnDisabled={data.btnDisabled}
       >
         {data.showModal && <Modal closeModal={isModal}></Modal>}
-        {
-          data.isModalDeleteProfile &&
-            <ModalMessage
-              closeModal={isModal}
-              modalTitle="Supprimer mon profil"
-              modalMessage="Attention ! Vous allez supprimer votre profil et vos données définitivement. Êtes-vous sûr de vouloir le supprimer ?"
-              modalBtnValue="Supprimer"
-            >
-            </ModalMessage>
-        }
+        {data.isModalDeleteProfile && <ModalDeleteProfile closeModal={isModal}></ModalDeleteProfile>}
         <section className="profile--user--data">
           <div className="profile--user--data--title">
             <div className="profile--user--data--img">
@@ -297,7 +288,12 @@ function UserProfile() {
                 id="btn--change--pswd"
                 onClick={isModal}
               ></input>
-              <input type="button" value="Supprimer mon profil" id="btn--delete--profile" onClick={isModal}></input>
+              <input
+                type="button"
+                value="Supprimer mon profil"
+                id="btn--delete--profile"
+                onClick={isModal}
+              ></input>
             </div>
           </section>
           {/* Si les cards sont vides */}
