@@ -4,7 +4,7 @@ import CloseArrow from "../../img/croix.svg";
 import ModalDeleteProfileStyled from "../../style/ModalDeleteProfileStyled.style";
 
 function ModalDeleteProfile(props) {
-  return(
+  return (
     <ModalDeleteProfileStyled>
       <div className="modal--content">
         <div className="modal--title">
@@ -20,14 +20,13 @@ function ModalDeleteProfile(props) {
           ></img>
         </div>
         <div className="modal--message">
-          <p>Attention ! Vous allez supprimer votre profil et ses données. Êtes-vous sûr de vouloir le supprimer ?</p>
+          <p>
+            Attention ! Vous allez supprimer votre profil et ses données. Êtes-vous sûr de
+            vouloir le supprimer ?
+          </p>
         </div>
         <div className="modal--btn">
-          <input
-            type="button"
-            value="Supprimer"
-            className="btn--delete"
-          ></input>
+          <input type="button" value="Supprimer" className="btn--delete"></input>
           <input
             type="button"
             value="Annuler"
@@ -37,7 +36,7 @@ function ModalDeleteProfile(props) {
         </div>
       </div>
     </ModalDeleteProfileStyled>
-  )
+  );
 }
 
 export default ModalDeleteProfile;

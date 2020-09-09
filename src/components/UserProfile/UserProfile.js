@@ -178,7 +178,9 @@ function UserProfile() {
         btnDisabled={data.btnDisabled}
       >
         {data.showModal && <Modal closeModal={isModal}></Modal>}
-        {data.isModalDeleteProfile && <ModalDeleteProfile closeModal={isModal}></ModalDeleteProfile>}
+        {data.isModalDeleteProfile && (
+          <ModalDeleteProfile closeModal={isModal}></ModalDeleteProfile>
+        )}
         <section className="profile--user--data">
           <div className="profile--user--data--title">
             <div className="profile--user--data--img">
