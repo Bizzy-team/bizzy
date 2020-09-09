@@ -20,9 +20,7 @@ function ModalMessage(props) {
           ></img>
         </div>
         <div className="modal--message">
-          <p>
-            {props.modalMessage}
-          </p>
+          <p>{props.modalMessage}</p>
         </div>
         <div className="modal--btn">
           <input

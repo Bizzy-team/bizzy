@@ -122,17 +122,15 @@ function Modal(props) {
 
   return (
     <>
-      {
-      data.confirmModal &&
+      {data.confirmModal && (
         <ModalMessage
           closeModal={props.closeModal}
           modalTitle="Changer le mot de passe"
           modalMessage="Votre mot de passe a été changé ! Un mail vous a été envoyé à
           adresse@gmail.com contenant votre nouveau mot de passe."
           modalBtnValue="Ok"
-        >
-        </ModalMessage>
-      }
+        ></ModalMessage>
+      )}
       <ModalStyled btnDisabled={data.btnDisabled} className="modal--reset--pswd">
         <div className="pswd--reset--content">
           <div className="pswd--title">
