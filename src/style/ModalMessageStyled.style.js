@@ -32,7 +32,7 @@ const ModalMessageStyled = styled.section`
   }
   .modal--btn {
     padding: 16px;
-    input {
+    .btn--ok {
       background-color: ${props => props.theme.colorBtn};
       color: ${props => props.theme.colorPrincipal};
       padding: 10px 24px;
