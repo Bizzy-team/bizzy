@@ -42,6 +42,7 @@
         "dotenv": "^8.2.0",
         "react": "^16.13.0",
         "react-dom": "^16.13.0",
+        "react-multi-carousel": "^2.5.5",
         "react-router-dom": "^5.1.2",
         "react-svg": "^11.0.28",
         "styled-components": "^5.0.1"
