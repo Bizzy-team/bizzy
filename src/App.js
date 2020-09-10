@@ -69,7 +69,8 @@ function App() {
       <ThemeProvider theme={{ ...variables }}>
         <GlobalStyle></GlobalStyle>
         <Switch>
-          <Route exact path="/" render={() => unavailableToken(StartPage)}></Route>
+          {/* <Route exact path="/" render={() => unavailableToken(StartPage)}></Route> */}
+          <Route exact path="/" component={StartPage}></Route>
           <Route exact path="/inscription" component={SignUpSpace}></Route>
           <Route exact path="/connexion" component={LogginSpace}></Route>
           <Route exact path="/confirm_mail" component={ConfirmMail}></Route>
