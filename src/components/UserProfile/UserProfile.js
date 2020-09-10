@@ -41,13 +41,13 @@ function UserProfile() {
       partialVisibilityGutter: 10
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1024, min: 700 },
       items: 1,
       slidesToSlide: 1,
       partialVisibilityGutter: 10
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 700, min: 300 },
       items: 1,
       slidesToSlide: 1,
       partialVisibilityGutter: 10
@@ -352,7 +352,9 @@ function UserProfile() {
             </div>
           </section>
 
-          <section style={{ width: "40vw" }}>
+          {/* Si il y  a des cards */}
+          {/* <section style={{ width: "40vw" }}> */}
+          <section>
             <Carousel
               arrows
               className=""
