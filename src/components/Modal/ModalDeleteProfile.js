@@ -8,7 +8,7 @@ function ModalDeleteProfile(props) {
   const [redirect, setRedirect] = React.useState(false);
 
   function deleteProfile() {
-    let newState = {...redirect};
+    let newState = { ...redirect };
 
     document.querySelector("body").style.overflow = "hidden";
     newState = true;
@@ -16,7 +16,10 @@ function ModalDeleteProfile(props) {
     return setRedirect(newState);
   }
 
-  if (redirect) return <Redirect to={{pathname: "/", state: {isModalDelete: redirect}}}></Redirect>;
+  if (redirect)
+    return (
+      <Redirect to={{ pathname: "/", state: { isModalDelete: redirect } }}></Redirect>
+    );
 
   return (
     <ModalDeleteProfileStyled>
@@ -40,7 +43,12 @@ function ModalDeleteProfile(props) {
           </p>
         </div>
         <div className="modal--btn">
-          <input type="button" value="Supprimer" className="btn--delete" onClick={deleteProfile}></input>
+          <input
+            type="button"
+            value="Supprimer"
+            className="btn--delete"
+            onClick={deleteProfile}
+          ></input>
           <input
             type="button"
             value="Annuler"

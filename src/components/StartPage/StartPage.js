@@ -11,7 +11,7 @@ import ModalMessage from "../Modal/ModalMessage";
 function StartPage(props) {
   const [data, setData] = React.useState({
     isModalDelete: props.location.state.isModalDelete
-  })
+  });
 
   React.useEffect(() => {
     window.addEventListener("scroll", headerStyle);
@@ -32,7 +32,7 @@ function StartPage(props) {
   }
 
   function closeModal(e) {
-    const newState = {...data};
+    const newState = { ...data };
 
     if (e.target.className === "btn--ok") {
       newState.isModalDelete = false;
@@ -45,15 +45,14 @@ function StartPage(props) {
   return (
     <>
       <Header />
-      {
-        data.isModalDelete &&
+      {data.isModalDelete && (
         <ModalMessage
           closeModal={closeModal}
           modalTitle="Votre profil est supprimé :("
           modalMessage="C'est dommage ! Votre profil a été supprimé, nous espérons vous revoir ! N'hésitez pas à envoyer votre retour pour améliorer nos services."
           modalBtnValue="Ok"
         ></ModalMessage>
-      }
+      )}
       <StartPageStyled as="main" className="startPage--about">
         <section>
           <div className="section--content">
