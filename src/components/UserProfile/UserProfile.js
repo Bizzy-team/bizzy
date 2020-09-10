@@ -10,6 +10,9 @@ import IconAdd from "../../img/icon_add.svg";
 import Arrow from "../../img/arrow.svg";
 import Modal from "../Modal/ModalResetPswd";
 import ModalDeleteProfile from "../Modal/ModalDeleteProfile";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import CardsProfile from "../Cards/CardsProfile";
 
 // import Footer from "../Footer/Footer";
 
@@ -29,6 +32,27 @@ function UserProfile() {
     isModalDeleteProfile: false
     // isBtnCancel: false
   });
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+      slidesToSlide: 1,
+      partialVisibilityGutter: 10
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+      slidesToSlide: 1,
+      partialVisibilityGutter: 10
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+      partialVisibilityGutter: 10
+    },
+  };
 
   React.useEffect(() => {
     const arrInputId = [
@@ -326,6 +350,33 @@ function UserProfile() {
                 </div>
               </div>
             </div>
+          </section>
+
+
+          <section style={{width: "40vw"}}>
+            <Carousel
+              arrows
+              className=""
+              containerClass="container"
+              dotListClass=""
+              focusOnSelect={false}
+              // infinite={true}
+              itemClass=""
+              keyBoardControl
+              minimumTouchDrag={80}
+              renderButtonGroupOutside={false}
+              renderDotsOutside={false}
+              responsive={responsive}
+              showDots={false}
+              sliderClass=""
+              slidesToSlide={3}
+              swipeable
+              partialVisible = "right"
+            >
+              <CardsProfile></CardsProfile>
+              <CardsProfile></CardsProfile>
+              <CardsProfile></CardsProfile>
+            </Carousel>
           </section>
         </div>
       </UserProfileStyled>
