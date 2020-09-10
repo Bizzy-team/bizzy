@@ -6,8 +6,13 @@ import imgTitle from "../../img/img_title.png";
 import imgAfterwork from "../../img/img_afterwork.png";
 import imgPosition from "../../img/img_position.png";
 import imgMsg from "../../img/img_msg.png";
+import ModalMessage from "../Modal/ModalMessage";
 
-function StartPage() {
+function StartPage(props) {
+  const [data, setData] = React.useState({
+    isModalDelete: props.location.state.isModalDelete
+  })
+
   React.useEffect(() => {
     window.addEventListener("scroll", headerStyle);
   }, []);
@@ -26,9 +31,29 @@ function StartPage() {
       "box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18); transition: box-shadow .3s cubic-bezier(.35,0,.65,1) 0s";
   }
 
+  function closeModal(e) {
+    const newState = {...data};
+
+    if (e.target.className === "btn--ok") {
+      newState.isModalDelete = false;
+      document.querySelector("body").style.overflow = "auto";
+    }
+
+    return setData(newState);
+  }
+
   return (
     <>
       <Header />
+      {
+        data.isModalDelete &&
+        <ModalMessage
+          closeModal={closeModal}
+          modalTitle="Votre profil est supprimé :("
+          modalMessage="C'est dommage ! Votre profil a été supprimé, nous espérons vous revoir ! N'hésitez pas à envoyer votre retour pour améliorer nos services."
+          modalBtnValue="Ok"
+        ></ModalMessage>
+      }
       <StartPageStyled as="main" className="startPage--about">
         <section>
           <div className="section--content">
