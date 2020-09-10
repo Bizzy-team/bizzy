@@ -34,8 +34,9 @@ function StartPage(props) {
   function closeModal(e) {
     const newState = { ...data };
 
-    if (e.target.className === "btn--ok") {
+    if (e.target.className === "btn--ok" || e.target.className === "close--arrow") {
       newState.isModalDelete = false;
+      props.location.state.isModalDelete = false;
       document.querySelector("body").style.overflow = "auto";
     }
 
