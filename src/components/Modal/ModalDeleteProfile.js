@@ -1,9 +1,23 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import GeometryImg from "../../img/geometry_desktop.svg";
 import CloseArrow from "../../img/croix.svg";
 import ModalDeleteProfileStyled from "../../style/ModalDeleteProfileStyled.style";
 
 function ModalDeleteProfile(props) {
+  const [redirect, setRedirect] = React.useState(false);
+
+  function deleteProfile() {
+    let newState = {...redirect};
+
+    document.querySelector("body").style.overflow = "hidden";
+    newState = true;
+
+    return setRedirect(newState);
+  }
+
+  if (redirect) return <Redirect to={{pathname: "/", state: {isModalDelete: redirect}}}></Redirect>;
+
   return (
     <ModalDeleteProfileStyled>
       <div className="modal--content">
@@ -26,7 +40,7 @@ function ModalDeleteProfile(props) {
           </p>
         </div>
         <div className="modal--btn">
-          <input type="button" value="Supprimer" className="btn--delete"></input>
+          <input type="button" value="Supprimer" className="btn--delete" onClick={deleteProfile}></input>
           <input
             type="button"
             value="Annuler"
