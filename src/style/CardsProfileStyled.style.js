@@ -52,7 +52,6 @@ const CardsProfileStyled = styled.div`
         top: 16px;
       }
     }
-
   }
   .badges--card {
     display: flex;

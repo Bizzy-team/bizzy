@@ -51,7 +51,7 @@ function UserProfile() {
       items: 1,
       slidesToSlide: 1,
       partialVisibilityGutter: 10
-    },
+    }
   };
 
   React.useEffect(() => {
@@ -352,8 +352,7 @@ function UserProfile() {
             </div>
           </section>
 
-
-          <section style={{width: "40vw"}}>
+          <section style={{ width: "40vw" }}>
             <Carousel
               arrows
               className=""
@@ -371,7 +370,7 @@ function UserProfile() {
               sliderClass=""
               slidesToSlide={3}
               swipeable
-              partialVisible = "right"
+              partialVisible="right"
             >
               <CardsProfile></CardsProfile>
               <CardsProfile></CardsProfile>
