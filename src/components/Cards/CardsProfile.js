@@ -11,12 +11,16 @@ function CardsProfile() {
         <div className="card--mood--img">
           <img src={FoodMood} alt="food"></img>
         </div>
-        <h2>Pizza's pour l'après-midi</h2>
+        <div className="card--title--name">
+          <h2>Pizza's pour l'après-midi</h2>
+        </div>
         <div className="about--user">
           <div className="about--user--avatar">
             <img src={UserAvatar} alt="avatar"></img>
           </div>
-          <h3>Par Katrine, Product Manager</h3>
+          <div className="about--user--identity">
+            <h3>Par Katrine, Product Manager</h3>
+          </div>
         </div>
         <div className="edit--icon">
           <img src={EditCard} alt="icon"></img>
