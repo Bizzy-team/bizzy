@@ -10,11 +10,19 @@ import ModalMessage from "../Modal/ModalMessage";
 
 function StartPage(props) {
   const [data, setData] = React.useState({
-    isModalDelete: props.location.state.isModalDelete
+    isModalDelete: false
   });
 
   React.useEffect(() => {
     window.addEventListener("scroll", headerStyle);
+
+    if (props.location.search === "?isModalDelete=true") {
+      const newState = {...data};
+
+      newState.isModalDelete = props.location.state.isModalDelete;
+
+      return setData(newState);
+    }
   }, []);
 
   function headerStyle() {
@@ -32,7 +40,7 @@ function StartPage(props) {
   }
 
   function closeModal(e) {
-    const newState = { ...data };
+    const newState = {  ...data };
 
     if (e.target.className === "btn--ok" || e.target.className === "close--arrow") {
       newState.isModalDelete = false;
@@ -127,6 +135,7 @@ function StartPage(props) {
           </div>
         </section>
       </StartPageStyled>
+
     </>
   );
 }
