@@ -96,7 +96,7 @@ const CardsProfileStyled = styled.div`
         h2 {
           top: 17px;
           left: 84px;
-          font-size: .7em;
+          font-size: 0.7em;
         }
       }
       .about--user {
@@ -105,7 +105,7 @@ const CardsProfileStyled = styled.div`
         margin-bottom: 5px;
         .about--user--identity {
           h3 {
-            font-size: .5em;
+            font-size: 0.5em;
           }
         }
         .about--user--avatar {
@@ -119,12 +119,11 @@ const CardsProfileStyled = styled.div`
           top: 10px;
         }
       }
-
     }
     .badges--card {
       margin-top: 8px;
       span {
-        font-size: .6em;
+        font-size: 0.6em;
         bottom: 0px;
         left: 81px;
       }
@@ -132,7 +131,7 @@ const CardsProfileStyled = styled.div`
     .card--desc {
       margin-top: 8px;
       p {
-        font-size: .9em;
+        font-size: 0.9em;
       }
     }
   }
@@ -183,7 +182,7 @@ const CardsProfileStyled = styled.div`
     .badges--card {
       span {
         left: 125px;
-        font-size: .8em;
+        font-size: 0.8em;
       }
     }
   }
@@ -244,7 +243,6 @@ const CardsProfileStyled = styled.div`
       .card--title--name {
         h2 {
           font-size: 1.5em;
-
         }
       }
       .about--user {
@@ -256,7 +254,7 @@ const CardsProfileStyled = styled.div`
         }
         .about--user--identity {
           h3 {
-            font-size: .8em;
+            font-size: 0.8em;
           }
         }
       }
