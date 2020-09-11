@@ -29,7 +29,8 @@ function UserProfile() {
     error: {},
     isDisabled: true,
     showModal: false,
-    isModalDeleteProfile: false
+    isModalDeleteProfile: false,
+    isWidthCards: true
     // isBtnCancel: false
   });
 
@@ -353,8 +354,9 @@ function UserProfile() {
           </section>
 
           {/* Si il y  a des cards */}
-          {/* <section style={{ width: "40vw" }}> */}
-          <section>
+          {/* <section className="profile--user--cards" style={{ width: "40vw" }}> */}
+          <section className="profile--user--cards">
+          {/* <section> */}
             <Carousel
               arrows
               className=""
