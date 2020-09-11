@@ -335,7 +335,7 @@ const UserProfileStyled = styled(GlobalContainer)`
       }
     }
     .profile--user--cards {
-      /* ${props => props.isWidthCards ? "width": "40vw"}; */
+      /* ${props => (props.isWidthCards ? "width" : "40vw")}; */
       width: 40vw;
       position: relative;
       .profile--user--cards--title {

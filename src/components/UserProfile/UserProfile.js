@@ -356,7 +356,7 @@ function UserProfile() {
           {/* Si il y  a des cards */}
           {/* <section className="profile--user--cards" style={{ width: "40vw" }}> */}
           <section className="profile--user--cards">
-          {/* <section> */}
+            {/* <section> */}
             <Carousel
               arrows
               className=""
