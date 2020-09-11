@@ -272,6 +272,101 @@ const CardsProfileStyled = styled.div`
       }
     }
   }
+
+  @media screen and (min-width: 1000px) {
+    width: 96%;
+    .card--title {
+      .card--mood--img {
+        width: 24%;
+      }
+      .card--title--name {
+        h2 {
+          font-size: 1.1em;
+          left: 105px;
+        }
+      }
+      .about--user {
+        .about--user--avatar {
+          margin-left: 16px;
+          width: 9%;
+        }
+        .about--user--identity {
+          font-size: 1em;
+          h3 {
+            margin-bottom: 0;
+          }
+        }
+      }
+      .edit--icon {
+        width: 4vw;
+        img {
+          left: -10px;
+          top: 10px;
+        }
+      }
+    }
+    .badges--card {
+      margin-top: 25px;
+      span {
+        left: 93px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1070px) {
+    .card--title {
+      .card--mood--img {
+        width: 30%;
+      }
+      .card--title--name {
+        h2 {
+          font-size: 1.2em;
+          left: 121px;
+        }
+      }
+    }
+    .badges--card {
+      margin-top: 16px;
+      span {
+        left: 117px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1206px) {
+    .card--title {
+      .card--title--name {
+        h2 {
+          left: 131px;
+        }
+      }
+    }
+    .badges--card {
+      span {
+        left: 127px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    .card--title {
+      .card--mood--img {
+        width: 30%;
+      }
+      .card--title--name {
+        h2 {
+          font-size: 1.4em;
+          left: 153px;
+        }
+      }
+    }
+    .badges--card {
+      margin-top: 6px;
+      span {
+        left: 150px;
+      }
+    }
+  }
 `;
 
 export default CardsProfileStyled;
