@@ -18,7 +18,7 @@ function ModalDeleteProfile(props) {
 
   if (redirect)
     return (
-      <Redirect to={{ pathname: "/", state: { isModalDelete: redirect } }}></Redirect>
+      <Redirect to={{ pathname: "/", search:"?isModalDelete=true", state: { isModalDelete: redirect } }}></Redirect>
     );
 
   return (
