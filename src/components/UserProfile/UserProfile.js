@@ -189,8 +189,6 @@ function UserProfile() {
       return setData(newState);
     }
 
-
-
     newState.showModal = false;
     newState.isModalDeleteProfile = false;
     newState.isModalNewCard = false;
@@ -357,7 +355,12 @@ function UserProfile() {
                 première card !
               </p>
               <div className="user--cards--btn">
-                <input type="button" value="New Card" className="new--card--btn" onClick={isModal}></input>
+                <input
+                  type="button"
+                  value="New Card"
+                  className="new--card--btn"
+                  onClick={isModal}
+                ></input>
                 <div>
                   <img src={IconAdd} alt="add--card"></img>
                 </div>
