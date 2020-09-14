@@ -17,15 +17,10 @@ function ModalNewCard() {
 
   const [data, setData] = React.useState({
     error: {}
-  })
+  });
 
   React.useEffect(() => {
-    const arrInputId = [
-      "inputTitle",
-      "inputAddress",
-      "inputTime",
-      "inputDesc"
-    ];
+    const arrInputId = ["inputTitle", "inputAddress", "inputTime", "inputDesc"];
     const newState = { ...data };
     const obj = {
       error: false,
@@ -38,7 +33,6 @@ function ModalNewCard() {
     return setData(newState);
   }, []); //eslint-disable-line
 
-
   return (
     <ModalNewCardStyled>
       <div className="card--content">
@@ -49,6 +43,12 @@ function ModalNewCard() {
           <div className="card--name">
             <h2>New card</h2>
           </div>
+          <img
+            src={CloseArrow}
+            alt="icon--close"
+            className="close--arrow"
+            // onClick={props.closeModal}
+          ></img>
         </div>
         <div className="card--moods">
           <h4>Choisissez votre mood:</h4>
