@@ -13,6 +13,7 @@ import ModalDeleteProfile from "../Modal/ModalDeleteProfile";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CardsProfile from "../Cards/CardsProfile";
+import ModalNewCard from "../Modal/ModalNewCard";
 
 // import Footer from "../Footer/Footer";
 
@@ -30,7 +31,7 @@ function UserProfile() {
     isDisabled: true,
     showModal: false,
     isModalDeleteProfile: false,
-    isWidthCards: true
+    isModalNewCard: false
     // isBtnCancel: false
   });
 
@@ -181,8 +182,18 @@ function UserProfile() {
       return setData(newState);
     }
 
+    if (e.target.className === "new--card--btn") {
+      newState.isModalNewCard = true;
+      document.querySelector("body").style.overflow = "hidden";
+
+      return setData(newState);
+    }
+
+
+
     newState.showModal = false;
     newState.isModalDeleteProfile = false;
+    newState.isModalNewCard = false;
     document.querySelector("body").style.overflow = "auto";
 
     return setData(newState);
@@ -206,6 +217,7 @@ function UserProfile() {
         {data.isModalDeleteProfile && (
           <ModalDeleteProfile closeModal={isModal}></ModalDeleteProfile>
         )}
+        {data.isModalNewCard && <ModalNewCard></ModalNewCard>}
         <section className="profile--user--data">
           <div className="profile--user--data--title">
             <div className="profile--user--data--img">
@@ -345,7 +357,7 @@ function UserProfile() {
                 première card !
               </p>
               <div className="user--cards--btn">
-                <input type="button" value="New Card"></input>
+                <input type="button" value="New Card" className="new--card--btn" onClick={isModal}></input>
                 <div>
                   <img src={IconAdd} alt="add--card"></img>
                 </div>
