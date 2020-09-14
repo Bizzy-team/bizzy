@@ -9,7 +9,7 @@ import OpenMindMood from "../../img/open_mind_mood.svg";
 import InputsForm from "../InputsForm/InputsForm";
 import ModalNewCardStyled from "../../style/ModalNewCardStyled.style";
 
-function ModalNewCard() {
+function ModalNewCard(props) {
   const inputTitle = React.useRef(null);
   const inputAddress = React.useRef(null);
   const inputTime = React.useRef(null);
@@ -47,7 +47,7 @@ function ModalNewCard() {
             src={CloseArrow}
             alt="icon--close"
             className="close--arrow"
-            // onClick={props.closeModal}
+            onClick={props.closeModal}
           ></img>
         </div>
         <div className="card--moods">
@@ -98,7 +98,7 @@ function ModalNewCard() {
           </div>
           <div className="card--buttons">
             <input type="button" value="Poster" className="btn--send"></input>
-            <input type="button" value="Annuler" className="btn--cancel"></input>
+            <input type="button" value="Annuler" className="btn--cancel" onClick={props.closeModal}></input>
           </div>
         </div>
       </div>
