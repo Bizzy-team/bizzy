@@ -16,7 +16,8 @@ function ModalNewCard(props) {
   const inputDesc = React.useRef(null);
 
   const [data, setData] = React.useState({
-    error: {}
+    error: {},
+    btnDisabled: true
   });
 
   React.useEffect(() => {
@@ -33,8 +34,63 @@ function ModalNewCard(props) {
     return setData(newState);
   }, []); //eslint-disable-line
 
+  function checkCardData(e) {
+    e.preventDefault();
+
+    const newState = { ...data };
+    const inputIdTarget = e.target.id;
+
+    if (e.type === "change") {
+      if (!newState.error[inputIdTarget].accessToChange) {
+        return;
+      }
+    }
+
+    if (e.target.value === "") {
+      if (newState.error[inputIdTarget].accessToChange) {
+        return updateState(inputIdTarget, "Champs vide.");
+      }
+      return;
+    }
+
+    if (!newState.error[inputIdTarget].accessToChange) {
+      newState.error[inputIdTarget].accessToChange = true;
+    }
+    newState.error[inputIdTarget].error = false;
+    newState.error[inputIdTarget].message = "";
+
+    if (inputTitle.current.value !== "" || inputAddress.current.value !== "" ) {
+      const btnEnabled = Object.values(newState.error).every(el => !el.error);
+
+      if (btnEnabled) {
+        newState.btnDisabled = false;
+      } else {
+        newState.btnDisabled = true;
+      }
+    }
+
+    return setData(newState);
+  }
+
+  function updateState(inputId, errorMessage) {
+    const newState = { ...data };
+
+    newState.error[inputId].error = true;
+    newState.error[inputId].message = errorMessage;
+
+    if (!newState.error[inputId].accessToChange) {
+      newState.error[inputId].accessToChange = true;
+    }
+
+    if (!newState.btnDisabled) {
+      newState.btnDisabled = true;
+    }
+
+    return setData(newState);
+  }
+
   return (
-    <ModalNewCardStyled>
+    <ModalNewCardStyled btnDisabled={data.btnDisabled}>
       <div className="card--content">
         <div className="card--title">
           <div className="card--img">
@@ -66,24 +122,26 @@ function ModalNewCard(props) {
             inputId="inputTitle"
             inputRef={inputTitle}
             inputPlaceholder="Titre de votre annonce"
-            // inputCheckError={checkUserData}
-            isError={data.error.inputTitle ? data.error.inputTitle : ""}
+            inputCheckError={checkCardData}
+            isError={data.error.inputTitle ? data.error.inputTitle : false}
+            marginSize
           ></InputsForm>
           <InputsForm
             type="text"
             inputId="inputAddress"
             inputRef={inputAddress}
             inputPlaceholder="L'adresse"
-            // inputCheckError={checkUserData}
+            inputCheckError={checkCardData}
             isError={data.error.inputAddress ? data.error.inputAddress : ""}
+            marginSize
           ></InputsForm>
           <InputsForm
             type="text"
             inputId="inputTime"
             inputRef={inputTime}
             inputPlaceholder="L'heure"
-            // inputCheckError={checkUserData}
             isError={data.error.inputTime ? data.error.inputTime : ""}
+            marginSize
           ></InputsForm>
           <div className="card--desc">
             <textarea
@@ -97,8 +155,13 @@ function ModalNewCard(props) {
             ></textarea>
           </div>
           <div className="card--buttons">
-            <input type="button" value="Poster" className="btn--send"></input>
-            <input type="button" value="Annuler" className="btn--cancel" onClick={props.closeModal}></input>
+            <input type="button" value="Poster" className="btn--send" disabled={data.btnDisabled}></input>
+            <input
+              type="button"
+              value="Annuler"
+              className="btn--cancel"
+              onClick={props.closeModal}
+            ></input>
           </div>
         </div>
       </div>
