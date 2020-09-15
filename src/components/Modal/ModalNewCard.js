@@ -59,7 +59,7 @@ function ModalNewCard(props) {
     newState.error[inputIdTarget].error = false;
     newState.error[inputIdTarget].message = "";
 
-    if (inputTitle.current.value !== "" || inputAddress.current.value !== "" ) {
+    if (inputTitle.current.value !== "" || inputAddress.current.value !== "") {
       const btnEnabled = Object.values(newState.error).every(el => !el.error);
 
       if (btnEnabled) {
@@ -155,7 +155,12 @@ function ModalNewCard(props) {
             ></textarea>
           </div>
           <div className="card--buttons">
-            <input type="button" value="Poster" className="btn--send" disabled={data.btnDisabled}></input>
+            <input
+              type="button"
+              value="Poster"
+              className="btn--send"
+              disabled={data.btnDisabled}
+            ></input>
             <input
               type="button"
               value="Annuler"
