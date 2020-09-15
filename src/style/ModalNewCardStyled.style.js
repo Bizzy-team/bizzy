@@ -80,6 +80,7 @@ const ModalNewCardStyled = styled.section`
         font-size: 0.9em;
         margin-bottom: 15%;
         margin-right: 9px;
+        opacity: ${props => props.btnDisabled ? .5 : 1};
       }
       .btn--cancel {
         background-color: ${props => props.theme.colorPrincipal};
@@ -290,7 +291,11 @@ const ModalNewCardStyled = styled.section`
       }
       .title--card {
         div {
-          margin-bottom: 7%;
+          /* margin-bottom: 7%; */
+          /* margin-bottom: ${props => props.isError ? "1%" : "7%"}; */
+          .error--message {
+            padding: 0 8px;
+          }
         }
         .card--desc {
           margin-bottom: 0;
