@@ -136,10 +136,11 @@ function ModalNewCard(props) {
             marginSize
           ></InputsForm>
           <InputsForm
-            type="text"
-            inputId="inputTime"
+            type="time"
+            id="default-picker"
             inputRef={inputTime}
-            inputPlaceholder="L'heure"
+            className="form-control"
+            placeholder="L'heure"
             isError={data.error.inputTime ? data.error.inputTime : ""}
             marginSize
           ></InputsForm>
