@@ -5,7 +5,7 @@ const HeaderStyled = styled.header`
   position: fixed;
   font-family: "Nunito";
   height: 14%;
-  z-index: 1;
+  z-index: 10;
 
   @media only screen and (min-width: 300px) {
     width: 100%;

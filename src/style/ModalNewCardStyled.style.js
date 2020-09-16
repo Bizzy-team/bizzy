@@ -10,7 +10,7 @@ const ModalNewCardStyled = styled.section`
   height: 100vh;
   text-align: center;
   font-family: "Nunito";
-  z-index: 10000;
+  z-index: 1;
   .card--content {
     .card--title {
       display: flex;

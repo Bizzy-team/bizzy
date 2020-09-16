@@ -124,6 +124,11 @@ const UserProfileStyled = styled(GlobalContainer)`
 
   .profile--user--cards {
     margin-top: 20px;
+    .react-multi-carousel-list {
+      .react-multiple-carousel__arrow {
+        z-index: 0;
+      }
+    }
     .profile--user--cards--title {
       display: flex;
       justify-content: space-between;
