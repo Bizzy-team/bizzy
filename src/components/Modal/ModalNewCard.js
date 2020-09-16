@@ -59,7 +59,7 @@ function ModalNewCard(props) {
     newState.error[inputIdTarget].error = false;
     newState.error[inputIdTarget].message = "";
 
-    if (inputTitle.current.value !== "" || inputAddress.current.value !== "") {
+    if (inputTitle.current.value !== "" && inputAddress.current.value !== "") {
       const btnEnabled = Object.values(newState.error).every(el => !el.error);
 
       if (btnEnabled) {
