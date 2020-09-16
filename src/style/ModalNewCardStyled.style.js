@@ -27,9 +27,9 @@ const ModalNewCardStyled = styled.section`
         h2 {
           font-family: "CeraPro Bold";
         }
-        .close--arrow {
-          display: none;
-        }
+      }
+      .close--arrow {
+        display: none;
       }
     }
     .card--moods {
@@ -112,6 +112,13 @@ const ModalNewCardStyled = styled.section`
           padding: 0 5px;
           img {
             margin-right: 6px;
+          }
+        }
+      }
+      .title--card {
+        div {
+          .error--message {
+            padding: 0px 8px 12px;
           }
         }
       }
