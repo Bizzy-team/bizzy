@@ -6,8 +6,11 @@ import DrinkMood from "../../img/drink_mood.svg";
 import CultureMood from "../../img/culture_mood.svg";
 import SportMood from "../../img/sport_mood.svg";
 import OpenMindMood from "../../img/open_mind_mood.svg";
+import WarningIcon from "../../img/warning.svg";
 import InputsForm from "../InputsForm/InputsForm";
 import ModalNewCardStyled from "../../style/ModalNewCardStyled.style";
+import profanities from "profanities";
+import ProfanitiesFr from "profanities/fr";
 
 function ModalNewCard(props) {
   const inputTitle = React.useRef(null);
@@ -53,6 +56,44 @@ function ModalNewCard(props) {
       return;
     }
 
+    if (inputIdTarget === "inputTitle" || inputIdTarget === "inputDesc" ) {
+      console.log(e.target.value);
+      // console.log(profanities.find(e.target.value));
+
+      const newArr = e.target.value.split(' ');
+      console.log(newArr);
+
+      newArr.map((word, index) => {
+        console.log(word);
+        console.log(profanities.includes(word));
+        console.log(ProfanitiesFr.includes(word));
+
+        if (!newState.error[inputIdTarget].accessToChange) {
+        if (profanities.includes(word) || ProfanitiesFr.includes(word)) {
+            console.log("insulteee");
+
+            return updateState(inputIdTarget, "Insulte.");
+          }
+
+        }
+            // if (newState.error[inputIdTarget].accessToChange) {
+                newState.error[inputIdTarget].error = false;
+                newState.error[inputIdTarget].message = "";
+                newState.error[inputIdTarget].accessToChange = false;
+              
+                return setData(newState);
+              // }
+
+        // newState.error[inputIdTarget].error = false;
+        // newState.error[inputIdTarget].message = "";
+        // newState.error[inputIdTarget].accessToChange = false;
+
+        // setData(newState);
+
+        // return;
+      })
+    }
+
     if (!newState.error[inputIdTarget].accessToChange) {
       newState.error[inputIdTarget].accessToChange = true;
     }
@@ -90,7 +131,7 @@ function ModalNewCard(props) {
   }
 
   return (
-    <ModalNewCardStyled btnDisabled={data.btnDisabled}>
+    <ModalNewCardStyled btnDisabled={data.btnDisabled} isError={data.error.inputDesc ? data.error.inputDesc.error : false}>
       <div className="card--content">
         <div className="card--title">
           <div className="card--img">
@@ -151,9 +192,15 @@ function ModalNewCard(props) {
               cols="34"
               placeholder="Ajoutez une description"
               ref={inputDesc}
-              // onBlur={checkUserData}
-              // onChange={checkUserData}
+              onBlur={checkCardData}
+              onChange={checkCardData}
             ></textarea>
+            {data.error.inputDesc && (
+              <div className="error--message">
+                <small>{data.error.inputDesc.message}</small>
+                <img src={WarningIcon} alt="warning--icon"></img>
+              </div>
+            )}
           </div>
           <div className="card--buttons">
             <input
