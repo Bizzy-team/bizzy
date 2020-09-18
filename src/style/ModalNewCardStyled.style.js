@@ -52,7 +52,8 @@ const ModalNewCardStyled = styled.section`
           font-weight: 200;
           padding: 20px 12px;
           margin: 0 5px;
-          border: solid 2px ${props => props.theme.colorText};
+          border: solid 2px;
+          /* border: solid 2px ${props => props.theme.colorText}; */
           border-radius: 20px;
           border-color: ${props =>
             props.isError ? props.theme.colorRed : props.theme.colorLola};
@@ -63,6 +64,25 @@ const ModalNewCardStyled = styled.section`
             border: solid 2px ${props => props.theme.colorBtn};
             outline: none;
             opacity: 1;
+          }
+        }
+        .error--message {
+          display: flex;
+          justify-content: space-between;
+          font-size: .9em;
+          color: ${props => props.theme.colorRed};;
+          margin-top: ${props => {
+            if (props.marginSize) {
+              if (props.isError) {
+                return "7px;";
+              }
+            }
+            return "16px;";
+          }};
+
+          img {
+            display: ${props => props.isError ? "block" : "none"};
+            width: 18px;
           }
         }
       }
