@@ -40,6 +40,7 @@
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
         "dotenv": "^8.2.0",
+        "profanities": "^2.14.0",
         "react": "^16.13.0",
         "react-dom": "^16.13.0",
         "react-multi-carousel": "^2.5.5",
