@@ -56,42 +56,43 @@ function ModalNewCard(props) {
       return;
     }
 
-    if (inputIdTarget === "inputTitle" || inputIdTarget === "inputDesc" ) {
+    if (inputIdTarget === "inputTitle" || inputIdTarget === "inputDesc") {
       console.log(e.target.value);
       // console.log(profanities.find(e.target.value));
 
-      const newArr = e.target.value.split(' ');
+      const newArr = e.target.value.split(" ");
       console.log(newArr);
 
-      newArr.map((word, index) => {
-        console.log(word);
-        console.log(profanities.includes(word));
-        console.log(ProfanitiesFr.includes(word));
 
-        if (!newState.error[inputIdTarget].accessToChange) {
-        if (profanities.includes(word) || ProfanitiesFr.includes(word)) {
-            console.log("insulteee");
+      console.log(newState.error[inputIdTarget].accessToChange);
 
-            return updateState(inputIdTarget, "Insulte.");
-          }
+      // if (newState.error[inputIdTarget].accessToChange) {
+        return newArr.map((word, index) => {
+  
+          // if (!newState.error[inputIdTarget].accessToChange) {
+            if (profanities.includes(word) || ProfanitiesFr.includes(word)) {
+              console.log("insulteee");
 
-        }
-            // if (newState.error[inputIdTarget].accessToChange) {
-                newState.error[inputIdTarget].error = false;
-                newState.error[inputIdTarget].message = "";
-                newState.error[inputIdTarget].accessToChange = false;
-              
-                return setData(newState);
-              // }
+              newState.error[inputIdTarget].error = true;
+              newState.error[inputIdTarget].message = "Insulteee";
+              newState.error[inputIdTarget].accessToChange = true;
 
-        // newState.error[inputIdTarget].error = false;
-        // newState.error[inputIdTarget].message = "";
-        // newState.error[inputIdTarget].accessToChange = false;
+              return setData(newState);
+  
+              // return updateState(inputIdTarget, "Insulte.");
+            }
 
-        // setData(newState);
+            // return setData(newState);
 
-        // return;
-      })
+          // }
+
+          // if (newState.error[inputIdTarget].accessToChange) {
+          // newState.error[inputIdTarget].error = false;
+          // newState.error[inputIdTarget].message = "";
+          // newState.error[inputIdTarget].accessToChange = false;
+  
+          return setData(newState);
+        });
     }
 
     if (!newState.error[inputIdTarget].accessToChange) {
@@ -131,7 +132,10 @@ function ModalNewCard(props) {
   }
 
   return (
-    <ModalNewCardStyled btnDisabled={data.btnDisabled} isError={data.error.inputDesc ? data.error.inputDesc.error : false}>
+    <ModalNewCardStyled
+      btnDisabled={data.btnDisabled}
+      isError={data.error.inputDesc ? data.error.inputDesc.error : false}
+    >
       <div className="card--content">
         <div className="card--title">
           <div className="card--img">
