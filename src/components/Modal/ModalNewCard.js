@@ -58,7 +58,9 @@ function ModalNewCard(props) {
 
     if (inputIdTarget === "inputTitle" || inputIdTarget === "inputDesc") {
       const newArr = e.target.value.split(" ");
-      const includeBadWord = newArr.some((word) => profanities.includes(word) || ProfanitiesFr.includes(word) && true);
+      const includeBadWord = newArr.some(
+        word => profanities.includes(word) || (ProfanitiesFr.includes(word) && true)
+      );
 
       if (includeBadWord) {
         return updateState(inputIdTarget, "Insulte");
