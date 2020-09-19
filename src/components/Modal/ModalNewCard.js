@@ -57,47 +57,18 @@ function ModalNewCard(props) {
     }
 
     if (inputIdTarget === "inputTitle" || inputIdTarget === "inputDesc") {
-      console.log(e.target.value);
-      // console.log(profanities.find(e.target.value));
-
       const newArr = e.target.value.split(" ");
-      console.log(newArr);
+      const includeBadWord = newArr.some((word) => profanities.includes(word) || ProfanitiesFr.includes(word) && true);
 
-
-      console.log(newState.error[inputIdTarget].accessToChange);
-
-      // if (newState.error[inputIdTarget].accessToChange) {
-        return newArr.map((word, index) => {
-  
-          // if (!newState.error[inputIdTarget].accessToChange) {
-            if (profanities.includes(word) || ProfanitiesFr.includes(word)) {
-              console.log("insulteee");
-
-              newState.error[inputIdTarget].error = true;
-              newState.error[inputIdTarget].message = "Insulteee";
-              newState.error[inputIdTarget].accessToChange = true;
-
-              return setData(newState);
-  
-              // return updateState(inputIdTarget, "Insulte.");
-            }
-
-            // return setData(newState);
-
-          // }
-
-          // if (newState.error[inputIdTarget].accessToChange) {
-          // newState.error[inputIdTarget].error = false;
-          // newState.error[inputIdTarget].message = "";
-          // newState.error[inputIdTarget].accessToChange = false;
-  
-          return setData(newState);
-        });
+      if (includeBadWord) {
+        return updateState(inputIdTarget, "Insulte");
+      }
     }
 
     if (!newState.error[inputIdTarget].accessToChange) {
       newState.error[inputIdTarget].accessToChange = true;
     }
+
     newState.error[inputIdTarget].error = false;
     newState.error[inputIdTarget].message = "";
 
