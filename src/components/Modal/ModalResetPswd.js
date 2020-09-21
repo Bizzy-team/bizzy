@@ -5,7 +5,7 @@ import InputsForm from "../InputsForm/InputsForm";
 import ModalStyled from "../../style/ModalStyled.style";
 import ModalMessage from "./ModalMessage";
 
-function Modal(props) {
+function ModalResetPassword(props) {
   const inputOldPswd = React.useRef(null);
   const inputNewPswd = React.useRef(null);
   const inputCheckPswd = React.useRef(null);
@@ -27,6 +27,16 @@ function Modal(props) {
     };
 
     arrInputId.forEach(element => (newState.error[element] = { ...obj }));
+
+    document.addEventListener("click", function modalClose(e) {
+      console.log(document.querySelector(".pswd--reset--content"));
+      if (document.querySelector(".pswd--reset--content").contains(e.target)) {
+        return;
+      } else {
+        props.updateStateParent(props.isModalResetPassword);
+        document.removeEventListener("click", modalClose);
+      }
+    });
 
     return setData(newState);
   }, []); //eslint-disable-line
@@ -192,4 +202,4 @@ function Modal(props) {
   );
 }
 
-export default Modal;
+export default ModalResetPassword;

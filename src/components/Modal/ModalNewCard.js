@@ -34,25 +34,15 @@ function ModalNewCard(props) {
 
     arrInputId.forEach(element => (newState.error[element] = { ...obj }));
 
-    console.log(props);
-
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", function modalClose(e) {
+      console.log(document.querySelector(".card--content"))
       if (document.querySelector(".card--content").contains(e.target)) {
-        console.log("c'est dans la boite");
+        return;
       } else {
-        console.log("pas dans la boite");
-
-        console.log(props);
-        // const newState = {props};
-
-        // console.log(newState);
-
-        // props.isModalNewCard = false;
         props.updateStateParent(props.isModalNewCard);
-        // return setData(props);
-
+        document.removeEventListener("click", modalClose);
       }
-    })
+    });
 
     return setData(newState);
   }, []); //eslint-disable-line
@@ -125,44 +115,10 @@ function ModalNewCard(props) {
     return setData(newState);
   }
 
-
-
-  function test() {
-    document.addEventListener("click", (e) => {
-      if (document.querySelector(".card--content").contains(e.target)) {
-        console.log("c'est dans la boite");
-      } else {
-        console.log("pas dans la boite");
-
-        console.log(props);
-        const newState = {...props};
-
-        console.log(newState);
-
-        newState.isModalNewCard = false;
-        return setData(newState);
-
-        // props.isModalNewCard = false;
-        // return setData(props.isModalNewCard);
-
-        // document.querySelector(".card--content").style.display = "none";
-        // const newState  = {...props.data};
-
-        // newState.isModalNewCard = false;
-
-        // return setData(newState);
-      }
-
-      // return;
-    })
-  }
-
-
   return (
     <ModalNewCardStyled
       btnDisabled={data.btnDisabled}
       isError={data.error.inputDesc ? data.error.inputDesc.error : false}
-      // onClick={test}
     >
       <div className="card--content">
         <div className="card--title">

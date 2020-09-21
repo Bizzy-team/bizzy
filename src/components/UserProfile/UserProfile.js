@@ -8,7 +8,7 @@ import IconSettings from "../../img/settings_mobile.svg";
 import IconSectionCards from "../../img/icon_cards.svg";
 import IconAdd from "../../img/icon_add.svg";
 import Arrow from "../../img/arrow.svg";
-import Modal from "../Modal/ModalResetPswd";
+import ModalResetPassword from "../Modal/ModalResetPswd";
 import ModalDeleteProfile from "../Modal/ModalDeleteProfile";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -29,7 +29,7 @@ function UserProfile() {
     btnDisabled: true,
     error: {},
     isDisabled: true,
-    showModal: false,
+    isModalResetPassword: false,
     isModalDeleteProfile: false,
     isModalNewCard: false
     // isBtnCancel: false
@@ -168,7 +168,7 @@ function UserProfile() {
     const newState = { ...data };
 
     if (e.target.id === "btn--change--pswd") {
-      newState.showModal = true;
+      newState.isModalResetPassword = true;
       document.querySelector("body").style.overflow = "hidden";
 
       return setData(newState);
@@ -189,9 +189,20 @@ function UserProfile() {
       return setData(newState);
     }
 
-    newState.showModal = false;
+    newState.isModalResetPassword = false;
     newState.isModalDeleteProfile = false;
     newState.isModalNewCard = false;
+    document.querySelector("body").style.overflow = "auto";
+
+    return setData(newState);
+  }
+
+  function closeModalOutside() {
+    const newState = { ...data };
+
+    newState.isModalNewCard = false;
+    newState.isModalResetPassword = false;
+    newState.isModalDeleteProfile = false;
     document.querySelector("body").style.overflow = "auto";
 
     return setData(newState);
@@ -203,15 +214,6 @@ function UserProfile() {
   //   }
   // }
 
-  function t() {
-    const newState = {...data};
-
-    newState.isModalNewCard = false;
-
-    document.querySelector("body").style.overflow = "auto";
-
-    return setData(newState);
-  }
 
   return (
     <>
@@ -221,11 +223,24 @@ function UserProfile() {
         isDisabled={data.isDisabled}
         btnDisabled={data.btnDisabled}
       >
-        {data.showModal && <Modal closeModal={isModal}></Modal>}
-        {data.isModalDeleteProfile && (
-          <ModalDeleteProfile closeModal={isModal}></ModalDeleteProfile>
+        {data.isModalResetPassword && (
+          <ModalResetPassword
+            closeModal={isModal}
+            updateStateParent={closeModalOutside}
+          ></ModalResetPassword>
         )}
-        {data.isModalNewCard && <ModalNewCard closeModal={isModal}  updateStateParent={t}></ModalNewCard>}
+        {data.isModalDeleteProfile && (
+          <ModalDeleteProfile
+            closeModal={isModal}
+            updateStateParent={closeModalOutside}
+          ></ModalDeleteProfile>
+        )}
+        {data.isModalNewCard && (
+          <ModalNewCard
+            closeModal={isModal}
+            updateStateParent={closeModalOutside}
+          ></ModalNewCard>
+        )}
         <section className="profile--user--data">
           <div className="profile--user--data--title">
             <div className="profile--user--data--img">

@@ -7,6 +7,19 @@ import ModalDeleteProfileStyled from "../../style/ModalDeleteProfileStyled.style
 function ModalDeleteProfile(props) {
   const [redirect, setRedirect] = React.useState(false);
 
+  React.useEffect(() => {
+    document.addEventListener("click", function modalClose(e) {
+      console.log(document.querySelector(".modal--content"));
+      
+      if (document.querySelector(".modal--content").contains(e.target)) {
+        return;
+      } else {
+        props.updateStateParent(props.isModalDeleteProfile);
+        document.removeEventListener("click", modalClose);
+      }
+    });
+  }, []); //eslint-disable-line
+
   function deleteProfile() {
     let newState = { ...redirect };
 
