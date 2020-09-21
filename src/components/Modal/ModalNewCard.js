@@ -53,6 +53,7 @@ function ModalNewCard(props) {
       if (newState.error[inputIdTarget].accessToChange) {
         return updateState(inputIdTarget, "Champs vide.");
       }
+
       return;
     }
 
@@ -63,36 +64,34 @@ function ModalNewCard(props) {
       const newArr = e.target.value.split(" ");
       console.log(newArr);
 
-
       console.log(newState.error[inputIdTarget].accessToChange);
 
       // if (newState.error[inputIdTarget].accessToChange) {
-        return newArr.map((word, index) => {
-  
-          // if (!newState.error[inputIdTarget].accessToChange) {
-            if (profanities.includes(word) || ProfanitiesFr.includes(word)) {
-              console.log("insulteee");
+      return newArr.map((word, index) => {
+        // if (!newState.error[inputIdTarget].accessToChange) {
+        if (profanities.includes(word) || ProfanitiesFr.includes(word)) {
+          console.log("insulteee");
 
-              newState.error[inputIdTarget].error = true;
-              newState.error[inputIdTarget].message = "Insulteee";
-              newState.error[inputIdTarget].accessToChange = true;
+          newState.error[inputIdTarget].error = true;
+          newState.error[inputIdTarget].message = "Insulteee";
+          newState.error[inputIdTarget].accessToChange = true;
 
-              return setData(newState);
-  
-              // return updateState(inputIdTarget, "Insulte.");
-            }
-
-            // return setData(newState);
-
-          // }
-
-          // if (newState.error[inputIdTarget].accessToChange) {
-          // newState.error[inputIdTarget].error = false;
-          // newState.error[inputIdTarget].message = "";
-          // newState.error[inputIdTarget].accessToChange = false;
-  
           return setData(newState);
-        });
+
+          // return updateState(inputIdTarget, "Insulte.");
+        }
+
+        // return setData(newState);
+
+        // }
+
+        // if (newState.error[inputIdTarget].accessToChange) {
+        // newState.error[inputIdTarget].error = false;
+        // newState.error[inputIdTarget].message = "";
+        // newState.error[inputIdTarget].accessToChange = false;
+
+        // return setData(newState);
+      });
     }
 
     if (!newState.error[inputIdTarget].accessToChange) {
