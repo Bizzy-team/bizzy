@@ -8,8 +8,17 @@ function ModalDeleteProfile(props) {
   const [redirect, setRedirect] = React.useState(false);
 
   React.useEffect(() => {
+    console.log(props);
     document.addEventListener("click", function modalClose(e) {
-      console.log(document.querySelector(".modal--content"));
+      console.log("coucous");
+
+      console.log(e.target.className);
+
+      if (e.target.className === "close--arrow") {
+        console.log("c la croix");
+        props.updateStateParent(props.isModalDeleteProfile);
+        document.removeEventListener("click", modalClose);
+      }
 
       if (document.querySelector(".modal--content").contains(e.target)) {
         return;
@@ -52,7 +61,7 @@ function ModalDeleteProfile(props) {
             src={CloseArrow}
             alt="icon--close"
             className="close--arrow"
-            onClick={props.closeModal}
+            // onClick={props.closeModal}
           ></img>
         </div>
         <div className="modal--message">
