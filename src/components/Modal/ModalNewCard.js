@@ -35,7 +35,7 @@ function ModalNewCard(props) {
     arrInputId.forEach(element => (newState.error[element] = { ...obj }));
 
     document.addEventListener("click", function modalClose(e) {
-      console.log(document.querySelector(".card--content"))
+      console.log(document.querySelector(".card--content"));
       if (document.querySelector(".card--content").contains(e.target)) {
         return;
       } else {

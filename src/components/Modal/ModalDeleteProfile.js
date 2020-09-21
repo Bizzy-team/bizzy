@@ -10,7 +10,7 @@ function ModalDeleteProfile(props) {
   React.useEffect(() => {
     document.addEventListener("click", function modalClose(e) {
       console.log(document.querySelector(".modal--content"));
-      
+
       if (document.querySelector(".modal--content").contains(e.target)) {
         return;
       } else {
