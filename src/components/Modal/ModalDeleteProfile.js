@@ -8,16 +8,17 @@ function ModalDeleteProfile(props) {
   const [redirect, setRedirect] = React.useState(false);
 
   React.useEffect(() => {
-    console.log(props);
     document.addEventListener("click", function modalClose(e) {
-      console.log("coucous");
-
-      console.log(e.target.className);
-
       if (e.target.className === "close--arrow") {
-        console.log("c la croix");
         props.updateStateParent(props.isModalDeleteProfile);
         document.removeEventListener("click", modalClose);
+        return;
+      }
+
+      if (e.target.className === "btn--cancel") {
+        props.updateStateParent(props.isModalDeleteProfile);
+        document.removeEventListener("click", modalClose);
+        return;
       }
 
       if (document.querySelector(".modal--content").contains(e.target)) {
@@ -81,7 +82,7 @@ function ModalDeleteProfile(props) {
             type="button"
             value="Annuler"
             className="btn--cancel"
-            onClick={props.closeModal}
+            // onClick={props.closeModal}
           ></input>
         </div>
       </div>
