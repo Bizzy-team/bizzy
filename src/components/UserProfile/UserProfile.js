@@ -203,6 +203,16 @@ function UserProfile() {
   //   }
   // }
 
+  function t() {
+    const newState = {...data};
+
+    newState.isModalNewCard = false;
+
+    document.querySelector("body").style.overflow = "auto";
+
+    return setData(newState);
+  }
+
   return (
     <>
       <Header />
@@ -215,7 +225,7 @@ function UserProfile() {
         {data.isModalDeleteProfile && (
           <ModalDeleteProfile closeModal={isModal}></ModalDeleteProfile>
         )}
-        {data.isModalNewCard && <ModalNewCard closeModal={isModal}></ModalNewCard>}
+        {data.isModalNewCard && <ModalNewCard closeModal={isModal}  updateStateParent={t}></ModalNewCard>}
         <section className="profile--user--data">
           <div className="profile--user--data--title">
             <div className="profile--user--data--img">
