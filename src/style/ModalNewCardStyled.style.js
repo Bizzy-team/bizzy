@@ -81,7 +81,7 @@ const ModalNewCardStyled = styled.section`
           }};
 
           img {
-            display: ${props => props.isError ? "block" : "none"};
+            display: ${props => (props.isError ? "block" : "none")};
             width: 18px;
           }
         }
