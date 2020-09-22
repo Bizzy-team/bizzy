@@ -3,7 +3,6 @@ import Header from "../Header/Header";
 import UserProfileStyled from "../../style/UserProfileStyled.style";
 import EditImg from "../../img/edit_img.svg";
 import InputsForm from "../InputsForm/InputsForm";
-import bcImg from "../../img/bc_desktop.svg";
 import IconSettings from "../../img/settings_mobile.svg";
 import IconSectionCards from "../../img/icon_cards.svg";
 import IconAdd from "../../img/icon_add.svg";
@@ -188,13 +187,6 @@ function UserProfile() {
 
       return setData(newState);
     }
-
-    newState.isModalResetPassword = false;
-    newState.isModalDeleteProfile = false;
-    newState.isModalNewCard = false;
-    document.querySelector("body").style.overflow = "auto";
-
-    return setData(newState);
   }
 
   function closeModalOutside() {
@@ -224,19 +216,16 @@ function UserProfile() {
       >
         {data.isModalResetPassword && (
           <ModalResetPassword
-            closeModal={isModal}
             updateStateParent={closeModalOutside}
           ></ModalResetPassword>
         )}
         {data.isModalDeleteProfile && (
           <ModalDeleteProfile
-            closeModal={isModal}
             updateStateParent={closeModalOutside}
           ></ModalDeleteProfile>
         )}
         {data.isModalNewCard && (
           <ModalNewCard
-            closeModal={isModal}
             updateStateParent={closeModalOutside}
           ></ModalNewCard>
         )}
