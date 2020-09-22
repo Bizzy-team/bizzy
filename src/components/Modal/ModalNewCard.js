@@ -35,7 +35,18 @@ function ModalNewCard(props) {
     arrInputId.forEach(element => (newState.error[element] = { ...obj }));
 
     document.addEventListener("click", function modalClose(e) {
-      console.log(document.querySelector(".card--content"));
+      if (e.target.className === "close--arrow") {
+        props.updateStateParent(props.isModalDeleteProfile);
+        document.removeEventListener("click", modalClose);
+        return;
+      }
+
+      if (e.target.className === "btn--cancel") {
+        props.updateStateParent(props.isModalDeleteProfile);
+        document.removeEventListener("click", modalClose);
+        return;
+      }
+
       if (document.querySelector(".card--content").contains(e.target)) {
         return;
       } else {
@@ -132,7 +143,6 @@ function ModalNewCard(props) {
             src={CloseArrow}
             alt="icon--close"
             className="close--arrow"
-            onClick={props.closeModal}
           ></img>
         </div>
         <div className="card--moods">
@@ -201,7 +211,6 @@ function ModalNewCard(props) {
               type="button"
               value="Annuler"
               className="btn--cancel"
-              onClick={props.closeModal}
             ></input>
           </div>
         </div>

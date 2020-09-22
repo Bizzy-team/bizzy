@@ -62,7 +62,6 @@ function ModalDeleteProfile(props) {
             src={CloseArrow}
             alt="icon--close"
             className="close--arrow"
-            // onClick={props.closeModal}
           ></img>
         </div>
         <div className="modal--message">
@@ -82,7 +81,6 @@ function ModalDeleteProfile(props) {
             type="button"
             value="Annuler"
             className="btn--cancel"
-            // onClick={props.closeModal}
           ></input>
         </div>
       </div>

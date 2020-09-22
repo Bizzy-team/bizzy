@@ -29,7 +29,18 @@ function ModalResetPassword(props) {
     arrInputId.forEach(element => (newState.error[element] = { ...obj }));
 
     document.addEventListener("click", function modalClose(e) {
-      console.log(document.querySelector(".pswd--reset--content"));
+      if (e.target.className === "close--arrow") {
+        props.updateStateParent(props.isModalDeleteProfile);
+        document.removeEventListener("click", modalClose);
+        return;
+      }
+
+      if (e.target.className === "btn--cancel") {
+        props.updateStateParent(props.isModalDeleteProfile);
+        document.removeEventListener("click", modalClose);
+        return;
+      }
+
       if (document.querySelector(".pswd--reset--content").contains(e.target)) {
         return;
       } else {
@@ -152,7 +163,6 @@ function ModalResetPassword(props) {
               src={CloseArrow}
               alt="icon--close"
               className="close--arrow"
-              onClick={props.closeModal}
             ></img>
           </div>
           <div className="modal--inputs">
@@ -193,7 +203,6 @@ function ModalResetPassword(props) {
               type="button"
               value="Annuler"
               className="btn--cancel"
-              onClick={props.closeModal}
             ></input>
           </div>
         </div>
