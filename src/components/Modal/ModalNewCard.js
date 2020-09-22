@@ -139,11 +139,7 @@ function ModalNewCard(props) {
           <div className="card--name">
             <h2>New card</h2>
           </div>
-          <img
-            src={CloseArrow}
-            alt="icon--close"
-            className="close--arrow"
-          ></img>
+          <img src={CloseArrow} alt="icon--close" className="close--arrow"></img>
         </div>
         <div className="card--moods">
           <h4>Choisissez votre mood:</h4>
@@ -207,11 +203,7 @@ function ModalNewCard(props) {
               className="btn--send"
               disabled={data.btnDisabled}
             ></input>
-            <input
-              type="button"
-              value="Annuler"
-              className="btn--cancel"
-            ></input>
+            <input type="button" value="Annuler" className="btn--cancel"></input>
           </div>
         </div>
       </div>

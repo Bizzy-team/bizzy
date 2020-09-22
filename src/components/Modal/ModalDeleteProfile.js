@@ -58,11 +58,7 @@ function ModalDeleteProfile(props) {
             <img src={GeometryImg} alt="modal--title"></img>
           </div>
           <h2>Supprimer mon profil</h2>
-          <img
-            src={CloseArrow}
-            alt="icon--close"
-            className="close--arrow"
-          ></img>
+          <img src={CloseArrow} alt="icon--close" className="close--arrow"></img>
         </div>
         <div className="modal--message">
           <p>
@@ -77,11 +73,7 @@ function ModalDeleteProfile(props) {
             className="btn--delete"
             onClick={deleteProfile}
           ></input>
-          <input
-            type="button"
-            value="Annuler"
-            className="btn--cancel"
-          ></input>
+          <input type="button" value="Annuler" className="btn--cancel"></input>
         </div>
       </div>
     </ModalDeleteProfileStyled>

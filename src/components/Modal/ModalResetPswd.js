@@ -159,11 +159,7 @@ function ModalResetPassword(props) {
               <img src={GeometryImg} alt="icon--title"></img>
             </div>
             <h2>Changer le mot de passe</h2>
-            <img
-              src={CloseArrow}
-              alt="icon--close"
-              className="close--arrow"
-            ></img>
+            <img src={CloseArrow} alt="icon--close" className="close--arrow"></img>
           </div>
           <div className="modal--inputs">
             <InputsForm
@@ -199,11 +195,7 @@ function ModalResetPassword(props) {
               className="btn--change"
               onClick={changePswd}
             ></input>
-            <input
-              type="button"
-              value="Annuler"
-              className="btn--cancel"
-            ></input>
+            <input type="button" value="Annuler" className="btn--cancel"></input>
           </div>
         </div>
       </ModalStyled>

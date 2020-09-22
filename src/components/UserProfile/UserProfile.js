@@ -215,19 +215,13 @@ function UserProfile() {
         btnDisabled={data.btnDisabled}
       >
         {data.isModalResetPassword && (
-          <ModalResetPassword
-            updateStateParent={closeModalOutside}
-          ></ModalResetPassword>
+          <ModalResetPassword updateStateParent={closeModalOutside}></ModalResetPassword>
         )}
         {data.isModalDeleteProfile && (
-          <ModalDeleteProfile
-            updateStateParent={closeModalOutside}
-          ></ModalDeleteProfile>
+          <ModalDeleteProfile updateStateParent={closeModalOutside}></ModalDeleteProfile>
         )}
         {data.isModalNewCard && (
-          <ModalNewCard
-            updateStateParent={closeModalOutside}
-          ></ModalNewCard>
+          <ModalNewCard updateStateParent={closeModalOutside}></ModalNewCard>
         )}
         <section className="profile--user--data">
           <div className="profile--user--data--title">
