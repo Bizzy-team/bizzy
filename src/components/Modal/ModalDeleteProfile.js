@@ -9,7 +9,7 @@ function ModalDeleteProfile(props) {
 
   React.useEffect(() => {
     document.addEventListener("click", function modalClose(e) {
-      if ((e.target.className === "close--arrow") || (e.target.className === "btn--cancel")) {
+      if (e.target.className === "close--arrow" || e.target.className === "btn--cancel") {
         props.updateStateParent(props.isModalDeleteProfile);
         document.removeEventListener("click", modalClose);
         return;
