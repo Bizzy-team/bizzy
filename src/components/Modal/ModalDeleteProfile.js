@@ -9,23 +9,19 @@ function ModalDeleteProfile(props) {
 
   React.useEffect(() => {
     document.addEventListener("click", function modalClose(e) {
-      if (e.target.className === "close--arrow") {
+      if ((e.target.className === "close--arrow") || (e.target.className === "btn--cancel")) {
         props.updateStateParent(props.isModalDeleteProfile);
         document.removeEventListener("click", modalClose);
         return;
       }
 
-      if (e.target.className === "btn--cancel") {
-        props.updateStateParent(props.isModalDeleteProfile);
-        document.removeEventListener("click", modalClose);
-        return;
-      }
-
-      if (document.querySelector(".modal--content").contains(e.target)) {
-        return;
-      } else {
-        props.updateStateParent(props.isModalDeleteProfile);
-        document.removeEventListener("click", modalClose);
+      if (document.querySelector(".modal--content") !== null) {
+        if (document.querySelector(".modal--content").contains(e.target)) {
+          return;
+        } else {
+          props.updateStateParent(props.isModalDeleteProfile);
+          document.removeEventListener("click", modalClose);
+        }
       }
     });
   }, []); //eslint-disable-line
