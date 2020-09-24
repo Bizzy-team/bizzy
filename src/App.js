@@ -6,7 +6,7 @@ import ErrorMessageTokenStyled from "./style/ErrorMessageTokenStyled.style";
 import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
 import Feed from "./components/Feed/Feed";
 import UserProfile from "./components/UserProfile/UserProfile";
-import ShareYourMood from "./components/YourMood/ShareYourMood";
+// import ShareYourMood from "./components/YourMood/ShareYourMood";
 import variables from "./variables";
 import ResetPswd from "./components/ResetPswd/ResetPswd";
 import ForgotPasswordConfirm from "./components/ForgotPasswordForm/ForgotPasswordConfirm";

@@ -23,7 +23,7 @@ function StartPage(props) {
 
       return setData(newState);
     }
-  }, []);
+  }, []); //eslint-disable-line
 
   function headerStyle() {
     if (window.scrollY === 0) {
