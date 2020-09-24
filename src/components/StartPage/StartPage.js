@@ -6,11 +6,22 @@ import imgTitle from "../../img/img_title.png";
 import imgAfterwork from "../../img/img_afterwork.png";
 import imgPosition from "../../img/img_position.png";
 import imgMsg from "../../img/img_msg.png";
+import ModalMessage from "../Modal/ModalMessage";
 
-function StartPage() {
+function StartPage(props) {
+  const [data, setData] = React.useState(false);
+
   React.useEffect(() => {
     window.addEventListener("scroll", headerStyle);
-  }, []);
+
+    if (props.location.search) {
+      let newState = { ...data };
+
+      newState = props.location.state.isModalDelete;
+
+      return setData(newState);
+    }
+  }, []); //eslint-disable-line
 
   function headerStyle() {
     if (window.scrollY === 0) {
@@ -26,9 +37,29 @@ function StartPage() {
       "box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18); transition: box-shadow .3s cubic-bezier(.35,0,.65,1) 0s";
   }
 
+  function closeModal(e) {
+    let newState = { ...data };
+
+    if (e.target.className === "btn--ok" || e.target.className === "close--arrow") {
+      newState = false;
+      props.location.state.isModalDelete = false;
+      document.querySelector("body").style.overflow = "auto";
+    }
+
+    return setData(newState);
+  }
+
   return (
     <>
       <Header />
+      {data && (
+        <ModalMessage
+          closeModal={closeModal}
+          modalTitle="Votre profil est supprimé :("
+          modalMessage="C'est dommage ! Votre profil a été supprimé, nous espérons vous revoir ! N'hésitez pas à envoyer votre retour pour améliorer nos services."
+          modalBtnValue="Ok"
+        ></ModalMessage>
+      )}
       <StartPageStyled as="main" className="startPage--about">
         <section>
           <div className="section--content">

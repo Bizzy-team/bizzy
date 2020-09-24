@@ -7,7 +7,18 @@ const InputsForm = styled(GlobalContainer)`
   color: ${props => props.theme.colorLola};
   display: flex;
   flex-direction: column;
-  margin-bottom: 10%;
+  /* margin-bottom: 10%; */
+  margin-bottom: ${props => {
+    if (props.marginSize) {
+      if (props.isError) {
+        return "1%;";
+      }
+
+      return "7%;";
+    }
+
+    return "10%;";
+  }};
   position: relative;
   input {
     /* ${props => props.marginLeft && `margin-left: ${props.marginLeft}`}; */
@@ -18,6 +29,7 @@ const InputsForm = styled(GlobalContainer)`
     color: ${props => props.theme.colorText};
     border-color: ${props =>
       props.isError ? props.theme.colorRed : props.theme.colorLola};
+    background-color: ${props => props.theme.colorPrincipal};
     /* padding: 26px 0 0 10px; */
 
     &:focus {
@@ -39,7 +51,16 @@ const InputsForm = styled(GlobalContainer)`
     justify-content: space-between;
     font-size: .9em;
     color: ${props => props.theme.colorRed};;
-    margin-top: 16px;
+    /* margin-top: 16px; */
+    margin-top: ${props => {
+      if (props.marginSize) {
+        if (props.isError) {
+          return "7px;";
+        }
+      }
+
+      return "16px;";
+    }};
 
     img {
       width: 18px;
