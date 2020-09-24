@@ -1,30 +1,27 @@
-import React, { useState } from "react";
-import Header from "../Header/Header";
-import LogginSpace from "../LogginSpace/LogginSpace";
-import SigninSpace from "../SignUpSpace/SignUpSpace";
+import React from "react";
+import mapboxgl from 'mapbox-gl';
+import HomeHeader from "./HomeHeader";
 
 function Home() {
-  const [data, setData] = useState({
-    signUp: false
-  });
 
-  function switchPage(e) {
-    if (e.target.id === "sign--up--btn") {
-      return setData({
-        signUp: true
-      });
-    }
+  React.useEffect(() => {
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia3ZpbjMzMjQiLCJhIjoiY2thaTZweWM2MDdpZTJzczBqdDE5YjVyeiJ9.bKdiEHmbDnDtQUnNU-jI7Q';
 
-    return setData({
-      signUp: false
+     new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+        center: [-74.5, 40], // starting position [lng, lat]
+        zoom: 3 // starting zoom
     });
-  }
+  })
 
   return (
-    <React.Fragment>
-      <Header switchPage={e => switchPage(e)} />
-      {data.signUp ? <SigninSpace /> : <LogginSpace />}
-    </React.Fragment>
+    <>
+      <HomeHeader/>
+      <div>
+        <div id="map" style={{position: 'absolute'}}></div>
+      </div>
+    </>
   );
 }
 

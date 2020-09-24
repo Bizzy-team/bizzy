@@ -4,7 +4,7 @@ import { Route, BrowserRouter, Link, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import ErrorMessageTokenStyled from "./style/ErrorMessageTokenStyled.style";
 import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
-import Feed from "./components/Feed/Feed";
+import Home from "./components/Home/Home";
 import UserProfile from "./components/UserProfile/UserProfile";
 // import ShareYourMood from "./components/YourMood/ShareYourMood";
 import variables from "./variables";
@@ -86,7 +86,8 @@ function App() {
             render={() => unavailableToken(ForgotPasswordConfirm)}
           ></Route>
           <Route exact path="/reset_pswd_form" component={ResetPswd} />
-          <Route exact path="/feed" render={() => availableToken(Feed)} />
+          <Route exact path="/Home" component={Home} />
+          {/* <Route exact path="/Home" render={() => availableToken(Home)} /> */}
           <Route strict path="/:name" component={UserProfile} />
         </Switch>
         {/* <Route
