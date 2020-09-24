@@ -9,17 +9,15 @@ import imgMsg from "../../img/img_msg.png";
 import ModalMessage from "../Modal/ModalMessage";
 
 function StartPage(props) {
-  const [data, setData] = React.useState({
-    isModalDelete: false
-  });
+  const [data, setData] = React.useState(false);
 
   React.useEffect(() => {
     window.addEventListener("scroll", headerStyle);
 
-    if (props.location.search === "?isModalDelete=true") {
-      const newState = { ...data };
+    if (props.location.search) {
+      let newState = { ...data };
 
-      newState.isModalDelete = props.location.state.isModalDelete;
+      newState = props.location.state.isModalDelete;
 
       return setData(newState);
     }
@@ -40,10 +38,10 @@ function StartPage(props) {
   }
 
   function closeModal(e) {
-    const newState = { ...data };
+    let newState = { ...data };
 
     if (e.target.className === "btn--ok" || e.target.className === "close--arrow") {
-      newState.isModalDelete = false;
+      newState = false;
       props.location.state.isModalDelete = false;
       document.querySelector("body").style.overflow = "auto";
     }
@@ -54,7 +52,7 @@ function StartPage(props) {
   return (
     <>
       <Header />
-      {data.isModalDelete && (
+      {data && (
         <ModalMessage
           closeModal={closeModal}
           modalTitle="Votre profil est supprimé :("
