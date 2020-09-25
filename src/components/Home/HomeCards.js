@@ -1,12 +1,12 @@
 import React from "react";
 import FoodIcon from "../../img/food_mood.svg";
-import UserAvatar from '../../img/user_avatar.svg';
+import UserAvatar from "../../img/user_avatar.svg";
 import Like from "../../img/heart.svg";
 import ParticipantIcon from "../../img/participant_icon.svg";
 import HomeCardsStyled from "../../style/HomeCardsStyled.style";
 
 function HomeCards() {
-  return(
+  return (
     <HomeCardsStyled>
       <div className="card--header">
         <div className="card--img">
@@ -35,12 +35,14 @@ function HomeCards() {
       </div>
       <div className="card--content">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem.
-          Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat
+          massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut
+          placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit
+          mauris nunc in mi. Sit pulvinar proin egestas dolor a at.
         </p>
       </div>
     </HomeCardsStyled>
-  )
-};
+  );
+}
 
 export default HomeCards;

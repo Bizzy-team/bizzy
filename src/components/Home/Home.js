@@ -12,9 +12,9 @@ function Home() {
 
   const sectionStyle = {
     style: {
-      display: 'flex',
-      alignItems: 'center',
-      flexDirection: 'column',
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
       marginTop: "10px"
     },
     styleBtn: {
@@ -26,11 +26,11 @@ function Home() {
       position: "fixed",
       bottom: "85px"
     }
-  }
+  };
 
   React.useEffect(() => {
     document.querySelector("body").style.background = "#F7F6F7";
-  })
+  });
 
   function displayMap() {
     mapboxgl.accessToken = process.env.REACT_APP_TOKEN_MAP_KEY;

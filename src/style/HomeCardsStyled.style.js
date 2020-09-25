@@ -79,26 +79,26 @@ const HomeCardsStyled = styled.div`
         .card--author--about {
           p {
             margin-bottom: 0;
-            font-size: .8em;
+            font-size: 0.8em;
             padding-left: 8px;
           }
         }
       }
     }
     .card--tags {
-    margin-top: 8px;
-    .card--tags--participants {
-      margin-right: 38%;
-      padding: 0px 14px;
-      .card--tags--participants--icon {
-        width: 5vw;
-        padding-right: 4px;
-      }
-      p {
-        margin-bottom: 0;
+      margin-top: 8px;
+      .card--tags--participants {
+        margin-right: 38%;
+        padding: 0px 14px;
+        .card--tags--participants--icon {
+          width: 5vw;
+          padding-right: 4px;
+        }
+        p {
+          margin-bottom: 0;
+        }
       }
     }
-  }
     .card--content {
       margin-top: 5px;
     }

@@ -6,7 +6,7 @@ const HomeStyled = styled.div`
     top: 0;
     bottom: 0;
     width: 100%;
-    .mapboxgl-canvas-container{
+    .mapboxgl-canvas-container {
       .mapboxgl-canvas {
         margin-top: 23%;
       }
