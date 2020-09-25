@@ -10,17 +10,17 @@ function HomeCards() {
     <HomeCardsStyled>
       <div className="card--header">
         <div className="card--img">
-          <img src={FoodIcon}></img>
+          <img src={FoodIcon} alt="food-icon"></img>
         </div>
         <div className="card--title">
           <div className="card--title--name">
             <h2>Pizza pour l'après-midi</h2>
             <div className="card--title--like">
-              <img src={Like}></img>
+              <img src={Like} alt="like-icon"></img>
             </div>
           </div>
           <div className="card--author--about">
-            <img src={UserAvatar}></img>
+            <img src={UserAvatar} alt="avatar-icon"></img>
             <p>Par Sébastien, Content Manager</p>
           </div>
         </div>
@@ -28,7 +28,7 @@ function HomeCards() {
       <div className="card--tags">
         <div className="card--tags--participants">
           <div className="card--tags--participants--icon">
-            <img src={ParticipantIcon}></img>
+            <img src={ParticipantIcon} alt="participant-icon"></img>
           </div>
           <p>3</p>
         </div>

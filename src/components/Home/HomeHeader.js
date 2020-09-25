@@ -8,7 +8,7 @@ function HomeHeader() {
       <div>
         <input type="text" placeholder="Paris 10"></input>
         <button className="btn--filters">
-          <img src={FiltersImg}></img>{" "}
+          <img src={FiltersImg} alt="filters-icon"></img>{" "}
         </button>
         <button className="btn--create">New card</button>
       </div>
