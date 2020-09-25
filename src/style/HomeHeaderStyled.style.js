@@ -2,7 +2,8 @@ import styled from "styled-components";
 import SearchIcon from "../img/search.svg";
 
 const HomeHeaderStyled = styled.header`
-font-family: "Nunito";
+  font-family: "Nunito";
+  background-color: ${props => props.theme.colorPrincipal};
   div {
     display: flex;
     justify-content: space-between;
