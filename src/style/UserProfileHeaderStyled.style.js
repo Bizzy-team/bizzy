@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const UserProfileHeaderStyled = styled.header`
-background-color: ${props => props.theme.colorPrincipal};
-margin-bottom: 20%;
-padding: 20px 18px;
-font-family: "Nunito";
+  background-color: ${props => props.theme.colorPrincipal};
+  margin-bottom: 20%;
+  padding: 20px 18px;
+  font-family: "Nunito";
   div {
     display: flex;
     align-items: center;

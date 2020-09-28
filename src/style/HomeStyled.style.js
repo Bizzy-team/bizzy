@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const HomeStyled = styled.div`
-display: none;
+  display: none;
   #map {
     position: absolute;
     top: 0;
@@ -63,7 +63,7 @@ display: none;
   }
 
   @media screen and (min-width: 1000px) {
-    display: flex!important;
+    display: flex !important;
     flex-direction: row-reverse;
     #map {
       width: 53vw;

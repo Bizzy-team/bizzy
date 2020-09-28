@@ -4,7 +4,7 @@ import UserAvatar from "../../img/user_avatar.svg";
 import UserProfileHeaderStyled from "../../style/UserProfileHeaderStyled.style";
 
 function UserProfileHeader() {
-  return(
+  return (
     <UserProfileHeaderStyled className="user--profile--header">
       <div>
         <div className="app--logo">
@@ -24,7 +24,7 @@ function UserProfileHeader() {
         </div>
       </div>
     </UserProfileHeaderStyled>
-  )
-};
+  );
+}
 
 export default UserProfileHeader;
