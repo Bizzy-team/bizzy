@@ -225,6 +225,17 @@ const HomeCardsStyled = styled.div`
       }
     }
   }
+
+  @media screen and (min-width: 1000px) {
+    .card--header {
+      display: initial;
+      .card--title {
+        .card--title--name {
+          display: initial;
+        }
+      }
+    }
+  }
 `;
 
 export default HomeCardsStyled;
