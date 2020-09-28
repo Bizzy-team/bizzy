@@ -24,6 +24,7 @@ const HomeCardsStyled = styled.div`
       .card--title--name {
         display: flex;
         justify-content: space-between;
+        width: 68vw;
         h2 {
           font-size: 1em;
           line-height: 1.7;
@@ -101,6 +102,127 @@ const HomeCardsStyled = styled.div`
     }
     .card--content {
       margin-top: 5px;
+    }
+  }
+
+  @media screen and (min-width: 445px) {
+    .card--header {
+      .card--img {
+        width: 17vw;
+      }
+      .card--title {
+        .card--title--name {
+          h2 {
+            font-size: 1.3em;
+          }
+        }
+      }
+    }
+    .card--tags {
+      .card--tags--participants {
+        margin-right: 46%;
+      }
+    }
+  }
+
+  @media screen and (min-width: 544px) {
+    .card--header {
+      .card--img {
+        width: 15vw;
+      }
+      .card--title {
+        .card--title--name {
+          .card--title--like {
+            width: 5vw;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 593px) {
+    .card--header {
+      .card--title {
+        margin-left: 10px;
+        .card--title--name {
+          h2 {
+            font-size: 1.4em;
+          }
+        }
+        .card--author--about {
+          p {
+            font-size: .9em;
+          }
+        }
+      }
+    }
+    .card--tags {
+      .card--tags--participants {
+        margin-right: 52%;
+        .card--tags--participants--icon {
+          width: 3vw;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 688px) {
+    .card--header {
+      .card--img {
+        width: 13vw;
+      }
+      .card--title {
+        margin-left: 10px;
+        .card--title--name {
+          h2 {
+            font-size: 1.5em;
+          }
+          .card--title--like {
+            width: 4vw;
+          }
+        }
+      }
+    }
+    .card--tags {
+      .card--tags--participants {
+        margin-right: 59%;
+      }
+    }
+  }
+
+  @media screen and (min-width: 785px) {
+    .card--header {
+      .card--img {
+        width: 11vw;
+      }
+      .card--title {
+        .card--title--name {
+          .card--title--like {
+            width: 3vw;
+          }
+        }
+      }
+    }
+    .card--tags {
+      .card--tags--participants {
+        margin-right: 66%;
+      }
+    }
+  }
+
+  @media screen and (min-width: 892px) {
+    .card--header {
+      .card--img {
+        width: 10vw;
+      }
+      .card--title {
+        margin-left: 15px;
+      }
+    }
+    .card--tags {
+      .card--tags--participants {
+        margin-right: 69%;
+      }
     }
   }
 `;
