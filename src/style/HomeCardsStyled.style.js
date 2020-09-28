@@ -151,7 +151,7 @@ const HomeCardsStyled = styled.div`
         }
         .card--author--about {
           p {
-            font-size: .9em;
+            font-size: 0.9em;
           }
         }
       }
