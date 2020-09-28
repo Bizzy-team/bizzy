@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const HomeStyled = styled.div`
+display: none;
   #map {
     position: absolute;
     top: 0;
@@ -58,6 +59,15 @@ const HomeStyled = styled.div`
           margin-top: 9%;
         }
       }
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    display: flex!important;
+    flex-direction: row-reverse;
+    #map {
+      width: 53vw;
+      top: 5%;
     }
   }
 `;
