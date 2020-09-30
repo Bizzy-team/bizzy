@@ -1,9 +1,9 @@
 import React from "react";
 import mapboxgl from "mapbox-gl";
-import HomeStyled from "../../style/HomeStyled.style";
+import {HomeStyled, SectionStyled, TitlePageStyled} from "../../style/HomeStyled.style";
 import HomeCards from "./HomeCards";
 import UserProfileHeader from "../UserProfile/UserProfileHeader";
-import {SectionStyled} from "../../style/HomeCardsStyled.style";
+import SquigglesImg from "../../img/squiggles_colorful.svg";
 
 import FiltersImg from "../../img/filters.svg";
 import FilterStyled from "../../style/FilterStyled.style";
@@ -67,6 +67,12 @@ function Home() {
       </HomeStyled>
       {data.isCards ? (
         <>
+        <TitlePageStyled className="title--page">
+          <h1>Propositions autour de vous</h1>
+          <div>
+            <img src={SquigglesImg} alt="squiggles--img"></img>
+          </div>
+        </TitlePageStyled>
           <FilterStyled>
             <div>
               <input type="text" placeholder="Paris 10"></input>
@@ -82,16 +88,12 @@ function Home() {
             <HomeCards></HomeCards>
             <HomeCards></HomeCards>
             <HomeCards></HomeCards>
-            <button onClick={displayMap}>
-              Voir sur la map
-            </button>
+            <button onClick={displayMap}>Voir sur la map</button>
           </SectionStyled>
         </>
       ) : (
         <SectionStyled>
-          <button onClick={displayMap}>
-            Retour sur la liste
-          </button>
+          <button onClick={displayMap}>Retour sur la liste</button>
         </SectionStyled>
       )}
     </>
