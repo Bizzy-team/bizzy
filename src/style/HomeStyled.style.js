@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const HomeStyled = styled.div`
+export const HomeStyled = styled.div`
   display: none;
   #map {
     position: absolute;
@@ -72,4 +72,53 @@ const HomeStyled = styled.div`
   }
 `;
 
-export default HomeStyled;
+export const SectionStyled = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+  button {
+    background-color: #283d80;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 85px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  @media screen and (min-width: 1000px) {
+    width: 48%;
+    button {
+      display: none;
+    }
+  }
+`;
+
+export const TitlePageStyled = styled.div`
+display: none;
+
+@media screen and (min-width: 1000px) {
+  display: flex;
+  padding: 6px 8px;
+  width: 45%;
+  justify-content: space-between;
+  margin-bottom: 4%;
+  h1 {
+    font-family: "CeraPro Bold";
+    font-size: 1.5em;
+    width: 45%;
+  }
+  div {
+    width: 7vw;
+    img {
+      width: 100%;
+      height: inherit;
+      object-fit: cover;
+    }
+  }
+}
+
+`;
