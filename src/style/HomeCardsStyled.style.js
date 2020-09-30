@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HomeCardsStyled = styled.div`
+const HomeCardsStyled = styled.div`
   background-color: ${props => props.theme.colorPrincipal};
   padding: 10px 6px;
   box-shadow: 0px 5px 5px 5px rgba(247, 246, 247, 1);
@@ -237,24 +237,4 @@ export const HomeCardsStyled = styled.div`
   }
 `;
 
-export const SectionStyled = styled.section`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 10px;
-    button {
-      background-color: #283D80;
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      position: fixed;
-      bottom: 85px;
-      left: 50%;
-      transform: translate(-50%, 0);
-    }
-
-  @media screen and (min-width: 1000px) {
-    width: 48%;
-  }
-`;
+export default HomeCardsStyled;
