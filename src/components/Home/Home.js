@@ -3,6 +3,7 @@ import mapboxgl from "mapbox-gl";
 import HomeStyled from "../../style/HomeStyled.style";
 import HomeCards from "./HomeCards";
 import UserProfileHeader from "../UserProfile/UserProfileHeader";
+import {SectionStyled} from "../../style/HomeCardsStyled.style";
 
 import FiltersImg from "../../img/filters.svg";
 import FilterStyled from "../../style/FilterStyled.style";
@@ -11,26 +12,6 @@ function Home() {
   const [data, setData] = React.useState({
     isCards: true
   });
-
-  const sectionStyle = {
-    style: {
-      display: "flex",
-      alignItems: "center",
-      flexDirection: "column",
-      marginTop: "10px"
-    },
-    styleBtn: {
-      backgroundColor: "#283D80",
-      color: "white",
-      padding: "12px",
-      border: "none",
-      borderRadius: "10px",
-      position: "fixed",
-      bottom: "85px",
-      left: "50%",
-      transform: "translate(-50%, 0)"
-    }
-  };
 
   React.useEffect(() => {
     document.querySelector("body").style.background = "#F7F6F7";
@@ -41,7 +22,6 @@ function Home() {
 
     if (window.screen.width > 1000) {
       document.querySelector(".section--map").style.display = "block";
-      document.querySelector(".section--cards").style.width = "48%";
 
       mapboxgl.accessToken = process.env.REACT_APP_TOKEN_MAP_KEY;
 
@@ -98,19 +78,21 @@ function Home() {
               <button className="btn--create">New card</button>
             </div>
           </FilterStyled>
-          <section style={sectionStyle.style} className="section--cards">
+          <SectionStyled>
             <HomeCards></HomeCards>
             <HomeCards></HomeCards>
             <HomeCards></HomeCards>
-            <button style={sectionStyle.styleBtn} onClick={displayMap}>
+            <button onClick={displayMap}>
               Voir sur la map
             </button>
-          </section>
+          </SectionStyled>
         </>
       ) : (
-        <button style={sectionStyle.styleBtn} onClick={displayMap}>
-          Retour sur la liste
-        </button>
+        <SectionStyled>
+          <button onClick={displayMap}>
+            Retour sur la liste
+          </button>
+        </SectionStyled>
       )}
     </>
   );
