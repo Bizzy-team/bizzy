@@ -116,7 +116,18 @@ const HomeHeaderStyled = styled.section`
   }
 
   @media screen and (min-width: 1000px) {
-    width: 42vw;
+    width: 45vw;
+    div {
+      input {
+        width: 60%;
+      }
+      .btn--filters {
+        padding: 0 10px;
+        div {
+          width: 4vw;
+        }
+      }
+    }
   }
 `;
 
