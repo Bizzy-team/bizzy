@@ -42,6 +42,10 @@ const UserProfileHeaderStyled = styled.header`
       }
     }
   }
+
+  @media screen and (min-width: 1000px) {
+    margin-bottom: 2%;
+  }
 `;
 
 export default UserProfileHeaderStyled;
