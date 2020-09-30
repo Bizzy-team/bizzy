@@ -1,6 +1,6 @@
 import React from "react";
 import mapboxgl from "mapbox-gl";
-import {HomeStyled, SectionStyled, TitlePageStyled} from "../../style/HomeStyled.style";
+import { HomeStyled, SectionStyled, TitlePageStyled } from "../../style/HomeStyled.style";
 import HomeCards from "./HomeCards";
 import UserProfileHeader from "../UserProfile/UserProfileHeader";
 import SquigglesImg from "../../img/squiggles_colorful.svg";
@@ -67,12 +67,12 @@ function Home() {
       </HomeStyled>
       {data.isCards ? (
         <>
-        <TitlePageStyled className="title--page">
-          <h1>Propositions autour de vous</h1>
-          <div>
-            <img src={SquigglesImg} alt="squiggles--img"></img>
-          </div>
-        </TitlePageStyled>
+          <TitlePageStyled className="title--page">
+            <h1>Propositions autour de vous</h1>
+            <div>
+              <img src={SquigglesImg} alt="squiggles--img"></img>
+            </div>
+          </TitlePageStyled>
           <FilterStyled>
             <div>
               <input type="text" placeholder="Paris 10"></input>

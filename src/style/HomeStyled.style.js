@@ -98,27 +98,26 @@ export const SectionStyled = styled.section`
 `;
 
 export const TitlePageStyled = styled.div`
-display: none;
+  display: none;
 
-@media screen and (min-width: 1000px) {
-  display: flex;
-  padding: 6px 8px;
-  width: 45%;
-  justify-content: space-between;
-  margin-bottom: 4%;
-  h1 {
-    font-family: "CeraPro Bold";
-    font-size: 1.5em;
+  @media screen and (min-width: 1000px) {
+    display: flex;
+    padding: 6px 8px;
     width: 45%;
-  }
-  div {
-    width: 7vw;
-    img {
-      width: 100%;
-      height: inherit;
-      object-fit: cover;
+    justify-content: space-between;
+    margin-bottom: 4%;
+    h1 {
+      font-family: "CeraPro Bold";
+      font-size: 1.5em;
+      width: 45%;
+    }
+    div {
+      width: 7vw;
+      img {
+        width: 100%;
+        height: inherit;
+        object-fit: cover;
+      }
     }
   }
-}
-
 `;
