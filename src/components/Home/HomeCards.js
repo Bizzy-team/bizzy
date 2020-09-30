@@ -3,7 +3,7 @@ import FoodIcon from "../../img/food_mood.svg";
 import UserAvatar from "../../img/user_avatar.svg";
 import Like from "../../img/heart.svg";
 import ParticipantIcon from "../../img/participant_icon.svg";
-import HomeCardsStyled from "../../style/HomeCardsStyled.style";
+import {HomeCardsStyled} from "../../style/HomeCardsStyled.style";
 
 function HomeCards() {
   return (
