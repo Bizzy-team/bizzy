@@ -247,6 +247,18 @@ const HomeCardsStyled = styled.div`
       }
     }
   }
+
+  @media screen and (min-width: 1227px) {
+    .card--header {
+      .card--title {
+        .card--title--name {
+          .card--title--like {
+            width: 2vw;
+          }
+        }
+      }
+    }
+  }
 `;
 
 export default HomeCardsStyled;

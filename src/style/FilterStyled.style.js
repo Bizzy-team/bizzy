@@ -130,6 +130,28 @@ const HomeHeaderStyled = styled.section`
       }
     }
   }
+
+  @media screen and (min-width: 1227px) {
+    div {
+      .btn--filters {
+        div {
+          width: 3vw;
+        }
+      }
+      .btn--create {
+        padding: 15px 10px;
+        font-size: 1.2em;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    div {
+      input {
+        background-position: 10px 20px;
+      }
+    }
+  }
 `;
 
 export default HomeHeaderStyled;
