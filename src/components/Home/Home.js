@@ -14,10 +14,9 @@ function Home() {
   });
 
   React.useEffect(() => {
-    document.querySelector("body").style.background = "#F7F6F7";
-
     if (window.screen.width < 1000) {
       document.querySelector(".user--profile--header").style.display = "none";
+      document.querySelector("body").style.background = "#F7F6F7";
     }
 
     if (window.screen.width > 1000) {
@@ -28,8 +27,8 @@ function Home() {
       new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
-        center: [-74.5, 40], // starting position [lng, lat]
-        zoom: 3 // starting zoom
+        center: [2.370010, 48.837460], // starting position [lng, lat]
+        zoom: 14 // starting zoom
       });
     }
   });
