@@ -4,7 +4,7 @@ import { HomeStyled, SectionStyled, TitlePageStyled } from "../../style/HomeStyl
 import HomeCards from "./HomeCards";
 import UserProfileHeader from "../UserProfile/UserProfileHeader";
 import SquigglesImg from "../../img/squiggles_colorful.svg";
-
+import FoodIcon from "../../img/food_mood.svg";
 import FiltersImg from "../../img/filters.svg";
 import FilterStyled from "../../style/FilterStyled.style";
 
@@ -24,11 +24,40 @@ function Home() {
 
       mapboxgl.accessToken = process.env.REACT_APP_TOKEN_MAP_KEY;
 
-      new mapboxgl.Map({
+      const map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
         center: [2.37001, 48.83746], // starting position [lng, lat]
         zoom: 15 // starting zoom
+      });
+
+      const geojson = {
+        type: 'FeatureCollection',
+        features: [{
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [2.365170, 48.835010]
+          },
+          properties: {
+            title: 'Mapbox',
+            description: 'Washington, D.C.'
+          }
+        }]
+      };
+
+      // add markers to map
+      geojson.features.forEach(function(marker) {
+
+        // create a HTML element for each feature
+        const el = document.createElement('div');
+        el.className = 'marker';
+        el.style.cssText = `background-image: url(${FoodIcon}); background-repeat: no-repeat; width: 84px; height: 84px; border-radius: 50%`;
+
+        // make a marker for each feature and add to the map
+        new mapboxgl.Marker(el)
+          .setLngLat(marker.geometry.coordinates)
+          .addTo(map);
       });
     }
   });
