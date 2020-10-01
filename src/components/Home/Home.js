@@ -27,7 +27,7 @@ function Home() {
       new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
-        center: [2.370010, 48.837460], // starting position [lng, lat]
+        center: [2.37001, 48.83746], // starting position [lng, lat]
         zoom: 14 // starting zoom
       });
     }
