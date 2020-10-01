@@ -67,7 +67,7 @@ export const HomeStyled = styled.div`
     flex-direction: row-reverse;
     #map {
       width: 53vw;
-      top: 5%;
+      top: 4%;
     }
   }
 `;
@@ -90,7 +90,9 @@ export const SectionStyled = styled.section`
   }
 
   @media screen and (min-width: 1000px) {
-    width: 48%;
+    width: 46%;
+    height: 440px;
+    overflow: auto;
     button {
       display: none;
     }
@@ -102,7 +104,7 @@ export const TitlePageStyled = styled.div`
 
   @media screen and (min-width: 1000px) {
     display: flex;
-    padding: 6px 8px;
+    padding: 6px 25px;
     width: 45%;
     justify-content: space-between;
     margin-bottom: 4%;
