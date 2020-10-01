@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 exports.handler = (event, context, callback) => {
 
     // Get the request and its headers
@@ -5,8 +7,8 @@ exports.handler = (event, context, callback) => {
     const headers = request.headers;
   
     // Specify the username and password to be used
-    const user = "bizzy";
-    const pw = "xJg*B*2apbADG9yVAqZtARtV";
+    const user = process.env.ID_LAMBDA;
+    const pw = process.env.PSWD_LAMBDA;
   
     // Build a Basic Authentication string
     const authString = 'Basic ' + new Buffer(user + ':' + pw).toString('base64');

@@ -24,7 +24,7 @@
     ]
   },
   "devDependencies": {
-    "@silvermine/serverless-plugin-cloudfront-lambda-edge": "2.1.1",
+    "@silvermine/serverless-plugin-cloudfront-lambda-edge": "^2.1.1",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "ava": "^3.8.2",

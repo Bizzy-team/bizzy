@@ -57,6 +57,9 @@ functions:
       lambdaAtEdge:
          distribution: 'CloudFrontDistribution'
          eventType: 'viewer-request'
+      package:
+        include:
+          - "lambda_basicauth/**"
 
 # functions:
 #   basic_auth:
