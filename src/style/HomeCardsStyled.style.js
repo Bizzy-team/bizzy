@@ -228,9 +228,21 @@ const HomeCardsStyled = styled.div`
 
   @media screen and (min-width: 1000px) {
     .card--header {
+      .card--img {
+        width: 7vw;
+      }
       .card--title {
         .card--title--name {
           width: 30vw;
+        }
+      }
+    }
+    .card--tags {
+      .card--tags--participants {
+        margin-right: 46%;
+        margin-top: 10px;
+        .card--tags--participants--icon {
+          width: 2vw;
         }
       }
     }
