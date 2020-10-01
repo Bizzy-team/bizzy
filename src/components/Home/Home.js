@@ -32,32 +32,31 @@ function Home() {
       });
 
       const geojson = {
-        type: 'FeatureCollection',
-        features: [{
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [2.365170, 48.835010]
-          },
-          properties: {
-            title: 'Mapbox',
-            description: 'Washington, D.C.'
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [2.36517, 48.83501]
+            },
+            properties: {
+              title: "Mapbox",
+              description: "Washington, D.C."
+            }
           }
-        }]
+        ]
       };
 
       // add markers to map
       geojson.features.forEach(function(marker) {
-
         // create a HTML element for each feature
-        const el = document.createElement('div');
-        el.className = 'marker';
+        const el = document.createElement("div");
+        el.className = "marker";
         el.style.cssText = `background-image: url(${FoodIcon}); background-repeat: no-repeat; width: 84px; height: 84px; border-radius: 50%`;
 
         // make a marker for each feature and add to the map
-        new mapboxgl.Marker(el)
-          .setLngLat(marker.geometry.coordinates)
-          .addTo(map);
+        new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
       });
     }
   });
