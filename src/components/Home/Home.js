@@ -20,7 +20,7 @@ function Home() {
     }
 
     if (window.screen.width > 1000) {
-      document.querySelector(".section--map").style.display = "block";
+      document.querySelector("body").style.overflow = "hidden";
 
       mapboxgl.accessToken = process.env.REACT_APP_TOKEN_MAP_KEY;
 
@@ -28,7 +28,7 @@ function Home() {
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
         center: [2.37001, 48.83746], // starting position [lng, lat]
-        zoom: 14 // starting zoom
+        zoom: 15 // starting zoom
       });
     }
   });
@@ -45,8 +45,8 @@ function Home() {
       new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
-        center: [-74.5, 40], // starting position [lng, lat]
-        zoom: 3 // starting zoom
+        center: [2.37001, 48.83746], // starting position [lng, lat]
+        zoom: 15 // starting zoom
       });
 
       return setData(newState);
