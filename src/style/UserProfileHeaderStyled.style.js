@@ -5,6 +5,7 @@ const UserProfileHeaderStyled = styled.header`
   margin-bottom: 20%;
   padding: 20px 18px;
   font-family: "Nunito";
+  box-shadow: 0px 3px 16px rgba(0, 0, 0, .18);
   div {
     display: flex;
     align-items: center;
