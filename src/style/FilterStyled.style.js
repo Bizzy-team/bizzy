@@ -120,6 +120,7 @@ const HomeHeaderStyled = styled.section`
     div {
       input {
         width: 60%;
+        background-position: 10px 14px;
       }
       .btn--filters {
         padding: 0 10px;
