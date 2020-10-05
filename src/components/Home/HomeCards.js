@@ -1,27 +1,26 @@
 import React from "react";
-import FoodIcon from "../../img/food_mood.svg";
 import UserAvatar from "../../img/user_avatar.svg";
 import Like from "../../img/heart.svg";
 import ParticipantIcon from "../../img/participant_icon.svg";
 import HomeCardsStyled from "../../style/HomeCardsStyled.style";
 
-function HomeCards() {
+function HomeCards(props) {
   return (
     <HomeCardsStyled>
       <div className="card--header">
         <div className="card--img">
-          <img src={FoodIcon} alt="food-icon"></img>
+          <img src={props.card.card_user_mood} alt="food-icon"></img>
         </div>
         <div className="card--title">
           <div className="card--title--name">
-            <h2>Pizza pour l'après-midi</h2>
+            <h2>{props.card.card_title}</h2>
             <div className="card--title--like">
               <img src={Like} alt="like-icon"></img>
             </div>
           </div>
           <div className="card--author--about">
             <img src={UserAvatar} alt="avatar-icon"></img>
-            <p>Par Sébastien, Content Manager</p>
+            <p>Par {props.card.card_user_name}, {props.card.card_user_job}</p>
           </div>
         </div>
       </div>
@@ -34,12 +33,7 @@ function HomeCards() {
         </div>
       </div>
       <div className="card--content">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat
-          massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut
-          placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit
-          mauris nunc in mi. Sit pulvinar proin egestas dolor a at.
-        </p>
+        <p>{props.card.card_desc}</p>
       </div>
     </HomeCardsStyled>
   );
