@@ -20,7 +20,9 @@ function HomeCards(props) {
           </div>
           <div className="card--author--about">
             <img src={UserAvatar} alt="avatar-icon"></img>
-            <p>Par {props.card.card_user_name}, {props.card.card_user_job}</p>
+            <p>
+              Par {props.card.card_user_name}, {props.card.card_user_job}
+            </p>
           </div>
         </div>
       </div>
