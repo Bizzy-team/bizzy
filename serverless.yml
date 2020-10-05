@@ -144,6 +144,15 @@ resources:
                               - 'origin-access-identity/cloudfront/'
                               - Ref: CloudFrontOriginAccessIdentity
                   Comment: 'CloudFront origin for ${self:custom.bucketName}'
+                  CustomErrorResponses:
+                    - ErrorCode: 404
+                      ResponseCode: 200
+                      ErrorCachingMinTTL: 0
+                      ResponsePagePath: /index.html
+                    - ErrorCode: 403
+                      ResponseCode: 200
+                      ErrorCachingMinTTL: 0
+                      ResponsePagePath: /index.html
                   DefaultCacheBehavior:
                     AllowedMethods:
                       - GET
