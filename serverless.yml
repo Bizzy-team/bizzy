@@ -48,19 +48,6 @@ package:
       - 'build/**'
       - 'public/**'
 
-functions:
-   LambdaBasicAuth:
-      name: '${self:custom.objectPrefix}-origin-request'
-      handler: lambda_basicauth/main.handler
-      memorySize: 128
-      timeout: 1
-      lambdaAtEdge:
-         distribution: 'CloudFrontDistribution'
-         eventType: 'viewer-request'
-      package:
-        include:
-          - "lambda_basicauth/**"
-
 # functions:
 #   basic_auth:
 #     handler: lambda_basicauth/main.handler
@@ -80,7 +67,7 @@ resources:
               ErrorDocument: "error.html"
               IndexDocument: "index.html"
             LoggingConfiguration:
-              DestinationBucketName: 
+              DestinationBucketName:
                 Ref: BucketAccessLogs
         S3AccessPolicy:
             Type: AWS::S3::BucketPolicy
@@ -99,7 +86,7 @@ resources:
                     #   AWS:
                     #     Fn::Join:
                     #       - ' '
-                    #       - 
+                    #       -
                     #         - 'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity'
                     #         - Ref: CloudFrontOriginAccessIdentity
                     Action:
