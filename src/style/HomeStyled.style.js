@@ -122,4 +122,13 @@ export const TitlePageStyled = styled.div`
       }
     }
   }
+
+  @media screen and (min-width: 1400px) {
+    h1 {
+      font-size: 2em;
+    }
+    div {
+      width: 5vw;
+    }
+  }
 `;
