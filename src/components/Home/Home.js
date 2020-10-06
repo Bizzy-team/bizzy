@@ -9,6 +9,7 @@ import BeerIcon from "../../img/drink_mood.svg";
 import FiltersImg from "../../img/filters.svg";
 import FilterStyled from "../../style/FilterStyled.style";
 import UserAvatar from "../../img/user_avatar.svg";
+import ModalNewCard from "../../components/Modal/ModalNewCard";
 import Footer from "../Footer/Footer";
 
 function Home() {
@@ -54,7 +55,8 @@ function Home() {
         }
       }
     ],
-    isCards: true
+    isCards: true,
+    isModalNewCard: false
   });
 
   React.useEffect(() => {
@@ -116,12 +118,33 @@ function Home() {
     map.scrollZoom.disable();
   }
 
+  function displayNewCard() {
+    const newState = {...data};
+
+    document.querySelector("body").style.overflow = "hidden";
+    newState.isModalNewCard = true;
+
+    return setData(newState);
+  }
+
+  function closeModalOutside() {
+    const newState = { ...data };
+
+    newState.isModalNewCard = false;
+    document.querySelector("body").style.overflow = "auto";
+
+    return setData(newState);
+  }
+
   return (
     <>
       <UserProfileHeader></UserProfileHeader>
       <HomeStyled className="section--map">
         <div id="map"></div>
       </HomeStyled>
+      {
+        data.isModalNewCard && <ModalNewCard  updateStateParent={closeModalOutside} isMarginTop={true}></ModalNewCard>
+      }
       {data.isCards ? (
         <>
           <TitlePageStyled className="title--page">
@@ -138,7 +161,7 @@ function Home() {
                   <img src={FiltersImg} alt="filters-icon"></img>{" "}
                 </div>
               </button>
-              <button className="btn--create">New card</button>
+              <button className="btn--create" onClick={displayNewCard}>New card</button>
             </div>
           </FilterStyled>
           <SectionStyled>
