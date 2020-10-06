@@ -9,6 +9,7 @@ import BeerIcon from "../../img/drink_mood.svg";
 import FiltersImg from "../../img/filters.svg";
 import FilterStyled from "../../style/FilterStyled.style";
 import UserAvatar from "../../img/user_avatar.svg";
+import Footer from "../Footer/Footer";
 
 function Home() {
   const [data, setData] = React.useState({
@@ -57,7 +58,7 @@ function Home() {
   });
 
   React.useEffect(() => {
-    if (window.screen.width < 1000) {
+    if (window.screen.width < 700) {
       document.querySelector(".user--profile--header").style.display = "none";
       document.querySelector("body").style.background = "#F7F6F7";
     }
@@ -152,6 +153,7 @@ function Home() {
           <button onClick={displayMap}>Retour sur la liste</button>
         </SectionStyled>
       )}
+      <Footer></Footer>
     </>
   );
 }
