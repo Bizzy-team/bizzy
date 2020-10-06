@@ -130,6 +130,7 @@ function ModalNewCard(props) {
     <ModalNewCardStyled
       btnDisabled={data.btnDisabled}
       isError={data.error.inputDesc ? data.error.inputDesc.error : false}
+      isMarginTop={props.isMarginTop}
     >
       <div className="card--content">
         <div className="card--title">
