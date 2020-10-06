@@ -59,6 +59,14 @@ const HomeHeaderStyled = styled.section`
     }
   }
 
+  @media screen and (min-width: 400px) {
+    div {
+      input {
+        width: 64%;
+      }
+    }
+  }
+
   @media screen and (min-width: 420px) {
     div {
       .btn--filters {
@@ -99,7 +107,6 @@ const HomeHeaderStyled = styled.section`
     div {
       padding: 10px;
       input {
-        width: 28%;
         background-position: 10px 21px;
       }
     }
