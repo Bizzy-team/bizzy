@@ -13,7 +13,10 @@ const FooterStyle = styled.footer`
     justify-content: space-around;
     margin-top: 4px;
     padding: 0 6px;
-    .footer--elements--home, .footer--elements--favoris, .footer--elements--messagerie, .footer--elements--profile {
+    .footer--elements--home,
+    .footer--elements--favoris,
+    .footer--elements--messagerie,
+    .footer--elements--profile {
       display: flex;
       flex-direction: column;
     }
