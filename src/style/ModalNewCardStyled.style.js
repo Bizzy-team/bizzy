@@ -115,6 +115,7 @@ const ModalNewCardStyled = styled.section`
   }
 
   @media screen and (min-width: 300px) {
+    ${props => props.isMarginTop && "margin-top: 2%"};
     .card--content {
       .card--title {
         margin-bottom: 13%;
@@ -146,7 +147,8 @@ const ModalNewCardStyled = styled.section`
   }
 
   @media screen and (min-width: 340px) {
-    margin-top: 31%;
+    ${props => (props.isMarginTop ? "margin-top: 2%" : "margin-top: 31%")};
+
   }
 
   @media screen and (min-width: 418px) {
@@ -158,6 +160,14 @@ const ModalNewCardStyled = styled.section`
           }
         }
       }
+    }
+  }
+
+  @media screen and (min-width: 427px) {
+    ${props => props.isMarginTop && ({
+      marginTop: "1%!important",
+      paddingTop: "25%"
+      })
     }
   }
 
