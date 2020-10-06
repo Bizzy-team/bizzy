@@ -164,11 +164,11 @@ const ModalNewCardStyled = styled.section`
   }
 
   @media screen and (min-width: 427px) {
-    ${props => props.isMarginTop && ({
-      marginTop: "1%!important",
-      paddingTop: "25%"
-      })
-    }
+    ${props =>
+      props.isMarginTop && {
+        marginTop: "1%!important",
+        paddingTop: "25%"
+      }}
   }
 
   @media screen and (min-width: 474px) {

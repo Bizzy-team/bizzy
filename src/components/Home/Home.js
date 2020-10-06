@@ -119,7 +119,7 @@ function Home() {
   }
 
   function displayNewCard() {
-    const newState = {...data};
+    const newState = { ...data };
 
     document.querySelector("body").style.overflow = "hidden";
     newState.isModalNewCard = true;
@@ -142,9 +142,12 @@ function Home() {
       <HomeStyled className="section--map">
         <div id="map"></div>
       </HomeStyled>
-      {
-        data.isModalNewCard && <ModalNewCard  updateStateParent={closeModalOutside} isMarginTop={true}></ModalNewCard>
-      }
+      {data.isModalNewCard && (
+        <ModalNewCard
+          updateStateParent={closeModalOutside}
+          isMarginTop={true}
+        ></ModalNewCard>
+      )}
       {data.isCards ? (
         <>
           <TitlePageStyled className="title--page">
@@ -161,7 +164,9 @@ function Home() {
                   <img src={FiltersImg} alt="filters-icon"></img>{" "}
                 </div>
               </button>
-              <button className="btn--create" onClick={displayNewCard}>New card</button>
+              <button className="btn--create" onClick={displayNewCard}>
+                New card
+              </button>
             </div>
           </FilterStyled>
           <SectionStyled>
