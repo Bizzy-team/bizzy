@@ -44,6 +44,10 @@ const UserProfileHeaderStyled = styled.header`
     }
   }
 
+  @media screen and (min-width: 700px) {
+    margin-bottom: 3%;
+  }
+
   @media screen and (min-width: 1000px) {
     margin-bottom: 2%;
   }
