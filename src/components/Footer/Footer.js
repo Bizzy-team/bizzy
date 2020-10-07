@@ -12,7 +12,7 @@ import ProfileIconActive from "../../img/profil_active.svg";
 
 function Footer(props) {
   return (
-    <FooterStyle as="footer" isHome={props.isHome}>
+    <FooterStyle as="footer">
       <div className="footer--elements">
         <div className="footer--elements--home">
           {props.isUrlActive.url === "/home" ? (
