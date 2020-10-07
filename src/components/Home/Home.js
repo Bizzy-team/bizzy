@@ -181,7 +181,7 @@ function Home(props) {
           <button onClick={displayMap}>Retour sur la liste</button>
         </SectionStyled>
       )}
-      <Footer isUrlActive={props.match} isHome={true}></Footer>
+      <Footer isUrlActive={props.match}></Footer>
     </>
   );
 }
