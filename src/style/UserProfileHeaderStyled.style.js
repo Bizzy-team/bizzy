@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const UserProfileHeaderStyled = styled.header`
+  display: none;
   background-color: ${props => props.theme.colorPrincipal};
   margin-bottom: 20%;
   padding: 20px 18px;
@@ -49,6 +50,7 @@ const UserProfileHeaderStyled = styled.header`
   }
 
   @media screen and (min-width: 1000px) {
+    display: block;
     margin-bottom: 2%;
   }
 `;
