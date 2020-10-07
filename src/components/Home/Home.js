@@ -4,8 +4,9 @@ import { HomeStyled, SectionStyled, TitlePageStyled } from "../../style/HomeStyl
 import HomeCards from "./HomeCards";
 import UserProfileHeader from "../UserProfile/UserProfileHeader";
 import SquigglesImg from "../../img/squiggles_colorful.svg";
-import FoodIcon from "../../img/food_mood.svg";
-import BeerIcon from "../../img/drink_mood.svg";
+import FoodIcon from "../../img/icon_map_food.svg";
+import BeerIcon from "../../img/icon_map_drink.svg";
+import CultureMood from "../../img/icon_map_culture.svg";
 import FiltersImg from "../../img/filters.svg";
 import FilterStyled from "../../style/FilterStyled.style";
 import UserAvatar from "../../img/user_avatar.svg";
@@ -16,6 +17,7 @@ function Home(props) {
   const [data, setData] = React.useState({
     cards: [
       {
+        card_id: 1,
         card_user_avatar: UserAvatar,
         card_user_name: "Claudia Boudié",
         card_title: "Pizza pour l'aprèm",
@@ -29,19 +31,21 @@ function Home(props) {
         }
       },
       {
+        card_id: 2,
         card_user_avatar: UserAvatar,
         card_user_name: "Lucas Tostée",
         card_title: "Kebab pour le déj",
         card_user_job: "Dev AWS claqué",
         card_desc:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-        card_user_mood: [FoodIcon],
+        card_user_mood: [CultureMood],
         card_geometry: {
           type: "Point",
           coordinates: [2.37358, 48.837551]
         }
       },
       {
+        card_id: 3,
         card_user_avatar: UserAvatar,
         card_user_name: "Diane",
         card_title: "Balade sportive",
@@ -103,6 +107,7 @@ function Home(props) {
     data.cards.forEach(card => {
       const el = document.createElement("div");
       el.className = "marker";
+      el.id = `${card.card_id}`;
       el.style.cssText = `
           display: block;
           background-image: url(${card.card_user_mood});
@@ -113,6 +118,16 @@ function Home(props) {
           background-position: -3px -5px;
           background-size: 60px;
         `;
+        el.addEventListener("click", (e) => {
+          console.log(e.target.id);
+          console.log(card.card_id);
+          console.log(card);
+          console.log(parseInt(e.target.id) == card.card_id);
+          // condition if parseInt(e.target.id) === card.card_id
+          // make an object with card data
+            // => fill properties from object with card data.
+          // display modal card
+        })
       new mapboxgl.Marker(el).setLngLat(card.card_geometry.coordinates).addTo(map);
     });
     map.scrollZoom.disable();
