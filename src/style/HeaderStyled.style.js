@@ -7,7 +7,7 @@ const HeaderStyled = styled.header`
   height: 14%;
   z-index: 10;
 
-  @media only screen and (min-width: 300px) {
+  @media screen and (min-width: 300px) {
     width: 100%;
     padding: 10px 5px;
     display: flex;
@@ -62,7 +62,7 @@ const HeaderStyled = styled.header`
     }
   }
 
-  @media only screen and (min-width: 406px) {
+  @media screen and (min-width: 406px) {
     .mobile--menu {
       .menu--options {
         display: flex;
@@ -75,7 +75,7 @@ const HeaderStyled = styled.header`
     }
   }
 
-  @media only screen and (min-width: 482px) {
+  @media screen and (min-width: 482px) {
     .mobile--logo {
       width: 18%;
     }
@@ -86,7 +86,7 @@ const HeaderStyled = styled.header`
     }
   }
 
-  @media only screen and (min-width: 584px) {
+  @media screen and (min-width: 584px) {
     .mobile--logo {
       width: 15%;
     }
@@ -97,7 +97,7 @@ const HeaderStyled = styled.header`
     }
   }
 
-  @media only screen and (min-width: 682px) {
+  @media screen and (min-width: 682px) {
     .mobile--logo {
       width: 12%;
     }
@@ -108,7 +108,7 @@ const HeaderStyled = styled.header`
     }
   }
 
-  @media only screen and (min-width: 774px) {
+  @media screen and (min-width: 774px) {
     .mobile--logo {
       width: 10%;
     }
@@ -119,7 +119,7 @@ const HeaderStyled = styled.header`
     }
   }
 
-  @media only screen and (min-width: 888px) {
+  @media screen and (min-width: 888px) {
     .mobile--menu {
       .menu--options {
         width: 14vw;
@@ -127,7 +127,7 @@ const HeaderStyled = styled.header`
     }
   }
 
-  @media only screen and (min-width: 1000px) {
+  @media screen and (min-width: 1000px) {
     width: 100%;
 
     .mobile--logo {
@@ -155,13 +155,13 @@ const HeaderStyled = styled.header`
     }
   }
 
-  @media only screen and (min-width: 1000px) {
+  @media screen and (min-width: 1000px) {
     .mobile--logo {
       width: 8%;
     }
   }
 
-  @media only screen and (min-width: 1400px) {
+  @media screen and (min-width: 1400px) {
     .mobile--logo {
       width: 6%;
     }
