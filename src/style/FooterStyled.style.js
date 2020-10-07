@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const FooterStyle = styled.footer`
   background-color: ${props => props.theme.colorPrincipal};
+  box-shadow: 0px 3px 16px rgba(0, 0, 0, 0.18);
   position: fixed;
   left: 0;
   bottom: 0;
@@ -23,6 +24,10 @@ const FooterStyle = styled.footer`
   }
 
   @media screen and (min-width: 700px) {
+    ${props => props.isHome && "display: none"};
+  }
+
+  @media only  screen and (min-width: 1000px) {
     display: none;
   }
 `;
