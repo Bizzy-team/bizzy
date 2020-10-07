@@ -13,6 +13,7 @@ import "react-multi-carousel/lib/styles.css";
 import CardsProfile from "../Cards/CardsProfile";
 import ModalNewCard from "../Modal/ModalNewCard";
 import Footer from "../../components/Footer/Footer";
+import UserProfileHeader from "../../components/UserProfile/UserProfileHeader";
 
 function UserProfile(props) {
   const inputFirstName = React.useRef(null);
@@ -206,6 +207,7 @@ function UserProfile(props) {
 
   return (
     <>
+    <UserProfileHeader></UserProfileHeader>
       <UserProfileStyled
         as="main"
         isDisabled={data.isDisabled}
