@@ -207,7 +207,7 @@ function UserProfile(props) {
 
   return (
     <>
-    <UserProfileHeader></UserProfileHeader>
+      <UserProfileHeader></UserProfileHeader>
       <UserProfileStyled
         as="main"
         isDisabled={data.isDisabled}
