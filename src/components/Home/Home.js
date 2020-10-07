@@ -12,7 +12,7 @@ import UserAvatar from "../../img/user_avatar.svg";
 import ModalNewCard from "../../components/Modal/ModalNewCard";
 import Footer from "../Footer/Footer";
 
-function Home() {
+function Home(props) {
   const [data, setData] = React.useState({
     cards: [
       {
@@ -181,7 +181,7 @@ function Home() {
           <button onClick={displayMap}>Retour sur la liste</button>
         </SectionStyled>
       )}
-      <Footer></Footer>
+      <Footer isUrlActive={props.match} isHome={true}></Footer>
     </>
   );
 }
