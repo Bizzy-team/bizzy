@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../Header/Header";
 import UserProfileStyled from "../../style/UserProfileStyled.style";
 import EditImg from "../../img/edit_img.svg";
 import InputsForm from "../InputsForm/InputsForm";
@@ -13,10 +12,9 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CardsProfile from "../Cards/CardsProfile";
 import ModalNewCard from "../Modal/ModalNewCard";
+import Footer from "../../components/Footer/Footer";
 
-// import Footer from "../Footer/Footer";
-
-function UserProfile() {
+function UserProfile(props) {
   const inputFirstName = React.useRef(null);
   const inputLastName = React.useRef(null);
   const inputMail = React.useRef(null);
@@ -208,7 +206,6 @@ function UserProfile() {
 
   return (
     <>
-      <Header />
       <UserProfileStyled
         as="main"
         isDisabled={data.isDisabled}
@@ -405,7 +402,7 @@ function UserProfile() {
           </section>
         </div>
       </UserProfileStyled>
-      {/* <Footer /> */}
+      <Footer isUrlActive={props.match} />
     </>
   );
 }
