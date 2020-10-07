@@ -2,7 +2,6 @@ import styled from "styled-components";
 import GlobalContainer from "../utlis/GlobalContainer";
 
 const UserProfileStyled = styled(GlobalContainer)`
-  margin-top: 40%;
   .profile--user--data {
     .profile--user--data--title {
       display: flex;
@@ -176,6 +175,7 @@ const UserProfileStyled = styled(GlobalContainer)`
   }
 
   @media screen and (min-width: 300px) {
+    margin-top: 10%;
     .profile--user--data {
       .profile--user--data--title {
         .profile--user--data--img {
@@ -223,7 +223,7 @@ const UserProfileStyled = styled(GlobalContainer)`
   }
 
   @media screen and (min-width: 538px) {
-    margin-top: 28%;
+    margin-top: 6%;
     .profile--user--data {
       .profile--user--data--title {
         margin-bottom: 40px;
