@@ -23,10 +23,6 @@ const FooterStyle = styled.footer`
     }
   }
 
-  @media screen and (min-width: 700px) {
-    ${props => props.isHome && "display: none"};
-  }
-
   @media only screen and (min-width: 1000px) {
     display: none;
   }
