@@ -34,12 +34,11 @@ function HomeCards(props) {
           <p>3</p>
         </div>
       </div>
-      {
-        props.isCardFeed &&
-          <div className="card--content">
-            <p>{props.card.card_desc}</p>
-          </div>
-      }
+      {props.isCardFeed && (
+        <div className="card--content">
+          <p>{props.card.card_desc}</p>
+        </div>
+      )}
     </HomeCardsStyled>
   );
 }
