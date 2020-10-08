@@ -9,6 +9,11 @@ const HomeCardsStyled = styled.div`
   border-bottom-width: 8px;
   font-family: "Nunito";
   width: 90%;
+  ${props => {
+    if (props.isModalCard) {
+      return "position: fixed; bottom: 82px;";
+    }
+  }}
   .card--header {
     display: flex;
     .card--img {
