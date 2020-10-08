@@ -36,8 +36,9 @@ const HomeHeaderStyled = styled.section`
   }
 
   @media screen and (min-width: 300px) {
+    padding: 19px 1px;
     div {
-      padding: 10px 5px;
+      padding: 6px 0px;
       input {
         background-position: 10px 15px;
         background-size: 14px;
@@ -48,13 +49,14 @@ const HomeHeaderStyled = styled.section`
         }
       }
       .btn--filters {
-        padding: 7px 10px;
+        padding: 4px 10px;
+        margin-right: 6px;
         div {
-          width: 9vw;
+          width: 6vw;
         }
       }
       .btn--create {
-        padding: 10px 10px;
+        /* padding: 10px 10px; */
       }
     }
   }
