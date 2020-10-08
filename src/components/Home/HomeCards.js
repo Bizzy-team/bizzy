@@ -6,7 +6,7 @@ import HomeCardsStyled from "../../style/HomeCardsStyled.style";
 
 function HomeCards(props) {
   return (
-    <HomeCardsStyled>
+    <HomeCardsStyled isModalCard={props.isModalCard}>
       <div className="card--header">
         <div className="card--img">
           <img src={props.card.card_user_mood} alt="food-icon"></img>
@@ -34,9 +34,12 @@ function HomeCards(props) {
           <p>3</p>
         </div>
       </div>
-      <div className="card--content">
-        <p>{props.card.card_desc}</p>
-      </div>
+      {
+        props.isCardFeed &&
+          <div className="card--content">
+            <p>{props.card.card_desc}</p>
+          </div>
+      }
     </HomeCardsStyled>
   );
 }
