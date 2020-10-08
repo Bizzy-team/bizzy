@@ -14,6 +14,7 @@ export const HomeStyled = styled.div`
 
   @media screen and (min-width: 300px) {
     #map {
+      margin-top: 7%;
       .mapboxgl-canvas-container {
         .mapboxgl-canvas {
           margin-top: 23%;
@@ -24,6 +25,7 @@ export const HomeStyled = styled.div`
 
   @media screen and (min-width: 447px) {
     #map {
+      margin-top: 0;
       .mapboxgl-canvas-container {
         .mapboxgl-canvas {
           margin-top: 16%;
@@ -77,6 +79,7 @@ export const SectionStyled = styled.section`
   align-items: center;
   flex-direction: column;
   margin-top: 10px;
+
   button {
     background-color: #283d80;
     color: white;
@@ -89,10 +92,15 @@ export const SectionStyled = styled.section`
     transform: translate(-50%, 0);
   }
 
+  @media screen and (min-width: 300px) {
+    margin-bottom: 22%;
+  }
+
   @media screen and (min-width: 1000px) {
     width: 46%;
     height: 440px;
     overflow: auto;
+    margin-bottom: 0;
     button {
       display: none;
     }
