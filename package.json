@@ -38,15 +38,18 @@
         "table": "^5.4.6"
     },
     "dependencies": {
+        "@silvermine/serverless-plugin-cloudfront-lambda-edge": "^2.1.1",
         "@testing-library/jest-dom": "^4.2.4",
         "dotenv": "^8.2.0",
-        "profanities": "^2.14.0",
         "mapbox-gl": "^1.12.0",
+        "profanities": "^2.14.0",
         "react": "^16.13.0",
         "react-dom": "^16.13.0",
         "react-multi-carousel": "^2.5.5",
         "react-router-dom": "^5.1.2",
         "react-svg": "^11.0.39",
+        "serverless-s3-remover": "^0.6.0",
+        "serverless-s3-sync": "^1.15.0",
         "styled-components": "^5.2.0"
     }
 }
