@@ -1,7 +1,0 @@
-README.md
-.eslintrc.json
-.prettierrc.json
-.travis.yml
-.eslintcache
-yarn.lock
-.scripts/
