@@ -16,7 +16,7 @@ plugins:
 
 custom:
   defaultRegion: us-east-1
-  defaultStage: dev
+  defaultStage: ${opt:stage}
   region: ${opt:region, self:custom.defaultRegion}
   stage: ${opt:stage, self:custom.defaultStage}
   objectPrefix: '${self:service}-${self:custom.stage}'
