@@ -3,26 +3,36 @@ language: node_js
 node_js:
 - "lts/*"
 
-os:
-- linux
-- osx
-
-cache: npm
-
 branches:
   only:
   - master
   - dev
 
-before_install:
-  - npm i -g npm@latest
-
-install:
-- npm install
-
-script:
-- npm run build
-- npm run style
+jobs:
+  include:
+    - stage: lint
+      cache:
+        directories: 
+          - "node_modules"
+      before_install:
+        - npm install -g npm@latest
+      install:
+        - npm install
+      script:
+        - npm run build
+        - npm run style
+    
+    - stage: deploy
+      if: type = pull_request AND branch = dev OR type = pull_request AND branch = master
+      cache:
+        directories:
+          - "node_modules"
+      install:
+        - npm install -g serverless
+      script:
+        - export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID_DEVELOPMENT}
+        - export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY_DEVELOPMENT}
+        - serverless deploy -s=${TRAVIS_BRANCH}
 
 notifications:
   email:

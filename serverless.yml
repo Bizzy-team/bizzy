@@ -20,10 +20,6 @@ custom:
   region: ${opt:region, self:custom.defaultRegion}
   stage: ${opt:stage, self:custom.defaultStage}
   objectPrefix: '${self:service}-${self:custom.stage}'
-  # The domain name to be used
-  # defaultdomainName: ${self:service}-${self:custom.stage}.com
-  # defaultdomainName: dev-bizzy.com
-  # domainName: ${opt:domain, self:custom.defaultdomainName}
   domainName: dev-bizzy.com
   bucketName: ${self:custom.domainName}
   remover:
@@ -34,7 +30,6 @@ custom:
     - bucketName: ${self:custom.bucketName}
       localDir: build
 
-# The `provider` block defines where your service will be deployed
 provider:
   name: aws
   runtime: nodejs12.x
@@ -47,10 +42,6 @@ package:
       - 'node_modules/**'
       - 'build/**'
       - 'public/**'
-
-# functions:
-#   basic_auth:
-#     handler: lambda_basicauth/main.handler
 
 resources:
   Resources:
@@ -82,13 +73,6 @@ resources:
                   - Sid: PublicReadGetObject
                     Effect: Allow
                     Principal: '*'
-                    # Principal:
-                    #   AWS:
-                    #     Fn::Join:
-                    #       - ' '
-                    #       -
-                    #         - 'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity'
-                    #         - Ref: CloudFrontOriginAccessIdentity
                     Action:
                       - s3:GetObject
                     Resource:
@@ -110,17 +94,11 @@ resources:
               Type: 'AWS::CloudFront::Distribution'
               DependsOn:
                 - BizzyApp
-                # - HostedZone
-                # - SSLCertificate
                 - CloudFrontOriginAccessIdentity
               Properties:
                 DistributionConfig:
-                  # Aliases:
-                  #   - '${opt:domain}'
-                  #   - 'www.${opt:domain}'
                   Origins:
                     - DomainName: ${self:custom.bucketName}.s3.amazonaws.com
-                    # DomainName: '#{BizzyApp.DomainName}'
                       OriginPath: ''
                       Id: S3BucketOrigin
                       S3OriginConfig:
@@ -152,10 +130,6 @@ resources:
                       Cookies:
                         Forward: none
                     ViewerProtocolPolicy: redirect-to-https
-                    # LambdaFunctionAssociations: 
-                    #   - EventType: 'viewer-request'
-                    #     IncludeBody: false
-                    #     LambdaFunctionARN: "arn:aws:lambda:eu-west-1:431852575624:function:bizzy-dev-basic_auth:1"
                   DefaultRootObject: index.html
                   Enabled: 'true'
                   HttpVersion: 'http2'
