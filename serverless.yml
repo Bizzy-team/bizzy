@@ -35,7 +35,7 @@ provider:
   runtime: nodejs12.x
   stage: ${self:custom.stage}
   region: ${self:custom.region}
-  profile: bizzy_deploy_app
+  profile: bizzy_deploy_front_dev
 
 package:
    exclude:
