@@ -12,7 +12,7 @@ jobs:
   include:
     - stage: lint
       cache:
-        directories: 
+        directories:
           - "node_modules"
       before_install:
         - npm install -g npm@latest
@@ -21,7 +21,7 @@ jobs:
       script:
         # - npm run build
         - npm run style
-    
+
     - stage: deploy
       if: type = pull_request AND branch = dev OR type = pull_request AND branch = master
       cache:
