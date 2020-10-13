@@ -38,7 +38,6 @@
         "table": "^5.4.6"
     },
     "dependencies": {
-        "@silvermine/serverless-plugin-cloudfront-lambda-edge": "^2.1.1",
         "@testing-library/jest-dom": "^4.2.4",
         "dotenv": "^8.2.0",
         "mapbox-gl": "^1.12.0",

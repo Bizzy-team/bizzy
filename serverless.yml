@@ -8,7 +8,6 @@
 service: bizzy
 
 plugins:
-  - '@silvermine/serverless-plugin-cloudfront-lambda-edge'
   - serverless-s3-remover
   - serverless-s3-sync
 
