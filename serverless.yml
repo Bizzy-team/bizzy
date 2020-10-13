@@ -7,8 +7,6 @@
 # The `service` block is the name of the service
 service: bizzy
 
-frameworkVersion: '1'
-
 plugins:
   - '@silvermine/serverless-plugin-cloudfront-lambda-edge'
   - serverless-s3-remover
