@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import FooterStyle from "../../style/FooterStyled.style";
 import HomeIcon from "../../img/icon_home_non_active.svg";
 import HomeIconActive from "../../img/icon_home.svg";

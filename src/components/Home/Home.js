@@ -127,15 +127,16 @@ function Home(props) {
           background-size: 60px;
         `;
       el.addEventListener("click", e => {
-        if (parseInt(e.target.id) === card.card_id) {
-          const newState = { ...data };
+        const newState = { ...data };
 
+        if (parseInt(e.target.id) === card.card_id) {
           newState.modalCardArr = newState.cards[parseInt(e.target.id)];
           newState.isModalCard = true;
 
           return setData(newState);
         }
       });
+
       new mapboxgl.Marker(el).setLngLat(card.card_geometry.coordinates).addTo(map);
     });
     map.scrollZoom.disable();
@@ -154,10 +155,21 @@ function Home(props) {
     const newState = { ...data };
 
     newState.isModalNewCard = false;
+    newState.isModalCard = false;
+
     document.querySelector("body").style.overflow = "auto";
 
     return setData(newState);
   }
+
+  // function closeModalOutside() {
+  //   const newState = { ...data };
+
+  //   newState.isModalCard = false;
+  //   document.querySelector("body").style.overflow = "auto";
+
+  //   return setData(newState);
+  // }
 
   return (
     <>
@@ -196,17 +208,39 @@ function Home(props) {
             </div>
           </FilterStyled>
           <SectionStyled>
-            {data.isModalCard ? (
+            {
+              data.cards.map((card, index) => {
+                return (
+                  <HomeCards
+                    card={card}
+                    key={index}
+                    isCardFeed={true}
+                    updateStateParent={closeModalOutside}
+                  ></HomeCards>
+                );
+              })
+            }
+            {/* {data.isModalCard ? (
               <HomeCards
                 card={data.modalCardArr}
                 isModalCard={data.isModalCard}
+                updateStateParent={closeModalOutside}
               ></HomeCards>
             ) : (
               data.cards.map((card, index) => {
-                return <HomeCards card={card} key={index} isCardFeed={true}></HomeCards>;
+                return (
+                  <HomeCards
+                    card={card}
+                    key={index}
+                    isCardFeed={true}
+                    updateStateParent={closeModalOutside}
+                  ></HomeCards>
+                );
               })
-            )}
-            <button onClick={displayMap}>Voir sur la map</button>
+            )} */}
+            {!data.isModalCard ? (
+              <button onClick={displayMap}>Voir sur la map</button>
+            ) : null}
           </SectionStyled>
         </>
       ) : (

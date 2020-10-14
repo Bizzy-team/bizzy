@@ -38,18 +38,18 @@ function App() {
     );
   }
 
-  function availableToken(Component, propsFromRoute) {
-    return sessionStorage.UserToken ? (
-      <Component {...propsFromRoute} />
-    ) : (
-      <ErrorMessage
-        errorTitle="You need to be connected."
-        errorContent="To access to this page, please"
-        redirectLink="/"
-        errorAdvice="use your account."
-      />
-    );
-  }
+  // function availableToken(Component, propsFromRoute) {
+  //   return sessionStorage.UserToken ? (
+  //     <Component {...propsFromRoute} />
+  //   ) : (
+  //     <ErrorMessage
+  //       errorTitle="You need to be connected."
+  //       errorContent="To access to this page, please"
+  //       redirectLink="/"
+  //       errorAdvice="use your account."
+  //     />
+  //   );
+  // }
 
   function unavailableToken(Component) {
     return !sessionStorage.UserToken ? (
