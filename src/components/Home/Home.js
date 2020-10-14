@@ -208,18 +208,16 @@ function Home(props) {
             </div>
           </FilterStyled>
           <SectionStyled>
-            {
-              data.cards.map((card, index) => {
-                return (
-                  <HomeCards
-                    card={card}
-                    key={index}
-                    isCardFeed={true}
-                    updateStateParent={closeModalOutside}
-                  ></HomeCards>
-                );
-              })
-            }
+            {data.cards.map((card, index) => {
+              return (
+                <HomeCards
+                  card={card}
+                  key={index}
+                  isCardFeed={true}
+                  updateStateParent={closeModalOutside}
+                ></HomeCards>
+              );
+            })}
             {/* {data.isModalCard ? (
               <HomeCards
                 card={data.modalCardArr}
