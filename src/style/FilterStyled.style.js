@@ -79,11 +79,21 @@ const HomeHeaderStyled = styled.section`
     }
   }
 
-  @media screen and (min-width: 529px) {
+  @media screen and (min-width: 464px) {
     div {
       .btn--filters {
         div {
-          width: 6vw;
+          width: 5vw;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 542px) {
+    div {
+      .btn--filters {
+        div {
+          width: 4vw;
         }
       }
     }
