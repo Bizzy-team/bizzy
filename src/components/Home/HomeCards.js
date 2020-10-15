@@ -8,9 +8,11 @@ function HomeCards(props) {
   React.useEffect(() => {
     if (props.isModalCard === true) {
       document.addEventListener("click", function modalClose(e) {
-        if (!e.target.id) {
-          props.updateStateParent(props.isModalCard);
-          document.removeEventListener("click", modalClose);
+        if (e.target.className === "mapboxgl-canvas") {
+          if (!e.target.id) {
+            props.updateStateParent(props.isModalCard);
+            document.removeEventListener("click", modalClose);
+          }
         }
       });
     }
