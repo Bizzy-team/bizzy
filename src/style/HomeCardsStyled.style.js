@@ -11,7 +11,7 @@ const HomeCardsStyled = styled.div`
   width: 90%;
   ${props => {
     if (props.isModalCard) {
-      return "position: fixed; bottom: 82px; z-index: 1; box-shadow: none;";
+      return "position: fixed; bottom: 82px; z-index: 1; box-shadow: none; border: none;";
     }
   }}
   .card--header {
@@ -110,6 +110,16 @@ const HomeCardsStyled = styled.div`
     }
   }
 
+  @media screen and (min-width: 388px) {
+    .card--header {
+      .card--title {
+        .card--title--name {
+          ${props => props.isModalCard && "margin-left: 5px;"};
+        }
+      }
+    }
+  }
+
   @media screen and (min-width: 445px) {
     .card--header {
       .card--img {
@@ -130,16 +140,46 @@ const HomeCardsStyled = styled.div`
     }
   }
 
+  @media screen and (min-width: 464px) {
+    .card--header {
+      .card--title {
+        .card--title--name {
+          .card--title--like {
+            ${props => props.isModalCard && "width: 5vw;"};
+          }
+        }
+      }
+    }
+  }
+
   @media screen and (min-width: 544px) {
+    ${props => props.isModalCard && "padding: 16px 14px;"};
     .card--header {
       .card--img {
         width: 15vw;
       }
       .card--title {
         .card--title--name {
+          h2 {
+            ${props => props.isModalCard && "line-height: 1;"};
+          }
           .card--title--like {
             width: 5vw;
           }
+        }
+        .card--author--about {
+          img {
+            ${props => props.isModalCard && "display: none;"};
+          }
+        }
+      }
+    }
+    .card--tags {
+      ${props => props.isModalCard && "margin-top: -22px;"};
+      .card--tags--participants {
+        ${props => props.isModalCard && "margin-right: 50%;"};
+        .card--tags--participants--icon {
+          ${props => props.isModalCard && "width: 3vw;"};
         }
       }
     }
@@ -171,6 +211,14 @@ const HomeCardsStyled = styled.div`
     }
   }
 
+  @media screen and (min-width: 602px) {
+    .card--tags {
+      .card--tags--participants {
+        ${props => props.isModalCard && "margin-right: 49%;"};
+      }
+    }
+  }
+
   @media screen and (min-width: 688px) {
     .card--header {
       .card--img {
@@ -190,7 +238,7 @@ const HomeCardsStyled = styled.div`
     }
     .card--tags {
       .card--tags--participants {
-        margin-right: 59%;
+        ${props => props.isModalCard ? "margin-right: 55%;" : "margin-right: 59%;"};
       }
     }
   }
@@ -210,7 +258,7 @@ const HomeCardsStyled = styled.div`
     }
     .card--tags {
       .card--tags--participants {
-        margin-right: 66%;
+        ${props => props.isModalCard ? "margin-right: 62%;" : "margin-right: 66%;"};
       }
     }
   }
@@ -226,12 +274,18 @@ const HomeCardsStyled = styled.div`
     }
     .card--tags {
       .card--tags--participants {
-        margin-right: 69%;
+        ${props => props.isModalCard ? "margin-right: 64%;" : "margin-right: 69%;"};
+
       }
     }
   }
 
   @media screen and (min-width: 1000px) {
+    ${props => {
+      if (props.isModalCard) {
+        return "width: 45%; left: 52%;";
+      }
+    }}
     .card--header {
       .card--img {
         width: 7vw;
@@ -253,6 +307,14 @@ const HomeCardsStyled = styled.div`
     }
   }
 
+  @media screen and (min-width: 1083px) {
+    .card--tags {
+      .card--tags--participants {
+        ${props => props.isModalCard && "margin-right: 48%;"};
+      }
+    }
+  }
+
   @media screen and (min-width: 1227px) {
     .card--header {
       .card--title {
@@ -261,6 +323,19 @@ const HomeCardsStyled = styled.div`
             width: 2vw;
           }
         }
+      }
+    }
+    .card--tags {
+      .card--tags--participants {
+        ${props => props.isModalCard && "margin-right: 50%;"};
+      }
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    .card--tags {
+      .card--tags--participants {
+        ${props => props.isModalCard && "margin-right: 52%;"};
       }
     }
   }
