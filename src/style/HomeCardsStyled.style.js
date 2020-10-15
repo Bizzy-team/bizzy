@@ -238,7 +238,7 @@ const HomeCardsStyled = styled.div`
     }
     .card--tags {
       .card--tags--participants {
-        ${props => props.isModalCard ? "margin-right: 55%;" : "margin-right: 59%;"};
+        ${props => (props.isModalCard ? "margin-right: 55%;" : "margin-right: 59%;")};
       }
     }
   }
@@ -258,7 +258,7 @@ const HomeCardsStyled = styled.div`
     }
     .card--tags {
       .card--tags--participants {
-        ${props => props.isModalCard ? "margin-right: 62%;" : "margin-right: 66%;"};
+        ${props => (props.isModalCard ? "margin-right: 62%;" : "margin-right: 66%;")};
       }
     }
   }
@@ -274,8 +274,7 @@ const HomeCardsStyled = styled.div`
     }
     .card--tags {
       .card--tags--participants {
-        ${props => props.isModalCard ? "margin-right: 64%;" : "margin-right: 69%;"};
-
+        ${props => (props.isModalCard ? "margin-right: 64%;" : "margin-right: 69%;")};
       }
     }
   }
