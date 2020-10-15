@@ -5,6 +5,17 @@ import ParticipantIcon from "../../img/participant_icon.svg";
 import HomeCardsStyled from "../../style/HomeCardsStyled.style";
 
 function HomeCards(props) {
+  React.useEffect(() => {
+    if (props.isModalCard === true) {
+      document.addEventListener("click", function modalClose(e) {
+        if (!e.target.id) {
+          props.updateStateParent(props.isModalCard);
+          document.removeEventListener("click", modalClose);
+        }
+      });
+    }
+  });
+
   return (
     <HomeCardsStyled isModalCard={props.isModalCard}>
       <div className="card--header">
