@@ -11,7 +11,7 @@ const HomeCardsStyled = styled.div`
   width: 90%;
   ${props => {
     if (props.isModalCard) {
-      return "position: fixed; bottom: 82px;";
+      return "position: fixed; bottom: 82px; z-index: 1; box-shadow: none;";
     }
   }}
   .card--header {
