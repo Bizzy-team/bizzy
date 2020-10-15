@@ -161,7 +161,6 @@ function Home(props) {
 
     newState.isModalNewCard = false;
     newState.isModalCard = false;
-    // newState.isMap = false;
 
     document.querySelector("body").style.overflow = "auto";
 
@@ -200,24 +199,23 @@ function Home(props) {
         </div>
       </FilterStyled>
       <SectionStyled>
-        {data.isModalCard ? (
+        {data.isModalCard && (
           <HomeCards
             card={data.modalCardArr}
             isModalCard={data.isModalCard}
             updateStateParent={closeModalOutside}
           ></HomeCards>
-        ) : (
-          data.cards.map((card, index) => {
-            return (
-              <HomeCards
-                card={card}
-                key={index}
-                isCardFeed={true}
-                updateStateParent={closeModalOutside}
-              ></HomeCards>
-            );
-          })
         )}
+        {data.cards.map((card, index) => {
+          return (
+            <HomeCards
+              card={card}
+              key={index}
+              isCardFeed={true}
+              updateStateParent={closeModalOutside}
+            ></HomeCards>
+          );
+        })}
         {data.isMap ? (
           <button onClick={displayMap}>Retour sur la liste</button>
         ) : (
