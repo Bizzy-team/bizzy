@@ -65,7 +65,7 @@ function Home(props) {
         }
       }
     ],
-    isCards: true,
+    isMap: false,
     isModalNewCard: false,
     isModalCard: false,
     modalCardArr: []
@@ -87,9 +87,10 @@ function Home(props) {
   function displayMap() {
     const newState = { ...data };
 
-    if (data.isCards) {
-      newState.isCards = false;
+    if (!data.isMap) {
+      newState.isMap = true;
       document.querySelector(".section--map").style.display = "block";
+      document.querySelector("body").style.overflow = "hidden";
 
       aboutMap();
 
@@ -97,7 +98,10 @@ function Home(props) {
     }
 
     document.querySelector(".section--map").style.display = "none";
-    newState.isCards = true;
+    document.querySelector("body").style.overflow = "auto";
+
+    newState.isMap = false;
+    newState.isModalCard = false;
 
     return setData(newState);
   }
@@ -131,6 +135,7 @@ function Home(props) {
 
         if (parseInt(e.target.id) === card.card_id) {
           newState.modalCardArr = newState.cards[parseInt(e.target.id)];
+          newState.isMap = true;
           newState.isModalCard = true;
 
           return setData(newState);
@@ -156,20 +161,12 @@ function Home(props) {
 
     newState.isModalNewCard = false;
     newState.isModalCard = false;
+    // newState.isMap = false;
 
     document.querySelector("body").style.overflow = "auto";
 
     return setData(newState);
   }
-
-  // function closeModalOutside() {
-  //   const newState = { ...data };
-
-  //   newState.isModalCard = false;
-  //   document.querySelector("body").style.overflow = "auto";
-
-  //   return setData(newState);
-  // }
 
   return (
     <>
@@ -183,84 +180,50 @@ function Home(props) {
           isMarginTop={true}
         ></ModalNewCard>
       )}
-      {/* {
-        data.isModalCard && <HomeCards ></HomeCards>
-      } */}
-      {data.isCards ? (
-        <>
-          <TitlePageStyled className="title--page">
-            <h1>Propositions autour de vous</h1>
+      <TitlePageStyled className="title--page">
+        <h1>Propositions autour de vous</h1>
+        <div>
+          <img src={SquigglesImg} alt="squiggles--img"></img>
+        </div>
+      </TitlePageStyled>
+      <FilterStyled>
+        <div>
+          <input type="text" placeholder="Paris 10"></input>
+          <button className="btn--filters">
             <div>
-              <img src={SquigglesImg} alt="squiggles--img"></img>
+              <img src={FiltersImg} alt="filters-icon"></img>{" "}
             </div>
-          </TitlePageStyled>
-          <FilterStyled>
-            <div>
-              <input type="text" placeholder="Paris 10"></input>
-              <button className="btn--filters">
-                <div>
-                  <img src={FiltersImg} alt="filters-icon"></img>{" "}
-                </div>
-              </button>
-              <button className="btn--create" onClick={displayNewCard}>
-                New card
-              </button>
-            </div>
-          </FilterStyled>
-          <SectionStyled>
-            {data.cards.map((card, index) => {
-              return (
-                <HomeCards
-                  card={card}
-                  key={index}
-                  isCardFeed={true}
-                  updateStateParent={closeModalOutside}
-                ></HomeCards>
-              );
-            })}
-            {/* {data.isModalCard ? (
+          </button>
+          <button className="btn--create" onClick={displayNewCard}>
+            New card
+          </button>
+        </div>
+      </FilterStyled>
+      <SectionStyled>
+        {data.isModalCard ? (
+          <HomeCards
+            card={data.modalCardArr}
+            isModalCard={data.isModalCard}
+            updateStateParent={closeModalOutside}
+          ></HomeCards>
+        ) : (
+          data.cards.map((card, index) => {
+            return (
               <HomeCards
-                card={data.modalCardArr}
-                isModalCard={data.isModalCard}
+                card={card}
+                key={index}
+                isCardFeed={true}
                 updateStateParent={closeModalOutside}
               ></HomeCards>
-            ) : (
-              data.cards.map((card, index) => {
-                return (
-                  <HomeCards
-                    card={card}
-                    key={index}
-                    isCardFeed={true}
-                    updateStateParent={closeModalOutside}
-                  ></HomeCards>
-                );
-              })
-            )} */}
-            {!data.isModalCard ? (
-              <button onClick={displayMap}>Voir sur la map</button>
-            ) : null}
-          </SectionStyled>
-        </>
-      ) : (
-        <>
-          <FilterStyled>
-            <div>
-              <input type="text" placeholder="Paris 10"></input>
-              <button className="btn--filters">
-                <div>
-                  <img src={FiltersImg} alt="filters-icon"></img>{" "}
-                </div>
-              </button>
-              <button className="btn--create" onClick={displayNewCard}>
-                New card
-              </button>
-            </div>
-          </FilterStyled>
-          <SectionStyled>
-            <button onClick={displayMap}>Retour sur la liste</button>
-          </SectionStyled>
-        </>
-      )}
+            );
+          })
+        )}
+        {data.isMap ? (
+          <button onClick={displayMap}>Retour sur la liste</button>
+        ) : (
+          <button onClick={displayMap}>Voir sur la map</button>
+        )}
+      </SectionStyled>
       <Footer isUrlActive={props.match}></Footer>
     </>
   );
