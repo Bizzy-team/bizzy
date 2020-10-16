@@ -177,6 +177,7 @@ function Home(props) {
         <ModalNewCard
           updateStateParent={closeModalOutside}
           isMarginTop={true}
+          isModalNewCard={data.isModalNewCard}
         ></ModalNewCard>
       )}
       <TitlePageStyled className="title--page">
