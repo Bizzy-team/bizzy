@@ -110,4 +110,8 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+# Vercel config
 .now
+
+# Build
+build/
