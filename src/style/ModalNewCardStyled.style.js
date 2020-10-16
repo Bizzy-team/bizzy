@@ -164,11 +164,11 @@ const ModalNewCardStyled = styled.section`
   }
 
   @media screen and (min-width: 427px) {
-    ${props =>
-      props.isMarginTop && {
-        marginTop: "1%!important",
-        paddingTop: "25%"
-      }}
+    ${props => {
+      if (props.isMarginTop) {
+        return "margin-top: 1%; padding-top: 25%;";
+      }
+    }}
   }
 
   @media screen and (min-width: 474px) {
@@ -241,19 +241,21 @@ const ModalNewCardStyled = styled.section`
 
   @media screen and (min-width: 1000px) {
     background-color: rgba(0, 0, 0, 0.5);
-    margin-top: 18%;
+    margin-top: ${props => props.isModalNewCard ?  "0" : "18%"};
+    ${props => props.isModalNewCard && "padding-top: 0;"};
     .card--content {
+      ${props => props.isModalNewCard ? "margin-top: 2%;" : "margin-top: 14%;"};
       padding-top: 20px;
       width: 50vw;
-      margin-top: 14%;
-      /* height: 23vh; */
       margin-left: 25%;
       border-radius: 20px;
       border: solid 3px rgba(247, 246, 247, 1);
       border-bottom-width: 8px;
       background-color: white;
+      ${props => props.isModalNewCard && "height: 100vh;"};
       .card--title {
         position: relative;
+        ${props => props.isModalNewCard && "margin-bottom: 0;"};
         .card--img {
           width: 5vw;
         }
@@ -265,6 +267,7 @@ const ModalNewCardStyled = styled.section`
         }
       }
       .card--moods {
+        ${props => props.isModalNewCard && "margin: 5% 1px;"};
         .cards--moods--img {
           padding: 0 23px;
         }
@@ -273,16 +276,17 @@ const ModalNewCardStyled = styled.section`
   }
 
   @media screen and (min-width: 1084px) {
-    margin-top: 16%;
+    margin-top: ${props => props.isModalNewCard ?  "0" : "16%"};
+
     .card--content {
-      margin-top: 12%;
+      margin-top: ${props => props.isModalNewCard ?  "0" : "12%"};
     }
   }
 
   @media screen and (min-width: 1200px) {
-    margin-top: 14%;
+    margin-top: ${props => props.isModalNewCard ?  "0" : "14%"};
     .card--content {
-      margin-top: 10%;
+      margin-top: ${props => props.isModalNewCard ?  "0" : "18%"};
       .card--title {
         .card--img {
           width: 4vw;
@@ -293,23 +297,23 @@ const ModalNewCardStyled = styled.section`
 
   @media screen and (min-width: 1288px) {
     .card--content {
-      margin-top: 6%;
+      margin-top: ${props => props.isModalNewCard ?  "0" : "6%"};
     }
   }
 
   @media screen and (min-width: 1364px) {
-    margin-top: 13%;
+    margin-top: ${props => props.isModalNewCard ?  "0" : "13%"};
     .card--content {
-      margin-top: 4%;
+      margin-top: ${props => props.isModalNewCard ?  "0" : "4%"};
     }
   }
 
   @media screen and (min-width: 1400px) {
-    margin-top: 7%;
+    margin-top: ${props => props.isModalNewCard ?  "0" : "7%"};
     .card--content {
       width: 30vw;
-      height: 84vh;
-      margin-top: 11px;
+      height: ${props => props.isModalNewCard ?  "89vh" : "84vh"};
+      margin-top: ${props => props.isModalNewCard ?  "5%" : "11px"};
       margin-left: 33%;
       .card--title {
         margin-bottom: 0;
@@ -318,8 +322,6 @@ const ModalNewCardStyled = styled.section`
         }
       }
       .card--moods {
-        /* margin: 0;
-        margin-bottom: 4%; */
         margin: 24px 0;
         .cards--moods--img {
           width: 8vw;
@@ -328,7 +330,6 @@ const ModalNewCardStyled = styled.section`
       }
       .title--card {
         div {
-          /* margin-bottom: 7%; */
           /* margin-bottom: ${props => (props.isError ? "1%" : "7%")}; */
           .error--message {
             padding: 0 8px;
