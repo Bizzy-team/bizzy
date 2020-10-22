@@ -15,6 +15,8 @@ import FilterStyled from "../../style/FilterStyled.style";
 import UserAvatar from "../../img/user_avatar.svg";
 import ModalNewCard from "../../components/Modal/ModalNewCard";
 import Footer from "../Footer/Footer";
+// import HomeAboutCard from "./HomeAboutCard";
+import { Redirect } from "react-router-dom";
 
 function Home(props) {
   const [data, setData] = React.useState({
@@ -32,7 +34,27 @@ function Home(props) {
         card_geometry: {
           type: "Point",
           coordinates: [2.36517, 48.83501]
-        }
+        },
+        card_participants: [
+          {
+            card_participant_id: 0,
+            card_participant_avatar: UserAvatar,
+            card_participant_name: "Albert",
+            card_participant_job: "CTO",
+          },
+          {
+            card_participant_id: 1,
+            card_participant_avatar: UserAvatar,
+            card_participant_name: "Guillaume",
+            card_participant_job: "Freelance",
+          },
+          {
+            card_participant_id: 2,
+            card_participant_avatar: UserAvatar,
+            card_participant_name: "Alice",
+            card_participant_job: "RH",
+          }
+        ]
       },
       {
         card_id: 1,
@@ -47,7 +69,27 @@ function Home(props) {
         card_geometry: {
           type: "Point",
           coordinates: [2.37358, 48.837551]
-        }
+        },
+        card_participants: [
+          {
+            card_participant_id: 0,
+            card_participant_avatar: UserAvatar,
+            card_participant_name: "Albert",
+            card_participant_job: "CTO",
+          },
+          {
+            card_participant_id: 1,
+            card_participant_avatar: UserAvatar,
+            card_participant_name: "Guillaume",
+            card_participant_job: "Freelance",
+          },
+          {
+            card_participant_id: 2,
+            card_participant_avatar: UserAvatar,
+            card_participant_name: "Alice",
+            card_participant_job: "RH",
+          }
+        ]
       },
       {
         card_id: 2,
@@ -62,17 +104,43 @@ function Home(props) {
         card_geometry: {
           type: "Point",
           coordinates: [2.37523, 48.83022]
-        }
+        },
+        card_participants: [
+          {
+            card_participant_id: 0,
+            card_participant_avatar: UserAvatar,
+            card_participant_name: "Albert",
+            card_participant_job: "CTO",
+          },
+          {
+            card_participant_id: 1,
+            card_participant_avatar: UserAvatar,
+            card_participant_name: "Guillaume",
+            card_participant_job: "Freelance",
+          },
+          {
+            card_participant_id: 2,
+            card_participant_avatar: UserAvatar,
+            card_participant_name: "Alice",
+            card_participant_job: "RH",
+          }
+        ]
       }
     ],
     isMap: false,
     isModalNewCard: false,
     isModalCard: false,
-    modalCardArr: []
+    modalCardArr: [],
+  });
+
+  const [redirect, setRedirect] = React.useState({
+    isRedirect: false,
+    redirectCardId: null,
+    cardDetails: []
   });
 
   React.useEffect(() => {
-    if (window.screen.width < 700) {
+    if (window.screen.width < 700 && document.querySelector(".user--profile--header")) {
       document.querySelector(".user--profile--header").style.display = "none";
       document.querySelector("body").style.background = "#F7F6F7";
     }
@@ -167,6 +235,19 @@ function Home(props) {
     return setData(newState);
   }
 
+  function aboutCard(card) {
+    const newState = { ...redirect };
+
+    newState.isRedirect = true;
+    newState.redirectCardId = card.card_id;
+    newState.cardDetails = card;
+
+    return setRedirect(newState);
+  }
+
+  // if (redirect.isRedirect) return <Redirect to={`/aboutCard/${redirect.redirectCardId}`}></Redirect>;
+  if (redirect.isRedirect) return <Redirect to={{pathname: `/aboutCard/${redirect.redirectCardId}`, state: {cardDetails: redirect.cardDetails}}}></Redirect>;
+
   return (
     <>
       <UserProfileHeader></UserProfileHeader>
@@ -214,6 +295,7 @@ function Home(props) {
               key={index}
               isCardFeed={true}
               updateStateParent={closeModalOutside}
+              aboutCard={() => aboutCard(card)}
             ></HomeCards>
           );
         })}
