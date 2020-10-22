@@ -40,19 +40,19 @@ function Home(props) {
             card_participant_id: 0,
             card_participant_avatar: UserAvatar,
             card_participant_name: "Albert",
-            card_participant_job: "CTO",
+            card_participant_job: "CTO"
           },
           {
             card_participant_id: 1,
             card_participant_avatar: UserAvatar,
             card_participant_name: "Guillaume",
-            card_participant_job: "Freelance",
+            card_participant_job: "Freelance"
           },
           {
             card_participant_id: 2,
             card_participant_avatar: UserAvatar,
             card_participant_name: "Alice",
-            card_participant_job: "RH",
+            card_participant_job: "RH"
           }
         ]
       },
@@ -75,19 +75,19 @@ function Home(props) {
             card_participant_id: 0,
             card_participant_avatar: UserAvatar,
             card_participant_name: "Albert",
-            card_participant_job: "CTO",
+            card_participant_job: "CTO"
           },
           {
             card_participant_id: 1,
             card_participant_avatar: UserAvatar,
             card_participant_name: "Guillaume",
-            card_participant_job: "Freelance",
+            card_participant_job: "Freelance"
           },
           {
             card_participant_id: 2,
             card_participant_avatar: UserAvatar,
             card_participant_name: "Alice",
-            card_participant_job: "RH",
+            card_participant_job: "RH"
           }
         ]
       },
@@ -110,19 +110,19 @@ function Home(props) {
             card_participant_id: 0,
             card_participant_avatar: UserAvatar,
             card_participant_name: "Albert",
-            card_participant_job: "CTO",
+            card_participant_job: "CTO"
           },
           {
             card_participant_id: 1,
             card_participant_avatar: UserAvatar,
             card_participant_name: "Guillaume",
-            card_participant_job: "Freelance",
+            card_participant_job: "Freelance"
           },
           {
             card_participant_id: 2,
             card_participant_avatar: UserAvatar,
             card_participant_name: "Alice",
-            card_participant_job: "RH",
+            card_participant_job: "RH"
           }
         ]
       }
@@ -130,7 +130,7 @@ function Home(props) {
     isMap: false,
     isModalNewCard: false,
     isModalCard: false,
-    modalCardArr: [],
+    modalCardArr: []
   });
 
   const [redirect, setRedirect] = React.useState({
@@ -246,7 +246,15 @@ function Home(props) {
   }
 
   // if (redirect.isRedirect) return <Redirect to={`/aboutCard/${redirect.redirectCardId}`}></Redirect>;
-  if (redirect.isRedirect) return <Redirect to={{pathname: `/aboutCard/${redirect.redirectCardId}`, state: {cardDetails: redirect.cardDetails}}}></Redirect>;
+  if (redirect.isRedirect)
+    return (
+      <Redirect
+        to={{
+          pathname: `/aboutCard/${redirect.redirectCardId}`,
+          state: { cardDetails: redirect.cardDetails }
+        }}
+      ></Redirect>
+    );
 
   return (
     <>

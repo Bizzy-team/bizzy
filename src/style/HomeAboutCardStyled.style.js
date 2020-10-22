@@ -14,13 +14,13 @@ const HomeAboutCardStyled = styled.section`
 
   @media screen and (min-width: 300px) {
     div {
-    padding-top: 10%;
-    .card--title {
-      .back--arrow {
-        margin-right: 6%;
+      padding-top: 10%;
+      .card--title {
+        .back--arrow {
+          margin-right: 6%;
+        }
       }
     }
-  }
   }
 `;
 
