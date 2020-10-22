@@ -14,7 +14,10 @@ function HomeAboutCard(props) {
               <img src={BackArrow} alt="back-arrow"></img>
             </div>
             <div className="card--title--img">
-              <img src={props.location.state.cardDetails.card_user_mood} alt="icons-mood"></img>
+              <img
+                src={props.location.state.cardDetails.card_user_mood}
+                alt="icons-mood"
+              ></img>
             </div>
             <div className="card--title--name">
               <h2>{props.location.state.cardDetails.card_title}</h2>
@@ -36,27 +39,38 @@ function HomeAboutCard(props) {
           </div>
           <div className="card--about--author">
             <div className="card--about--author--img">
-              <img src={props.location.state.cardDetails.card_user_avatar} alt="user-avatar"></img>
+              <img
+                src={props.location.state.cardDetails.card_user_avatar}
+                alt="user-avatar"
+              ></img>
             </div>
-            <p>{props.location.state.cardDetails.card_user_name}, {props.location.state.cardDetails.card_user_job}</p>
+            <p>
+              {props.location.state.cardDetails.card_user_name},{" "}
+              {props.location.state.cardDetails.card_user_job}
+            </p>
           </div>
           <div className="card--desc">
             <p>{props.location.state.cardDetails.card_desc}</p>
           </div>
           <div className="card--participants">
             <h3>Participants:</h3>
-            {props.location.state.cardDetails.card_participants.map((participant, index) => {
-              return (
-                <React.Fragment key={index}>
-                  <div className={`participant--${participant.card_participant_id}`}>
-                    <div className="card--participant--avatar">
-                      <img src={participant.card_participant_avatar} alt="avatar"></img>
+            {props.location.state.cardDetails.card_participants.map(
+              (participant, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <div className={`participant--${participant.card_participant_id}`}>
+                      <div className="card--participant--avatar">
+                        <img src={participant.card_participant_avatar} alt="avatar"></img>
+                      </div>
+                      <p>
+                        {participant.card_participant_name},{" "}
+                        {participant.card_participant_job}
+                      </p>
                     </div>
-                    <p>{participant.card_participant_name}, {participant.card_participant_job}</p>
-                  </div>
-                </React.Fragment>
-              );
-            })}
+                  </React.Fragment>
+                );
+              }
+            )}
           </div>
         </div>
       </HomeAboutCardStyled>
