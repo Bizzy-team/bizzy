@@ -14,7 +14,7 @@ function Footer(props) {
     <FooterStyle as="footer">
       <div className="footer--elements">
         <div className="footer--elements--home">
-          {props.isUrlActive.url === "/home" ? (
+          {(props.isUrlActive.url === "/home" || props.isUrlActive.path === "/aboutCard/:cardId") ? (
             <img src={HomeIconActive} alt="home--icon"></img>
           ) : (
             <img src={HomeIcon} alt="home--icon"></img>
