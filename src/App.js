@@ -16,6 +16,7 @@ import ConfirmMail from "./components/ConfirmMail/ConfirmMail";
 import SignUpSpace from "./components/SignUpSpace/SignUpSpace";
 import Support from "./components/Support/Support";
 import LogginSpace from "./components/LogginSpace/LogginSpace";
+import HomeAboutCard from "./components/Home/HomeAboutCard";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -88,6 +89,7 @@ function App() {
           <Route exact path="/reset_pswd_form" component={ResetPswd} />
           <Route exact path="/Home" component={Home} />
           {/* <Route exact path="/Home" render={() => availableToken(Home)} /> */}
+          <Route strict path="/aboutCard/:cardId" component={HomeAboutCard} />
           <Route strict path="/:name" component={UserProfile} />
         </Switch>
         {/* <Route
