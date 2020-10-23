@@ -90,6 +90,60 @@ const HomeAboutCardStyled = styled.section`
     }
   }
 
+  .section--map {
+    display: flex;
+    justify-content: center;
+    /* position: relative;
+    width: 80%; */
+    /* height: 10%; */
+    #map {
+      /* width: inherit;
+      height: inherit;
+      overflow: visible; */
+      width: 90%;
+      height: 23%;
+      position: absolute;
+      margin-bottom: 32%;
+      margin-top: 3%;
+      .mapboxgl-canvas-container {
+        canvas {
+          border-radius: 10px;
+        }
+      }
+      .mapboxgl-control-container {
+        display: none;
+      }
+    }
+  }
+
+  .buttons {
+    margin-top: 60%;
+    margin-bottom: 60%;
+    display: flex;
+    .btn--favorite {
+      background-color: ${props => props.theme.colorPrincipal};
+      color: ${props => props.theme.colorBtn};
+      padding: 10px 24px;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      font-size: 0.9em;
+      /* opacity: ${props => (props.btnDisabled ? 0.5 : 1)}; */
+      margin-bottom: 15%;
+    }
+    .btn--join {
+      background-color: ${props => props.theme.colorBtn};
+      color: ${props => props.theme.colorPrincipal};
+      padding: 10px 24px;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      font-size: 0.9em;
+      /* opacity: ${props => (props.btnDisabled ? 0.5 : 1)}; */
+      margin-bottom: 15%;
+    }
+  }
+
   @media screen and (min-width: 300px) {
     .about--card {
       padding-top: 10%;
@@ -156,6 +210,13 @@ const HomeAboutCardStyled = styled.section`
         }
       }
     }
+    /* .section--map {
+      #map {
+        top: 81%;
+        width: 90%;
+        height: 23%;
+      }
+    } */
   }
 `;
 
