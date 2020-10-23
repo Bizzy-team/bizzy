@@ -1,10 +1,48 @@
 import React from "react";
+import mapboxgl from "mapbox-gl";
 import Footer from "../Footer/Footer";
 import ParticipantIcon from "../../img/participant_icon.svg";
 import BackArrow from "../../img/back_arrow.svg";
 import HomeAboutCardStyled from "../../style/HomeAboutCardStyled.style";
 
 function HomeAboutCard(props) {
+  console.log(props.location.state.cardDetails);
+  console.log(props.location.state.cardDetails.card_geometry.coordinates[0]);
+  console.log(props.location.state.cardDetails.card_geometry.coordinates[1]);
+
+  React.useEffect(() => {
+    mapboxgl.accessToken = process.env.REACT_APP_TOKEN_MAP_KEY;
+
+    const map = new mapboxgl.Map({
+      container: "map",
+      style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+      center: [props.location.state.cardDetails.card_geometry.coordinates[0], props.location.state.cardDetails.card_geometry.coordinates[1]], // starting position [lng, lat]
+      // center: [2.37001, 48.83746], // starting position [lng, lat]
+      zoom: 14 // starting zoom
+    });
+
+    // props.location.state.cardDetails.forEach(card => {
+      const el = document.createElement("div");
+      el.className = "marker";
+      el.id = `${props.location.state.cardDetails.card_id}`;
+      el.style.cssText = `
+          display: block;
+          background-image: url(${props.location.state.cardDetails.card_user_mood_map});
+          background-repeat: no-repeat;
+          width: 55px;
+          height: 55px;
+          border-radius: 50%;
+          background-position: -3px -5px;
+          background-size: 60px;
+        `;
+
+      new mapboxgl.Marker(el).setLngLat(props.location.state.cardDetails.card_geometry.coordinates).addTo(map);
+    // });
+
+    map.scrollZoom.disable();
+  })
+
+
   return (
     <>
       <HomeAboutCardStyled>
@@ -72,6 +110,14 @@ function HomeAboutCard(props) {
               }
             )}
           </div>
+        </div>
+        <section className="section--map">
+          <div id="map"></div>
+        </section>
+
+        <div className="buttons">
+          <button className="btn--favorite">Mettre en favoris</button>
+          <button className="btn--join">Rejoindre</button>
         </div>
       </HomeAboutCardStyled>
 
