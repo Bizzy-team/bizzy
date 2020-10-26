@@ -5,10 +5,9 @@ import ParticipantIcon from "../../img/participant_icon.svg";
 import BackArrow from "../../img/back_arrow.svg";
 import HomeAboutCardStyled from "../../style/HomeAboutCardStyled.style";
 
+
 function HomeAboutCard(props) {
-  console.log(props.location.state.cardDetails);
-  console.log(props.location.state.cardDetails.card_geometry.coordinates[0]);
-  console.log(props.location.state.cardDetails.card_geometry.coordinates[1]);
+  console.log(props);
 
   React.useEffect(() => {
     mapboxgl.accessToken = process.env.REACT_APP_TOKEN_MAP_KEY;
@@ -44,12 +43,16 @@ function HomeAboutCard(props) {
     map.scrollZoom.disable();
   });
 
+  function backHome() {
+    return props.history.goBack();
+  }
+
   return (
     <>
       <HomeAboutCardStyled>
         <div className="about--card">
           <div className="card--title">
-            <div className="back--arrow">
+            <div className="back--arrow" onClick={backHome}>
               <img src={BackArrow} alt="back-arrow"></img>
             </div>
             <div className="card--title--img">
@@ -112,9 +115,9 @@ function HomeAboutCard(props) {
             )}
           </div>
         </div>
-          <section className="section--map">
-            <div id="map"></div>
-          </section>
+        <section className="section--map">
+          <div id="map"></div>
+        </section>
         <div className="buttons">
           <button className="btn--favorite">Mettre en favoris</button>
           <button className="btn--join">Rejoindre</button>
