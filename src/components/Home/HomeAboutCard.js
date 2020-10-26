@@ -5,7 +5,6 @@ import ParticipantIcon from "../../img/participant_icon.svg";
 import BackArrow from "../../img/back_arrow.svg";
 import HomeAboutCardStyled from "../../style/HomeAboutCardStyled.style";
 
-
 function HomeAboutCard(props) {
   console.log(props);
 
