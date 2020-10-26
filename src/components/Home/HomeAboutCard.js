@@ -16,16 +16,17 @@ function HomeAboutCard(props) {
     const map = new mapboxgl.Map({
       container: "map",
       style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
-      center: [props.location.state.cardDetails.card_geometry.coordinates[0], props.location.state.cardDetails.card_geometry.coordinates[1]], // starting position [lng, lat]
-      // center: [2.37001, 48.83746], // starting position [lng, lat]
+      center: [
+        props.location.state.cardDetails.card_geometry.coordinates[0],
+        props.location.state.cardDetails.card_geometry.coordinates[1]
+      ], // starting position [lng, lat]
       zoom: 14 // starting zoom
     });
 
-    // props.location.state.cardDetails.forEach(card => {
-      const el = document.createElement("div");
-      el.className = "marker";
-      el.id = `${props.location.state.cardDetails.card_id}`;
-      el.style.cssText = `
+    const el = document.createElement("div");
+    el.className = "marker";
+    el.id = `${props.location.state.cardDetails.card_id}`;
+    el.style.cssText = `
           display: block;
           background-image: url(${props.location.state.cardDetails.card_user_mood_map});
           background-repeat: no-repeat;
@@ -36,12 +37,12 @@ function HomeAboutCard(props) {
           background-size: 60px;
         `;
 
-      new mapboxgl.Marker(el).setLngLat(props.location.state.cardDetails.card_geometry.coordinates).addTo(map);
-    // });
+    new mapboxgl.Marker(el)
+      .setLngLat(props.location.state.cardDetails.card_geometry.coordinates)
+      .addTo(map);
 
     map.scrollZoom.disable();
-  })
-
+  });
 
   return (
     <>
