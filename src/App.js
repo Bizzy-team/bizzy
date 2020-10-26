@@ -87,7 +87,7 @@ function App() {
             render={() => unavailableToken(ForgotPasswordConfirm)}
           ></Route>
           <Route exact path="/reset_pswd_form" component={ResetPswd} />
-          <Route exact path="/Home" component={Home} />
+          <Route exact path="/home" component={Home} />
           {/* <Route exact path="/Home" render={() => availableToken(Home)} /> */}
           <Route strict path="/aboutCard/:cardId" component={HomeAboutCard} />
           <Route strict path="/:name" component={UserProfile} />
