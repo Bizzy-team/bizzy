@@ -112,10 +112,9 @@ function HomeAboutCard(props) {
             )}
           </div>
         </div>
-        <section className="section--map">
-          <div id="map"></div>
-        </section>
-
+          <section className="section--map">
+            <div id="map"></div>
+          </section>
         <div className="buttons">
           <button className="btn--favorite">Mettre en favoris</button>
           <button className="btn--join">Rejoindre</button>
