@@ -125,7 +125,7 @@ const HomeAboutCardStyled = styled.section`
       width: 100%;
       font-size: 0.9em;
       /* opacity: ${props => (props.btnDisabled ? 0.5 : 1)}; */
-      margin-bottom: 15%;
+      /* margin-bottom: 15%; */
     }
     .btn--join {
       background-color: ${props => props.theme.colorBtn};
@@ -136,7 +136,7 @@ const HomeAboutCardStyled = styled.section`
       width: 100%;
       font-size: 0.9em;
       /* opacity: ${props => (props.btnDisabled ? 0.5 : 1)}; */
-      margin-bottom: 15%;
+      /* margin-bottom: 15%; */
     }
   }
 
@@ -205,6 +205,241 @@ const HomeAboutCardStyled = styled.section`
             width: 12vw;
           }
         }
+      }
+    }
+  }
+
+  @media screen and (min-width: 373px) {
+    .about--card {
+      .card--title {
+        .card--title--img {
+          width: 26vw;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 384px) {
+    .about--card {
+      .card--title {
+        .card--title--img {
+          width: 22vw;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 414px) {
+    .buttons {
+      margin-top: 48%;
+    }
+  }
+
+  @media screen and (min-width: 492px) {
+    .about--card {
+      .card--title {
+        .card--title--img {
+          width: 20vw;
+        }
+        .card--title--name {
+          padding-left: 29px;
+        }
+      }
+      .card--tags {
+        .card--tags--participants {
+          .card--tags--participants--icon {
+            width: 6vw;
+          }
+        }
+      }
+      .card--about--author {
+        .card--about--author--img {
+          width: 12vw;
+        }
+      }
+    }
+    .section--map {
+      #map {
+        height: 31%;
+      }
+    }
+    .buttons {
+      margin-top: 53%;
+      margin-bottom: 0;
+    }
+  }
+
+  @media screen and (min-width: 562px) {
+    .about--card {
+      .card--title {
+        .card--title--img {
+          width: 16vw;
+        }
+        .card--title--name {
+          padding-left: 44px;
+        }
+      }
+      .card--tags {
+        .card--tags--participants {
+          .card--tags--participants--icon {
+            width: 5vw;
+          }
+        }
+      }
+      .card--about--author {
+        .card--about--author--img {
+          width: 9vw;
+        }
+      }
+      .card--participants {
+        div {
+          div {
+            width: 8vw;
+          }
+        }
+      }
+    }
+    .section--map {
+      #map {
+        height: 36%;
+        margin-bottom: 24%;
+      }
+    }
+    .buttons {
+      margin-top: 51%;
+    }
+  }
+
+  @media screen and (min-width: 616px) {
+    .section--map {
+      #map {
+        height: 40%;
+        margin-bottom: 23%;
+      }
+    }
+  }
+
+  @media screen and (min-width: 691px) {
+    .about--card {
+      .card--title {
+        .card--title--img {
+          width: 14vw;
+        }
+        .card--title--name {
+          padding-left: 88px;
+        }
+      }
+    }
+    .section--map {
+      #map {
+        height: 45%;
+        margin-bottom: 22%;
+      }
+    }
+    .buttons {
+      margin-top: 52%;
+    }
+  }
+
+  @media screen and (min-width: 785px) {
+    .about--card {
+      .card--title {
+        .card--title--name {
+          h2 {
+            font-size: 2em;
+          }
+        }
+      }
+      .card--tags {
+        .card--tags--participants {
+          .card--tags--participants--icon {
+            width: 4vw;
+          }
+        }
+      }
+      .card--about--author {
+        .card--about--author--img {
+          width: 7vw;
+        }
+      }
+      .card--participants {
+        div {
+          div {
+            width: 6vw;
+          }
+        }
+      }
+    }
+    .section--map {
+      #map {
+        height: 50%;
+        margin-bottom: 19%;
+      }
+    }
+  }
+
+  @media screen and (min-width: 806px) {
+    .about--card {
+      padding-top: 5%;
+    }
+    .section--map {
+      #map {
+        height: 55%;
+      }
+    }
+  }
+
+  @media screen and (min-width: 876px) {
+    .about--card {
+      .card--title {
+        .card--title--img {
+          width: 12vw;
+        }
+        .card--title--name {
+          padding-left: 130px;
+        }
+      }
+      .card--tags {
+        .card--tags--participants {
+          .card--tags--participants--icon {
+            width: 3vw;
+          }
+        }
+      }
+      .card--about--author {
+        .card--about--author--img {
+          width: 6vw;
+        }
+      }
+      .card--participants {
+        div {
+          div {
+            width: 5vw;
+          }
+        }
+      }
+    }
+    .section--map {
+      #map {
+        height: 60%;
+      }
+    }
+    .buttons {
+      margin-top: 54%;
+    }
+  }
+
+  @media screen and (min-width: 986px) {
+    .about--card {
+      .card--title {
+        .card--title--name {
+          padding-left: 180px;
+        }
+      }
+    }
+    .section--map {
+      #map {
+        height: 65%;
       }
     }
   }
