@@ -443,6 +443,149 @@ const HomeAboutCardStyled = styled.section`
       }
     }
   }
+
+  @media screen and (min-width: 1001px) {
+    display: flex;
+    .about--card {
+      width: 75%;
+      .card--title {
+        .card--title--img {
+          width: 10vw;
+        }
+        .card--title--name {
+          padding-left: 33px;
+        }
+      }
+      .card--tags {
+        width: 66%;
+      }
+      .card--about--author {
+        .card--about--author--img {
+          width: 5vw;
+        }
+      }
+      .card--desc {
+        width: 55%;
+        padding: 0 47px;
+      }
+      .card--participants {
+        div {
+          div {
+            width: 4vw;
+          }
+        }
+      }
+    }
+
+    .section--map {
+      #map {
+        height: 100%;
+        width: 50%;
+        margin: 0;
+      }
+    }
+    .buttons {
+      position: absolute;
+      top: 15%;
+      left: 2%;
+      .btn--favorite {
+        margin-right: 50px;
+        padding: 0 60px;
+      }
+      .btn--join {
+        padding: 0 60px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1058px) {
+    .buttons {
+      margin-top: 50%;
+    }
+  }
+
+  @media screen and (min-width: 1104px) {
+    .about--card .card--tags .card--tags--participants .card--tags--participants--icon {
+      width: 2vw;
+    }
+    .buttons {
+      margin-top: 48%;
+    }
+  }
+
+  @media screen and (min-width: 1150px) {
+    .about--card {
+      width: 75%;
+      .card--title {
+        .card--title--img {
+          width: 9vw;
+        }
+        .card--title--name {
+          padding-left: 45px;
+        }
+      }
+      .card--tags {
+        width: 60%;
+      }
+      .card--about--author {
+        .card--about--author--img {
+          width: 4vw;
+        }
+      }
+      .card--desc {
+        width: 55%;
+        padding: 0 47px;
+      }
+      .card--participants {
+        div {
+          div {
+            width: 3vw;
+          }
+        }
+      }
+    }
+    .section--map {
+      #map {
+        width: 60%;
+      }
+    }
+    .buttons {
+      margin-top: 44%;
+    }
+  }
+
+  @media screen and (min-width: 1236px) {
+    .buttons {
+      margin-top: 42%;
+    }
+  }
+
+  @media screen and (min-width: 1236px) {
+    .about--card .card--title .card--title--img {
+      width: 8vw;
+    }
+    .buttons {
+      margin-top: 40%;
+    }
+  }
+
+  @media screen and (min-width: 1389px) {
+    .about--card .card--title .card--title--img {
+      width: 7vw;
+    }
+    .buttons {
+      margin-top: 38%;
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    .about--card {
+      width: 70%;
+    }
+    .buttons {
+      left: 4%;
+    }
+  }
 `;
 
 export default HomeAboutCardStyled;
