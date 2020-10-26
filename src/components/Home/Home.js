@@ -150,7 +150,7 @@ function Home(props) {
 
       aboutMap();
     }
-  });
+  }, []);
 
   function displayMap() {
     const newState = { ...data };
