@@ -93,13 +93,7 @@ const HomeAboutCardStyled = styled.section`
   .section--map {
     display: flex;
     justify-content: center;
-    /* position: relative;
-    width: 80%; */
-    /* height: 10%; */
     #map {
-      /* width: inherit;
-      height: inherit;
-      overflow: visible; */
       width: 90%;
       height: 23%;
       position: absolute;
@@ -118,14 +112,16 @@ const HomeAboutCardStyled = styled.section`
 
   .buttons {
     margin-top: 60%;
-    margin-bottom: 60%;
+    margin-bottom: 12%;
     display: flex;
+    padding: 4px 20px;
     .btn--favorite {
-      background-color: ${props => props.theme.colorPrincipal};
-      color: ${props => props.theme.colorBtn};
-      padding: 10px 24px;
-      border: none;
+      background-color: ${props => props.theme.colorLola};
+      color: black;
+      margin-right: 12px;
+      padding: 0px 24px;
       border-radius: 10px;
+      border-color: ${props => props.theme.colorBtn};
       width: 100%;
       font-size: 0.9em;
       /* opacity: ${props => (props.btnDisabled ? 0.5 : 1)}; */
@@ -149,7 +145,8 @@ const HomeAboutCardStyled = styled.section`
       padding-top: 10%;
       .card--title {
         .back--arrow {
-          margin-right: 6%;
+          margin-right: 3%;
+          margin-left: 4px;
         }
         .card--title--img {
           width: 30vw;
@@ -210,13 +207,6 @@ const HomeAboutCardStyled = styled.section`
         }
       }
     }
-    /* .section--map {
-      #map {
-        top: 81%;
-        width: 90%;
-        height: 23%;
-      }
-    } */
   }
 `;
 
