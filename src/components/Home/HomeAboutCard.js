@@ -43,7 +43,7 @@ function HomeAboutCard(props) {
   });
 
   function backHome() {
-    return props.history.goBack();
+    return props.history.push("/home");
   }
 
   return (
