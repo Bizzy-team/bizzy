@@ -146,7 +146,7 @@ const HomeAboutCardStyled = styled.section`
       .card--title {
         .back--arrow {
           margin-right: 3%;
-          margin-left: 4px;
+          margin-left: 6%;
         }
         .card--title--img {
           width: 30vw;
@@ -216,6 +216,9 @@ const HomeAboutCardStyled = styled.section`
           width: 26vw;
         }
       }
+      .card--desc {
+        padding: 0 19px;
+      }
     }
   }
 
@@ -256,6 +259,9 @@ const HomeAboutCardStyled = styled.section`
         .card--about--author--img {
           width: 12vw;
         }
+      }
+      .card--desc {
+        padding: 0 25px;
       }
     }
     .section--map {
@@ -311,6 +317,11 @@ const HomeAboutCardStyled = styled.section`
   }
 
   @media screen and (min-width: 616px) {
+    .about--card {
+      .card--desc {
+        padding: 0 30px;
+      }
+    }
     .section--map {
       #map {
         height: 40%;
@@ -369,6 +380,9 @@ const HomeAboutCardStyled = styled.section`
           }
         }
       }
+      .card--desc {
+        padding: 0 36px;
+      }
     }
     .section--map {
       #map {
@@ -418,6 +432,9 @@ const HomeAboutCardStyled = styled.section`
           }
         }
       }
+      .card--desc {
+        padding: 0 42px;
+      }
     }
     .section--map {
       #map {
@@ -449,6 +466,9 @@ const HomeAboutCardStyled = styled.section`
     .about--card {
       width: 75%;
       .card--title {
+        .back--arrow {
+          margin-left: 5%;
+        }
         .card--title--img {
           width: 10vw;
         }
@@ -466,7 +486,7 @@ const HomeAboutCardStyled = styled.section`
       }
       .card--desc {
         width: 55%;
-        padding: 0 47px;
+        padding: 0 36px;
       }
       .card--participants {
         div {
@@ -534,7 +554,6 @@ const HomeAboutCardStyled = styled.section`
       }
       .card--desc {
         width: 55%;
-        padding: 0 47px;
       }
       .card--participants {
         div {
@@ -555,6 +574,11 @@ const HomeAboutCardStyled = styled.section`
   }
 
   @media screen and (min-width: 1236px) {
+    .about--card {
+      .card--desc {
+        padding: 0 43px;
+      }
+    }
     .buttons {
       margin-top: 42%;
     }
@@ -581,6 +605,9 @@ const HomeAboutCardStyled = styled.section`
   @media screen and (min-width: 1400px) {
     .about--card {
       width: 70%;
+      .card--desc {
+        padding: 0 48px;
+      }
     }
     .buttons {
       left: 4%;
