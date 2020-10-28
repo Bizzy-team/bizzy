@@ -11,17 +11,21 @@ import InputsForm from "../InputsForm/InputsForm";
 import ModalNewCardStyled from "../../style/ModalNewCardStyled.style";
 import profanities from "profanities";
 import ProfanitiesFr from "profanities/fr";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function ModalNewCard(props) {
   const inputTitle = React.useRef(null);
   const inputAddress = React.useRef(null);
-  const inputTime = React.useRef(null);
   const inputDesc = React.useRef(null);
+  // const inputTime = React.useRef(null);
 
   const [data, setData] = React.useState({
     error: {},
     btnDisabled: true
   });
+
+  const [startDate, setStartDate] = React.useState(null);
 
   React.useEffect(() => {
     const arrInputId = ["inputTitle", "inputAddress", "inputTime", "inputDesc"];
@@ -35,22 +39,11 @@ function ModalNewCard(props) {
     arrInputId.forEach(element => (newState.error[element] = { ...obj }));
 
     document.addEventListener("click", function modalClose(e) {
-      if (e.target.className === "close--arrow") {
-        props.updateStateParent(props.isModalDeleteProfile);
-        document.removeEventListener("click", modalClose);
-        return;
-      }
-
-      if (e.target.className === "btn--cancel") {
-        props.updateStateParent(props.isModalDeleteProfile);
-        document.removeEventListener("click", modalClose);
-        return;
-      }
-
       if (document.querySelector(".card--content").contains(e.target)) {
         return;
       } else {
-        props.updateStateParent(props.isModalNewCard);
+        props.updateStateParent(false);
+        // props.updateStateParent(props.isModalNewCard);
         document.removeEventListener("click", modalClose);
       }
     });
@@ -132,6 +125,7 @@ function ModalNewCard(props) {
       isError={data.error.inputDesc ? data.error.inputDesc.error : false}
       isMarginTop={props.isMarginTop}
       isModalNewCard={props.isModalNewCard}
+      isErrorMessage={data.error}
     >
       <div className="card--content">
         <div className="card--title">
@@ -141,7 +135,7 @@ function ModalNewCard(props) {
           <div className="card--name">
             <h2>New card</h2>
           </div>
-          <img src={CloseArrow} alt="icon--close" className="close--arrow"></img>
+          <img src={CloseArrow} alt="icon--close" onClick={() => props.updateStateParent(props.isModalNewCard)} className="close--arrow"></img>
         </div>
         <div className="card--moods">
           <h4>Choisissez votre mood:</h4>
@@ -172,7 +166,17 @@ function ModalNewCard(props) {
             isError={data.error.inputAddress ? data.error.inputAddress : ""}
             marginSize
           ></InputsForm>
-          <InputsForm
+          <DatePicker
+            selected={startDate}
+            onChange={date => setStartDate(date)}
+            timeInputLabel="Time:"
+            dateFormat="dd/MM/yyyy h:mm aa"
+            showTimeInput
+            placeholderText="dd/mm/yyyy h:mm"
+          />
+
+
+          {/* <InputsForm
             type="time"
             id="default-picker"
             inputRef={inputTime}
@@ -180,7 +184,7 @@ function ModalNewCard(props) {
             placeholder="L'heure"
             isError={data.error.inputTime ? data.error.inputTime : ""}
             marginSize
-          ></InputsForm>
+          ></InputsForm> */}
           <div className="card--desc">
             <textarea
               id="inputDesc"
@@ -205,7 +209,7 @@ function ModalNewCard(props) {
               className="btn--send"
               disabled={data.btnDisabled}
             ></input>
-            <input type="button" value="Annuler" className="btn--cancel"></input>
+            <input type="button" value="Annuler" onClick={() => props.updateStateParent(props.isModalNewCard)} className="btn--cancel"></input>
           </div>
         </div>
       </div>
