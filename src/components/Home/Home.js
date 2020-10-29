@@ -224,19 +224,8 @@ function Home(props) {
     return setData(newState);
   }
 
-  function closeModalOutside(showModal) {
+  function closeModalOutside() {
     const newState = { ...data };
-
-    newState.isModalNewCard = showModal;
-    newState.isModalCard = false;
-
-    return setData(newState);
-
-    // if (document.querySelector(".react-datepicker")) {
-    //   newState.isModalNewCard = true;
-
-    //   return setData(newState);
-    // }
 
     newState.isModalNewCard = false;
     newState.isModalCard = false;
@@ -275,7 +264,7 @@ function Home(props) {
       </HomeStyled>
       {data.isModalNewCard && (
         <ModalNewCard
-          updateStateParent={(showModal) => closeModalOutside(showModal)}
+          updateStateParent={closeModalOutside}
           isMarginTop={true}
           isModalNewCard={data.isModalNewCard}
         ></ModalNewCard>
