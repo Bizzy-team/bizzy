@@ -136,7 +136,7 @@ const ModalNewCardStyled = styled.section`
     .card--content {
       .card--title {
         /* margin-bottom: 13%; */
-        margin-bottom: ${props => props.isErrorMessage ? "0%" : "13%"};
+        margin-bottom: ${props => (props.isErrorMessage ? "0%" : "13%")};
         .card--img {
           width: 12vw;
         }
