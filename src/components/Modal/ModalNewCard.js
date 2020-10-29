@@ -42,8 +42,7 @@ function ModalNewCard(props) {
       if (document.querySelector(".card--content").contains(e.target)) {
         return;
       } else {
-        props.updateStateParent(false);
-        // props.updateStateParent(props.isModalNewCard);
+        props.updateStateParent(props.isModalNewCard);
         document.removeEventListener("click", modalClose);
       }
     });
@@ -135,7 +134,12 @@ function ModalNewCard(props) {
           <div className="card--name">
             <h2>New card</h2>
           </div>
-          <img src={CloseArrow} alt="icon--close" onClick={() => props.updateStateParent(props.isModalNewCard)} className="close--arrow"></img>
+          <img
+            src={CloseArrow}
+            alt="icon--close"
+            onClick={() => props.updateStateParent(props.isModalNewCard)}
+            className="close--arrow"
+          ></img>
         </div>
         <div className="card--moods">
           <h4>Choisissez votre mood:</h4>
@@ -173,8 +177,8 @@ function ModalNewCard(props) {
             dateFormat="dd/MM/yyyy h:mm aa"
             showTimeInput
             placeholderText="dd/mm/yyyy h:mm"
+            shouldCloseOnSelect={false}
           />
-
 
           {/* <InputsForm
             type="time"
@@ -209,7 +213,12 @@ function ModalNewCard(props) {
               className="btn--send"
               disabled={data.btnDisabled}
             ></input>
-            <input type="button" value="Annuler" onClick={() => props.updateStateParent(props.isModalNewCard)} className="btn--cancel"></input>
+            <input
+              type="button"
+              value="Annuler"
+              onClick={() => props.updateStateParent(props.isModalNewCard)}
+              className="btn--cancel"
+            ></input>
           </div>
         </div>
       </div>
