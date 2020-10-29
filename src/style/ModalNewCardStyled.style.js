@@ -268,14 +268,6 @@ const ModalNewCardStyled = styled.section`
     margin-top: -7px;
   }
 
-  /* @media screen and (min-width: 852px) {
-    margin-top: 18%;
-  }
-
-  @media screen and (min-width: 852px) {
-    margin-top: 16%;
-  } */
-
   @media screen and (min-width: 1000px) {
     background-color: rgba(0, 0, 0, 0.5);
     margin-top: ${props => (props.isModalNewCard ? "0" : "18%")};
@@ -320,17 +312,23 @@ const ModalNewCardStyled = styled.section`
   }
 
   @media screen and (min-width: 1084px) {
-    margin-top: ${props => (props.isModalNewCard ? "0" : "16%")};
+    margin-top: ${props => (props.isModalNewCard ? "0;" : "16%;")};
 
     .card--content {
-      margin-top: ${props => (props.isModalNewCard ? "10%" : "12%")};
+      margin-top: ${props => (props.isModalNewCard ? "10%;" : "12%;")};
     }
   }
 
-  @media screen and (min-width: 1200px) {
-    margin-top: ${props => (props.isModalNewCard ? "0" : "14%")};
+  @media only screen and (min-width: 1180px) {
     .card--content {
-      margin-top: ${props => (props.isModalNewCard ? "10%" : "18%")};
+      height: ${props => props.isModalNewCard && "71vh;"};
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    margin-top: ${props => (props.isModalNewCard ? "0;" : "14%;")};
+    .card--content {
+      margin-top: ${props => (props.isModalNewCard ? "10%;" : "18%;")};
       .card--title {
         .card--img {
           width: 4vw;
@@ -339,26 +337,26 @@ const ModalNewCardStyled = styled.section`
     }
   }
 
-  @media screen and (min-width: 1273px) {
+  @media only screen and (min-width: 1273px) {
     .card--content {
-      height: ${props => (props.isModalNewCard ? "65vh" : "84vh")};
+      height: ${props => (props.isModalNewCard ? "65vh;" : "84vh;")};
     }
   }
 
-  @media screen and (min-width: 1288px) {
+  @media only screen and (min-width: 1288px) {
     .card--content {
       margin-top: ${props => (props.isModalNewCard ? "10%" : "6%")};
     }
   }
 
-  @media screen and (min-width: 1364px) {
+  @media only screen and (min-width: 1364px) {
     margin-top: ${props => (props.isModalNewCard ? "0" : "13%")};
     .card--content {
       margin-top: ${props => (props.isModalNewCard ? "10%" : "4%")};
     }
   }
 
-  @media screen and (min-width: 1400px) {
+  @media only screen and (min-width: 1400px) {
     margin-top: ${props => (props.isModalNewCard ? "0" : "7%")};
     .card--content {
       width: 30vw;
