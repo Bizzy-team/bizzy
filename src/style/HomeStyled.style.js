@@ -80,6 +80,39 @@ export const SectionStyled = styled.section`
   flex-direction: column;
   margin-top: 10px;
 
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin-top: 40px;
+    cursor: pointer;
+      a {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid ${props => props.theme.colorBtn};
+        color: ${props => props.theme.colorBtn};
+      }
+      li {
+        padding: 0 5px;
+      }
+    .pagination__link--disabled {
+      a {
+        color: ${props => props.theme.colorBtn};
+        border: 1px solid ${props => props.theme.colorBtn};
+        opacity: .2;
+      }
+      .pagination__link {
+        font-weight: bold;
+      }
+    }
+    .pagination__link--active {
+      a {
+        color: #fff;
+        background: ${props => props.theme.colorBtn};
+      }
+    }
+  }
+
   button {
     background-color: #283d80;
     color: white;
