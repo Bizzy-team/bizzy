@@ -86,20 +86,20 @@ export const SectionStyled = styled.section`
     list-style: none;
     margin-top: 40px;
     cursor: pointer;
-      a {
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid ${props => props.theme.colorBtn};
-        color: ${props => props.theme.colorBtn};
-      }
-      li {
-        padding: 0 5px;
-      }
+    a {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid ${props => props.theme.colorBtn};
+      color: ${props => props.theme.colorBtn};
+    }
+    li {
+      padding: 0 5px;
+    }
     .pagination__link--disabled {
       a {
         color: ${props => props.theme.colorBtn};
         border: 1px solid ${props => props.theme.colorBtn};
-        opacity: .2;
+        opacity: 0.2;
       }
       .pagination__link {
         font-weight: bold;
