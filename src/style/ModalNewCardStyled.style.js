@@ -341,7 +341,7 @@ const ModalNewCardStyled = styled.section`
   @media screen and (min-width: 1260px) {
     .card--content {
       height: 65vh!important;
-      /* ${props => (props.isModalNewCard && "height: 65vh;")}; */
+      /* ${props => props.isModalNewCard && "height: 65vh;"}; */
       /* ${props => (props.isModalNewCard ? "height: 65vh;" : "height: 84vh;")}; */
       /* height: ${props => (props.isModalNewCard ? "65vh;" : "84vh;")}; */
     }
