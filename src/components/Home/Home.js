@@ -245,6 +245,9 @@ function Home(props) {
     cardDetails: []
   });
 
+  const PER_PAGE = 3;
+  const [currentPage, setCurrentPage] = React.useState(0);
+
   React.useEffect(() => {
     if (window.screen.width < 700 && document.querySelector(".user--profile--header")) {
       document.querySelector(".user--profile--header").style.display = "none";
@@ -256,7 +259,14 @@ function Home(props) {
 
       aboutMap();
     }
-  }, []);
+  }, []); //eslint-disable-lint
+
+  const offset = currentPage * PER_PAGE;
+
+  
+
+
+  const pageCount = Math.ceil(data.cards.length / PER_PAGE);
 
   function displayMap() {
     const newState = { ...data };
@@ -290,7 +300,12 @@ function Home(props) {
       zoom: 14 // starting zoom
     });
 
-    data.cards.forEach(card => {
+    console.log(currentPageData);
+    // console.log(u);
+
+    // u.forEach(card => {
+    currentPageData.forEach(card => {
+    // data.cards.forEach(card => {
       const el = document.createElement("div");
       el.className = "marker";
       el.id = `${card.card_id}`;
@@ -351,6 +366,32 @@ function Home(props) {
     return setRedirect(newState);
   }
 
+  const currentPageData = data.cards.slice(offset, offset + PER_PAGE);
+  console.log(currentPageData)
+
+  const mapData = currentPageData.map((thumbur1, index) =>
+    <HomeCards
+      key={index}
+      card={thumbur1}
+      isCardFeed={true}
+      updateStateParent={closeModalOutside}
+      aboutCard={() => aboutCard(thumbur1)}
+    >
+    </HomeCards>
+  )
+
+  let u = []
+  const t = mapData.map((card, index) => {
+    return u.push(card.props.card);
+  })
+  console.log(u);
+
+  function handlePageClick({selected: selectedPage}) {
+    // console.log(u);
+    aboutMap();
+    setCurrentPage(selectedPage);
+  }
+
   // if (redirect.isRedirect) return <Redirect to={`/aboutCard/${redirect.redirectCardId}`}></Redirect>;
   if (redirect.isRedirect)
     return (
@@ -395,7 +436,7 @@ function Home(props) {
         </div>
       </FilterStyled>
       <SectionStyled>
-        {data.isModalCard && (
+        {/* {data.isModalCard && (
           <HomeCards
             card={data.modalCardArr}
             isModalCard={data.isModalCard}
@@ -412,11 +453,21 @@ function Home(props) {
               aboutCard={() => aboutCard(card)}
             ></HomeCards>
           );
-        })}
+        })} */}
+        
+        {data.isModalCard && (
+          <HomeCards
+            card={data.modalCardArr}
+            isModalCard={data.isModalCard}
+            updateStateParent={closeModalOutside}
+          ></HomeCards>
+        )}
+        {mapData}
         <ReactPaginate
-          pageCount={5}
           previousLabel={"←"}
           nextLabel={"→"}
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
           containerClassName={"pagination"}
           previousLinkClassName={"pagination__link"}
           nextLinkClassName={"pagination__link"}
