@@ -6,8 +6,6 @@ import BackArrow from "../../img/back_arrow.svg";
 import HomeAboutCardStyled from "../../style/HomeAboutCardStyled.style";
 
 function HomeAboutCard(props) {
-  console.log(props);
-
   React.useEffect(() => {
     mapboxgl.accessToken = process.env.REACT_APP_TOKEN_MAP_KEY;
 
