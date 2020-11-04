@@ -1,5 +1,6 @@
 import React from "react";
-import mapboxgl from "mapbox-gl";
+import ReactMapboxGl from "react-mapbox-gl";
+import { Marker } from "react-mapbox-gl";
 import { HomeStyled, SectionStyled, TitlePageStyled } from "../../style/HomeStyled.style";
 import HomeCards from "./HomeCards";
 import UserProfileHeader from "../UserProfile/UserProfileHeader";
@@ -19,220 +20,228 @@ import Footer from "../Footer/Footer";
 import { Redirect } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 
+const Map = ReactMapboxGl({
+  accessToken: process.env.REACT_APP_TOKEN_MAP_KEY
+});
+
 function Home(props) {
   const [data, setData] = React.useState({
-    cards: [
-      {
-        card_id: 0,
-        card_user_avatar: UserAvatar,
-        card_user_name: "Claudia Boudié",
-        card_title: "Pizza pour l'aprèm",
-        card_user_job: "Designer",
-        card_desc:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-        card_user_mood: [FoodIcon],
-        card_user_mood_map: [FoodIconMap],
-        card_geometry: {
-          type: "Point",
-          coordinates: [2.36517, 48.83501]
+    cards: {
+      1: [
+        {
+          card_id: 0,
+          card_user_avatar: UserAvatar,
+          card_user_name: "Claudia Boudié",
+          card_title: "Pizza pour l'aprèm",
+          card_user_job: "Designer",
+          card_desc:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
+          card_user_mood: [FoodIcon],
+          card_user_mood_map: [FoodIconMap],
+          card_geometry: {
+            type: "Point",
+            coordinates: [2.36517, 48.83501]
+          },
+          card_participants: [
+            {
+              card_participant_id: 0,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Albert",
+              card_participant_job: "CTO"
+            },
+            {
+              card_participant_id: 1,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Guillaume",
+              card_participant_job: "Freelance"
+            },
+            {
+              card_participant_id: 2,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Alice",
+              card_participant_job: "RH"
+            }
+          ]
         },
-        card_participants: [
-          {
-            card_participant_id: 0,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Albert",
-            card_participant_job: "CTO"
+        {
+          card_id: 1,
+          card_user_avatar: UserAvatar,
+          card_user_name: "Lucas Tostée",
+          card_title: "Kebab pour le déj",
+          card_user_job: "Dev AWS claqué",
+          card_desc:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
+          card_user_mood: [CultureMood],
+          card_user_mood_map: [CultureMoodMap],
+          card_geometry: {
+            type: "Point",
+            coordinates: [2.37358, 48.837551]
           },
-          {
-            card_participant_id: 1,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Guillaume",
-            card_participant_job: "Freelance"
-          },
-          {
-            card_participant_id: 2,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Alice",
-            card_participant_job: "RH"
-          }
-        ]
-      },
-      {
-        card_id: 1,
-        card_user_avatar: UserAvatar,
-        card_user_name: "Lucas Tostée",
-        card_title: "Kebab pour le déj",
-        card_user_job: "Dev AWS claqué",
-        card_desc:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-        card_user_mood: [CultureMood],
-        card_user_mood_map: [CultureMoodMap],
-        card_geometry: {
-          type: "Point",
-          coordinates: [2.37358, 48.837551]
+          card_participants: [
+            {
+              card_participant_id: 0,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Albert",
+              card_participant_job: "CTO"
+            },
+            {
+              card_participant_id: 1,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Guillaume",
+              card_participant_job: "Freelance"
+            },
+            {
+              card_participant_id: 2,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Alice",
+              card_participant_job: "RH"
+            }
+          ]
         },
-        card_participants: [
-          {
-            card_participant_id: 0,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Albert",
-            card_participant_job: "CTO"
+        {
+          card_id: 2,
+          card_user_avatar: UserAvatar,
+          card_user_name: "Diane",
+          card_title: "Balade sportive",
+          card_user_job: "Chomeuse",
+          card_desc:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
+          card_user_mood: [BeerIcon],
+          card_user_mood_map: [BeerIconMap],
+          card_geometry: {
+            type: "Point",
+            coordinates: [2.37523, 48.83022]
           },
-          {
-            card_participant_id: 1,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Guillaume",
-            card_participant_job: "Freelance"
+          card_participants: [
+            {
+              card_participant_id: 0,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Albert",
+              card_participant_job: "CTO"
+            },
+            {
+              card_participant_id: 1,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Guillaume",
+              card_participant_job: "Freelance"
+            },
+            {
+              card_participant_id: 2,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Alice",
+              card_participant_job: "RH"
+            }
+          ]
+        }
+      ],
+      2: [
+        {
+          card_id: 3,
+          card_user_avatar: UserAvatar,
+          card_user_name: "Margaux",
+          card_title: "Balade dans les champs",
+          card_user_job: "Barmaid",
+          card_desc:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
+          card_user_mood: [BeerIcon],
+          card_user_mood_map: [BeerIconMap],
+          card_geometry: {
+            type: "Point",
+            coordinates: [2.37523, 48.83501]
           },
-          {
-            card_participant_id: 2,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Alice",
-            card_participant_job: "RH"
-          }
-        ]
-      },
-      {
-        card_id: 2,
-        card_user_avatar: UserAvatar,
-        card_user_name: "Diane",
-        card_title: "Balade sportive",
-        card_user_job: "Chomeuse",
-        card_desc:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-        card_user_mood: [BeerIcon],
-        card_user_mood_map: [BeerIconMap],
-        card_geometry: {
-          type: "Point",
-          coordinates: [2.37523, 48.83022]
+          card_participants: [
+            {
+              card_participant_id: 0,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Albert",
+              card_participant_job: "CTO"
+            },
+            {
+              card_participant_id: 1,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Guillaume",
+              card_participant_job: "Freelance"
+            },
+            {
+              card_participant_id: 2,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Alice",
+              card_participant_job: "RH"
+            }
+          ]
         },
-        card_participants: [
-          {
-            card_participant_id: 0,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Albert",
-            card_participant_job: "CTO"
+        {
+          card_id: 4,
+          card_user_avatar: UserAvatar,
+          card_user_name: "Mélina",
+          card_title: "Apéro",
+          card_user_job: "Kebabier",
+          card_desc:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
+          card_user_mood: [BeerIcon],
+          card_user_mood_map: [BeerIconMap],
+          card_geometry: {
+            type: "Point",
+            coordinates: [2.37523, 48.836551]
           },
-          {
-            card_participant_id: 1,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Guillaume",
-            card_participant_job: "Freelance"
-          },
-          {
-            card_participant_id: 2,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Alice",
-            card_participant_job: "RH"
-          }
-        ]
-      },
-      {
-        card_id: 3,
-        card_user_avatar: UserAvatar,
-        card_user_name: "Margaux",
-        card_title: "Balade dans les champs",
-        card_user_job: "Barmaid",
-        card_desc:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-        card_user_mood: [BeerIcon],
-        card_user_mood_map: [BeerIconMap],
-        card_geometry: {
-          type: "Point",
-          coordinates: [2.37523, 48.832]
+          card_participants: [
+            {
+              card_participant_id: 0,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Albert",
+              card_participant_job: "CTO"
+            },
+            {
+              card_participant_id: 1,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Guillaume",
+              card_participant_job: "Freelance"
+            },
+            {
+              card_participant_id: 2,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Alice",
+              card_participant_job: "RH"
+            }
+          ]
         },
-        card_participants: [
-          {
-            card_participant_id: 0,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Albert",
-            card_participant_job: "CTO"
+        {
+          card_id: 5,
+          card_user_avatar: UserAvatar,
+          card_user_name: "Sarah",
+          card_title: "Pates carbo",
+          card_user_job: "Educatrice",
+          card_desc:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
+          card_user_mood: [FoodIcon],
+          card_user_mood_map: [FoodIconMap],
+          card_geometry: {
+            type: "Point",
+            coordinates: [2.37523, 48.83022]
           },
-          {
-            card_participant_id: 1,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Guillaume",
-            card_participant_job: "Freelance"
-          },
-          {
-            card_participant_id: 2,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Alice",
-            card_participant_job: "RH"
-          }
-        ]
-      },
-      {
-        card_id: 4,
-        card_user_avatar: UserAvatar,
-        card_user_name: "Mélina",
-        card_title: "Apéro",
-        card_user_job: "Kebabier",
-        card_desc:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-        card_user_mood: [BeerIcon],
-        card_user_mood_map: [BeerIconMap],
-        card_geometry: {
-          type: "Point",
-          coordinates: [2.37523, 48.831]
-        },
-        card_participants: [
-          {
-            card_participant_id: 0,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Albert",
-            card_participant_job: "CTO"
-          },
-          {
-            card_participant_id: 1,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Guillaume",
-            card_participant_job: "Freelance"
-          },
-          {
-            card_participant_id: 2,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Alice",
-            card_participant_job: "RH"
-          }
-        ]
-      },
-      {
-        card_id: 5,
-        card_user_avatar: UserAvatar,
-        card_user_name: "Sarah",
-        card_title: "Pates carbo",
-        card_user_job: "Educatrice",
-        card_desc:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-        card_user_mood: [FoodIcon],
-        card_user_mood_map: [FoodIconMap],
-        card_geometry: {
-          type: "Point",
-          coordinates: [2.37523, 48.8315]
-        },
-        card_participants: [
-          {
-            card_participant_id: 0,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Albert",
-            card_participant_job: "CTO"
-          },
-          {
-            card_participant_id: 1,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Guillaume",
-            card_participant_job: "Freelance"
-          },
-          {
-            card_participant_id: 2,
-            card_participant_avatar: UserAvatar,
-            card_participant_name: "Alice",
-            card_participant_job: "RH"
-          }
-        ]
-      }
-    ],
+          card_participants: [
+            {
+              card_participant_id: 0,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Albert",
+              card_participant_job: "CTO"
+            },
+            {
+              card_participant_id: 1,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Guillaume",
+              card_participant_job: "Freelance"
+            },
+            {
+              card_participant_id: 2,
+              card_participant_avatar: UserAvatar,
+              card_participant_name: "Alice",
+              card_participant_job: "RH"
+            }
+          ]
+        }
+      ]
+    },
     isMap: false,
     isModalNewCard: false,
     isModalCard: false,
@@ -245,8 +254,10 @@ function Home(props) {
     cardDetails: []
   });
 
-  const PER_PAGE = 3;
-  const [currentPage, setCurrentPage] = React.useState(0);
+  const [paginationData, setCurrentPage] = React.useState({
+    currentPage: 1,
+    pageCount: Object.keys(data.cards).length
+  });
 
   React.useEffect(() => {
     if (window.screen.width < 700 && document.querySelector(".user--profile--header")) {
@@ -256,17 +267,8 @@ function Home(props) {
 
     if (window.screen.width > 1000) {
       document.querySelector("body").style.overflow = "hidden";
-
-      aboutMap();
     }
   }, []); //eslint-disable-lint
-
-  const offset = currentPage * PER_PAGE;
-
-  
-
-
-  const pageCount = Math.ceil(data.cards.length / PER_PAGE);
 
   function displayMap() {
     const newState = { ...data };
@@ -275,8 +277,6 @@ function Home(props) {
       newState.isMap = true;
       document.querySelector(".section--map").style.display = "block";
       document.querySelector("body").style.overflow = "hidden";
-
-      aboutMap();
 
       return setData(newState);
     }
@@ -288,52 +288,6 @@ function Home(props) {
     newState.isModalCard = false;
 
     return setData(newState);
-  }
-
-  function aboutMap() {
-    mapboxgl.accessToken = process.env.REACT_APP_TOKEN_MAP_KEY;
-
-    const map = new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
-      center: [2.37001, 48.83746], // starting position [lng, lat]
-      zoom: 14 // starting zoom
-    });
-
-    console.log(currentPageData);
-    // console.log(u);
-
-    // u.forEach(card => {
-    currentPageData.forEach(card => {
-    // data.cards.forEach(card => {
-      const el = document.createElement("div");
-      el.className = "marker";
-      el.id = `${card.card_id}`;
-      el.style.cssText = `
-          display: block;
-          background-image: url(${card.card_user_mood_map});
-          background-repeat: no-repeat;
-          width: 55px;
-          height: 55px;
-          border-radius: 50%;
-          background-position: -3px -5px;
-          background-size: 60px;
-        `;
-      el.addEventListener("click", e => {
-        const newState = { ...data };
-
-        if (parseInt(e.target.id) === card.card_id) {
-          newState.modalCardArr = newState.cards[parseInt(e.target.id)];
-          newState.isMap = true;
-          newState.isModalCard = true;
-
-          return setData(newState);
-        }
-      });
-
-      new mapboxgl.Marker(el).setLngLat(card.card_geometry.coordinates).addTo(map);
-    });
-    map.scrollZoom.disable();
   }
 
   function displayNewCard() {
@@ -366,30 +320,11 @@ function Home(props) {
     return setRedirect(newState);
   }
 
-  const currentPageData = data.cards.slice(offset, offset + PER_PAGE);
-  console.log(currentPageData)
-
-  const mapData = currentPageData.map((thumbur1, index) =>
-    <HomeCards
-      key={index}
-      card={thumbur1}
-      isCardFeed={true}
-      updateStateParent={closeModalOutside}
-      aboutCard={() => aboutCard(thumbur1)}
-    >
-    </HomeCards>
-  )
-
-  let u = []
-  const t = mapData.map((card, index) => {
-    return u.push(card.props.card);
-  })
-  console.log(u);
-
-  function handlePageClick({selected: selectedPage}) {
-    // console.log(u);
-    aboutMap();
-    setCurrentPage(selectedPage);
+  function handlePageClick({ selected }) {
+    setCurrentPage({
+      ...paginationData,
+      currentPage: selected + 1
+    });
   }
 
   // if (redirect.isRedirect) return <Redirect to={`/aboutCard/${redirect.redirectCardId}`}></Redirect>;
@@ -407,7 +342,34 @@ function Home(props) {
     <>
       <UserProfileHeader></UserProfileHeader>
       <HomeStyled className="section--map">
-        <div id="map"></div>
+        <div id="map">
+          <Map
+            style="mapbox://styles/mapbox/streets-v11"
+            zoom={[14]}
+            containerStyle={{ height: "100vh" }}
+            center={[2.37001, 48.83746]}
+          >
+            {data.cards[paginationData.currentPage].map((card, index) => {
+              return (
+                <Marker coordinates={card.card_geometry.coordinates} key={index}>
+                  <div
+                    style={{
+                      display: "block",
+                      backgroundImage: `url(${card.card_user_mood_map})`,
+                      backgroundRepeat: "no-repeat",
+                      width: "55px",
+                      height: "55px",
+                      borderRadius: "50%",
+                      backgroundPosition: "-3px -5px",
+                      backgroundSize: "60px"
+                    }}
+                    className="marker"
+                  ></div>
+                </Marker>
+              );
+            })}
+          </Map>
+        </div>
       </HomeStyled>
       {data.isModalNewCard && (
         <ModalNewCard
@@ -436,14 +398,14 @@ function Home(props) {
         </div>
       </FilterStyled>
       <SectionStyled>
-        {/* {data.isModalCard && (
+        {data.isModalCard && (
           <HomeCards
             card={data.modalCardArr}
             isModalCard={data.isModalCard}
             updateStateParent={closeModalOutside}
           ></HomeCards>
         )}
-        {data.cards.map((card, index) => {
+        {data.cards[paginationData.currentPage].map((card, index) => {
           return (
             <HomeCards
               card={card}
@@ -453,20 +415,11 @@ function Home(props) {
               aboutCard={() => aboutCard(card)}
             ></HomeCards>
           );
-        })} */}
-        
-        {data.isModalCard && (
-          <HomeCards
-            card={data.modalCardArr}
-            isModalCard={data.isModalCard}
-            updateStateParent={closeModalOutside}
-          ></HomeCards>
-        )}
-        {mapData}
+        })}
         <ReactPaginate
           previousLabel={"←"}
           nextLabel={"→"}
-          pageCount={pageCount}
+          pageCount={paginationData.pageCount}
           onPageChange={handlePageClick}
           containerClassName={"pagination"}
           previousLinkClassName={"pagination__link"}
