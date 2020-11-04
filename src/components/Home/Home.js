@@ -21,7 +21,8 @@ import { Redirect } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 
 const Map = ReactMapboxGl({
-  accessToken: process.env.REACT_APP_TOKEN_MAP_KEY
+  accessToken: process.env.REACT_APP_TOKEN_MAP_KEY,
+  scrollZoom: false
 });
 
 function Home(props) {
@@ -363,7 +364,6 @@ function Home(props) {
                       backgroundPosition: "-3px -5px",
                       backgroundSize: "60px"
                     }}
-                    className="marker"
                   ></div>
                 </Marker>
               );
