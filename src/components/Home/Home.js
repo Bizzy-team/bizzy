@@ -245,8 +245,7 @@ function Home(props) {
     },
     isMap: false,
     isModalNewCard: false,
-    isModalCard: false,
-    modalCardArr: []
+    modalCardData: false
   });
 
   const [redirect, setRedirect] = React.useState({
@@ -364,6 +363,7 @@ function Home(props) {
                       backgroundPosition: "-3px -5px",
                       backgroundSize: "60px"
                     }}
+                    onClick={() => setData({ ...data, modalCardData: card })}
                   ></div>
                 </Marker>
               );
@@ -398,10 +398,10 @@ function Home(props) {
         </div>
       </FilterStyled>
       <SectionStyled>
-        {data.isModalCard && (
+        {data.modalCardData && (
           <HomeCards
-            card={data.modalCardArr}
-            isModalCard={data.isModalCard}
+            card={data.modalCardData}
+            isModalCard={data.modalCardData}
             updateStateParent={closeModalOutside}
           ></HomeCards>
         )}
