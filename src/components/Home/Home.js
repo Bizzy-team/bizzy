@@ -275,13 +275,17 @@ function Home(props) {
 
     if (!data.isMap) {
       newState.isMap = true;
-      document.querySelector(".section--map").style.display = "block";
+      // document.querySelector(".section--map").style.display = "block";
       document.querySelector("body").style.overflow = "hidden";
+
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'))
+      }, 0)
 
       return setData(newState);
     }
 
-    document.querySelector(".section--map").style.display = "none";
+    // document.querySelector(".section--map").style.display = "none";
     document.querySelector("body").style.overflow = "auto";
 
     newState.isMap = false;
@@ -327,6 +331,9 @@ function Home(props) {
     });
   }
 
+  const handleStyleLoad = map => (map.resize())
+
+
   // if (redirect.isRedirect) return <Redirect to={`/aboutCard/${redirect.redirectCardId}`}></Redirect>;
   if (redirect.isRedirect)
     return (
@@ -341,12 +348,12 @@ function Home(props) {
   return (
     <>
       <UserProfileHeader></UserProfileHeader>
-      <HomeStyled as="main">
+      <HomeStyled as="main" isMap={data.isMap}>
         <section id="map">
           <Map
             style="mapbox://styles/mapbox/streets-v11"
             zoom={[14]}
-            containerStyle={{ height: "100vh" }}
+            containerStyle={{ height: "inherit" }}
             center={[2.37001, 48.83746]}
           >
             {data.cards[paginationData.currentPage].map((card, index) => {
@@ -427,13 +434,13 @@ function Home(props) {
               disabledClassName={"pagination__link--disabled"}
               activeClassName={"pagination__link--active"}
             ></ReactPaginate>
-            {data.isMap ? (
-              <button onClick={displayMap}>Retour sur la liste</button>
-            ) : (
-              <button onClick={displayMap}>Voir sur la map</button>
-            )}
           </div>
         </section>
+        {data.isMap ? (
+          <button onClick={displayMap}>Retour sur la liste</button>
+        ) : (
+          <button onClick={displayMap}>Voir sur la map</button>
+        )}
       </HomeStyled>
       <Footer isUrlActive={props.match}></Footer>
     </>
