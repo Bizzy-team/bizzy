@@ -24,7 +24,6 @@ export const HomeStyled = styled.div`
     }
   }
 
-
   @media screen and (min-width: 1000px) {
     display: flex !important;
     flex-direction: row-reverse;
