@@ -348,7 +348,7 @@ function Home(props) {
             zoom={[14]}
             containerStyle={{ height: "100vh" }}
             center={[2.37001, 48.83746]}
-          >
+            >
             {data.cards[paginationData.currentPage].map((card, index) => {
               return (
                 <Marker coordinates={card.card_geometry.coordinates} key={index}>
@@ -364,10 +364,10 @@ function Home(props) {
                       backgroundSize: "60px"
                     }}
                     onClick={() => setData({ ...data, modalCardData: card })}
-                  ></div>
+                    ></div>
                 </Marker>
-              );
-            })}
+                );
+                })}
           </Map>
         </div>
       </HomeStyled>
