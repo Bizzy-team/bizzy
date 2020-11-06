@@ -1,29 +1,36 @@
 import styled from "styled-components";
+import GlobalContainer from "../utlis/GlobalContainer";
 
-const UserProfileHeaderStyled = styled.header`
+const UserProfileHeaderStyled = styled(GlobalContainer)`
   display: none;
   background-color: ${props => props.theme.colorPrincipal};
   margin-bottom: 20%;
-  padding: 20px 18px;
   font-family: "Nunito";
   box-shadow: 0px 3px 16px rgba(0, 0, 0, 0.18);
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .app--logo {
-      img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-      }
+  /* div { */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 10vh;
+  .app--logo {
+    width: 5vw;
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
     }
-    .menu--options {
+  }
+  nav {
+    ul {
+      margin: 0;
+      padding: 0;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      nav {
+      li {
+        list-style-type: none;
+        margin: 0 10px;
         a {
-          padding: 0 10px;
           color: ${props => props.theme.colorText};
           text-decoration: none;
           &:active {
@@ -50,8 +57,11 @@ const UserProfileHeaderStyled = styled.header`
   }
 
   @media screen and (min-width: 1000px) {
-    display: block;
     margin-bottom: 2%;
+  }
+
+  @media screen and (min-width: 1200px) {
+    max-width: 1640px;
   }
 `;
 
