@@ -52,6 +52,7 @@ const HomeStyled = styled.main`
         }
       }
     }
+  }
 
     button {
       background-color: #283d80;
@@ -64,14 +65,17 @@ const HomeStyled = styled.main`
       left: 50%;
       transform: translate(-50%, 0);
     }
-  }
 
   @media screen and (min-width: 300px) {
     #map {
-      display: none;
+      display: ${props => props.isMap ? "block;" : "none;"};
+      width: ${props => props.isMap && "100vw;"};
+      height: ${props => props.isMap && "90vh;"};
+      /* display: none; */
       margin-top: 7%;
     }
     .section--cards {
+      display: ${props => props.isMap ? "none;": "block;"};
       margin-bottom: 22%;
     }
   }
