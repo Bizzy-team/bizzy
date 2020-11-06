@@ -5,24 +5,32 @@ import UserProfileHeaderStyled from "../../style/UserProfileHeaderStyled.style";
 
 function UserProfileHeader() {
   return (
-    <UserProfileHeaderStyled className="user--profile--header">
-      <div>
-        <div className="app--logo">
-          <img src={LogoApp} alt="bizzy-logo"></img>
-        </div>
-        <div className="menu--options">
-          <nav>
+    <UserProfileHeaderStyled className="user--profile--header" as="header">
+      <div className="app--logo">
+        <img src={LogoApp} alt="bizzy-logo"></img>
+      </div>
+      <nav>
+        <ul>
+          <li>
             <a href="/home">Accueil</a>
+          </li>
+          <li>
             <a href="/home">Support</a>
+          </li>
+          <li>
             <a href="/home">Messagerie</a>
+          </li>
+          <li>
             <a href="/home">Favoris</a>
+          </li>
+          <li>
             <a href="/home">
               <img src={UserAvatar} alt="avatar"></img>
               Katrine
             </a>
-          </nav>
-        </div>
-      </div>
+          </li>
+        </ul>
+      </nav>
     </UserProfileHeaderStyled>
   );
 }

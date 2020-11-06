@@ -285,6 +285,7 @@ const HomeCardsStyled = styled.div`
         return "width: 45%; left: 52%;";
       }
     }}
+    z-index: 4;
     .card--header {
       .card--img {
         width: 7vw;
