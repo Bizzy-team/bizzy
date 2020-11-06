@@ -1,7 +1,7 @@
 import React from "react";
 import ReactMapboxGl from "react-mapbox-gl";
 import { Marker } from "react-mapbox-gl";
-import { HomeStyled, SectionStyled, TitlePageStyled } from "../../style/HomeStyled.style";
+import HomeStyled from "../../style/HomeStyled.style";
 import HomeCards from "./HomeCards";
 import UserProfileHeader from "../UserProfile/UserProfileHeader";
 import SquigglesImg from "../../img/squiggles_colorful.svg";
@@ -341,8 +341,8 @@ function Home(props) {
   return (
     <>
       <UserProfileHeader></UserProfileHeader>
-      <HomeStyled className="section--map">
-        <div id="map">
+      <HomeStyled as="main">
+        <section id="map">
           <Map
             style="mapbox://styles/mapbox/streets-v11"
             zoom={[14]}
@@ -369,70 +369,72 @@ function Home(props) {
               );
             })}
           </Map>
-        </div>
-      </HomeStyled>
-      {data.isModalNewCard && (
-        <ModalNewCard
-          updateStateParent={closeModalOutside}
-          isMarginTop={true}
-          isModalNewCard={data.isModalNewCard}
-        ></ModalNewCard>
-      )}
-      <TitlePageStyled className="title--page">
-        <h1>Propositions autour de vous</h1>
-        <div>
-          <img src={SquigglesImg} alt="squiggles--img"></img>
-        </div>
-      </TitlePageStyled>
-      <FilterStyled>
-        <div>
-          <input type="text" placeholder="Paris 10"></input>
-          <button className="btn--filters">
-            <div>
-              <img src={FiltersImg} alt="filters-icon"></img>{" "}
-            </div>
-          </button>
-          <button className="btn--create" onClick={displayNewCard}>
-            New card
-          </button>
-        </div>
-      </FilterStyled>
-      <SectionStyled>
-        {data.modalCardData && (
-          <HomeCards
-            card={data.modalCardData}
-            isModalCard={data.modalCardData}
-            updateStateParent={closeModalOutside}
-          ></HomeCards>
-        )}
-        {data.cards[paginationData.currentPage].map((card, index) => {
-          return (
-            <HomeCards
-              card={card}
-              key={index}
-              isCardFeed={true}
+        </section>
+        <section className="section--cards">
+          {data.isModalNewCard && (
+            <ModalNewCard
               updateStateParent={closeModalOutside}
-              aboutCard={() => aboutCard(card)}
-            ></HomeCards>
-          );
-        })}
-        <ReactPaginate
-          previousLabel={"←"}
-          nextLabel={"→"}
-          pageCount={paginationData.pageCount}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          previousLinkClassName={"pagination__link"}
-          nextLinkClassName={"pagination__link"}
-          disabledClassName={"pagination__link--disabled"}
-          activeClassName={"pagination__link--active"}
-        ></ReactPaginate>
-        {data.isMap ? (
-          <button onClick={displayMap}>Retour sur la liste</button>
-        ) : (
-          <button onClick={displayMap}>Voir sur la map</button>
-        )}
-      </SectionStyled>
+              isMarginTop={true}
+              isModalNewCard={data.isModalNewCard}
+            ></ModalNewCard>
+          )}
+          <div className="title--page">
+            <h1>Propositions autour de vous</h1>
+            <div>
+              <img src={SquigglesImg} alt="squiggles--img"></img>
+            </div>
+          </div>
+          <FilterStyled>
+            <div>
+              <input type="text" placeholder="Paris 10"></input>
+              <button className="btn--filters">
+                <div>
+                  <img src={FiltersImg} alt="filters-icon"></img>{" "}
+                </div>
+              </button>
+              <button className="btn--create" onClick={displayNewCard}>
+                New card
+              </button>
+            </div>
+          </FilterStyled>
+          <div className="feed--cards">
+            {data.modalCardData && (
+              <HomeCards
+                card={data.modalCardData}
+                isModalCard={data.modalCardData}
+                updateStateParent={closeModalOutside}
+              ></HomeCards>
+            )}
+            {data.cards[paginationData.currentPage].map((card, index) => {
+              return (
+                <HomeCards
+                  card={card}
+                  key={index}
+                  isCardFeed={true}
+                  updateStateParent={closeModalOutside}
+                  aboutCard={() => aboutCard(card)}
+                ></HomeCards>
+              );
+            })}
+            <ReactPaginate
+              previousLabel={"←"}
+              nextLabel={"→"}
+              pageCount={paginationData.pageCount}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              previousLinkClassName={"pagination__link"}
+              nextLinkClassName={"pagination__link"}
+              disabledClassName={"pagination__link--disabled"}
+              activeClassName={"pagination__link--active"}
+            ></ReactPaginate>
+            {data.isMap ? (
+              <button onClick={displayMap}>Retour sur la liste</button>
+            ) : (
+              <button onClick={displayMap}>Voir sur la map</button>
+            )}
+          </div>
+        </section>
+      </HomeStyled>
       <Footer isUrlActive={props.match}></Footer>
     </>
   );
