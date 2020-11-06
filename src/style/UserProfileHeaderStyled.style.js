@@ -4,10 +4,8 @@ import GlobalContainer from "../utlis/GlobalContainer";
 const UserProfileHeaderStyled = styled(GlobalContainer)`
   display: none;
   background-color: ${props => props.theme.colorPrincipal};
-  margin-bottom: 20%;
   font-family: "Nunito";
   box-shadow: 0px 3px 16px rgba(0, 0, 0, 0.18);
-  /* div { */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -50,14 +48,6 @@ const UserProfileHeaderStyled = styled(GlobalContainer)`
         width: 10vw;
       }
     }
-  }
-
-  @media screen and (min-width: 700px) {
-    margin-bottom: 3%;
-  }
-
-  @media screen and (min-width: 1000px) {
-    margin-bottom: 2%;
   }
 
   @media screen and (min-width: 1200px) {
