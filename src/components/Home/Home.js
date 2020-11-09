@@ -275,17 +275,15 @@ function Home(props) {
 
     if (!data.isMap) {
       newState.isMap = true;
-      // document.querySelector(".section--map").style.display = "block";
       document.querySelector("body").style.overflow = "hidden";
 
       setTimeout(() => {
-        window.dispatchEvent(new Event('resize'))
-      }, 0)
+        window.dispatchEvent(new Event("resize"));
+      }, 0);
 
       return setData(newState);
     }
 
-    // document.querySelector(".section--map").style.display = "none";
     document.querySelector("body").style.overflow = "auto";
 
     newState.isMap = false;
@@ -331,9 +329,6 @@ function Home(props) {
     });
   }
 
-  const handleStyleLoad = map => (map.resize())
-
-
   // if (redirect.isRedirect) return <Redirect to={`/aboutCard/${redirect.redirectCardId}`}></Redirect>;
   if (redirect.isRedirect)
     return (
@@ -353,7 +348,7 @@ function Home(props) {
           <Map
             style="mapbox://styles/mapbox/streets-v11"
             zoom={[14]}
-            containerStyle={{ height: "inherit" }}
+            containerStyle={{ height: "90vh" }}
             center={[2.37001, 48.83746]}
           >
             {data.cards[paginationData.currentPage].map((card, index) => {
