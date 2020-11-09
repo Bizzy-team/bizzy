@@ -52,6 +52,26 @@ const HomeCardsStyled = styled.div`
   .card--tags {
     display: flex;
     justify-content: center;
+    .card--tags--time {
+      display: flex;
+      align-items: center;
+      background-color: ${props => props.theme.colorLola};
+      border-radius: 10px;
+      padding: 0 14px;
+      p {
+        margin-bottom: 0;
+      }
+    }
+    .card--tags--distance {
+      display: flex;
+      align-items: center;
+      background-color: ${props => props.theme.colorLola};
+      border-radius: 10px;
+      padding: 0 14px;
+      p {
+        margin-bottom: 0;
+      }
+    }
     .card--tags--participants {
       display: flex;
       justify-content: center;
@@ -93,8 +113,11 @@ const HomeCardsStyled = styled.div`
     }
     .card--tags {
       margin-top: 8px;
+      .card--tags--time, .card--tags--distance {
+        margin: 0 5px;
+      }
       .card--tags--participants {
-        margin-right: 38%;
+        margin: 0 5px;
         padding: 0px 14px;
         .card--tags--participants--icon {
           width: 5vw;
@@ -134,9 +157,7 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
-      .card--tags--participants {
-        margin-right: 46%;
-      }
+      margin-right: 5%;
     }
   }
 
@@ -149,6 +170,13 @@ const HomeCardsStyled = styled.div`
           }
         }
       }
+    }
+  }
+
+  @media screen and (min-width: 516px) {
+    .card--tags {
+      margin-right: 11%;
+      margin-top: 2px;
     }
   }
 
@@ -175,6 +203,7 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
+      margin-right: 18%;
       ${props => props.isModalCard && "margin-top: -22px;"};
       .card--tags--participants {
         ${props => props.isModalCard && "margin-right: 50%;"};
@@ -202,8 +231,8 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
+      margin-right: 23%;
       .card--tags--participants {
-        margin-right: 52%;
         .card--tags--participants--icon {
           width: 3vw;
         }
@@ -216,6 +245,15 @@ const HomeCardsStyled = styled.div`
       .card--tags--participants {
         ${props => props.isModalCard && "margin-right: 49%;"};
       }
+    }
+  }
+
+  @media screen and (min-width: 671px) {
+    .card--header {
+      height: 11vh;
+    }
+    .card--tags {
+      margin-right: 28%;
     }
   }
 
@@ -237,8 +275,10 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
+      margin-right: 33%;
       .card--tags--participants {
-        ${props => (props.isModalCard ? "margin-right: 55%;" : "margin-right: 59%;")};
+        ${props => (props.isModalCard && "margin-right: 55%;")};
+        /* ${props => (props.isModalCard ? "margin-right: 55%;" : "margin-right: 59%;")}; */
       }
     }
   }
@@ -257,8 +297,10 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
+      margin-right: 43%;
       .card--tags--participants {
-        ${props => (props.isModalCard ? "margin-right: 62%;" : "margin-right: 66%;")};
+        ${props => (props.isModalCard && "margin-right: 62%;")};
+        /* ${props => (props.isModalCard ? "margin-right: 62%;" : "margin-right: 66%;")}; */
       }
     }
   }
@@ -273,8 +315,10 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
+      margin-right: 48%;
       .card--tags--participants {
-        ${props => (props.isModalCard ? "margin-right: 64%;" : "margin-right: 69%;")};
+        ${props => (props.isModalCard && "margin-right: 64%;")};
+        /* ${props => (props.isModalCard ? "margin-right: 64%;" : "margin-right: 69%;")}; */
       }
     }
   }
@@ -297,9 +341,8 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
+      margin-right: 12%;
       .card--tags--participants {
-        margin-right: 46%;
-        margin-top: 10px;
         .card--tags--participants--icon {
           width: 2vw;
         }
@@ -315,6 +358,12 @@ const HomeCardsStyled = styled.div`
     }
   }
 
+  @media screen and (min-width: 1124px) {
+    .card--tags {
+      margin-right: 17%;
+    }
+  }
+
   @media screen and (min-width: 1227px) {
     .card--header {
       .card--title {
@@ -326,6 +375,7 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
+      margin-right: 23%;
       .card--tags--participants {
         ${props => props.isModalCard && "margin-right: 50%;"};
       }
@@ -334,8 +384,12 @@ const HomeCardsStyled = styled.div`
 
   @media screen and (min-width: 1400px) {
     .card--tags {
+      margin-right: 40%;
       .card--tags--participants {
         ${props => props.isModalCard && "margin-right: 52%;"};
+        .card--tags--participants--icon {
+          width: 1vw;
+        }
       }
     }
   }
