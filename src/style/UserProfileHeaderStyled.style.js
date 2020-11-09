@@ -57,6 +57,10 @@ const UserProfileHeaderStyled = styled(GlobalContainer)`
   @media screen and (min-width: 1200px) {
     max-width: 1640px;
   }
+
+  @media screen and (min-width: 1400px) {
+    max-width: 2040px;
+  }
 `;
 
 export default UserProfileHeaderStyled;
