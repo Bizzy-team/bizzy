@@ -40,6 +40,12 @@ function HomeCards(props) {
         </div>
       </div>
       <div className="card--tags">
+        <div className="card--tags--time">
+          <p>{props.card.card_time}</p>
+        </div>
+        <div className="card--tags--distance">
+          <p>{props.card.card_distance}</p>
+        </div>
         <div className="card--tags--participants">
           <div className="card--tags--participants--icon">
             <img src={ParticipantIcon} alt="participant-icon"></img>
