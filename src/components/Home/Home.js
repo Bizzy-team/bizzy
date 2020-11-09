@@ -62,7 +62,9 @@ function Home(props) {
               card_participant_name: "Alice",
               card_participant_job: "RH"
             }
-          ]
+          ],
+          card_time: "13h",
+          card_distance: "800m"
         },
         {
           card_id: 1,
@@ -97,7 +99,9 @@ function Home(props) {
               card_participant_name: "Alice",
               card_participant_job: "RH"
             }
-          ]
+          ],
+          card_time: "17h",
+          card_distance: "1.5km"
         },
         {
           card_id: 2,
@@ -132,7 +136,9 @@ function Home(props) {
               card_participant_name: "Alice",
               card_participant_job: "RH"
             }
-          ]
+          ],
+          card_time: "19h",
+          card_distance: "200m"
         }
       ],
       2: [
@@ -169,7 +175,9 @@ function Home(props) {
               card_participant_name: "Alice",
               card_participant_job: "RH"
             }
-          ]
+          ],
+          card_time: "22h",
+          card_distance: "2.5m"
         },
         {
           card_id: 4,
@@ -204,7 +212,9 @@ function Home(props) {
               card_participant_name: "Alice",
               card_participant_job: "RH"
             }
-          ]
+          ],
+          card_time: "12h",
+          card_distance: "600m"
         },
         {
           card_id: 5,
@@ -239,7 +249,9 @@ function Home(props) {
               card_participant_name: "Alice",
               card_participant_job: "RH"
             }
-          ]
+          ],
+          card_time: "21h",
+          card_distance: "100m"
         }
       ]
     },
