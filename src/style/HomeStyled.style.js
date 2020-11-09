@@ -54,7 +54,8 @@ const HomeStyled = styled.main`
     }
   }
 
-  .btn--list, .btn--map {
+  .btn--list,
+  .btn--map {
     background-color: #283d80;
     color: white;
     padding: 12px;
@@ -119,7 +120,8 @@ const HomeStyled = styled.main`
         }
       }
     }
-    .btn--list, .btn--map {
+    .btn--list,
+    .btn--map {
       display: none;
     }
   }

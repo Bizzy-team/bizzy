@@ -432,9 +432,13 @@ function Home(props) {
           </div>
         </section>
         {data.isMap ? (
-          <button onClick={displayMap} className="btn--list">Retour sur la liste</button>
+          <button onClick={displayMap} className="btn--list">
+            Retour sur la liste
+          </button>
         ) : (
-          <button onClick={displayMap} className="btn--map">Voir sur la map</button>
+          <button onClick={displayMap} className="btn--map">
+            Voir sur la map
+          </button>
         )}
       </HomeStyled>
       <Footer isUrlActive={props.match}></Footer>
