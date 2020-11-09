@@ -19,6 +19,7 @@ custom:
   region: ${opt:region, self:custom.defaultRegion}
   objectPrefix: '${self:service}-${self:custom.currentStage}'
   bucketName: dev-bizzy.com
+  # Normally use this value, we volontary custom bucketName for the first branch/architecture
   # bucketName: ${self:custom.domainName}
   remover:
      buckets:
