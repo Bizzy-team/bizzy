@@ -28,7 +28,9 @@
         "@testing-library/user-event": "^7.1.2",
         "husky": "^4.3.0",
         "prettier": "^1.19.1",
-        "react-scripts": "3.4.0"
+        "react-scripts": "3.4.0",
+        "serverless-certificate-creator": "^1.4.0",
+        "serverless-s3-sync": "^1.15.0"
     },
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
@@ -44,6 +46,7 @@
         "react-router-dom": "^5.1.2",
         "react-svg": "^11.0.39",
         "serverless-s3-remover": "^0.6.0",
+        "serverless-certificate-creator": "^1.4.0",
         "serverless-s3-sync": "^1.15.0",
         "styled-components": "^5.2.0"
     }
