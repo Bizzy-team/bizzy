@@ -91,9 +91,6 @@ const HomeStyled = styled.main`
     #map {
       display: block;
       width: 53vw;
-      .mapboxgl-map {
-        overflow: initial;
-      }
     }
     .section--cards {
       height: 90vh;
