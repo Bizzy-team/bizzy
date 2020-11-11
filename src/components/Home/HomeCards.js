@@ -19,10 +19,10 @@ function HomeCards(props) {
   });
 
   return (
-    <HomeCardsStyled isModalCard={props.isModalCard} onClick={props.aboutCard}>
+    <HomeCardsStyled isModalCard={props.isModalCard} onClick={props.aboutCard} className="card">
       <div className="card--header">
         <div className="card--img">
-          <img src={props.card.card_user_mood} alt="food-icon"></img>
+          <img src={props.imgSrc} alt="food-icon"></img>
         </div>
         <div className="card--title">
           <div className="card--title--name">
