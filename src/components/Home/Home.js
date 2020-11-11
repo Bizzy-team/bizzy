@@ -289,7 +289,11 @@ function Home(props) {
       <Redirect
         to={{
           pathname: `/aboutCard/${redirect.redirectCardId}`,
-          state: { cardDetails: redirect.cardDetails }
+          state: {
+            cardDetails: redirect.cardDetails,
+            imgSrc: returnIconMoodUrl(redirect.cardDetails.card_user_mood, false),
+            imgSrcMap: returnIconMoodUrl(redirect.cardDetails.card_user_mood, true)
+          }
         }}
       ></Redirect>
     );
