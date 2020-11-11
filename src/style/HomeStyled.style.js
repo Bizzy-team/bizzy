@@ -20,6 +20,7 @@ const HomeStyled = styled.main`
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
       .pagination {
         display: flex;
         list-style: none;
