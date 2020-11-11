@@ -19,7 +19,11 @@ function HomeCards(props) {
   });
 
   return (
-    <HomeCardsStyled isModalCard={props.isModalCard} onClick={props.aboutCard} className="card">
+    <HomeCardsStyled
+      isModalCard={props.isModalCard}
+      onClick={props.aboutCard}
+      className="card"
+    >
       <div className="card--header">
         <div className="card--img">
           <img src={props.imgSrc} alt="food-icon"></img>

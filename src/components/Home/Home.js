@@ -126,8 +126,10 @@ function Home(props) {
     const pageNumber = Math.ceil(cardsApi.length / itemPerPage);
     const cards = {};
 
-    cardsApi.forEach(function (card) {
-      const cardDateFormated = `${new Date(card.card_date_creation).getDate()}/${new Date(card.card_date_creation).getMonth() + 1}`;
+    cardsApi.forEach(function(card) {
+      const cardDateFormated = `${new Date(card.card_date_creation).getDate()}/${new Date(
+        card.card_date_creation
+      ).getMonth() + 1}`;
 
       if (pageNumber === 0) {
         if (cards[page]) {
@@ -138,7 +140,7 @@ function Home(props) {
 
           cards[page][cardDateFormated] = [];
           return cards[page][cardDateFormated].push(card);
-        };
+        }
 
         cards[page] = {};
         cards[page][cardDateFormated] = [];
@@ -147,7 +149,7 @@ function Home(props) {
 
       if (cards[page]) {
         let cardsInPage = 0;
-        Object.keys(cards[page]).map(i => cardsInPage += cards[page][i].length);
+        Object.keys(cards[page]).map(i => (cardsInPage += cards[page][i].length));
 
         if (cardsInPage >= itemPerPage) {
           page += 1;
@@ -177,7 +179,7 @@ function Home(props) {
 
     setData({
       ...data,
-      cards,
+      cards
     });
   }
 
@@ -198,7 +200,7 @@ function Home(props) {
     }
   }
 
-  function renderMarker () {
+  function renderMarker() {
     return Object.keys(data.cards[paginationData.currentPage]).map(item => {
       return data.cards[paginationData.currentPage][item].map((card, index) => {
         return (
@@ -217,13 +219,13 @@ function Home(props) {
               onClick={() => setData({ ...data, modalCardData: card })}
             ></div>
           </Marker>
-        )
-      })
+        );
+      });
     });
   }
 
   function renderCards() {
-    return Object.keys(data.cards[paginationData.currentPage]).map((date) => {
+    return Object.keys(data.cards[paginationData.currentPage]).map(date => {
       return data.cards[paginationData.currentPage][date].map((card, index) => {
         if (index > 0) {
           return (
@@ -235,7 +237,7 @@ function Home(props) {
               updateStateParent={closeModalOutside}
               aboutCard={() => aboutCard(card)}
             ></HomeCards>
-          )
+          );
         }
 
         if (date === `${new Date().getDate()}/${new Date().getMonth() + 1}`) {
@@ -250,7 +252,7 @@ function Home(props) {
                 aboutCard={() => aboutCard(card)}
               ></HomeCards>
             </React.Fragment>
-          )
+          );
         }
         if (date === `${new Date().getDate() + 1}/${new Date().getMonth() + 1}`) {
           return (
@@ -264,7 +266,7 @@ function Home(props) {
                 aboutCard={() => aboutCard(card)}
               ></HomeCards>
             </React.Fragment>
-          )
+          );
         }
         return (
           <React.Fragment key={index}>
@@ -277,9 +279,9 @@ function Home(props) {
               aboutCard={() => aboutCard(card)}
             ></HomeCards>
           </React.Fragment>
-        )
-      })
-    })
+        );
+      });
+    });
   }
 
   if (redirect.isRedirect)
@@ -292,7 +294,7 @@ function Home(props) {
       ></Redirect>
     );
 
-  if (!Object.keys(data.cards).length) return 'Loading';
+  if (!Object.keys(data.cards).length) return "Loading";
 
   return (
     <>
