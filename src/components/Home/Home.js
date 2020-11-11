@@ -11,6 +11,10 @@ import BeerIcon from "../../img/drink_mood.svg";
 import BeerIconMap from "../../img/icon_map_drink.svg";
 import CultureMood from "../../img/culture_mood.svg";
 import CultureMoodMap from "../../img/icon_map_culture.svg";
+import SportMood from "../../img/sport_mood.svg";
+import SportMoodMap from "../../img/icon_map_sport.svg";
+import OpenMindedMood from "../../img/open_mind_mood.svg";
+import OpenMindedMoodMap from "../../img/icon_map_open_mind.svg";
 import FiltersImg from "../../img/filters.svg";
 import FilterStyled from "../../style/FilterStyled.style";
 import UserAvatar from "../../img/user_avatar.svg";
@@ -19,6 +23,7 @@ import Footer from "../Footer/Footer";
 // import HomeAboutCard from "./HomeAboutCard";
 import { Redirect } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import fakeCards from "./fakeCards.json";
 
 const Map = ReactMapboxGl({
   accessToken: process.env.REACT_APP_TOKEN_MAP_KEY,
@@ -27,234 +32,7 @@ const Map = ReactMapboxGl({
 
 function Home(props) {
   const [data, setData] = React.useState({
-    cards: {
-      1: [
-        {
-          card_id: 0,
-          card_user_avatar: UserAvatar,
-          card_user_name: "Claudia Boudié",
-          card_title: "Pizza pour l'aprèm",
-          card_user_job: "Designer",
-          card_desc:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-          card_user_mood: [FoodIcon],
-          card_user_mood_map: [FoodIconMap],
-          card_geometry: {
-            type: "Point",
-            coordinates: [2.36517, 48.83501]
-          },
-          card_participants: [
-            {
-              card_participant_id: 0,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Albert",
-              card_participant_job: "CTO"
-            },
-            {
-              card_participant_id: 1,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Guillaume",
-              card_participant_job: "Freelance"
-            },
-            {
-              card_participant_id: 2,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Alice",
-              card_participant_job: "RH"
-            }
-          ],
-          card_time: "13h",
-          card_distance: "800m"
-        },
-        {
-          card_id: 1,
-          card_user_avatar: UserAvatar,
-          card_user_name: "Lucas Tostée",
-          card_title: "Kebab pour le déj",
-          card_user_job: "Dev AWS claqué",
-          card_desc:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-          card_user_mood: [CultureMood],
-          card_user_mood_map: [CultureMoodMap],
-          card_geometry: {
-            type: "Point",
-            coordinates: [2.37358, 48.837551]
-          },
-          card_participants: [
-            {
-              card_participant_id: 0,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Albert",
-              card_participant_job: "CTO"
-            },
-            {
-              card_participant_id: 1,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Guillaume",
-              card_participant_job: "Freelance"
-            },
-            {
-              card_participant_id: 2,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Alice",
-              card_participant_job: "RH"
-            }
-          ],
-          card_time: "17h",
-          card_distance: "1.5km"
-        },
-        {
-          card_id: 2,
-          card_user_avatar: UserAvatar,
-          card_user_name: "Diane",
-          card_title: "Balade sportive",
-          card_user_job: "Chomeuse",
-          card_desc:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-          card_user_mood: [BeerIcon],
-          card_user_mood_map: [BeerIconMap],
-          card_geometry: {
-            type: "Point",
-            coordinates: [2.37523, 48.83022]
-          },
-          card_participants: [
-            {
-              card_participant_id: 0,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Albert",
-              card_participant_job: "CTO"
-            },
-            {
-              card_participant_id: 1,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Guillaume",
-              card_participant_job: "Freelance"
-            },
-            {
-              card_participant_id: 2,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Alice",
-              card_participant_job: "RH"
-            }
-          ],
-          card_time: "19h",
-          card_distance: "200m"
-        }
-      ],
-      2: [
-        {
-          card_id: 3,
-          card_user_avatar: UserAvatar,
-          card_user_name: "Margaux",
-          card_title: "Balade dans les champs",
-          card_user_job: "Barmaid",
-          card_desc:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-          card_user_mood: [BeerIcon],
-          card_user_mood_map: [BeerIconMap],
-          card_geometry: {
-            type: "Point",
-            coordinates: [2.37523, 48.83501]
-          },
-          card_participants: [
-            {
-              card_participant_id: 0,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Albert",
-              card_participant_job: "CTO"
-            },
-            {
-              card_participant_id: 1,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Guillaume",
-              card_participant_job: "Freelance"
-            },
-            {
-              card_participant_id: 2,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Alice",
-              card_participant_job: "RH"
-            }
-          ],
-          card_time: "22h",
-          card_distance: "2.5m"
-        },
-        {
-          card_id: 4,
-          card_user_avatar: UserAvatar,
-          card_user_name: "Mélina",
-          card_title: "Apéro",
-          card_user_job: "Kebabier",
-          card_desc:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-          card_user_mood: [BeerIcon],
-          card_user_mood_map: [BeerIconMap],
-          card_geometry: {
-            type: "Point",
-            coordinates: [2.37523, 48.836551]
-          },
-          card_participants: [
-            {
-              card_participant_id: 0,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Albert",
-              card_participant_job: "CTO"
-            },
-            {
-              card_participant_id: 1,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Guillaume",
-              card_participant_job: "Freelance"
-            },
-            {
-              card_participant_id: 2,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Alice",
-              card_participant_job: "RH"
-            }
-          ],
-          card_time: "12h",
-          card_distance: "600m"
-        },
-        {
-          card_id: 5,
-          card_user_avatar: UserAvatar,
-          card_user_name: "Sarah",
-          card_title: "Pates carbo",
-          card_user_job: "Educatrice",
-          card_desc:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor arcu feugiat massa mauris. Praesent id et nullam nec odio porta morbi morbi sem. Cursus ut placerat turpis molestie neque mattis. Maecenas pulvinar ac scelerisque sit mauris nunc in mi. Sit pulvinar proin egestas dolor a at.",
-          card_user_mood: [FoodIcon],
-          card_user_mood_map: [FoodIconMap],
-          card_geometry: {
-            type: "Point",
-            coordinates: [2.37523, 48.83022]
-          },
-          card_participants: [
-            {
-              card_participant_id: 0,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Albert",
-              card_participant_job: "CTO"
-            },
-            {
-              card_participant_id: 1,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Guillaume",
-              card_participant_job: "Freelance"
-            },
-            {
-              card_participant_id: 2,
-              card_participant_avatar: UserAvatar,
-              card_participant_name: "Alice",
-              card_participant_job: "RH"
-            }
-          ],
-          card_time: "21h",
-          card_distance: "100m"
-        }
-      ]
-    },
+    cards: {},
     isMap: false,
     isModalNewCard: false,
     modalCardData: false
@@ -268,7 +46,7 @@ function Home(props) {
 
   const [paginationData, setCurrentPage] = React.useState({
     currentPage: 1,
-    pageCount: Object.keys(data.cards).length
+    pageCount: 0
   });
 
   React.useEffect(() => {
@@ -280,6 +58,8 @@ function Home(props) {
     if (window.screen.width > 1000) {
       document.querySelector("body").style.overflow = "hidden";
     }
+
+    return formatCards(fakeCards, 10);
   }, []); //eslint-disable-lint
 
   function displayMap() {
@@ -341,7 +121,167 @@ function Home(props) {
     });
   }
 
-  // if (redirect.isRedirect) return <Redirect to={`/aboutCard/${redirect.redirectCardId}`}></Redirect>;
+  function formatCards(cardsApi, itemPerPage) {
+    let page = 1;
+    const pageNumber = Math.ceil(cardsApi.length / itemPerPage);
+    const cards = {};
+
+    cardsApi.forEach(function (card) {
+      const cardDateFormated = `${new Date(card.card_date_creation).getDate()}/${new Date(card.card_date_creation).getMonth() + 1}`;
+
+      if (pageNumber === 0) {
+        if (cards[page]) {
+          const objectKeys = Object.keys(cards[page]);
+          if (cards[page][cardDateFormated] && objectKeys.includes(cardDateFormated)) {
+            return cards[page][cardDateFormated].push(card);
+          }
+
+          cards[page][cardDateFormated] = [];
+          return cards[page][cardDateFormated].push(card);
+        };
+
+        cards[page] = {};
+        cards[page][cardDateFormated] = [];
+        return cards[page][cardDateFormated].push(card);
+      }
+
+      if (cards[page]) {
+        let cardsInPage = 0;
+        Object.keys(cards[page]).map(i => cardsInPage += cards[page][i].length);
+
+        if (cardsInPage >= itemPerPage) {
+          page += 1;
+          cards[page] = {};
+          cards[page][cardDateFormated] = [];
+          return cards[page][cardDateFormated].push(card);
+        }
+
+        const objectKeys = Object.keys(cards[page]);
+        if (cards[page][cardDateFormated] && objectKeys.includes(cardDateFormated)) {
+          return cards[page][cardDateFormated].push(card);
+        }
+
+        cards[page][cardDateFormated] = [];
+        return cards[page][cardDateFormated].push(card);
+      }
+
+      cards[page] = {};
+      cards[page][cardDateFormated] = [];
+      return cards[page][cardDateFormated].push(card);
+    });
+
+    setCurrentPage({
+      pageCount: pageNumber,
+      currentPage: 1
+    });
+
+    setData({
+      ...data,
+      cards,
+    });
+  }
+
+  function returnIconMoodUrl(cardUserMood, isMarker = false) {
+    switch (cardUserMood) {
+      case "food":
+        return isMarker ? FoodIconMap : FoodIcon;
+      case "drink":
+        return isMarker ? BeerIconMap : BeerIcon;
+      case "culture":
+        return isMarker ? CultureMoodMap : CultureMood;
+      case "sport":
+        return isMarker ? SportMoodMap : SportMood;
+      case "openMinded":
+        return isMarker ? OpenMindedMoodMap : OpenMindedMood;
+      default:
+        break;
+    }
+  }
+
+  function renderMarker () {
+    return Object.keys(data.cards[paginationData.currentPage]).map(item => {
+      return data.cards[paginationData.currentPage][item].map((card, index) => {
+        return (
+          <Marker coordinates={card.card_geometry.coordinates} key={index}>
+            <div
+              style={{
+                display: "block",
+                backgroundImage: `url(${returnIconMoodUrl(card.card_user_mood, true)})`,
+                backgroundRepeat: "no-repeat",
+                width: "55px",
+                height: "55px",
+                borderRadius: "50%",
+                backgroundPosition: "-3px -5px",
+                backgroundSize: "60px"
+              }}
+              onClick={() => setData({ ...data, modalCardData: card })}
+            ></div>
+          </Marker>
+        )
+      })
+    });
+  }
+
+  function renderCards() {
+    return Object.keys(data.cards[paginationData.currentPage]).map((date) => {
+      return data.cards[paginationData.currentPage][date].map((card, index) => {
+        if (index > 0) {
+          return (
+            <HomeCards
+              key={index}
+              card={card}
+              imgSrc={returnIconMoodUrl(card.card_user_mood)}
+              isCardFeed={true}
+              updateStateParent={closeModalOutside}
+              aboutCard={() => aboutCard(card)}
+            ></HomeCards>
+          )
+        }
+
+        if (date === `${new Date().getDate()}/${new Date().getMonth() + 1}`) {
+          return (
+            <React.Fragment key={index}>
+              <h2>Aujourd'hui</h2>
+              <HomeCards
+                card={card}
+                imgSrc={returnIconMoodUrl(card.card_user_mood)}
+                isCardFeed={true}
+                updateStateParent={closeModalOutside}
+                aboutCard={() => aboutCard(card)}
+              ></HomeCards>
+            </React.Fragment>
+          )
+        }
+        if (date === `${new Date().getDate() + 1}/${new Date().getMonth() + 1}`) {
+          return (
+            <React.Fragment key={index}>
+              <h2>Demain</h2>
+              <HomeCards
+                card={card}
+                imgSrc={returnIconMoodUrl(card.card_user_mood)}
+                isCardFeed={true}
+                updateStateParent={closeModalOutside}
+                aboutCard={() => aboutCard(card)}
+              ></HomeCards>
+            </React.Fragment>
+          )
+        }
+        return (
+          <React.Fragment key={index}>
+            <h2>{date}</h2>
+            <HomeCards
+              card={card}
+              imgSrc={returnIconMoodUrl(card.card_user_mood)}
+              isCardFeed={true}
+              updateStateParent={closeModalOutside}
+              aboutCard={() => aboutCard(card)}
+            ></HomeCards>
+          </React.Fragment>
+        )
+      })
+    })
+  }
+
   if (redirect.isRedirect)
     return (
       <Redirect
@@ -351,6 +291,8 @@ function Home(props) {
         }}
       ></Redirect>
     );
+
+  if (!Object.keys(data.cards).length) return 'Loading';
 
   return (
     <>
@@ -363,25 +305,7 @@ function Home(props) {
             containerStyle={{ height: "90vh" }}
             center={[2.37001, 48.83746]}
           >
-            {data.cards[paginationData.currentPage].map((card, index) => {
-              return (
-                <Marker coordinates={card.card_geometry.coordinates} key={index}>
-                  <div
-                    style={{
-                      display: "block",
-                      backgroundImage: `url(${card.card_user_mood_map})`,
-                      backgroundRepeat: "no-repeat",
-                      width: "55px",
-                      height: "55px",
-                      borderRadius: "50%",
-                      backgroundPosition: "-3px -5px",
-                      backgroundSize: "60px"
-                    }}
-                    onClick={() => setData({ ...data, modalCardData: card })}
-                  ></div>
-                </Marker>
-              );
-            })}
+            {renderMarker()}
           </Map>
         </section>
         <section className="section--cards">
@@ -419,17 +343,7 @@ function Home(props) {
                 updateStateParent={closeModalOutside}
               ></HomeCards>
             )}
-            {data.cards[paginationData.currentPage].map((card, index) => {
-              return (
-                <HomeCards
-                  card={card}
-                  key={index}
-                  isCardFeed={true}
-                  updateStateParent={closeModalOutside}
-                  aboutCard={() => aboutCard(card)}
-                ></HomeCards>
-              );
-            })}
+            {renderCards()}
             <ReactPaginate
               previousLabel={"←"}
               nextLabel={"→"}
