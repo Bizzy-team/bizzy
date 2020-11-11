@@ -1,62 +1,48 @@
 import React from "react";
-import mapboxgl from "mapbox-gl";
+import ReactMapboxGl from "react-mapbox-gl";
+import { Marker } from "react-mapbox-gl";
 import Footer from "../Footer/Footer";
 import ParticipantIcon from "../../img/participant_icon.svg";
 import BackArrow from "../../img/back_arrow.svg";
+import UserAvatar from "../../img/user_avatar.svg";
 import HomeAboutCardStyled from "../../style/HomeAboutCardStyled.style";
 
+const Map = ReactMapboxGl({
+  accessToken: process.env.REACT_APP_TOKEN_MAP_KEY,
+  scrollZoom: false
+});
+
 function HomeAboutCard(props) {
-  React.useEffect(() => {
-    mapboxgl.accessToken = process.env.REACT_APP_TOKEN_MAP_KEY;
-
-    const map = new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
-      center: [
-        props.location.state.cardDetails.card_geometry.coordinates[0],
-        props.location.state.cardDetails.card_geometry.coordinates[1]
-      ], // starting position [lng, lat]
-      zoom: 14 // starting zoom
-    });
-
-    const el = document.createElement("div");
-    el.className = "marker";
-    el.id = `${props.location.state.cardDetails.card_id}`;
-    el.style.cssText = `
-          display: block;
-          background-image: url(${props.location.state.cardDetails.card_user_mood_map});
-          background-repeat: no-repeat;
-          width: 55px;
-          height: 55px;
-          border-radius: 50%;
-          background-position: -3px -5px;
-          background-size: 60px;
-        `;
-
-    new mapboxgl.Marker(el)
-      .setLngLat(props.location.state.cardDetails.card_geometry.coordinates)
-      .addTo(map);
-
-    map.scrollZoom.disable();
-  });
-
   function backHome() {
     return props.history.push("/home");
+  }
+
+  function renderMarker() {
+    return (
+      <Marker coordinates={props.location.state.cardDetails.card_geometry.coordinates}>
+        <div
+          style={{
+            display: "block",
+            backgroundImage: `url(${props.location.state.imgSrcMap})`,
+            backgroundRepeat: "no-repeat",
+            width: "55px",
+            height: "55px",
+            borderRadius: "50%",
+            backgroundPosition: "-3px -5px",
+            backgroundSize: "60px"
+          }}
+        ></div>
+      </Marker>
+    );
   }
 
   return (
     <>
       <HomeAboutCardStyled>
-        <div className="about--card">
+        <section className="about--card">
           <div className="card--title">
             <div className="back--arrow" onClick={backHome}>
               <img src={BackArrow} alt="back-arrow"></img>
-            </div>
-            <div className="card--title--img">
-              <img
-                src={props.location.state.cardDetails.card_user_mood}
-                alt="icons-mood"
-              ></img>
             </div>
             <div className="card--title--name">
               <h2>{props.location.state.cardDetails.card_title}</h2>
@@ -79,7 +65,8 @@ function HomeAboutCard(props) {
           <div className="card--about--author">
             <div className="card--about--author--img">
               <img
-                src={props.location.state.cardDetails.card_user_avatar}
+                src={UserAvatar}
+                // src={props.location.state.cardDetails.card_user_avatar}
                 alt="user-avatar"
               ></img>
             </div>
@@ -99,7 +86,8 @@ function HomeAboutCard(props) {
                   <React.Fragment key={index}>
                     <div className={`participant--${participant.card_participant_id}`}>
                       <div className="card--participant--avatar">
-                        <img src={participant.card_participant_avatar} alt="avatar"></img>
+                        <img src={UserAvatar} alt="avatar"></img>
+                        {/* <img src={participant.card_participant_avatar} alt="avatar"></img> */}
                       </div>
                       <p>
                         {participant.card_participant_name},{" "}
@@ -111,16 +99,24 @@ function HomeAboutCard(props) {
               }
             )}
           </div>
-        </div>
-        <section className="section--map">
-          <div id="map"></div>
+          <div className="buttons">
+            <button className="btn--favorite">Mettre en favoris</button>
+            <button className="btn--join">Rejoindre</button>
+          </div>
         </section>
-        <div className="buttons">
-          <button className="btn--favorite">Mettre en favoris</button>
-          <button className="btn--join">Rejoindre</button>
-        </div>
+        <section id="map">
+          <Map
+            style="mapbox://styles/mapbox/streets-v11"
+            zoom={[14]}
+            center={[
+              props.location.state.cardDetails.card_geometry.coordinates[0],
+              props.location.state.cardDetails.card_geometry.coordinates[1]
+            ]}
+          >
+            {renderMarker()}
+          </Map>
+        </section>
       </HomeAboutCardStyled>
-
       <Footer isUrlActive={props.match}></Footer>
     </>
   );
