@@ -46,6 +46,15 @@ const HomeCardsStyled = styled.div`
       .card--author--about {
         display: flex;
         align-items: center;
+        .card--author--about--img {
+          display: flex;
+          width: 6vw;
+          img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+          }
+        }
       }
     }
   }
@@ -112,6 +121,12 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
+      /* ${props => {
+        if (props.modalCardData) {
+          return "margin-top";
+        }
+      }} */
+
       margin-top: 8px;
       .card--tags--time, .card--tags--distance {
         margin: 0 5px;
@@ -130,6 +145,16 @@ const HomeCardsStyled = styled.div`
     }
     .card--content {
       margin-top: 5px;
+    }
+
+      #map {
+      .mapboxgl-map {
+      .modal--card--about {
+        .card--tags {
+          margin-left: 17%;
+          }
+        }
+      }
     }
   }
 
@@ -277,8 +302,9 @@ const HomeCardsStyled = styled.div`
     .card--tags {
       margin-right: 33%;
       .card--tags--participants {
-        ${props => (props.isModalCard && "margin-right: 55%;")};
-        /* ${props => (props.isModalCard ? "margin-right: 55%;" : "margin-right: 59%;")}; */
+        ${props => props.isModalCard && "margin-right: 55%;"};
+        /* ${props =>
+          props.isModalCard ? "margin-right: 55%;" : "margin-right: 59%;"}; */
       }
     }
   }
@@ -299,8 +325,9 @@ const HomeCardsStyled = styled.div`
     .card--tags {
       margin-right: 43%;
       .card--tags--participants {
-        ${props => (props.isModalCard && "margin-right: 62%;")};
-        /* ${props => (props.isModalCard ? "margin-right: 62%;" : "margin-right: 66%;")}; */
+        ${props => props.isModalCard && "margin-right: 62%;"};
+        /* ${props =>
+          props.isModalCard ? "margin-right: 62%;" : "margin-right: 66%;"}; */
       }
     }
   }
@@ -317,8 +344,9 @@ const HomeCardsStyled = styled.div`
     .card--tags {
       margin-right: 48%;
       .card--tags--participants {
-        ${props => (props.isModalCard && "margin-right: 64%;")};
-        /* ${props => (props.isModalCard ? "margin-right: 64%;" : "margin-right: 69%;")}; */
+        ${props => props.isModalCard && "margin-right: 64%;"};
+        /* ${props =>
+          props.isModalCard ? "margin-right: 64%;" : "margin-right: 69%;"}; */
       }
     }
   }
