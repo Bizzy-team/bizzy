@@ -59,7 +59,7 @@ function Home(props) {
       document.querySelector("body").style.overflow = "hidden";
     }
 
-    return formatCards(fakeCards, 10);
+    return formatCards(fakeCards, 3);
   }, []); //eslint-disable-lint
 
   function displayMap() {
@@ -312,6 +312,15 @@ function Home(props) {
             center={[2.37001, 48.83746]}
           >
             {renderMarker()}
+            {data.modalCardData && (
+              <HomeCards
+                card={data.modalCardData}
+                imgSrc={returnIconMoodUrl(data.modalCardData.card_user_mood)}
+                isModalCard={data.modalCardData}
+                updateStateParent={closeModalOutside}
+                classNameCard="modal--card--about"
+              ></HomeCards>
+            )}
           </Map>
         </section>
         <section className="section--cards">
@@ -342,13 +351,6 @@ function Home(props) {
             </div>
           </FilterStyled>
           <div className="feed--cards">
-            {data.modalCardData && (
-              <HomeCards
-                card={data.modalCardData}
-                isModalCard={data.modalCardData}
-                updateStateParent={closeModalOutside}
-              ></HomeCards>
-            )}
             {renderCards()}
             <ReactPaginate
               previousLabel={"←"}
