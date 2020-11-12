@@ -2,7 +2,6 @@ import styled from "styled-components";
 import GlobalContainer from "../utlis/GlobalContainer";
 
 const UserProfileHeaderStyled = styled(GlobalContainer)`
-  display: none;
   background-color: ${props => props.theme.colorPrincipal};
   font-family: "Nunito";
   box-shadow: 0px 3px 16px rgba(0, 0, 0, 0.18);
@@ -43,6 +42,7 @@ const UserProfileHeaderStyled = styled(GlobalContainer)`
   }
 
   @media screen and (min-width: 300px) {
+    display: none;
     div {
       .app--logo {
         width: 10vw;
@@ -51,6 +51,7 @@ const UserProfileHeaderStyled = styled(GlobalContainer)`
   }
 
   @media screen and (min-width: 1000px) {
+    display: flex;
     max-width: 1200px;
   }
 
