@@ -534,8 +534,37 @@ const HomeAboutCardStyled = styled.main`
   @media screen and (min-width: 1500px) {
     .about--card {
       padding: 0;
+      .card--tags {
+         .card--tags--distance {
+          span {
+            padding: 5px 70px;
+          }
+        }
+         .card--tags--time {
+          span {
+            padding: 5px 70px;
+          }
+        }
+         .card--tags--participants {
+          padding: 5px 70px;
+        }
+      }
       .card--participants {
         margin-top: 4%;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1751px) {
+    .about--card .card--tags .card--tags--participants .card--tags--participants--icon {
+      width: 26px;
+    }
+  }
+
+  @media screen and (min-width: 1796px) {
+    .about--card  {
+      .buttons {
+        margin-top: 15%;
       }
     }
   }
