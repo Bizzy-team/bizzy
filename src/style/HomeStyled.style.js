@@ -73,8 +73,21 @@ const HomeStyled = styled.main`
       display: ${props => (props.isMap ? "block;" : "none;")};
       width: ${props => props.isMap && "100vw;"};
       height: ${props => props.isMap && "90vh;"};
-      /* display: none; */
       margin-top: 7%;
+      .modal--card--about {
+        left: 14px;
+        .card--header {
+          width: 90vw;
+          .card--title {
+            .card--title--name {
+              width: 100%;
+              h2 {
+                padding-left: 6px;
+              }
+            }
+          }
+        }
+      }
     }
     .section--cards {
       display: ${props => (props.isMap ? "none;" : "block;")};
