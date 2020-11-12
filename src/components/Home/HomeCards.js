@@ -22,7 +22,7 @@ function HomeCards(props) {
     <HomeCardsStyled
       isModalCard={props.isModalCard}
       onClick={props.aboutCard}
-      className="card"
+      className={props.classNameCard}
     >
       <div className="card--header">
         <div className="card--img">
@@ -36,7 +36,9 @@ function HomeCards(props) {
             </div>
           </div>
           <div className="card--author--about">
-            <img src={UserAvatar} alt="avatar-icon"></img>
+            <div className="card--author--about--img">
+              <img src={UserAvatar} alt="avatar-icon"></img>
+            </div>
             <p>
               Par {props.card.card_user_name}, {props.card.card_user_job}
             </p>
