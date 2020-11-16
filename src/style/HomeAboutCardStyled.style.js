@@ -535,17 +535,17 @@ const HomeAboutCardStyled = styled.main`
     .about--card {
       padding: 0;
       .card--tags {
-         .card--tags--distance {
+        .card--tags--distance {
           span {
             padding: 5px 70px;
           }
         }
-         .card--tags--time {
+        .card--tags--time {
           span {
             padding: 5px 70px;
           }
         }
-         .card--tags--participants {
+        .card--tags--participants {
           padding: 5px 70px;
         }
       }
@@ -562,7 +562,7 @@ const HomeAboutCardStyled = styled.main`
   }
 
   @media screen and (min-width: 1796px) {
-    .about--card  {
+    .about--card {
       .buttons {
         margin-top: 15%;
       }
