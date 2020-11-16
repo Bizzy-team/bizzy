@@ -149,7 +149,7 @@ const HomeCardsStyled = styled.div`
 
   @media screen and (min-width: 360px) {
     .card--tags {
-      margin-left: ${props => props.isModalCard ? "18%;" : "17%;"};
+      margin-left: ${props => (props.isModalCard ? "18%;" : "17%;")};
     }
   }
 
@@ -226,7 +226,7 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
-      ${props => !props.isModalCard ? "margin-right: 5%;" : "width: 79vw;"};
+      ${props => (!props.isModalCard ? "margin-right: 5%;" : "width: 79vw;")};
       .card--tags--participants {
         .card--tags--participants--icon {
           ${props => props.isModalCard && "width: 3vw;"};
@@ -281,7 +281,10 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
-      ${props => props.isModalCard ? "margin-top: -12px; margin-left: 17%;" : "margin-right: 0; margin-left: 17%;"};
+      ${props =>
+        props.isModalCard
+          ? "margin-top: -12px; margin-left: 17%;"
+          : "margin-right: 0; margin-left: 17%;"};
       .card--tags--participants {
         ${props => props.isModalCard && "margin-right: 50%;"};
         .card--tags--participants--icon {
@@ -358,7 +361,8 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
-      ${props => !props.isModalCard && "margin-top: 4px; margin-right: 0; margin-left: 15%;"};
+      ${props =>
+        !props.isModalCard && "margin-top: 4px; margin-right: 0; margin-left: 15%;"};
       .card--tags--participants {
         ${props => props.isModalCard && "margin-right: 55%;"};
       }
@@ -399,7 +403,10 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
-      ${props => props.isModalCard ? "justify-content: flex-start;" : "margin-top: 0; margin-left: 13%;"};
+      ${props =>
+        props.isModalCard
+          ? "justify-content: flex-start;"
+          : "margin-top: 0; margin-left: 13%;"};
     }
   }
 
@@ -502,7 +509,7 @@ const HomeCardsStyled = styled.div`
       }
     }
     .card--tags {
-      ${props => props.isModalCard ? "margin-top: -12px;" : "margin-top: 8px;"};
+      ${props => (props.isModalCard ? "margin-top: -12px;" : "margin-top: 8px;")};
       margin-left: 18%;
       .card--tags--participants {
         .card--tags--participants--icon {
