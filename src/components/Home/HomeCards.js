@@ -23,6 +23,8 @@ function HomeCards(props) {
       isModalCard={props.isModalCard}
       onClick={props.aboutCard}
       className={props.classNameCard}
+      data-date={props.date}
+      data-card-id={props.card.card_id}
     >
       <div className="card--header">
         <div className="card--img">

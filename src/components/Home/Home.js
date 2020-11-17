@@ -31,11 +31,14 @@ const Map = ReactMapboxGl({
 });
 
 function Home(props) {
+  const refFeedCards = React.useRef(null);
+
   const [data, setData] = React.useState({
     cards: {},
     isMap: false,
     isModalNewCard: false,
-    modalCardData: false
+    modalCardData: false,
+    cardDate: ""
   });
 
   const [redirect, setRedirect] = React.useState({
@@ -59,7 +62,7 @@ function Home(props) {
       document.querySelector("body").style.overflow = "hidden";
     }
 
-    return formatCards(fakeCards, 3);
+    return formatCards(fakeCards, 4);
   }, []); //eslint-disable-lint
 
   function displayMap() {
@@ -97,7 +100,7 @@ function Home(props) {
     const newState = { ...data };
 
     newState.isModalNewCard = false;
-    newState.isModalCard = false;
+    newState.modalCardData = false;
 
     document.querySelector("body").style.overflow = "auto";
 
@@ -236,6 +239,7 @@ function Home(props) {
               isCardFeed={true}
               updateStateParent={closeModalOutside}
               aboutCard={() => aboutCard(card)}
+              date={date}
             ></HomeCards>
           );
         }
@@ -243,13 +247,15 @@ function Home(props) {
         if (date === `${new Date().getDate()}/${new Date().getMonth() + 1}`) {
           return (
             <React.Fragment key={index}>
-              <h2>Aujourd'hui</h2>
+              {/* <h2 className="card--date">{data.cardDate}</h2> */}
+              <h2 className="card--date">Aujourd'hui</h2>
               <HomeCards
                 card={card}
                 imgSrc={returnIconMoodUrl(card.card_user_mood)}
                 isCardFeed={true}
                 updateStateParent={closeModalOutside}
                 aboutCard={() => aboutCard(card)}
+                date={date}
               ></HomeCards>
             </React.Fragment>
           );
@@ -257,31 +263,101 @@ function Home(props) {
         if (date === `${new Date().getDate() + 1}/${new Date().getMonth() + 1}`) {
           return (
             <React.Fragment key={index}>
-              <h2>Demain</h2>
+              {/* <h2 className="card--date">{data.cardDate}</h2> */}
+              <h2 className="card--date">Demain</h2>
               <HomeCards
                 card={card}
                 imgSrc={returnIconMoodUrl(card.card_user_mood)}
                 isCardFeed={true}
                 updateStateParent={closeModalOutside}
                 aboutCard={() => aboutCard(card)}
+                date={date}
               ></HomeCards>
             </React.Fragment>
           );
         }
         return (
           <React.Fragment key={index}>
-            <h2>{date}</h2>
+            {/* <h2 className="card--date">{data.cardDate}</h2> */}
+            <h2 className="card--date">{date}</h2>
             <HomeCards
               card={card}
               imgSrc={returnIconMoodUrl(card.card_user_mood)}
               isCardFeed={true}
               updateStateParent={closeModalOutside}
               aboutCard={() => aboutCard(card)}
+              date={date}
             ></HomeCards>
           </React.Fragment>
         );
       });
     });
+  }
+
+  function sectionScroll(e) {
+    // créer un state avec la date affichée
+    // trouver sa height
+    // quand sa height touche le header:
+    // rendre la date en position fixed
+    // update le state avec la date
+    // rendre la section scrollable juste en dessous
+
+
+
+    // console.log(document.querySelector(".section--cards").scrollTop);
+    // console.log(document.querySelector(".section--cards").offsetTop);
+    // console.log(document.querySelector(".feed--cards").offsetTop);
+    
+    // console.log(document.querySelector(".feed--cards").firstChild.getBoundingClientRect().y  );
+
+    // console.log(document.querySelectorAll(".feed--cards > div").forEach(el => console.log(el)))
+
+    // const dateArr
+    
+
+    // console.log(document.scrollingElement.scrollTop );
+
+    if (document.querySelector(".section--cards").scrollTop >= 122) {
+      document.querySelector(".section--cards").style = "overflow: hidden;";
+      document.querySelector(".card--date").style = "position: fixed; top: 25%; z-index: 5;";
+      document.querySelector(".feed--cards").style = "height: 60vh; overflow: auto; margin-top: 5%; position: relative;";
+
+     
+      
+      // if ( 150 < document.querySelector(".feed--cards").firstChild.getBoundingClientRect().y > 160) {
+      //   console.log(date);
+      }
+
+
+  }
+
+  function t() {
+    // Probleme: détecter la card sur laquelle on scroll.
+
+    Object.keys(data.cards[paginationData.currentPage]).map(date => {
+      data.cards[paginationData.currentPage][date].map((card, index) => {
+        document.querySelectorAll(".feed--cards > div").forEach(el =>{
+          console.log(el.dataset.cardId);
+          console.log(card.card_id);
+          console.log(el.getBoundingClientRect().y);
+          // console.log(el.getBoundingClientRect().y * (25 / 100));
+          const axeY = el.getBoundingClientRect().y * (25 / 100);
+          console.log(axeY);
+          const resAxeY = el.getBoundingClientRect().y - axeY;
+          console.log(resAxeY);
+          // console.log(document.querySelector(".feed--cards").el.getBoundingClientRect().y)
+          if (0 > el.getBoundingClientRect().y && el.getBoundingClientRect().y < el.getBoundingClientRect().y ) {
+            console.log(el);
+            // console.log(card);
+          }
+        })
+      })
+    })
+    // console.log(document.querySelector(".feed--cards").scrollTop)
+    // console.log(document.querySelector(".feed--cards").scrollHeight)
+    // console.log(document.querySelector(".feed--cards").offsetHeight)
+    // console.log(document.querySelector(".section--cards").offsetHeight)
+    // console.log(document.querySelector(".feed--cards").clientHeight / Object.keys(data.cards[paginationData.currentPage]).length )
   }
 
   if (redirect.isRedirect)
@@ -323,7 +399,7 @@ function Home(props) {
             )}
           </Map>
         </section>
-        <section className="section--cards">
+        <section className="section--cards" onScroll={e => sectionScroll(e)}>
           {data.isModalNewCard && (
             <ModalNewCard
               updateStateParent={closeModalOutside}
@@ -331,13 +407,13 @@ function Home(props) {
               isModalNewCard={data.isModalNewCard}
             ></ModalNewCard>
           )}
-          <div className="title--page">
+          {/* <div className="title--page">
             <h1>Propositions autour de vous</h1>
             <div>
               <img src={SquigglesImg} alt="squiggles--img"></img>
             </div>
-          </div>
-          <FilterStyled>
+          </div> */}
+          <FilterStyled className="filters--section">
             <div>
               <input type="text" placeholder="Paris 10"></input>
               <button className="btn--filters">
@@ -350,7 +426,7 @@ function Home(props) {
               </button>
             </div>
           </FilterStyled>
-          <div className="feed--cards">
+          <div className="feed--cards" ref={refFeedCards} onScroll={t}>
             {renderCards()}
             <ReactPaginate
               previousLabel={"←"}
