@@ -37,8 +37,7 @@ function Home(props) {
     cards: {},
     isMap: false,
     isModalNewCard: false,
-    modalCardData: false,
-    cardDate: ""
+    modalCardData: false
   });
 
   const [redirect, setRedirect] = React.useState({
@@ -247,7 +246,6 @@ function Home(props) {
         if (date === `${new Date().getDate()}/${new Date().getMonth() + 1}`) {
           return (
             <React.Fragment key={index}>
-              {/* <h2 className="card--date">{data.cardDate}</h2> */}
               <h2 className="card--date">Aujourd'hui</h2>
               <HomeCards
                 card={card}
@@ -263,7 +261,6 @@ function Home(props) {
         if (date === `${new Date().getDate() + 1}/${new Date().getMonth() + 1}`) {
           return (
             <React.Fragment key={index}>
-              {/* <h2 className="card--date">{data.cardDate}</h2> */}
               <h2 className="card--date">Demain</h2>
               <HomeCards
                 card={card}
@@ -278,7 +275,6 @@ function Home(props) {
         }
         return (
           <React.Fragment key={index}>
-            {/* <h2 className="card--date">{data.cardDate}</h2> */}
             <h2 className="card--date">{date}</h2>
             <HomeCards
               card={card}
@@ -294,70 +290,31 @@ function Home(props) {
     });
   }
 
-  function sectionScroll(e) {
-    // créer un state avec la date affichée
-    // trouver sa height
-    // quand sa height touche le header:
-    // rendre la date en position fixed
-    // update le state avec la date
-    // rendre la section scrollable juste en dessous
-
-
-
-    // console.log(document.querySelector(".section--cards").scrollTop);
-    // console.log(document.querySelector(".section--cards").offsetTop);
-    // console.log(document.querySelector(".feed--cards").offsetTop);
-    
-    // console.log(document.querySelector(".feed--cards").firstChild.getBoundingClientRect().y  );
-
-    // console.log(document.querySelectorAll(".feed--cards > div").forEach(el => console.log(el)))
-
-    // const dateArr
-    
-
-    // console.log(document.scrollingElement.scrollTop );
-
+  function sectionScroll() {
     if (document.querySelector(".section--cards").scrollTop >= 122) {
       document.querySelector(".section--cards").style = "overflow: hidden;";
-      document.querySelector(".card--date").style = "position: fixed; top: 25%; z-index: 5;";
-      document.querySelector(".feed--cards").style = "height: 60vh; overflow: auto; margin-top: 5%; position: relative;";
-
-     
-      
-      // if ( 150 < document.querySelector(".feed--cards").firstChild.getBoundingClientRect().y > 160) {
-      //   console.log(date);
-      }
-
-
+      document.querySelector(".card--date").className = "card--date--fixed";
+      document.querySelector(".feed--cards").style =
+        "height: 60vh; overflow: auto; margin-top: 5%; position: relative;";
+    }
   }
 
-  function t() {
-    // Probleme: détecter la card sur laquelle on scroll.
+  function updateDate() {
+    document.querySelectorAll(".feed--cards > h2").forEach(h2 => {
+      if (h2.classList[0] === "card--date--fixed") {
+        console.log("ya r");
+        return;
+      }
 
-    Object.keys(data.cards[paginationData.currentPage]).map(date => {
-      data.cards[paginationData.currentPage][date].map((card, index) => {
-        document.querySelectorAll(".feed--cards > div").forEach(el =>{
-          console.log(el.dataset.cardId);
-          console.log(card.card_id);
-          console.log(el.getBoundingClientRect().y);
-          // console.log(el.getBoundingClientRect().y * (25 / 100));
-          const axeY = el.getBoundingClientRect().y * (25 / 100);
-          console.log(axeY);
-          const resAxeY = el.getBoundingClientRect().y - axeY;
-          console.log(resAxeY);
-          // console.log(document.querySelector(".feed--cards").el.getBoundingClientRect().y)
-          if (0 > el.getBoundingClientRect().y && el.getBoundingClientRect().y < el.getBoundingClientRect().y ) {
-            console.log(el);
-            // console.log(card);
-          }
-        })
-      })
+      if (h2.classList[0] !== "card--date--fixed") {
+        if (h2.getBoundingClientRect().y <= document.querySelector(".feed--cards").getBoundingClientRect().y) {
+          document.querySelector(".card--date--fixed").classList.remove("card--date--fixed");
+          h2.classList.add("card--date--fixed");
+
+          return;
+        }
+      }
     })
-    // console.log(document.querySelector(".feed--cards").scrollTop)
-    // console.log(document.querySelector(".feed--cards").scrollHeight)
-    // console.log(document.querySelector(".feed--cards").offsetHeight)
-    // console.log(document.querySelector(".section--cards").offsetHeight)
-    // console.log(document.querySelector(".feed--cards").clientHeight / Object.keys(data.cards[paginationData.currentPage]).length )
   }
 
   if (redirect.isRedirect)
@@ -426,7 +383,7 @@ function Home(props) {
               </button>
             </div>
           </FilterStyled>
-          <div className="feed--cards" ref={refFeedCards} onScroll={t}>
+          <div className="feed--cards" ref={refFeedCards} onScroll={updateDate}>
             {renderCards()}
             <ReactPaginate
               previousLabel={"←"}
