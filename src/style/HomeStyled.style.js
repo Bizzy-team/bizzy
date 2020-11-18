@@ -68,6 +68,12 @@ const HomeStyled = styled.main`
     transform: translate(-50%, 0);
   }
 
+  .card--date--fixed {
+    position: fixed;
+    top: 25%;
+    z-index: 5;
+  }
+
   @media screen and (min-width: 300px) {
     #map {
       display: ${props => (props.isMap ? "block;" : "none;")};
