@@ -307,14 +307,19 @@ function Home(props) {
       }
 
       if (h2.classList[0] !== "card--date--fixed") {
-        if (h2.getBoundingClientRect().y <= document.querySelector(".feed--cards").getBoundingClientRect().y) {
-          document.querySelector(".card--date--fixed").classList.remove("card--date--fixed");
+        if (
+          h2.getBoundingClientRect().y <=
+          document.querySelector(".feed--cards").getBoundingClientRect().y
+        ) {
+          document
+            .querySelector(".card--date--fixed")
+            .classList.remove("card--date--fixed");
           h2.classList.add("card--date--fixed");
 
           return;
         }
       }
-    })
+    });
   }
 
   if (redirect.isRedirect)
