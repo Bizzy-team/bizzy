@@ -30,7 +30,7 @@
     ],
     "card_time":"13h",
     "card_distance":"800m",
-    "card_date_creation":"Wed Nov 11 2020 15:36:55 GMT+0100 (heure normale d’Europe centrale)"
+    "card_date_creation":"Wed Nov 18 2020 15:36:55 GMT+0100 (heure normale d’Europe centrale)"
   },
   {
     "card_id":1,
@@ -63,7 +63,7 @@
     ],
     "card_time":"17h",
     "card_distance":"1.5km",
-    "card_date_creation":"Wed Nov 11 2020 16:36:55 GMT+0100 (heure normale d’Europe centrale)"
+    "card_date_creation":"Wed Nov 19 2020 16:36:55 GMT+0100 (heure normale d’Europe centrale)"
   },
   {
     "card_id":2,
@@ -96,7 +96,7 @@
     ],
     "card_time":"19h",
     "card_distance":"200m",
-    "card_date_creation":"Wed Nov 11 2020 16:36:55 GMT+0100 (heure normale d’Europe centrale)"
+    "card_date_creation":"Thu Nov 20 2020 16:36:55 GMT+0100 (heure normale d’Europe centrale)"
   },
   {
     "card_id":3,
@@ -129,7 +129,7 @@
     ],
     "card_time":"22h",
     "card_distance":"2.5m",
-    "card_date_creation": "Tue Nov 20 2020 15:36:55 GMT+0100 (heure normale d’Europe centrale)"
+    "card_date_creation": "Fri Nov 21 2020 15:36:55 GMT+0100 (heure normale d’Europe centrale)"
   },
   {
     "card_id":4,
@@ -162,7 +162,7 @@
     ],
     "card_time":"12h",
     "card_distance":"600m",
-    "card_date_creation": "Tue Nov 20 2020 15:36:55 GMT+0100 (heure normale d’Europe centrale)"
+    "card_date_creation": "Fri Nov 20 2020 15:36:55 GMT+0100 (heure normale d’Europe centrale)"
   },
   {
     "card_id":5,
