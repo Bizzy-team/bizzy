@@ -12,7 +12,7 @@ const HomeStyled = styled.main`
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-
+    overflow: auto;
     .title--page {
       display: none;
     }
@@ -72,9 +72,15 @@ const HomeStyled = styled.main`
     position: fixed;
     top: 25%;
     z-index: 5;
+    font-size: 1.2em;
+    background-color: ${props => props.theme.colorPrincipal};
+    padding: 10px;
+    font-family: "Nunito";
+    border-radius: 15px;
   }
 
   @media screen and (min-width: 300px) {
+    overflow: hidden;
     #map {
       display: ${props => (props.isMap ? "block;" : "none;")};
       width: ${props => props.isMap && "100vw;"};
@@ -84,6 +90,24 @@ const HomeStyled = styled.main`
     .section--cards {
       display: ${props => (props.isMap ? "none;" : "block;")};
       margin-bottom: 22%;
+
+      height: 90vh;
+
+      .feed--cards {
+        .card--date {
+          font-size: 1.2em;
+          margin-top: 10px;
+          margin-bottom: 0;
+          font-family: "Nunito";
+        }
+        .card--date--fixed {
+          top: 10%;
+          padding: 10px;
+        }
+        /* .pagination {
+          margin-bottom: 90%;
+        } */
+      }
     }
   }
 
@@ -93,7 +117,48 @@ const HomeStyled = styled.main`
     }
   }
 
+  @media screen and (min-width: 496px) {
+    .section--cards {
+      .feed--cards {
+        .card--date--fixed {
+          top: 14%;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 537px) {
+    .section--cards {
+      .feed--cards {
+        .card--date--fixed {
+          top: 15%;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 700px) {
+    .section--cards {
+      .feed--cards {
+        .card--date--fixed {
+          top: 18%;
+        }
+      }
+    }
+  }
+
+  /* @media screen and (min-width: 844px) {
+    .section--cards {
+      .feed--cards {
+        .card--date--fixed {
+          top: 20%;
+        }
+      }
+    }
+  } */
+
   @media screen and (min-width: 1000px) {
+    overflow: hidden;
     #map {
       display: block;
       width: 53vw;
@@ -101,7 +166,7 @@ const HomeStyled = styled.main`
     .section--cards {
       height: 90vh;
       width: 50vw;
-      overflow: auto;
+      /* overflow: auto; */
       margin-bottom: 0;
       .title--page {
         display: flex;
