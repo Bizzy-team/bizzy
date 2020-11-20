@@ -291,7 +291,7 @@ function Home(props) {
   }
 
   function sectionScroll() {
-    if (document.querySelector(".section--cards").scrollTop >= 122) {
+    if (document.querySelector(".section--cards").scrollTop >= 1) {
       document.querySelector(".section--cards").style = "overflow: hidden;";
       document.querySelector(".card--date").className = "card--date--fixed";
       document.querySelector(".feed--cards").style =
@@ -302,7 +302,6 @@ function Home(props) {
   function updateDate() {
     document.querySelectorAll(".feed--cards > h2").forEach(h2 => {
       if (h2.classList[0] === "card--date--fixed") {
-        console.log("ya r");
         return;
       }
 
@@ -313,11 +312,15 @@ function Home(props) {
         ) {
           document
             .querySelector(".card--date--fixed")
+            .classList.add("card--date");
+          document
+            .querySelector(".card--date--fixed")
             .classList.remove("card--date--fixed");
           h2.classList.add("card--date--fixed");
 
           return;
         }
+        return;
       }
     });
   }
@@ -361,7 +364,7 @@ function Home(props) {
             )}
           </Map>
         </section>
-        <section className="section--cards" onScroll={e => sectionScroll(e)}>
+        <section className="section--cards" onScroll={sectionScroll}>
           {data.isModalNewCard && (
             <ModalNewCard
               updateStateParent={closeModalOutside}
