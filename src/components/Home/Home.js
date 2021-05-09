@@ -310,9 +310,7 @@ function Home(props) {
           h2.getBoundingClientRect().y <=
           document.querySelector(".feed--cards").getBoundingClientRect().y
         ) {
-          document
-            .querySelector(".card--date--fixed")
-            .classList.add("card--date");
+          document.querySelector(".card--date--fixed").classList.add("card--date");
           document
             .querySelector(".card--date--fixed")
             .classList.remove("card--date--fixed");
