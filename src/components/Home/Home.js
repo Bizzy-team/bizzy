@@ -318,7 +318,7 @@ function Home(props) {
 
           return;
         }
-        return;
+        return h2.classList.remove("card--date--fixed");
       }
     });
   }
