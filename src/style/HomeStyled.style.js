@@ -205,6 +205,26 @@ const HomeStyled = styled.main`
       }
     }
   }
+
+  @media screen and (min-width: 1400px) {
+    .section--cards {
+      .feed--cards {
+        .card--date--fixed {
+          top: 25%;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    .section--cards {
+      .feed--cards {
+        .card--date--fixed {
+          top: 24%;
+        }
+      }
+    }
+  }
 `;
 
 export default HomeStyled;
