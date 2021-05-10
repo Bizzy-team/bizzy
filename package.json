@@ -33,6 +33,7 @@
         "serverless-s3-sync": "^1.15.0"
     },
     "dependencies": {
+        "axios": "0.21.1",
         "@testing-library/jest-dom": "^4.2.4",
         "dotenv": "^8.2.0",
         "mapbox-gl": "^1.12.0",
