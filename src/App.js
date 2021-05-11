@@ -1,8 +1,7 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
-import { Route, BrowserRouter, Link, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Link, Switch, Redirect } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import ErrorMessageTokenStyled from "./style/ErrorMessageTokenStyled.style";
 import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
 import Home from "./components/Home/Home";
 import UserProfile from "./components/UserProfile/UserProfile";
@@ -28,41 +27,11 @@ function App() {
   };
   `;
 
-  function ErrorMessage({ errorTitle, errorContent, redirectLink, errorAdvice }) {
-    return (
-      <ErrorMessageTokenStyled>
-        <h2>{errorTitle}</h2>
-        <p>
-          {errorContent} <Link to={`${redirectLink}`}>{errorAdvice}</Link>
-        </p>
-      </ErrorMessageTokenStyled>
-    );
-  }
+  function tokenCheck(Component, checkToken, redirectPath, propsFromRoute) {
+    if (checkToken && localStorage.getItem('token')) return <Component {...propsFromRoute} />
+    if (!checkToken && !localStorage.getItem('token')) return <Component {...propsFromRoute} />
 
-  // function availableToken(Component, propsFromRoute) {
-  //   return sessionStorage.UserToken ? (
-  //     <Component {...propsFromRoute} />
-  //   ) : (
-  //     <ErrorMessage
-  //       errorTitle="You need to be connected."
-  //       errorContent="To access to this page, please"
-  //       redirectLink="/"
-  //       errorAdvice="use your account."
-  //     />
-  //   );
-  // }
-
-  function unavailableToken(Component) {
-    return !sessionStorage.UserToken ? (
-      <Component />
-    ) : (
-      <ErrorMessage
-        errorTitle="You are already connected."
-        errorContent="You need to log out if you want to do"
-        redirectLink="/feed"
-        errorAdvice="something else."
-      />
-    );
+    return <Redirect to={redirectPath}></Redirect>
   }
 
   return (
@@ -70,25 +39,23 @@ function App() {
       <ThemeProvider theme={{ ...variables }}>
         <GlobalStyle></GlobalStyle>
         <Switch>
-          {/* <Route exact path="/" render={() => unavailableToken(StartPage)}></Route> */}
           <Route exact path="/" component={StartPage}></Route>
           <Route exact path="/inscription" component={SignUpSpace}></Route>
-          <Route exact path="/connexion" component={LogginSpace}></Route>
+          <Route exact path="/connexion" render={(props) => tokenCheck(LogginSpace, false, '/home', props)}></Route>
           <Route exact path="/confirm_mail" component={ConfirmMail}></Route>
           <Route exact path="/support" component={Support}></Route>
           <Route
             exact
             path="/forgot_password_form"
-            render={() => unavailableToken(ForgotPasswordForm)}
+            component={ForgotPasswordForm}
           ></Route>
           <Route
             exact
             path="/forgot_password_confirmation"
-            render={() => unavailableToken(ForgotPasswordConfirm)}
+            component={ForgotPasswordConfirm}
           ></Route>
           <Route exact path="/reset_pswd_form" component={ResetPswd} />
-          <Route exact path="/home" component={Home} />
-          {/* <Route exact path="/Home" render={() => availableToken(Home)} /> */}
+          <Route exact path="/home" render={(props) => tokenCheck(Home, true, '/connexion', props)} />
           <Route strict path="/aboutCard/:cardId" component={HomeAboutCard} />
           <Route strict path="/:name" component={UserProfile} />
         </Switch>
