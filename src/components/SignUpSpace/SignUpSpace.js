@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import http from "../../utlis/http";
 // import { Redirect } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 // import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
@@ -141,28 +142,14 @@ function SignUpSpace() {
     return setData(newState);
   }
 
-  function fetchUserData(e) {
-    e.preventDefault();
-
-    return FetchFunction("/register", "POST", {
-      credentials: "include",
-      body: {
-        prenom: refInputFirstName.current.value,
-        nom: refInputLastName.current.value,
-        mail: refInputMail.current.value,
-        pswd: refInputPswd.current.value
-      }
+  async function createUser(e) {
+    e.preventDefault()
+    await http.post('auth/register', {
+      name: refInputFirstName.current.value,
+      familyName: refInputLastName.current.value,
+      mail: refInputMail.current.value,
+      password: refInputPswd.current.value
     })
-      .then(dataParsed => {
-        console.log(dataParsed);
-        // return setRedirect(true);
-      })
-      .catch(error => {
-        setData({
-          errorApi: true,
-          errorMessage: error.message
-        });
-      });
   }
 
   // if (redirect) return <Redirect to="/feed"></Redirect>;
@@ -184,7 +171,7 @@ function SignUpSpace() {
       <SignUpSpaceStyled
         as="form"
         btnDisabled={data.btnDisabled}
-        onSubmit={fetchUserData}
+        onSubmit={createUser}
       >
         <div className="form--inscription">
           <div className="form--inscription--title">

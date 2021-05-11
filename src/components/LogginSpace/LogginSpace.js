@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import http from "../../utlis/http";
+import { Link , Redirect} from "react-router-dom";
 import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 // import { ReactSVG } from "react-svg";
 // import LoaderSvg from "../../img/loader.svg";
 import InputsForm from "../InputsForm/InputsForm";
-// import FetchFunction from "../../utlis/FetchFunction";
 import Header from "../Header/Header";
 import GeometryImg from "../../img/geometry_desktop.svg";
 import bcImg from "../../img/bc_desktop.svg";
@@ -17,7 +17,7 @@ function LogginSpace() {
     btnDisabled: true,
     error: {}
   });
-  // const [redirect, setRedirect] = React.useState(false);
+  const [redirect, setRedirect] = React.useState(false);
 
   React.useEffect(() => {
     const arrInputId = ["inputMail", "inputPswd"];
@@ -107,7 +107,22 @@ function LogginSpace() {
     return setData(newState);
   }
 
-  // if (redirect) return <Redirect to="/feed"></Redirect>;
+  async function connectionCheck(e) {
+    e.preventDefault()
+
+    try {
+      await http.post('auth/login', {
+        mail: inputMail.current.value,
+        password: inputPswd.current.value
+      })
+
+      setRedirect(true);
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  if (redirect) return <Redirect to="/home"></Redirect>;
 
   return (
     <React.Fragment>
@@ -146,6 +161,7 @@ function LogginSpace() {
                 <input
                   type="submit"
                   disabled={data.btnDisabled}
+                  onClick={connectionCheck}
                   value="Connexion"
                 ></input>
               </div>
