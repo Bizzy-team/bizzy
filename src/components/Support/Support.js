@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux';
 import SupportStyled from "../../style/SupportStyled.style";
 import GeometryImg from "../../img/geometry_desktop.svg";
 import Header from "../Header/Header";
@@ -6,7 +7,7 @@ import InputsForm from "../InputsForm/InputsForm";
 import bcImg from "../../img/bc_desktop.svg";
 import WarningIcon from "../../img/warning.svg";
 
-function Support() {
+function Support(props) {
   const refInputFirstName = React.useRef(null);
   const refInputLastName = React.useRef(null);
   const refInputMail = React.useRef(null);
@@ -173,4 +174,12 @@ function Support() {
   );
 }
 
-export default Support;
+function mapStateToProps (state) {
+  return {
+    userData: state.users.userConnected
+  }
+}
+
+export default connect(
+  mapStateToProps,
+)(Support);
