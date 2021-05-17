@@ -1,6 +1,9 @@
 import React from "react";
-import http from "../../utlis/http";
+import { connect } from 'react-redux';
 import { Link , Redirect} from "react-router-dom";
+
+import http from "../../utlis/http";
+import { populateUser } from '../../store/actions/creator';
 import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 // import { ReactSVG } from "react-svg";
 // import LoaderSvg from "../../img/loader.svg";
@@ -9,7 +12,10 @@ import Header from "../Header/Header";
 import GeometryImg from "../../img/geometry_desktop.svg";
 import bcImg from "../../img/bc_desktop.svg";
 
-function LogginSpace() {
+function LogginSpace(props) {
+  props.userData
+  props.populateUser
+
   const inputMail = React.createRef(null);
   const inputPswd = React.createRef(null);
   const [data, setData] = React.useState({
@@ -179,4 +185,13 @@ function LogginSpace() {
   );
 }
 
-export default LogginSpace;
+function mapStateToProps (state) {
+  return {
+    userData: state.users.userConnected
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { populateUser }
+)(LogginSpace);
