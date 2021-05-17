@@ -144,12 +144,14 @@ function SignUpSpace() {
     e.preventDefault()
 
     try {
-      await http.post('auth/register', {
+      const data = await http.post('auth/register', {
         name: refInputFirstName.current.value,
         familyName: refInputLastName.current.value,
         mail: refInputMail.current.value,
         password: refInputPswd.current.value
       })
+
+      localStorage.setItem('userData', JSON.stringify(data.data.user));
       setRedirect(true);
     } catch (error) {
       alert(error)

@@ -117,11 +117,12 @@ function LogginSpace(props) {
     e.preventDefault()
 
     try {
-      await http.post('auth/login', {
+      const { data } = await http.post('auth/login', {
         mail: inputMail.current.value,
         password: inputPswd.current.value
       })
 
+      props.populateUser(data.user);
       setRedirect(true);
     } catch (error) {
       alert(error)

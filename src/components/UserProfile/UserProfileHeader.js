@@ -1,9 +1,15 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 import LogoApp from "../../img/bizzy_logo.svg";
 import UserAvatar from "../../img/user_avatar.svg";
 import UserProfileHeaderStyled from "../../style/UserProfileHeaderStyled.style";
 
-function UserProfileHeader() {
+function UserProfileHeader(props) {
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   return (
     <UserProfileHeaderStyled className="user--profile--header" as="header">
       <div className="app--logo">
@@ -12,27 +18,38 @@ function UserProfileHeader() {
       <nav>
         <ul>
           <li>
-            <a href="/home">Accueil</a>
+            <Link to="/home">Accueil</Link>
           </li>
           <li>
-            <a href="/home">Support</a>
+            <Link to="/home">Support</Link>
           </li>
           <li>
-            <a href="/home">Messagerie</a>
+            <Link to="/home">Messagerie</Link>
           </li>
           <li>
-            <a href="/home">Favoris</a>
+            <Link to="/home">Favoris</Link>
           </li>
-          <li>
-            <a href="/home">
-              <img src={UserAvatar} alt="avatar"></img>
-              Katrine
-            </a>
-          </li>
+          {
+            props.userData !== null &&
+            <li>
+              <Link to={`${props.userData.name}`}>
+                <img src={UserAvatar} alt="avatar"></img>
+                {`${capitalizeFirstLetter(props.userData.name)}`}
+              </Link>
+            </li>
+          }
         </ul>
       </nav>
     </UserProfileHeaderStyled>
   );
 }
 
-export default UserProfileHeader;
+function mapStateToProps (state) {
+  return {
+    userData: state.users.userConnected
+  }
+}
+
+export default connect(
+  mapStateToProps,
+)(UserProfileHeader);
