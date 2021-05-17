@@ -13,8 +13,8 @@ import GeometryImg from "../../img/geometry_desktop.svg";
 import bcImg from "../../img/bc_desktop.svg";
 
 function LogginSpace(props) {
-  props.userData
-  props.populateUser
+  // props.userData
+  // props.populateUser
 
   const inputMail = React.createRef(null);
   const inputPswd = React.createRef(null);
