@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import http from "../../utlis/http";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { ReactSVG } from "react-svg";
-// import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 import LoaderSvg from "../../img/loader.svg";
-import FetchFunction from "../../utlis/FetchFunction";
 import Header from "../Header/Header";
 import SignUpSpaceStyled from "../../style/SignUpSpaceStyled.style";
 import GeometryImg from "../../img/geometry_desktop.svg";
@@ -25,7 +23,7 @@ function SignUpSpace() {
     errorApi: false,
     errorMessage: ""
   });
-  // const [redirect, setRedirect] = React.useState(false);
+  const [redirect, setRedirect] = React.useState(false);
 
   React.useEffect(() => {
     const arrInputId = [
@@ -144,15 +142,21 @@ function SignUpSpace() {
 
   async function createUser(e) {
     e.preventDefault()
-    await http.post('auth/register', {
-      name: refInputFirstName.current.value,
-      familyName: refInputLastName.current.value,
-      mail: refInputMail.current.value,
-      password: refInputPswd.current.value
-    })
+
+    try {
+      await http.post('auth/register', {
+        name: refInputFirstName.current.value,
+        familyName: refInputLastName.current.value,
+        mail: refInputMail.current.value,
+        password: refInputPswd.current.value
+      })
+      setRedirect(true);
+    } catch (error) {
+      alert(error)
+    }
   }
 
-  // if (redirect) return <Redirect to="/feed"></Redirect>;
+  if (redirect) return <Redirect to="/home"></Redirect>;
 
   return (
     <React.Fragment>
