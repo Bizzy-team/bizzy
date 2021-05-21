@@ -3,7 +3,6 @@ import ReactMapboxGl from "react-mapbox-gl";
 import { Marker } from "react-mapbox-gl";
 import HomeStyled from "../../style/HomeStyled.style";
 import HomeCards from "./HomeCards";
-import UserProfileHeader from "../UserProfile/UserProfileHeader";
 import SquigglesImg from "../../img/squiggles_colorful.svg";
 import FoodIcon from "../../img/food_mood.svg";
 import FoodIconMap from "../../img/icon_map_food.svg";
@@ -24,6 +23,7 @@ import Footer from "../Footer/Footer";
 import { Redirect } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import fakeCards from "./fakeCards.json";
+import Header from "../Header/Header";
 
 const Map = ReactMapboxGl({
   accessToken: process.env.REACT_APP_TOKEN_MAP_KEY,
@@ -300,6 +300,8 @@ function Home(props) {
   }
 
   function updateDate() {
+    console.log(document.querySelectorAll(".feed--cards > h2"));
+
     document.querySelectorAll(".feed--cards > h2").forEach(h2 => {
       if (h2.classList[0] === "card--date--fixed") {
         return;
@@ -310,6 +312,13 @@ function Home(props) {
           h2.getBoundingClientRect().y <=
           document.querySelector(".feed--cards").getBoundingClientRect().y
         ) {
+          // console.log(document.querySelector(".card--date--fixed"));
+          // document.querySelectorAll(".feed--cards > h2")[0].classList.add("card--date--fixed");
+
+          if (document.querySelectorAll(".feed--cards > h2")[0].classList.value !== "card--date card--date--fixed" ) {
+            document.querySelectorAll(".feed--cards > h2")[0].classList.add("card--date--fixed");
+          }
+
           document.querySelector(".card--date--fixed").classList.add("card--date");
           document
             .querySelector(".card--date--fixed")
@@ -341,7 +350,7 @@ function Home(props) {
 
   return (
     <>
-      <UserProfileHeader></UserProfileHeader>
+      <Header></Header>
       <HomeStyled as="main" isMap={data.isMap}>
         <section id="map">
           <Map
