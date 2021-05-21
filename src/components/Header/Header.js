@@ -49,7 +49,7 @@ function Header(props) {
               <Link to="/home">Favoris</Link>
             </li>
               <li>
-                <Link to={`${props.userData.name}`}>
+                <Link to={`user/${props.userData._id}`}>
                   <img src={UserAvatar} alt="avatar"></img>
                   {`${capitalizeFirstLetter(props.userData.name)}`}
                 </Link>

@@ -75,7 +75,7 @@ function App(props) {
           <Route exact path="/reset_pswd_form" component={ResetPswd} />
           <Route exact path="/home" render={(props) => tokenCheck(Home, true, '/connexion', props)} />
           <Route strict path="/aboutCard/:cardId" component={HomeAboutCard} />
-          <Route strict path="/:name" component={UserProfile} />
+          <Route strict path="/user/:name" component={UserProfile} />
         </Switch>
         {/* <Route
               exact
