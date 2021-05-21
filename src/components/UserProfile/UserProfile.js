@@ -13,7 +13,8 @@ import "react-multi-carousel/lib/styles.css";
 import CardsProfile from "../Cards/CardsProfile";
 import ModalNewCard from "../Modal/ModalNewCard";
 import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
+import Header from '../../components/Header/Header';
+import http from "../../utlis/http";
 
 function UserProfile(props) {
   const inputFirstName = React.useRef(null);
@@ -29,7 +30,8 @@ function UserProfile(props) {
     isDisabled: true,
     isModalResetPassword: false,
     isModalDeleteProfile: false,
-    isModalNewCard: false
+    isModalNewCard: false,
+    userData: null
     // isBtnCancel: false
   });
 
@@ -55,24 +57,32 @@ function UserProfile(props) {
   };
 
   React.useEffect(() => {
-    const arrInputId = [
-      "inputFirstName",
-      "inputLastName",
-      "inputMail",
-      "inputJob",
-      "inputCity",
-      "inputMessage"
-    ];
-    const newState = { ...data };
-    const obj = {
-      error: false,
-      message: "",
-      accessToChange: false
-    };
+    (async function () {
+      try {
+        const d = await http.get(`user/${props.match.params.name}`);
+        const arrInputId = [
+          "inputFirstName",
+          "inputLastName",
+          "inputMail",
+          "inputJob",
+          "inputCity",
+          "inputMessage"
+        ];
+        const newState = { ...data };
+        const obj = {
+          error: false,
+          message: "",
+          accessToChange: false
+        };
+    
+        arrInputId.forEach(element => (newState.error[element] = { ...obj }));
 
-    arrInputId.forEach(element => (newState.error[element] = { ...obj }));
-
-    return setData(newState);
+        newState.userData = d.data.user;
+        setData(newState);
+      } catch (error) {
+        throw error;
+      }
+    })()
   }, []); //eslint-disable-line
 
   function editData() {
@@ -205,6 +215,14 @@ function UserProfile(props) {
   //   }
   // }
 
+  if (!data.userData) {
+    return (
+      <>
+        <Header></Header>
+      </>
+    );
+  }
+
   return (
     <>
       <Header></Header>
@@ -228,7 +246,7 @@ function UserProfile(props) {
               <img src={EditImg} alt="edit--img"></img>
             </div>
             <div className="profile--user--data--name">
-              <h2>Hello Katrine :)</h2>
+              <h2>Hello { data.userData.name } :)</h2>
             </div>
           </div>
           <div className="profile--user--data--form">
@@ -237,7 +255,7 @@ function UserProfile(props) {
                 type="text"
                 inputId="inputFirstName"
                 inputRef={inputFirstName}
-                inputPlaceholder="Katrine"
+                inputPlaceholder={data.userData.name}
                 inputCheckError={checkUserData}
                 isDisabled={data.isDisabled}
                 isError={data.error.inputFirstName ? data.error.inputFirstName : ""}
@@ -246,7 +264,7 @@ function UserProfile(props) {
                 type="text"
                 inputId="inputLastName"
                 inputRef={inputLastName}
-                inputPlaceholder="Moreau"
+                inputPlaceholder={data.userData.familyName}
                 inputCheckError={checkUserData}
                 isDisabled={data.isDisabled}
                 isError={data.error.inputLastName ? data.error.inputLastName : ""}
@@ -256,7 +274,7 @@ function UserProfile(props) {
               type="mail"
               inputId="inputMail"
               inputRef={inputMail}
-              inputPlaceholder="adresse@gmail.com"
+              inputPlaceholder={data.userData.mail}
               inputCheckError={checkUserData}
               isDisabled={data.isDisabled}
               isError={data.error.inputMail ? data.error.inputMail : ""}
@@ -354,54 +372,55 @@ function UserProfile(props) {
               </div>
             </div>
             <div className="line"></div>
-            <div className="user--cards">
-              <p>Vous n'avez jamais posté quelque chose ici.</p>
-              <p>
-                N'hésitez pas à proposer des activités à la communauté Bizzy, créez votre
-                première card !
-              </p>
-              <div className="user--cards--btn">
-                <input
-                  type="button"
-                  value="New Card"
-                  className="new--card--btn"
-                  onClick={isModal}
-                ></input>
-                <div>
-                  <img src={IconAdd} alt="add--card"></img>
+            {
+              data.userData.cards ? 
+                <section className="profile--user--cards">
+                  {/* <section> */}
+                  <Carousel
+                    arrows
+                    className=""
+                    containerClass="container"
+                    dotListClass=""
+                    focusOnSelect={false}
+                    // infinite={true}
+                    itemClass=""
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    renderButtonGroupOutside={false}
+                    renderDotsOutside={false}
+                    responsive={responsive}
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={3}
+                    swipeable
+                    partialVisible="right"
+                  >
+                    <CardsProfile></CardsProfile>
+                    <CardsProfile></CardsProfile>
+                    <CardsProfile></CardsProfile>
+                  </Carousel>
+                </section>
+                :<div className="user--cards">
+                  <p>Vous n'avez jamais posté quelque chose ici.</p>
+                  <p>
+                    N'hésitez pas à proposer des activités à la communauté Bizzy, créez votre
+                    première card !
+                  </p>
+                  <div className="user--cards--btn">
+                    <input
+                      type="button"
+                      value="New Card"
+                      className="new--card--btn"
+                      onClick={isModal}
+                    ></input>
+                    <div>
+                      <img src={IconAdd} alt="add--card"></img>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              }
           </section>
 
-          {/* Si il y  a des cards */}
-          {/* <section className="profile--user--cards" style={{ width: "40vw" }}> */}
-          <section className="profile--user--cards">
-            {/* <section> */}
-            <Carousel
-              arrows
-              className=""
-              containerClass="container"
-              dotListClass=""
-              focusOnSelect={false}
-              // infinite={true}
-              itemClass=""
-              keyBoardControl
-              minimumTouchDrag={80}
-              renderButtonGroupOutside={false}
-              renderDotsOutside={false}
-              responsive={responsive}
-              showDots={false}
-              sliderClass=""
-              slidesToSlide={3}
-              swipeable
-              partialVisible="right"
-            >
-              <CardsProfile></CardsProfile>
-              <CardsProfile></CardsProfile>
-              <CardsProfile></CardsProfile>
-            </Carousel>
-          </section>
         </div>
       </UserProfileStyled>
       <Footer isUrlActive={props.match} />

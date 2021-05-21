@@ -3,6 +3,8 @@ import ReactMapboxGl from "react-mapbox-gl";
 import { Marker } from "react-mapbox-gl";
 import HomeStyled from "../../style/HomeStyled.style";
 import HomeCards from "./HomeCards";
+// import UserProfileHeader from "../UserProfile/UserProfileHeader";
+import Header from '../Header/Header';
 import SquigglesImg from "../../img/squiggles_colorful.svg";
 import FoodIcon from "../../img/food_mood.svg";
 import FoodIconMap from "../../img/icon_map_food.svg";

@@ -2,6 +2,10 @@ import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { Route, BrowserRouter, Link, Switch, Redirect } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { connect } from 'react-redux';
+
+import http from './utlis/http';
+import { populateUser } from './store/actions/creator';
 import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
 import Home from "./components/Home/Home";
 import UserProfile from "./components/UserProfile/UserProfile";
@@ -17,7 +21,21 @@ import Support from "./components/Support/Support";
 import LogginSpace from "./components/LogginSpace/LogginSpace";
 import HomeAboutCard from "./components/Home/HomeAboutCard";
 
-function App() {
+function App(props) {
+  React.useEffect(function () {
+    if (localStorage.getItem('token')) {
+      (async function () {
+        try {
+          const { data } = await http.get('auth/refresh');
+          props.populateUser(data.user);
+        } catch (error) {
+          throw error;
+        }
+      })()
+    };
+
+  }, []);
+
   const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${props => props.theme.backgroundColor};
@@ -67,7 +85,7 @@ function App() {
             render={props => tokenCheck(Home, true, "/connexion", props)}
           />
           <Route strict path="/aboutCard/:cardId" component={HomeAboutCard} />
-          <Route strict path="/:name" component={UserProfile} />
+          <Route strict path="/user/:name" component={UserProfile} />
         </Switch>
         {/* <Route
               exact
@@ -79,4 +97,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, { populateUser })(App);
