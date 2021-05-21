@@ -13,7 +13,7 @@ import "react-multi-carousel/lib/styles.css";
 import CardsProfile from "../Cards/CardsProfile";
 import ModalNewCard from "../Modal/ModalNewCard";
 import Footer from "../../components/Footer/Footer";
-import Header from '../../components/Header/Header';
+import Header from "../../components/Header/Header";
 
 function UserProfile(props) {
   const inputFirstName = React.useRef(null);

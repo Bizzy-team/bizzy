@@ -141,20 +141,20 @@ function SignUpSpace() {
   }
 
   async function createUser(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      const data = await http.post('auth/register', {
+      const data = await http.post("auth/register", {
         name: refInputFirstName.current.value,
         familyName: refInputLastName.current.value,
         mail: refInputMail.current.value,
         password: refInputPswd.current.value
-      })
+      });
 
-      localStorage.setItem('userData', JSON.stringify(data.data.user));
+      localStorage.setItem("userData", JSON.stringify(data.data.user));
       setRedirect(true);
     } catch (error) {
-      alert(error)
+      alert(error);
     }
   }
 
@@ -174,11 +174,7 @@ function SignUpSpace() {
           style={{ backgroundColor: `${props => props.theme.backgroundColor}` }}
         />
       )}
-      <SignUpSpaceStyled
-        as="form"
-        btnDisabled={data.btnDisabled}
-        onSubmit={createUser}
-      >
+      <SignUpSpaceStyled as="form" btnDisabled={data.btnDisabled} onSubmit={createUser}>
         <div className="form--inscription">
           <div className="form--inscription--title">
             <img src={GeometryImg} alt="img--inscription"></img>

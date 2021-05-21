@@ -28,10 +28,12 @@ function App() {
   `;
 
   function tokenCheck(Component, checkToken, redirectPath, propsFromRoute) {
-    if (checkToken && localStorage.getItem('token')) return <Component {...propsFromRoute} />
-    if (!checkToken && !localStorage.getItem('token')) return <Component {...propsFromRoute} />
+    if (checkToken && localStorage.getItem("token"))
+      return <Component {...propsFromRoute} />;
+    if (!checkToken && !localStorage.getItem("token"))
+      return <Component {...propsFromRoute} />;
 
-    return <Redirect to={redirectPath}></Redirect>
+    return <Redirect to={redirectPath}></Redirect>;
   }
 
   return (
@@ -41,7 +43,11 @@ function App() {
         <Switch>
           <Route exact path="/" component={StartPage}></Route>
           <Route exact path="/inscription" component={SignUpSpace}></Route>
-          <Route exact path="/connexion" render={(props) => tokenCheck(LogginSpace, false, '/home', props)}></Route>
+          <Route
+            exact
+            path="/connexion"
+            render={props => tokenCheck(LogginSpace, false, "/home", props)}
+          ></Route>
           <Route exact path="/confirm_mail" component={ConfirmMail}></Route>
           <Route exact path="/support" component={Support}></Route>
           <Route
@@ -55,7 +61,11 @@ function App() {
             component={ForgotPasswordConfirm}
           ></Route>
           <Route exact path="/reset_pswd_form" component={ResetPswd} />
-          <Route exact path="/home" render={(props) => tokenCheck(Home, true, '/connexion', props)} />
+          <Route
+            exact
+            path="/home"
+            render={props => tokenCheck(Home, true, "/connexion", props)}
+          />
           <Route strict path="/aboutCard/:cardId" component={HomeAboutCard} />
           <Route strict path="/:name" component={UserProfile} />
         </Switch>

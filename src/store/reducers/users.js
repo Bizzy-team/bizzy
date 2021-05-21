@@ -1,18 +1,18 @@
-import actionsTypes from '../actions/types';
+import actionsTypes from "../actions/types";
 
 const store = {
-    userConnected: null
+  userConnected: null
 };
 
-function usersReducer (state = store, action) {
-    const newStore = { ...state };
+function usersReducer(state = store, action) {
+  const newStore = { ...state };
 
-    if (action.type === actionsTypes.users.POPULATE_USER) {
-        newStore.userConnected = action.data;
-        return newStore;
-    }
-
+  if (action.type === actionsTypes.users.POPULATE_USER) {
+    newStore.userConnected = action.data;
     return newStore;
+  }
+
+  return newStore;
 }
 
 export default usersReducer;

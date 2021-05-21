@@ -315,8 +315,13 @@ function Home(props) {
           // console.log(document.querySelector(".card--date--fixed"));
           // document.querySelectorAll(".feed--cards > h2")[0].classList.add("card--date--fixed");
 
-          if (document.querySelectorAll(".feed--cards > h2")[0].classList.value !== "card--date card--date--fixed" ) {
-            document.querySelectorAll(".feed--cards > h2")[0].classList.add("card--date--fixed");
+          if (
+            document.querySelectorAll(".feed--cards > h2")[0].classList.value !==
+            "card--date card--date--fixed"
+          ) {
+            document
+              .querySelectorAll(".feed--cards > h2")[0]
+              .classList.add("card--date--fixed");
           }
 
           document.querySelector(".card--date--fixed").classList.add("card--date");

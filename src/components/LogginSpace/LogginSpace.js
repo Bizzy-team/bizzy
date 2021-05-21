@@ -1,9 +1,9 @@
 import React from "react";
-import { connect } from 'react-redux';
-import { Link , Redirect} from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 
 import http from "../../utlis/http";
-import { populateUser } from '../../store/actions/creator';
+import { populateUser } from "../../store/actions/creator";
 import LogginSpaceStyled from "../../style/LogginSpaceStyled.style";
 // import { ReactSVG } from "react-svg";
 // import LoaderSvg from "../../img/loader.svg";
@@ -114,18 +114,18 @@ function LogginSpace(props) {
   }
 
   async function connectionCheck(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      const { data } = await http.post('auth/login', {
+      const { data } = await http.post("auth/login", {
         mail: inputMail.current.value,
         password: inputPswd.current.value
-      })
+      });
 
       props.populateUser(data.user);
       setRedirect(true);
     } catch (error) {
-      alert(error)
+      alert(error);
     }
   }
 
@@ -186,13 +186,10 @@ function LogginSpace(props) {
   );
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     userData: state.users.userConnected
-  }
+  };
 }
 
-export default connect(
-  mapStateToProps,
-  { populateUser }
-)(LogginSpace);
+export default connect(mapStateToProps, { populateUser })(LogginSpace);

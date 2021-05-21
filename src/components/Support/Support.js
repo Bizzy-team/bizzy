@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import SupportStyled from "../../style/SupportStyled.style";
 import GeometryImg from "../../img/geometry_desktop.svg";
 import Header from "../Header/Header";
@@ -174,12 +174,10 @@ function Support(props) {
   );
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     userData: state.users.userConnected
-  }
+  };
 }
 
-export default connect(
-  mapStateToProps,
-)(Support);
+export default connect(mapStateToProps)(Support);
