@@ -2,10 +2,10 @@ import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { Route, BrowserRouter, Link, Switch, Redirect } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import http from './utlis/http';
-import { populateUser } from './store/actions/creator';
+import http from "./utlis/http";
+import { populateUser } from "./store/actions/creator";
 import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
 import Home from "./components/Home/Home";
 import UserProfile from "./components/UserProfile/UserProfile";
@@ -22,18 +22,17 @@ import LogginSpace from "./components/LogginSpace/LogginSpace";
 import HomeAboutCard from "./components/Home/HomeAboutCard";
 
 function App(props) {
-  React.useEffect(function () {
-    if (localStorage.getItem('token')) {
-      (async function () {
+  React.useEffect(function() {
+    if (localStorage.getItem("token")) {
+      (async function() {
         try {
-          const { data } = await http.get('auth/refresh');
+          const { data } = await http.get("auth/refresh");
           props.populateUser(data.user);
         } catch (error) {
           throw error;
         }
-      })()
-    };
-
+      })();
+    }
   }, []);
 
   const GlobalStyle = createGlobalStyle`

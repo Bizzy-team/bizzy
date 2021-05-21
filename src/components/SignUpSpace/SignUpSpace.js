@@ -144,14 +144,14 @@ function SignUpSpace() {
     e.preventDefault();
 
     try {
-      await http.post('auth/register', {
+      await http.post("auth/register", {
         name: refInputFirstName.current.value,
         familyName: refInputLastName.current.value,
         mail: refInputMail.current.value,
         password: refInputPswd.current.value
       });
 
-      // TODO: populate store with user data. 
+      // TODO: populate store with user data.
       setRedirect(true);
     } catch (error) {
       alert(error);
