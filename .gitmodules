@@ -1,3 +1,6 @@
+[submodule "common"]
+	path = src/commoncommon
+	url = git@github.com:Bizzy-team/common.git
 [submodule "src/common"]
 	path = src/common
 	url = git@github.com:Bizzy-team/common.git
