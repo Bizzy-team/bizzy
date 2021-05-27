@@ -14,7 +14,6 @@ import variables from "./variables";
 import ResetPswd from "./components/ResetPswd/ResetPswd";
 import ForgotPasswordConfirm from "./components/ForgotPasswordForm/ForgotPasswordConfirm";
 // import NotAvailable from "./components/NotAvailable/NotAvailable";
-import StartPage from "./components/StartPage/StartPage";
 import ConfirmMail from "./components/ConfirmMail/ConfirmMail";
 import SignUpSpace from "./components/SignUpSpace/SignUpSpace";
 import Support from "./components/Support/Support";
@@ -61,7 +60,6 @@ function App(props) {
       <ThemeProvider theme={{ ...variables }}>
         <GlobalStyle></GlobalStyle>
         <Switch>
-          <Route exact path="/" component={StartPage}></Route>
           <Route exact path="/inscription" component={SignUpSpace}></Route>
           <Route
             exact
