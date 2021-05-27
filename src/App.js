@@ -1,6 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
-import { Route, BrowserRouter, Link, Switch, Redirect } from "react-router-dom";
+import { Route, BrowserRouter, Switch, Redirect, useHistory } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { connect } from "react-redux";
 
@@ -22,6 +22,8 @@ import LogginSpace from "./components/LogginSpace/LogginSpace";
 import HomeAboutCard from "./components/Home/HomeAboutCard";
 
 function App(props) {
+  const history = useHistory();
+
   React.useEffect(function() {
     if (localStorage.getItem("token")) {
       (async function() {
@@ -29,6 +31,7 @@ function App(props) {
           const { data } = await http.get("auth/refresh");
           props.populateUser(data.user);
         } catch (error) {
+          console.log(error);
           throw error;
         }
       })();
