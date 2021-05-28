@@ -28,6 +28,10 @@ http.interceptors.response.use(
     return res;
   },
   function(resError) {
+    if (resError.response.status === 401) {
+      localStorage.clear();
+    }
+
     if (resError.response.data.token) {
       localStorage.setItem("token", resError.response.data.token);
     }

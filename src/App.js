@@ -1,6 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
-import { Route, BrowserRouter, Link, Switch, Redirect } from "react-router-dom";
+import { Route, BrowserRouter, Switch, Redirect, useHistory } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { connect } from "react-redux";
 
@@ -14,7 +14,6 @@ import variables from "./variables";
 import ResetPswd from "./components/ResetPswd/ResetPswd";
 import ForgotPasswordConfirm from "./components/ForgotPasswordForm/ForgotPasswordConfirm";
 // import NotAvailable from "./components/NotAvailable/NotAvailable";
-import StartPage from "./components/StartPage/StartPage";
 import ConfirmMail from "./components/ConfirmMail/ConfirmMail";
 import SignUpSpace from "./components/SignUpSpace/SignUpSpace";
 import Support from "./components/Support/Support";
@@ -22,6 +21,8 @@ import LogginSpace from "./components/LogginSpace/LogginSpace";
 import HomeAboutCard from "./components/Home/HomeAboutCard";
 
 function App(props) {
+  const history = useHistory();
+
   React.useEffect(function() {
     if (localStorage.getItem("token")) {
       (async function() {
@@ -29,6 +30,7 @@ function App(props) {
           const { data } = await http.get("auth/refresh");
           props.populateUser(data.user);
         } catch (error) {
+          console.log(error);
           throw error;
         }
       })();
@@ -58,7 +60,6 @@ function App(props) {
       <ThemeProvider theme={{ ...variables }}>
         <GlobalStyle></GlobalStyle>
         <Switch>
-          <Route exact path="/" component={StartPage}></Route>
           <Route exact path="/inscription" component={SignUpSpace}></Route>
           <Route
             exact

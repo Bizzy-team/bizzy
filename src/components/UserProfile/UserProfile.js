@@ -31,8 +31,8 @@ function UserProfile(props) {
     isModalResetPassword: false,
     isModalDeleteProfile: false,
     isModalNewCard: false,
-    userData: null
-    // isBtnCancel: false
+    userData: null,
+    dataToUpdate: {}
   });
 
   const responsive = {
@@ -93,10 +93,14 @@ function UserProfile(props) {
     return setData(newState);
   }
 
-  function confirmEdit() {
+  async function confirmEdit() {
     const newState = { ...data };
 
     newState.isDisabled = true;
+
+    if (Object.keys(newState.dataToUpdate).length) {
+      await http.patch(`user/${props.match.params.name}`, newState.dataToUpdate);
+    }
     // Fetch POST data if changed
 
     return setData(newState);
@@ -135,6 +139,8 @@ function UserProfile(props) {
     }
     newState.error[inputIdTarget].error = false;
     newState.error[inputIdTarget].message = "";
+    console.log(e.target["data-model"]);
+    newState.dataToUpdate[e.target.getAttribute("data-model")] = e.target.value;
 
     if (
       inputFirstName.current.value !== "" ||
@@ -254,6 +260,7 @@ function UserProfile(props) {
               <InputsForm
                 type="text"
                 inputId="inputFirstName"
+                model="name"
                 inputRef={inputFirstName}
                 inputPlaceholder={data.userData.name}
                 inputCheckError={checkUserData}
@@ -263,6 +270,7 @@ function UserProfile(props) {
               <InputsForm
                 type="text"
                 inputId="inputLastName"
+                model="familyName"
                 inputRef={inputLastName}
                 inputPlaceholder={data.userData.familyName}
                 inputCheckError={checkUserData}
@@ -273,6 +281,7 @@ function UserProfile(props) {
             <InputsForm
               type="mail"
               inputId="inputMail"
+              model="mail"
               inputRef={inputMail}
               inputPlaceholder={data.userData.mail}
               inputCheckError={checkUserData}
@@ -302,7 +311,8 @@ function UserProfile(props) {
                 id="inputMessage"
                 rows="6"
                 cols="34"
-                placeholder="Ajoutez une description à votre profil :)."
+                data-model="description"
+                placeholder={data.userData.description}
                 disabled={data.isDisabled}
                 ref={refInputMessage}
                 onBlur={checkUserData}
@@ -372,7 +382,7 @@ function UserProfile(props) {
               </div>
             </div>
             <div className="line"></div>
-            {data.userData.cards ? (
+            {data.userData.cards.length ? (
               <section className="profile--user--cards">
                 {/* <section> */}
                 <Carousel
