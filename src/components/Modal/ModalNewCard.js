@@ -13,12 +13,14 @@ import profanities from "profanities";
 import ProfanitiesFr from "profanities/fr";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { connect } from "react-redux";
+
 
 function ModalNewCard(props) {
   const inputTitle = React.useRef(null);
   const inputAddress = React.useRef(null);
   const inputDesc = React.useRef(null);
-  // const inputTime = React.useRef(null);
+  const inputTime = React.useRef(null);
 
   const [data, setData] = React.useState({
     error: {},
@@ -118,6 +120,15 @@ function ModalNewCard(props) {
     return setData(newState);
   }
 
+  function createCard() {
+    // poster: nom, mood, adresse (long & lat), author (id), l'heure début activité, description
+    console.log('nom carte', inputTitle.current.value);
+    console.log('address', inputAddress.current.value);
+    console.log('inputDesc', inputDesc.current.value);
+    console.log('inputTime', inputTime.current.props.selected);
+    console.log('props user co', props.userData._id);
+  }
+
   return (
     <ModalNewCardStyled
       btnDisabled={data.btnDisabled}
@@ -178,6 +189,7 @@ function ModalNewCard(props) {
             showTimeInput
             placeholderText="dd/mm/yyyy h:mm"
             shouldCloseOnSelect={false}
+            ref={inputTime}
           />
 
           {/* <InputsForm
@@ -212,6 +224,7 @@ function ModalNewCard(props) {
               value="Poster"
               className="btn--send"
               disabled={data.btnDisabled}
+              onClick={() => createCard()}
             ></input>
             <input
               type="button"
@@ -226,4 +239,10 @@ function ModalNewCard(props) {
   );
 }
 
-export default ModalNewCard;
+function mapStateToProps(state) {
+  return {
+    userData: state.users.userConnected
+  };
+}
+
+export default connect(mapStateToProps)(ModalNewCard);
