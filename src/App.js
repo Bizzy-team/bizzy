@@ -19,6 +19,9 @@ import SignUpSpace from "./components/SignUpSpace/SignUpSpace";
 import Support from "./components/Support/Support";
 import LogginSpace from "./components/LogginSpace/LogginSpace";
 import HomeAboutCard from "./components/Home/HomeAboutCard";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App(props) {
   const history = useHistory();
@@ -58,6 +61,17 @@ function App(props) {
   return (
     <BrowserRouter>
       <ThemeProvider theme={{ ...variables }}>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={8000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <GlobalStyle></GlobalStyle>
         <Switch>
           <Route exact path="/inscription" component={SignUpSpace}></Route>
