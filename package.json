@@ -47,6 +47,7 @@
         "react-redux": "7.2.4",
         "react-router-dom": "^5.1.2",
         "react-svg": "^11.0.39",
+        "react-toastify": "7.0.4",
         "redux": "4.1.0",
         "redux-thunk": "2.3.0",
         "serverless-certificate-creator": "^1.4.0",
