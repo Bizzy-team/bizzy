@@ -25,6 +25,7 @@ import Footer from "../Footer/Footer";
 import { Redirect } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import fakeCards from "./fakeCards.json";
+import { toast } from 'react-toastify';
 
 const Map = ReactMapboxGl({
   accessToken: process.env.REACT_APP_TOKEN_MAP_KEY,
@@ -60,6 +61,16 @@ function Home(props) {
 
     if (window.screen.width > 1000) {
       document.querySelector("body").style.overflow = "hidden";
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        // call api pour envoyer la position
+        console.log('c good', position);
+      }, (error) => {
+        // affichage d'une ville par défaut + toast message 'veuillez activer votre géoloc pour mieux afficher les cards'
+        toast.warn('Activez votre localisation pour avoir les activités autour de vous.');
+      })
     }
 
     return formatCards(fakeCards, 4);
