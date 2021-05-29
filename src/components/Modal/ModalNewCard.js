@@ -15,7 +15,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { connect } from "react-redux";
 
-
 function ModalNewCard(props) {
   const inputTitle = React.useRef(null);
   const inputAddress = React.useRef(null);
@@ -122,11 +121,11 @@ function ModalNewCard(props) {
 
   function createCard() {
     // poster: nom, mood, adresse (long & lat), author (id), l'heure début activité, description
-    console.log('nom carte', inputTitle.current.value);
-    console.log('address', inputAddress.current.value);
-    console.log('inputDesc', inputDesc.current.value);
-    console.log('inputTime', inputTime.current.props.selected);
-    console.log('props user co', props.userData._id);
+    console.log("nom carte", inputTitle.current.value);
+    console.log("address", inputAddress.current.value);
+    console.log("inputDesc", inputDesc.current.value);
+    console.log("inputTime", inputTime.current.props.selected);
+    console.log("props user co", props.userData._id);
   }
 
   return (
