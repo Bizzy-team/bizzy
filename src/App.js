@@ -19,9 +19,8 @@ import SignUpSpace from "./components/SignUpSpace/SignUpSpace";
 import Support from "./components/Support/Support";
 import LogginSpace from "./components/LogginSpace/LogginSpace";
 import HomeAboutCard from "./components/Home/HomeAboutCard";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App(props) {
   const history = useHistory();
