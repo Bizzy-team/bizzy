@@ -2,11 +2,11 @@ import React from "react";
 import axios from "axios";
 import FilterSearch from "../../style/FilterSearch.style";
 
-function InputSearch() {
+function InputSearch(props) {
   const inputCity = React.createRef(null);
   const [state, setState] = React.useState({
     citiesSuggestionsArr: [],
-    hideSuggestions: false
+    hideSuggestions: true
   });
 
   async function citySearched(e) {
@@ -31,9 +31,17 @@ function InputSearch() {
     return setState(newState);
   }
 
-  function citySelected(city) {
+  function citySelected(e, city) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const newState = { ...state };
     console.log(city);
     inputCity.current.value = city.place_name;
+    newState.hideSuggestions = true;
+
+    setState(newState);
+    props.emitCitySelected({long: city.center[0], lat: city.center[1]});
     // call api pour envoyer {long: city.center[0], lat: city.center[1]}
   }
 
@@ -48,10 +56,10 @@ function InputSearch() {
             onChange={e => citySearched(e)}
           ></input>
           {!state.hideSuggestions && (
-            <div className="cities--suggestions">
+            <div id="suggestions" className="cities--suggestions">
               {state.citiesSuggestionsArr.map((city, index) => {
                 return (
-                  <p key={index} onClick={() => citySelected(city)}>
+                  <p key={index} onClick={(e) => citySelected(e, city)}>
                     {city.place_name}
                   </p>
                 );
