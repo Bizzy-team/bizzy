@@ -41,7 +41,7 @@ function InputSearch(props) {
     newState.hideSuggestions = true;
 
     setState(newState);
-    props.emitCitySelected({long: city.center[0], lat: city.center[1]});
+    props.emitCitySelected({ long: city.center[0], lat: city.center[1] });
     // call api pour envoyer {long: city.center[0], lat: city.center[1]}
   }
 
@@ -59,7 +59,7 @@ function InputSearch(props) {
             <div id="suggestions" className="cities--suggestions">
               {state.citiesSuggestionsArr.map((city, index) => {
                 return (
-                  <p key={index} onClick={(e) => citySelected(e, city)}>
+                  <p key={index} onClick={e => citySelected(e, city)}>
                     {city.place_name}
                   </p>
                 );

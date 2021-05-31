@@ -14,7 +14,7 @@ import ProfanitiesFr from "profanities/fr";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { connect } from "react-redux";
-import { common } from '../../common/macros/index';
+import { common } from "../../common/macros/index";
 import InputSearch from "../InputSearch/InputSearch";
 import http from "../../utlis/http";
 
@@ -55,7 +55,10 @@ function ModalNewCard(props) {
     arrInputId.forEach(element => (newState.error[element] = { ...obj }));
 
     document.addEventListener("click", function modalClose(e) {
-      if (document.querySelector(".card--content").contains(e.target) || e.target.parentNode.id === "suggestions") {
+      if (
+        document.querySelector(".card--content").contains(e.target) ||
+        e.target.parentNode.id === "suggestions"
+      ) {
         return;
       } else {
         props.updateStateParent(props.isModalNewCard);
@@ -136,14 +139,14 @@ function ModalNewCard(props) {
 
   async function createCard() {
     try {
-      await http.post('/cards', {
+      await http.post("/cards", {
         name: inputTitle.current.value,
         description: inputDesc.current.value,
         startAt: new Date(inputTime.current.props.selected),
         mood: data.indexMoodSelected,
         author: props.userData._id,
         position: data.position
-      })
+      });
     } catch (error) {
       console.log(error);
     }
@@ -151,7 +154,7 @@ function ModalNewCard(props) {
 
   function selectedMood(moodIndex) {
     console.log(moodIndex);
-    const newState = {...data};
+    const newState = { ...data };
 
     newState.indexMoodSelected.push(moodIndex);
 
@@ -159,7 +162,7 @@ function ModalNewCard(props) {
   }
 
   function updatePositionState(city) {
-    const newState = {...data};
+    const newState = { ...data };
 
     newState.position.long = city.long;
     newState.position.lat = city.lat;
@@ -193,11 +196,16 @@ function ModalNewCard(props) {
         <div className="card--moods">
           <h4>Choisissez votre mood:</h4>
           <div className="cards--moods--img">
-            {
-              common.moods.map((mood, index) => {
-                return <img onClick={()=> selectedMood(index)} src={data.moodsSrc[mood.srcImg]} alt="food" key={index}></img>
-              })
-            }
+            {common.moods.map((mood, index) => {
+              return (
+                <img
+                  onClick={() => selectedMood(index)}
+                  src={data.moodsSrc[mood.srcImg]}
+                  alt="food"
+                  key={index}
+                ></img>
+              );
+            })}
           </div>
         </div>
         <div className="title--card">
@@ -210,7 +218,7 @@ function ModalNewCard(props) {
             isError={data.error.inputTitle ? data.error.inputTitle : false}
             marginSize
           ></InputsForm>
-          <InputSearch emitCitySelected={(city) => updatePositionState(city)}   ></InputSearch>
+          <InputSearch emitCitySelected={city => updatePositionState(city)}></InputSearch>
           <DatePicker
             selected={startDate}
             onChange={date => setStartDate(date)}
