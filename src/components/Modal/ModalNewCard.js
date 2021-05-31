@@ -14,6 +14,9 @@ import ProfanitiesFr from "profanities/fr";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { connect } from "react-redux";
+import { common } from '../../common/macros/index';
+import InputSearch from "../InputSearch/InputSearch";
+import http from "../../utlis/http";
 
 function ModalNewCard(props) {
   const inputTitle = React.useRef(null);
@@ -23,13 +26,25 @@ function ModalNewCard(props) {
 
   const [data, setData] = React.useState({
     error: {},
-    btnDisabled: true
+    btnDisabled: true,
+    moodsSrc: {
+      food: FoodMood,
+      drink: DrinkMood,
+      culture: CultureMood,
+      sport: SportMood,
+      openMind: OpenMindMood
+    },
+    indexMoodSelected: [],
+    position: {
+      long: null,
+      lat: null
+    }
   });
 
   const [startDate, setStartDate] = React.useState(null);
 
   React.useEffect(() => {
-    const arrInputId = ["inputTitle", "inputAddress", "inputTime", "inputDesc"];
+    const arrInputId = ["inputTitle", "inputTime", "inputDesc"];
     const newState = { ...data };
     const obj = {
       error: false,
@@ -40,7 +55,7 @@ function ModalNewCard(props) {
     arrInputId.forEach(element => (newState.error[element] = { ...obj }));
 
     document.addEventListener("click", function modalClose(e) {
-      if (document.querySelector(".card--content").contains(e.target)) {
+      if (document.querySelector(".card--content").contains(e.target) || e.target.parentNode.id === "suggestions") {
         return;
       } else {
         props.updateStateParent(props.isModalNewCard);
@@ -89,7 +104,7 @@ function ModalNewCard(props) {
     newState.error[inputIdTarget].error = false;
     newState.error[inputIdTarget].message = "";
 
-    if (inputTitle.current.value !== "" && inputAddress.current.value !== "") {
+    if (inputTitle.current.value !== "") {
       const btnEnabled = Object.values(newState.error).every(el => !el.error);
 
       if (btnEnabled) {
@@ -119,13 +134,37 @@ function ModalNewCard(props) {
     return setData(newState);
   }
 
-  function createCard() {
-    // poster: nom, mood, adresse (long & lat), author (id), l'heure début activité, description
-    console.log("nom carte", inputTitle.current.value);
-    console.log("address", inputAddress.current.value);
-    console.log("inputDesc", inputDesc.current.value);
-    console.log("inputTime", inputTime.current.props.selected);
-    console.log("props user co", props.userData._id);
+  async function createCard() {
+    try {
+      await http.post('/cards', {
+        name: inputTitle.current.value,
+        description: inputDesc.current.value,
+        startAt: new Date(inputTime.current.props.selected),
+        mood: data.indexMoodSelected,
+        author: props.userData._id,
+        position: data.position
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function selectedMood(moodIndex) {
+    console.log(moodIndex);
+    const newState = {...data};
+
+    newState.indexMoodSelected.push(moodIndex);
+
+    return setData(newState);
+  }
+
+  function updatePositionState(city) {
+    const newState = {...data};
+
+    newState.position.long = city.long;
+    newState.position.lat = city.lat;
+
+    setData(newState);
   }
 
   return (
@@ -154,11 +193,11 @@ function ModalNewCard(props) {
         <div className="card--moods">
           <h4>Choisissez votre mood:</h4>
           <div className="cards--moods--img">
-            <img src={FoodMood} alt="food"></img>
-            <img src={DrinkMood} alt="drink"></img>
-            <img src={CultureMood} alt="culture"></img>
-            <img src={SportMood} alt="sport"></img>
-            <img src={OpenMindMood} alt="open--mind"></img>
+            {
+              common.moods.map((mood, index) => {
+                return <img onClick={()=> selectedMood(index)} src={data.moodsSrc[mood.srcImg]} alt="food" key={index}></img>
+              })
+            }
           </div>
         </div>
         <div className="title--card">
@@ -171,15 +210,7 @@ function ModalNewCard(props) {
             isError={data.error.inputTitle ? data.error.inputTitle : false}
             marginSize
           ></InputsForm>
-          <InputsForm
-            type="text"
-            inputId="inputAddress"
-            inputRef={inputAddress}
-            inputPlaceholder="L'adresse"
-            inputCheckError={checkCardData}
-            isError={data.error.inputAddress ? data.error.inputAddress : ""}
-            marginSize
-          ></InputsForm>
+          <InputSearch emitCitySelected={(city) => updatePositionState(city)}   ></InputSearch>
           <DatePicker
             selected={startDate}
             onChange={date => setStartDate(date)}
