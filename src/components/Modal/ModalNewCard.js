@@ -142,7 +142,7 @@ function ModalNewCard(props) {
       await http.post("/cards", {
         name: inputTitle.current.value,
         description: inputDesc.current.value,
-        startAt: new Date(inputTime.current.props.selected),
+        startAt: startDate,
         mood: data.indexMoodSelected,
         author: props.userData._id,
         position: data.position
@@ -223,7 +223,7 @@ function ModalNewCard(props) {
             selected={startDate}
             onChange={date => setStartDate(date)}
             timeInputLabel="Time:"
-            dateFormat="dd/MM/yyyy h:mm aa"
+            // dateFormat="dd/MM/yyyy h:mm aa"
             showTimeInput
             placeholderText="dd/mm/yyyy h:mm"
             shouldCloseOnSelect={false}
