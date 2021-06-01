@@ -99,6 +99,7 @@ function App(props) {
           />
           <Route strict path="/aboutCard/:cardId" component={HomeAboutCard} />
           <Route strict path="/user/:name" component={UserProfile} />
+          <Route strict exact sensitive path="*" component={LogginSpace}/>
         </Switch>
         {/* <Route
               exact
