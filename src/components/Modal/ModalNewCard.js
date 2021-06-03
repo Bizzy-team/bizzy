@@ -223,7 +223,7 @@ function ModalNewCard(props) {
             selected={startDate}
             onChange={date => setStartDate(date)}
             timeInputLabel="Time:"
-            // dateFormat="dd/MM/yyyy h:mm aa"
+            dateFormat="dd/MM/yyyy h:mm aa"
             showTimeInput
             placeholderText="dd/mm/yyyy h:mm"
             shouldCloseOnSelect={false}
