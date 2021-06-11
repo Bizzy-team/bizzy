@@ -403,11 +403,10 @@ const ModalNewCardStyled = styled.section`
     .card--content {
       height: ${props => {
         if (props.hideSuggestions) {
-          return "96vh!important;"
+          return "96vh!important;";
         }
-        return "90vh!important;"
-        }
-      };
+        return "90vh!important;";
+      }};
       margin-top: 1%;
     }
   }

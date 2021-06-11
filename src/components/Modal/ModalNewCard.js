@@ -172,7 +172,7 @@ function ModalNewCard(props) {
   }
 
   function hiddenSuggestions(hideSugg) {
-    const newState = {...data};
+    const newState = { ...data };
 
     newState.hideSuggestions = hideSugg;
 
@@ -229,7 +229,10 @@ function ModalNewCard(props) {
             marginSize
             isModalNewCard={props.isModalNewCard}
           ></InputsForm>
-          <InputSearch emitCitySelected={city => updatePositionState(city)}  emitHiddenSuggestions={(sugg) => hiddenSuggestions(sugg)}></InputSearch>
+          <InputSearch
+            emitCitySelected={city => updatePositionState(city)}
+            emitHiddenSuggestions={sugg => hiddenSuggestions(sugg)}
+          ></InputSearch>
           <DatePicker
             selected={startDate}
             onChange={date => setStartDate(date)}
