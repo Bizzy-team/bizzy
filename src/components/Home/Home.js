@@ -412,14 +412,16 @@ function Home(props) {
           <FilterStyled className="filters--section">
             <div>
               <InputSearch></InputSearch>
-              <button className="btn--filters">
-                <div>
-                  <img src={FiltersImg} alt="filters-icon"></img>{" "}
-                </div>
-              </button>
-              <button className="btn--create" onClick={displayNewCard}>
-                New card
-              </button>
+              <div className="filters--section--buttons">
+                <button className="btn--filters">
+                  <div>
+                    <img src={FiltersImg} alt="filters-icon"></img>{" "}
+                  </div>
+                </button>
+                <button className="btn--create" onClick={displayNewCard}>
+                  New card
+                </button>
+              </div>
             </div>
           </FilterStyled>
           <div className="feed--cards" ref={refFeedCards} onScroll={updateDate}>
