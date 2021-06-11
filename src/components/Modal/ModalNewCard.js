@@ -27,6 +27,7 @@ function ModalNewCard(props) {
   const [data, setData] = React.useState({
     error: {},
     btnDisabled: true,
+    hideSuggestions: {},
     moodsSrc: {
       food: FoodMood,
       drink: DrinkMood,
@@ -170,6 +171,14 @@ function ModalNewCard(props) {
     setData(newState);
   }
 
+  function hiddenSuggestions(hideSugg) {
+    const newState = {...data};
+
+    newState.hideSuggestions = hideSugg;
+
+    setData(newState);
+  }
+
   return (
     <ModalNewCardStyled
       btnDisabled={data.btnDisabled}
@@ -177,6 +186,7 @@ function ModalNewCard(props) {
       isMarginTop={props.isMarginTop}
       isModalNewCard={props.isModalNewCard}
       isErrorMessage={data.error}
+      hideSuggestions={data.hideSuggestions}
     >
       <div className="card--content">
         <div className="card--title">
@@ -217,8 +227,9 @@ function ModalNewCard(props) {
             inputCheckError={checkCardData}
             isError={data.error.inputTitle ? data.error.inputTitle : false}
             marginSize
+            isModalNewCard={props.isModalNewCard}
           ></InputsForm>
-          <InputSearch emitCitySelected={city => updatePositionState(city)}></InputSearch>
+          <InputSearch emitCitySelected={city => updatePositionState(city)}  emitHiddenSuggestions={(sugg) => hiddenSuggestions(sugg)}></InputSearch>
           <DatePicker
             selected={startDate}
             onChange={date => setStartDate(date)}
