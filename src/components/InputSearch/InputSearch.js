@@ -22,7 +22,8 @@ function InputSearch(props) {
       newState.citiesSuggestionsArr = data.features;
       newState.hideSuggestions = false;
 
-      return setState(newState);
+      setState(newState);
+      props.emitHiddenSuggestions({hideSuggestions: newState.hideSuggestions});
     }
 
     newState.citiesSuggestionsArr = [];
