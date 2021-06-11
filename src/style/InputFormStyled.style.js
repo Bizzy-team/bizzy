@@ -14,6 +14,10 @@ const InputsForm = styled(GlobalContainer)`
         return "1%;";
       }
 
+      if (props.isModalNewCard) {
+        return "0";
+      }
+
       return "7%;";
     }
 

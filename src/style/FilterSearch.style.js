@@ -69,6 +69,27 @@ const HomeHeaderStyled = styled.section`
       }
     }
   }
+
+  @media screen and (min-width: 1680px) {
+    width: 50%;
+    div {
+      input {
+        padding: 15px 0;
+        width: 22vw;
+        background-position: 10px 20px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1680px) {
+    padding: 0 1px;
+    div {
+      .cities--suggestions {
+        width: 28vw;
+        text-align: left;
+      }
+    }
+  }
 `;
 
 export default HomeHeaderStyled;

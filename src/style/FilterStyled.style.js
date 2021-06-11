@@ -171,6 +171,29 @@ const HomeHeaderStyled = styled.section`
       }
     }
   }
+
+  @media screen and (min-width: 1680px) {
+    div {
+      align-items: center;
+      margin-left: 4%;
+      .btn--filters {
+        width: 3vw;
+        margin-right: 16%;
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          img {
+            width: 100px;
+          }
+        }
+      }
+      .btn--create {
+        width: 8vw;
+      }
+    }
+  }
 `;
 
 export default HomeHeaderStyled;

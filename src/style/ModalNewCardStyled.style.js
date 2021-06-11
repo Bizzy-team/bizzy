@@ -398,6 +398,19 @@ const ModalNewCardStyled = styled.section`
       }
     }
   }
+
+  @media screen and (min-width: 1680px) {
+    .card--content {
+      height: ${props => {
+        if (props.hideSuggestions) {
+          return "96vh!important;"
+        }
+        return "90vh!important;"
+        }
+      };
+      margin-top: 1%;
+    }
+  }
 `;
 
 export default ModalNewCardStyled;
